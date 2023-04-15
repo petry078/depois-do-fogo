@@ -90,71 +90,19 @@ A Igreja Nossa Senhora do Rosário dos Homens Pretos, a Igreja Evangélica Luter
 
 ## Capítulo 02 – Construção
 
-Antes do Wilton Paes de Almeida, o terreno na esqui-
-na da Rio Branco com a Antônio de Godói foi cenário de um
-luxuoso hotel nos anos 20, 30 e 40, o Hotel Victoria, inau-
-gurado em 1921. O hotel contava com telefones em todos os
-quartos, característica muito incomum nos hotéis dos anos 20.
+Antes do Wilton Paes de Almeida, o terreno na esquina da Rio Branco com a Antônio de Godói foi cenário de um luxuoso hotel nos anos 20, 30 e 40, o Hotel Victoria, inaugurado em 1921. O hotel contava com telefones em todos os quartos, característica muito incomum nos hotéis dos anos 20. Além disso, foi reconhecido como um dos mais luxuosos da época, um marco da hotelaria paulistana.
 
-Além disso, foi reconhecido como um dos mais luxuosos da
-época, um marco da hotelaria paulistana.
+O terreno do hotel foi vendido para os irmãos Elias Assad Júnior e Renato Assad em 1945 por Cr$ 4.500,00. Mas foi somente em 1951 que a construção do hotel foi demolida. O terreno passou a ser propriedade de Ivonette Yazbek Assad, esposa de Elias, que vendeu a propriedade por Cr$ 40.000.000,00 em 1960 para Sebastião Paes de Almeida, então ministro da fazenda na gestão de Juscelino Kubitschek, que durou de 1956 à 1961.
 
+Quando a edição número 323 da Revista Acrópole foi publicada, em novembro de 1965, pela Faculdade de Arquite- tura e Urbanismo da Universidade de São Paulo (FAU-USP), o edifício Wilton Paes de Almeida ainda estava em construção. Nesse momento, já era possível ver a estrutura imponente do edifício, mas pouco se sabia sobre o prédio. A publicação da FAU foi uma das primeiras a trazer mais informações sobre aquela construção curiosa que tomava cada vez mais forma, dia após dia. Na revista, foram publicados detalhes arquitetônicos do edifício, bem como a planta dos andares e os desenhos técnicos de sua estrutura.
 
-O terreno do hotel foi vendido para os irmãos Elias
-Assad Júnior e Renato Assad em 1945 por Cr$ 4.500,00. Mas
-foi somente em 1951 que a construção do hotel foi demoli-
-da. O terreno passou a ser propriedade de Ivonette Yazbek
-Assad, esposa de Elias, que vendeu a propriedade por Cr$
-40.000.000,00 em 1960 para Sebastião Paes de Almeida, en-
-tão ministro da fazenda na gestão de Juscelino Kubitschek,
-que durou de 1956 à 1961.
+A base principal do prédio foi construída em concreto armado, que é quando o concreto é instalado dentro de uma armação de aço, grande característica de projetos arquitetônicos do século XX e ainda muito popular até hoje, por ser uma alternativa de alta resistência a compressão do concreto.
 
+O edifício de 24 andares, 70 metros do chão e 12 mil metros quadrados de área construída contava com amplas salas com divisórias flexíveis, modulares e móveis. Os tetos de todo o edifício eram luminosos e contínuos, com um vidro difusor de luz colocado sobre uma estrutura de alumínio, onde ficavam as lâmpadas. Os três últimos andares eram exclusivos para o equipamento e maquinário do prédio, mas por fora foram revestidos com venezianas de alumínio. Acima dos três últimos andares, havia ainda um pequeno heliponto.
 
-Quando a edição número 323 da Revista Acrópole foi
-publicada, em novembro de 1965, pela Faculdade de Arquite-
-tura e Urbanismo da Universidade de São Paulo (FAU-USP),
-o edifício Wilton Paes de Almeida ainda estava em constru-
-ção. Nesse momento, já era possível ver a estrutura imponente
-do edifício, mas pouco se sabia sobre o prédio. A publicação
-da FAU foi uma das primeiras a trazer mais informações sobre
-aquela construção curiosa que tomava cada vez mais forma,
-dia após dia. Na revista, foram publicados detalhes arquitetô-
-nicos do edifício, bem como a planta dos andares e os dese-
-nhos técnicos de sua estrutura.
+Os halls de circulação geral possuíam mármore, aço inoxidável e madeira de Ipê nos pisos. O piso de madeira possuía canaletas por onde poderiam ser passados fios. O conjunto de divisórias móveis e a possibilidade de alterar o padrão dos fios no piso permitia uma arquitetura interna muito flexível.
 
-A base principal do prédio foi construída em concreto armado,
-que é quando o concreto é instalado dentro de uma armação de
-aço, grande característica de projetos arquitetônicos do século
-XX e ainda muito popular até hoje, por ser uma alternativa de
-alta resistência a compressão do concreto.
-
-
-O edifício de 24 andares, 70 metros do chão e 12 mil
-metros quadrados de área construída contava com amplas sa-
-las com divisórias flexíveis, modulares e móveis. Os tetos de
-todo o edifício eram luminosos e contínuos, com um vidro
-difusor de luz colocado sobre uma estrutura de alumínio, onde
-ficavam as lâmpadas. Os três últimos andares eram exclusivos
-para o equipamento e maquinário do prédio, mas por fora fo-
-ram revestidos com venezianas de alumínio. Acima dos três
-últimos andares, havia ainda um pequeno heliponto.
-
-
-Os halls de circulação geral possuíam mármore, aço
-inoxidável e madeira de Ipê nos pisos. O piso de madeira pos-
-suía canaletas por onde poderiam ser passados fios. O conjunto
-de divisórias móveis e a possibilidade de alterar o padrão dos
-fios no piso permitia uma arquitetura interna muito flexível.
-
-Além disso, o edifício contava com ar condicionado embutido.
-
-
-Sua fachada inteira de vidro, instalada no padrão “cur-
-tain wall” (quando as paredes externas não cumprem papel
-estrutural, mas estético) e o ar condicionado central embutido,
-foram as características mais marcantes do Wilton Paes de Al-
-meida, que logo se tornou um grande exemplo de arquitetura
-moderna na época.
+Além disso, o edifício contava com ar condicionado embutido. Sua fachada inteira de vidro, instalada no padrão “curtain wall” (quando as paredes externas não cumprem papel estrutural, mas estético) e o ar condicionado central embutido, foram as características mais marcantes do Wilton Paes de Almeida, que logo se tornou um grande exemplo de arquitetura moderna na época.
 
 A presença da Igreja Evangélica Luterana de São Paulo ao seu lado, fez com que essas características modernas fossem ainda mais destacadas. O contraste da arquitetura neo-gótica da igreja com o design moderno e imponente do edifício era visto de longe. A presença do ar condicionado central, que alimentou o prédio todo, foi uma das principais inovações para a época.
 
