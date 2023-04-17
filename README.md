@@ -1023,8 +1023,7 @@ Os 17 investigados são Ananias Pereira dos Santos, Edinalva Silva Franco Pereir
 
 No dia 15 de junho de 2019, Marco Antonio Martin Vargas, juiz do Tribunal de Justiça do Estado de São Paulo (TJ-SP), autorizou o mandado de busca e apreensão e ainda decretou a prisão temporária (cinco dias) a nove desses investigados. “Decreto as prisões temporárias dos averiguados Ananias Pereira dos Santos, Edinalva Silva Ferreira, Carmenda Silva Ferreira, Andreya Tamara Santos de Oliveira, Hamilton Coelho Resende, Sidney Ferreira da Silva, Janice Ferreira Silva, Angélica dos Santos Lima e Josiane Cristina Barranco”.
 
-O mandado de prisão temporária foi logo convertido em pri-
-são preventiva (de até 360 dias).
+O mandado de prisão temporária foi logo convertido em prisão preventiva (de até 360 dias).
 
 De acordo com o juiz, as prisões “se revelam necessárias para garantir a continuidade das investigações, inclusive, com a possibilidade de se obter maiores elementos acerca das graves condutas criminosas noticiadas e, ainda, para evitar que venham a se furtar dos procedimentos a serem realizados pela Autoridade Policial e para proteção das testemunhas protegidas mas, não vislumbro a premência e necessidade, por ora, de se decretar as prisões temporárias dos demais averiguados por ser medida extrema e cuja investigação deve ser mais aprofundada para verificação da participação de cada um destes no comando dos crimes de extorsão”. O juiz deixa claro (fonte 4 valores maior que o resto do texto, itálico e negrito), que “fica proibida o acesso da imprensa durante a diligência [busca e apreensão])”.
 
