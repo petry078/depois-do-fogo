@@ -12,17 +12,17 @@ O cheiro de pólvora quando tem jogo de futebol acontece devido aos fogos que al
 
 Ainda confuso, voltei à janela, e só fui me dar conta da gravidade da situação quando olhei para frente e vi uma nuvem de fumaça preta que calmamente se movia no céu. A nuvem negra de fumaça parecia estar a menos de um quilômetro de distância da minha janela. Embora não concorde com o uso de fogos, nesse momento eu preferi estar sentindo cheiro deles.
 
-A essa altura, às quatro horas da tarde, que mais pareciam oito da noite, o G1, portal de notícias da Globo, já tinha publicado mais de sete matérias sobre o incêndio e queda de um edifício no centro de São Paulo.
+A essa altura, às quatro horas da tarde, que mais pareciam oito da noite, o G1, portal de notícias da Globo, já tinha publicado mais de sete matérias sobre um incêndio e queda de um edifício no centro de São Paulo.
 
 A notícia em destaque era a respeito do edifício Wilton Paes de Almeida, no Largo do Paissandu, que pegou fogo e desabou na madrugada daquele Dia do Trabalhador. O fogo que começou por volta das 1h30 foi tão forte que o edifício desabou depois de pouco mais de uma hora de incêndio, por volta das 2h50.
 
-O edifício Wilton Paes de Almeida foi inaugurado em 1968 para ser a sede da Companhia Comercial de Vidros do Brasil (CVB), além de outras empresas da família de políticos e empresários Paes de Almeida. Mas o prédio foi abandonado. Alguns anos depois da sua inauguração passou a ser propriedade do Governo Federal. Se tornou sede da Polícia Federal e do INSS até 2003, quando ficou vazio e passou a ser ocupado por movimentos sociais.
+O edifício Wilton Paes de Almeida foi inaugurado em 1968 para ser a sede da Companhia Comercial de Vidros do Brasil (CVB), além de outras empresas da família de políticos e empresários Paes de Almeida. Mas o prédio foi abandonado. Alguns anos depois da sua inauguração passou a ser propriedade do Governo Federal. Tornou-se sede da Polícia Federal e do INSS até 2003, quando ficou vazio e passou a ser ocupado por movimentos sociais.
 
 O prédio era vizinho da Igreja Evangélica Luterana de São Paulo, também conhecida como Igreja Martin Luther, também ficava de frente para a Igreja Nossa Senhora do Rosário dos Homens Pretos e para o Shopping Grandes Galerias, conhecido entre os paulistanos como Galeria do Rock.
 
 Devido à urgência do caso, as primeiras notícias publicadas pelo portal não traziam muitas informações. Em muitos casos nem citavam que no prédio havia uma ocupação. Só fui me dar conta do acontecimento no dia seguinte, quando tive maior curiosidade. Foi quando percebi que aquela fumaça vinha de um dos edifícios mais curiosos do centro de São Paulo.
 
-Desde que cheguei a São Paulo, observei esse edifício de camarote algumas vezes, pelo menos em todas as que fui à Galeria do Rock. Da vista das sacadas da galeria, o que mais me chamou atenção foi sempre o edifício: gigante e imponente, mas caindo aos pedaços, coberto por pichações e vidros quebrados. Entre os pixos, 666 em branco, na vertical e com um traço grosso que ocupava grande parte do centro da fachada.
+Desde que cheguei a São Paulo, o observei de camarote algumas vezes, pelo menos em todas que fui à Galeria do Rock. Da vista das sacadas da galeria, o que mais me chamou atenção foi sempre o edifício: gigante e imponente, mas caindo aos pedaços, coberto por pichações e vidros quebrados. Entre os pixos, 666 em branco, na vertical e com um traço grosso que ocupava grande parte do centro da fachada.
 
 Observar o edifício Wilton Paes de Almeida era desconfortável. Não por sua fachada satanizada, mas pelo estado do edifício. Vendo de fora, não imaginava que aquela construção com cara de filme pós-apocalíptico era na realidade o verdadeiro apocalipse por dentro. Depois de algumas vezes de desconforto passei a cultivar um certo carinho pela edificação. Seu aspecto pandemônico era curioso.
 
@@ -36,9 +36,15 @@ Na calçada do edifício Wilton Paes de Almeida havia diversas pessoas dormindo,
 
 ## Capítulo 01 – Largo do Paissandu
 
-A Igreja Nossa Senhora do Rosário dos Homens Pretos é umas das primeiras construções do Largo do Paissandu que ainda está por lá. A igreja foi construída quando o local ainda não tinha ruas definidas e era, majoritariamente, desabitado. No entanto, a atual Igreja Nossa Senhora do Rosário dos Homens Pretos, que fica no centro da praça do Largo do Paissandu, de frente para a avenida São João e a Galeria do Rock, é uma reconstrução.16532dade do ermitão Domingos de Melo Tavares, que durante cerca de 2 anos, pediu esmolas e recebeu ajudas de religiosos em Minas Gerais. Domingos conseguiu juntar dez mil cruzados, o suficiente para a construção do prédio, já que contaria com mão de obra escrava para o trabalho. Acredita-se que a igreja tenha sido inaugurada em 1737.
+O edifício Wilton Paes de Almeida foi inaugurado em 1968 no Largo do Paissandu, uma região bastante movimentada no centro de São Paulo. No entanto, desde as primeiras construções do Largo do Paissandu, em meados de 1600 até 2018, quando o edifício Wilton Paes de Almeida pegou fogo e desabou, muita história foi escrita<sup>1</sup>.
 
-Durante o período de escravidão no Brasil, os negros e escravos eram proibidos de frequentar a mesma igreja frequentada por brancos descendentes de europeus, mas ao mesmo tempo, era proibido que praticassem cultos religiosos tradicionais de seu povo. Por esse motivo, foi fundada em meados do século XVI a Irmandade de Nossa Senhora do Rosário dos Homens Pretos, que teoricamente teria exclusividade em abrigar escravos e negros, para o culto católico.
+A Igreja Nossa Senhora do Rosário dos Homens Pretos é umas das primeiras construções do Largo do Paissandu que ainda está por lá. A igreja foi construída quando o local ainda não tinha ruas definidas e era, majoritariamente, desabitado. No entanto, a atual Igreja Nossa Senhora do Rosário dos Homens Pretos, que fica no centro da praça do Largo do Paissandu, de frente para a avenida São João e a Galeria do Rock, é uma reconstrução.
+
+A primeira Igreja Nossa Senhora do Rosário dos Homens Pretos foi construída no Largo do Rosário (hoje conhecido como praça Antônio Prado), que é uma praça próxima a Catedral da Sé, marco central da cidade. Atualmente a região da Praça Antônio Prado é principalmente ocupada por edifícios comerciais, restaurantes e comércios diversos. O tráfego na região é exclusivo para pedestres, mas é comum ver policiais militares a cavalo além de vans e carros da corporação. A praça fica entre as ruas São Bento, João Brícola e Quinze de Novembro.
+
+Em 1728, a Câmara de São Paulo atendeu a um pedido da Irmandade de Nossa Senhora dos Homens Pretos e cedeu um terreno, no alto de uma colina, para que fosse construído uma igreja católica para os escravos, que já demonstravam devoção e fé no local. A construção ficou sob responsabilidade do ermitão Domingos de Melo Tavares, que durante cerca de 2 anos, pediu esmolas e recebeu ajudas de religiosos em Minas Gerais. Domingos conseguiu juntar dez mil cruzados, o suficiente para a construção do prédio, já que contaria com mão de obra escrava para o trabalho. Acredita-se que a igreja tenha sido inaugurada em 1737.
+
+Durante o período de escravidão no Brasil, os negros e escravos eram proibidos de frequentar a mesma igreja frequentada por brancos descendentes de europeus, mas ao mesmo tempo, era proibido que praticassem cultos religiosos tradicionais de seu povo. Por esse motivo, foi fundada em meados do século XVI a Irmandade de Nossa Senhora do Rosário dos Homens Pretos, que teoricamente teria exclusividade em abrigar escravos e negros, para o culto católico. 
 
 Sendo assim, os negros vindos da África, mesmo com suas próprias crenças, viam-se sem opção e eram obrigados a se juntar a irmandade dos negros, para o culto religioso. Por isso, ainda hoje, é comum ver ao redor das igre- jas da irmandade dos negros, oferendas e práticas religiosas originárias de povos africanos. As igrejas da Irmandade dos Homens Pretos são católicas, mas com forte influência e presença de práticas de religiões africanas.
 
@@ -54,9 +60,9 @@ Há cerca de 50 anos, o Largo do Paissandu era chamado de Praça das Lagoas, dev
 
 Devido a problemas com o solo recém aterrado e terraplanado, a construção da igreja teve que superar desafios gerados pela forte e rápida alteração do terreno. Por esse motivo, demorou alguns anos para ser concluída. Em abril de 1906, a nova igreja já estava de pé, mas seu primeiro culto ainda demorou mais dois anos para acontecer e a igreja foi finalmenteinaugurada em 1908.
 
-Outro edifício marcante que passou a integrar a paisagem do Largo do Paissandu na mesma época foi a Igreja Evangélica Lu- terana de São Paulo, que começou a ser construída em 1907. A co- munidade luterana chegou em São Paulo com a vinda de imigrantes alemães para o Brasil. O primeiro culto da comunidade luterana em São Paulo foi feito inteiro na língua alemã, em 1858. Em 1907, a comunidade já contava com 150 membros e a construção de sua pri- meira igreja só foi possível depois que os irmãos empresários Daniel e Hermann Heydenreich doaram o terreno para a comunidade.
+Outro edifício marcante que passou a integrar a paisagem do Largo do Paissandu na mesma época foi a Igreja Evangélica Luterana de São Paulo, que começou a ser construída em 1907. A co- munidade luterana chegou em São Paulo com a vinda de imigrantes alemães para o Brasil. O primeiro culto da comunidade luterana em São Paulo foi feito inteiro na língua alemã, em 1858. Em 1907, a comunidade já contava com 150 membros e a construção de sua pri- meira igreja só foi possível depois que os irmãos empresários Daniel e Hermann Heydenreich doaram o terreno para a comunidade.
 
-Construída no estilo neogótico, a igreja é a primeira paróquia luterana da cidade. O desenho é obra do arquiteto ale- mão Guilherme Von Eÿe que projetou uma construção com um único pavimento de 465 metros quadrados. Também conhecida como Igreja Martin Luther, a paróquia operou cultos em alemão até 1942, quando o presidente Getúlio Vargas colocou em prá- tica a Campanha de Nacionalização, um conjunto de medidas nacionalistas, entre elas a proibição de se falar, estudar e usar nomes comerciais em alemão, italiano e japonês.
+Construída no estilo neogótico, a igreja é a primeira paróquia luterana da cidade. O desenho é obra do arquiteto alemão Guilherme Von Eÿe que projetou uma construção com um único pavimento de 465 metros quadrados. Também conhecida como Igreja Martin Luther, a paróquia operou cultos em alemão até 1942, quando o presidente Getúlio Vargas colocou em prá- tica a Campanha de Nacionalização, um conjunto de medidas nacionalistas, entre elas a proibição de se falar, estudar e usar nomes comerciais em alemão, italiano e japonês.
 
 O principal objetivo da Campanha de Nacionalização foi diminuir a influência das comunidades de imigrantes de países do eixo inimigo, que era Alemanha, Itália e Japão. Por motivos políticos, o Brasil se aliou aos Estados Unidos, que fazia parte do grupo de países chamados de Aliança durante a Segunda Guerra Mundial.
 
@@ -87,6 +93,8 @@ Os antigos cinemas de rua da Cinelândia que sobreviveram aos anos 90 exibem fil
 Inaugurado em 1943, o cinema é um marco da arquitetura moderna, que dominava a região, tanto por sua fachada externa como por seu interior. Ele foi comprado pela distribuidora de filmes PlayArte em 1992, mas assim como os outros, também exibiu filmes pornográficos para sobreviver, antes de ser comprado.
 
 A Igreja Nossa Senhora do Rosário dos Homens Pretos, a Igreja Evangélica Luterana de São Paulo, o Cine Ipiranga e o edifício Wilton Paes de Almeida, assim como muitos outros edifícios clássicos da região foram tombados em 1992.
+
+> <sup>1</sup>Também pode ser interpretado como uma brincadeira ou autocrítica do autor, já que muito foi escrito em um capítulo de introdução, que merece ser sedutor.
 
 ## Capítulo 02 – Construção
 
