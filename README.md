@@ -8,9 +8,9 @@ Primeiro de maio é feriado. Dia do Trabalhador. Uma homenagem ao dia primeiro d
 
 Cheguei em casa por volta das 16h, abri a janela do meu quarto e olhei para rua: o tempo estava esquisito. Na época, já morava no centro há quatro anos e nunca tinha visto um dia como aquele. O ar abafado tinha cheiro de pólvora. “Teve jogo de futebol hoje, Pá?”, perguntei à minha irmã.
 
-O cheiro de pólvora quando tem jogo de futebol acontece por causa dos fogos que alguns torcedores jogam nas ruas para comemorar. Mas esse cheiro de fogos dos dias de futebol não chegava nem perto do cheiro que eu sentia. Era forte a ponto de agredir as narinas. “Não é futebol, terça-feira nem tem jogo”, concluí.
+O cheiro de pólvora quando tem jogo de futebol acontece devido aos fogos que alguns torcedores jogam nas ruas para comemorar. Mas esse cheiro de fogos dos dias de futebol não chegava nem perto do cheiro que eu sentia. Era forte a ponto de agredir as narinas. “Não é futebol, terça-feira nem tem jogo”, concluí.
 
-Ainda confuso voltei à janela, e só fui me dar conta da gravidade da situação quando olhei para frente e vi uma nuvem de fumaça preta que calmamente se movia no céu. A nuvem negra de fumaça parecia estar a menos de um quilômetro de distância da minha janela. Embora não concorde com o uso de fogos, nesse momento eu preferi estar sentindo cheiro deles.
+Ainda confuso, voltei à janela, e só fui me dar conta da gravidade da situação quando olhei para frente e vi uma nuvem de fumaça preta que calmamente se movia no céu. A nuvem negra de fumaça parecia estar a menos de um quilômetro de distância da minha janela. Embora não concorde com o uso de fogos, nesse momento eu preferi estar sentindo cheiro deles.
 
 A essa altura, às quatro horas da tarde, que mais pareciam oito da noite, o G1, portal de notícias da Globo, já tinha publicado mais de sete matérias sobre o incêndio e queda de um edifício no centro de São Paulo.
 
@@ -20,11 +20,11 @@ O edifício Wilton Paes de Almeida foi inaugurado em 1968 para ser a sede da Com
 
 O prédio era vizinho da Igreja Evangélica Luterana de São Paulo, também conhecida como Igreja Martin Luther, também ficava de frente para a Igreja Nossa Senhora do Rosário dos Homens Pretos e para o Shopping Grandes Galerias, conhecido entre os paulistanos como Galeria do Rock.
 
-Devido à urgência do caso, as primeiras notícias publicadas pelo portal não traziam muitas infomações. Em muitos casos nem citavam que no prédio havia uma ocupação. Só fui me dar conta do acontecimento no dia seguinte, quando tive maior curiosidade. Foi quando percebi que aquela fumaça vinha de um dos edifícios mais curiosos do centro de São Paulo.
+Devido à urgência do caso, as primeiras notícias publicadas pelo portal não traziam muitas informações. Em muitos casos nem citavam que no prédio havia uma ocupação. Só fui me dar conta do acontecimento no dia seguinte, quando tive maior curiosidade. Foi quando percebi que aquela fumaça vinha de um dos edifícios mais curiosos do centro de São Paulo.
 
-Desde que cheguei a São Paulo, observei esse edifício de camarote algumas vezes, pelo menos em todas as que fui à Galeria do Rock. Da vista das sacadas da galeria, o que mais me chamou atenção foi sempre o edifício: gigante e imponente, mas caindo aos pedaços, coberto por pixações e vidros quebrados. Entre as pixações, 666 em branco, na vertical e com um traço grosso que ocupava grande parte do centro da fachada.
+Desde que cheguei a São Paulo, observei esse edifício de camarote algumas vezes, pelo menos em todas as que fui à Galeria do Rock. Da vista das sacadas da galeria, o que mais me chamou atenção foi sempre o edifício: gigante e imponente, mas caindo aos pedaços, coberto por pichações e vidros quebrados. Entre os pixos, 666 em branco, na vertical e com um traço grosso que ocupava grande parte do centro da fachada.
 
-Observar o edifício Wilton Paes de Almeida era desconfortável. Não por sua pixação satânica, mas pelo estado do edifício. Vendo de fora, não imaginava que aquela construção com cara de filme pós-apocalíptico era na realidade o verdadeiro apocalipse por dentro. Depois de algumas vezes de desconforto passei a cultivar um certo carinho pela edificação. Seu aspecto pandemônico era curioso.
+Observar o edifício Wilton Paes de Almeida era desconfortável. Não por sua fachada satanizada, mas pelo estado do edifício. Vendo de fora, não imaginava que aquela construção com cara de filme pós-apocalíptico era na realidade o verdadeiro apocalipse por dentro. Depois de algumas vezes de desconforto passei a cultivar um certo carinho pela edificação. Seu aspecto pandemônico era curioso.
 
 Um dia decidi percorrer de bicicleta a ciclovia da minha rua inteira, acompanhando seu fluxo e ignorando as interrupções pelo caminho (que são muitas), quando cheguei no bairro Barra Funda já era hora de voltar. No centro, o caminho para casa não tinha ciclovia. Um pouco perdido, entrei na rua Antônio de Godói e a paisagem mudou drasticamente.
 
@@ -32,7 +32,7 @@ A luz do sol que tinha me acompanhado durante a viagem toda não entrava na prim
 
 De perto era ainda mais desconfortável, o cenário era definitivamente pós-apocalíptico. A sensação desconfortável rapidamente se transformou em uma preocupação desesperadora. As pessoas na calçada não estavam nada bem e o prédio muito menos.
 
-Na calçada do edifício Wilton Paes de Almeida havia diversas pessoas dormindo, algumas em colchões outras no chão, mas todas dormindo junto ao lixo. São Paulo não é, nem de longe, uma cidade limpa, mas aquela quadra parecia realmente abandonada.
+Na calçada do edifício Wilton Paes de Almeida havia diversas pessoas dormindo, algumas em colchões, outras no chão, mas todas dormindo junto ao lixo. São Paulo não é, nem de longe, uma cidade limpa, mas aquela quadra parecia realmente abandonada.
 
 ## Capítulo 01 – Largo do Paissandu
 
