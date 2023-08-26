@@ -94,7 +94,7 @@ Inaugurado em 1943, o cinema é um marco da arquitetura moderna, que dominava a 
 
 A Igreja Nossa Senhora do Rosário dos Homens Pretos, a Igreja Evangélica Luterana de São Paulo, o Cine Ipiranga e o edifício Wilton Paes de Almeida, assim como muitos outros edifícios clássicos da região foram tombados em 1992.
 
-> <sup>1</sup>Também pode ser interpretado como uma brincadeira ou autocrítica do autor, já que muito foi escrito em um capítulo de introdução, que merece ser sedutor.
+> <sup>1</sup>Também pode ser interpretado como uma brincadeira ou autocrítica do autor, não satisfeito por detalhar demais um capítulo de introdução, que merece ser mais curto e até sedutor.
 
 ## Capítulo 02 – Construção
 
