@@ -522,6 +522,8 @@ Foi com essa ligação que Márcia ficou sabendo do desabamento. Imediatamente f
 
 Algumas horas depois da tragédia, na época presidente da república, Michel Temer visitou o acampamento, mas foi vaiado e hostilizado desde a hora que chegou até a hora que foi embora. “Golpista!”, “Fora Temer!” gritavam as pessoas no local enquanto o ex-presidente prestava depoimento à imprensa. O presidente precisou de ajuda da Polícia Militar para entrar no carro. Quando estava saindo, o carro foi alvo depedras e tapas.
 
+{sugestão de imagem: temer no acampamento}
+
 No dia seguinte da tragédia no Largo do Paissandu, a Defesa Civil de São Paulo anunciou que faria visitas técnicas de caráter emergencial em todas as outras ocupações do centro. A ação foi coordenada pela Defesa Civil e a SEHAB participou com seus dados e experiência.
 
 De acordo com a prefeitura, as visitas técnicas não teriam característica punitiva e seu objetivo não era a reintegração de posse, mas coletar dados da situação das ocupações do centro, além de poder orientar como tornar as ocupações mais seguras, evitando, principalmente incêndios.
@@ -562,11 +564,7 @@ A primeira interdição imediata do grupo foi na ocupação da rua do Carmo, 88.
 
 Nesta ocupação viviam 79 famílias, que foram cadastradas para atendimento emergencial. As famílias devem receber auxílio-aluguel, semelhante ao dado a algumas famílias vítimas do Wilton Paes de Almeida ou serão encaminhadas para abrigos.
 
-“Este prédio foi construído para ser um edifício garagem. Só tem uma entrada, feita para carros. Ao entrar, uma única escada de madeira dá acesso aos andares superiores.
-
-Além disso ele tem um formato único: um grande vão no meio, onde era para ser instalado o elevador de carros e as “garagens” de cada lado. Ou seja, o prédio tem um buraco no meio, onde acumula lixo e todas as escadas que levam pros outros andares são de madeira. Se o prédio pegasse fogo, as escadas provavelmente queimariam e todas as famílias morreriam. A partir do momento que a prefeitura tem conhecimento dessa situação ela não pode deixar aquelas pessoas lá. A única organização que tinha lá era o tráfico. Tráfico muito pesado.
-
-O risco lá era imenso. Qualquer incêndio poderia matar todo mundo”, conta Márcia.
+“Este prédio foi construído para ser um edifício garagem. Só tem uma entrada, feita para carros. Ao entrar, uma única escada de madeira dá acesso aos andares superiores. Além disso ele tem um formato único: um grande vão no meio, onde era para ser instalado o elevador de carros e as “garagens” de cada lado. Ou seja, o prédio tem um buraco no meio, onde acumula lixo e todas as escadas que levam pros outros andares são de madeira. Se o prédio pegasse fogo, as escadas provavelmente queimariam e todas as famílias morreriam. A partir do momento que a prefeitura tem conhecimento dessa situação ela não pode deixar aquelas pessoas lá. A única organização que tinha lá era o tráfico. Tráfico muito pesado. O risco lá era imenso. Qualquer incêndio poderia matar todo mundo”, conta Márcia.
 
 O segundo prédio a ser desocupado foi uma ocupação na rua Harry Dannenberg, na zona leste. Esta ocupação é a única que não fica no centro, mas foi adicionada ao roteiro de visitas devido às péssimas condições de sua estrutura e seu risco de desabamento iminente. A única diferença com relação ao Caveirão é que essa possui escadas de concreto. Já a terceira ocupação a ser interditada foi uma antiga padaria entre os bairros Vila Prudente e Mooca, onde foram construídas subdivisões com madeira.
 
@@ -576,7 +574,7 @@ Com exceção das ocupações interditadas, onde foi feito cadastro e contagem d
 
 A estimativa das visitas técnicas é que sejam mais de 3500 famílias divididas entre as 51 ocupações visitadas. Um total de cerca de 10500 pessoas. O relatório final estima que, dessa população, 86% seja idosa, 61% possa ter algum tipo de deficiência e em 58% das ocupações moram imigrantes e refugiados de países como Bolívia, Peru, Haiti, Venezuela, Angola, Congo, Costa do Marfim, Guiné Bissau, Palestina, China, Síria, entre outros. Além disso, metade dos imóveis ocupados possuem dívida ativa. Somadas as dívidas atingem cerca de R$ 132 milhões de reais.
 
-No dia seguinte da queda do Wilton Paes de Almeida, o Ministério Público Federal instaurou um inquérito com objetivo de apurar e indicar quem são os responsáveis pelo caso. Não demorou para a Polícia Civil identificar Ananias Pereira dos Santos, Hamilton Coelho Resende, Nireude de Jesus, Ricardo Luciano Lima, o Careca e Irmanil, conhecida por apenas Nil como os principais líderes.
+No dia seguinte da queda do Wilton Paes de Almeida, o Ministério Público Federal instaurou um inquérito com objetivo de apurar e indicar quem são os responsáveis pelo caso. Não demorou para a Polícia Civil identificar Ananias Pereira dos Santos, Hamilton Coelho Resende, Nireude de Jesus, Ricardo Luciano Lima, o Careca, e Irmanil, conhecida por apenas Nil, como os principais líderes.
 
 A cobrança do “aluguel” foi um dos pontos que mais chamou ateção do Departamento de Investigações Criminais (DEIC) e da Delegacia de Investigações Gerais (DIG). O inquérito desta investigação foi um pedido do então secretário de segurança pública de São Paulo, Mágino Alves Barbosa. Ele acredita que a cobrança de aluguel pode ser caracterizada como extorsão e lavagem de dinheiro.
 
@@ -588,13 +586,11 @@ A 3ª Delegacia de Polícia de Investigações sobre Fraudes Financeiras e Econ�
 
 “Desta forma, necessário se faz a realização de buscas nos endereços dos investigados abaixo, com vistas a localizar e apreender documentos atinentes à investigação em tela, notadamente documentos contendo conteúdo contábil e financeiro, bem como outros que possam indiciar o envolvimento direto dos investigados no esquema ilícito ora apurado”, escreve o delegado em um documento apresentado à Tamara Priscila Tocci, juíza do Tribunal de Justiça de São Paulo.
 
-Os 17 investigados são Ananias Pereira dos Santos, Edinalva Silva Franco Pereira, Carmem da Silva Ferreira, Ma ria Aparecida Ferreira, Andreya Tamara Santos de Oliveira, Hamilton Coelho Resende, Liliane Ferreira dos Santos, Adriana Aparecida França Ferreira, Sidney Ferreira Silva, Manoel Del Rio Blas Filho, Janice Ferreira Silva, Elisete Pereira da Costa, Wagner Lopes Sad, Juvenal da Conceição Pereira, Welida Alves Caetano Ribeiro, Angélica dos Santos Lima e Josiane Cristina Barranco.
+Os 17 investigados são Ananias Pereira dos Santos, Edinalva Silva Franco Pereira, Carmem da Silva Ferreira, Maria Aparecida Ferreira, Andreya Tamara Santos de Oliveira, Hamilton Coelho Resende, Liliane Ferreira dos Santos, Adriana Aparecida França Ferreira, Sidney Ferreira Silva, Manoel Del Rio Blas Filho, Janice Ferreira Silva, Elisete Pereira da Costa, Wagner Lopes Sad, Juvenal da Conceição Pereira, Welida Alves Caetano Ribeiro, Angélica dos Santos Lima e Josiane Cristina Barranco.
 
-No dia 15 de junho de 2019, Marco Antonio Martin Vargas, juiz do Tribunal de Justiça do Estado de São Paulo (TJ-SP), autorizou o mandado de busca e apreensão e ainda decretou a prisão temporária (cinco dias) a nove desses investigados. “Decreto as prisões temporárias dos averiguados Ananias Pereira dos Santos, Edinalva Silva Ferreira, Carmenda Silva Ferreira, Andreya Tamara Santos de Oliveira, Hamilton Coelho Resende, Sidney Ferreira da Silva, Janice Ferreira Silva, Angélica dos Santos Lima e Josiane Cristina Barranco”.
+No dia 15 de junho de 2019, Marco Antonio Martin Vargas, juiz do Tribunal de Justiça do Estado de São Paulo (TJ-SP), autorizou o mandado de busca e apreensão e ainda decretou a prisão temporária (cinco dias) a nove desses investigados. “Decreto as prisões temporárias dos averiguados Ananias Pereira dos Santos, Edinalva Silva Ferreira, Carmenda Silva Ferreira, Andreya Tamara Santos de Oliveira, Hamilton Coelho Resende, Sidney Ferreira da Silva, Janice Ferreira Silva, Angélica dos Santos Lima e Josiane Cristina Barranco”. O mandado de prisão temporária foi logo convertido em prisão preventiva (de até 360 dias).
 
-O mandado de prisão temporária foi logo convertido em prisão preventiva (de até 360 dias).
-
-De acordo com o juiz, as prisões “se revelam necessárias para garantir a continuidade das investigações, inclusive, com a possibilidade de se obter maiores elementos acerca das graves condutas criminosas noticiadas e, ainda, para evitar que venham a se furtar dos procedimentos a serem realizados pela Autoridade Policial e para proteção das testemunhas protegidas mas, não vislumbro a premência e necessidade, por ora, de se decretar as prisões temporárias dos demais averiguados por ser medida extrema e cuja investigação deve ser mais aprofundada para verificação da participação de cada um destes no comando dos crimes de extorsão”. O juiz deixa claro (fonte 4 valores maior que o resto do texto, itálico e negrito), que “fica proibida o acesso da imprensa durante a diligência [busca e apreensão])”.
+De acordo com o juiz, as prisões “se revelam necessárias para garantir a continuidade das investigações, inclusive, com a possibilidade de se obter maiores elementos acerca das graves condutas criminosas noticiadas e, ainda, para evitar que venham a se furtar dos procedimentos a serem realizados pela Autoridade Policial e para proteção das testemunhas protegidas mas, não vislumbro a premência e necessidade, por ora, de se decretar as prisões temporárias dos demais averiguados por ser medida extrema e cuja investigação deve ser mais aprofundada para verificação da participação de cada um destes no comando dos crimes de extorsão”. O juiz deixou claro (fonte 4 valores maior que o resto do texto, itálico e negrito), que “fica proibida o acesso da imprensa durante a diligência [busca e apreensão])”.
 
 De acordo com o portal de notícias G1, no dia 24 de junho de 2019, quatro dos nove investigados foram presos: os irmãos Sidney e Janice Ferreira da Silva, conhecida como Preta Ferreira, do Movimento dos Sem Teto do Centro (MSTC), Angélica dos Santos Lima e Edinalva Silva Pereira, ambas do Movimento de Moradia para Todos (MMPT).
 
@@ -608,19 +604,23 @@ A Plataforma de Direitos Humanos Dhesca Brasil, uma rede de organizações e art
 
 Em janeiro de 2020, a Prefeitura de São Paulo fechou um acordo com o governo federal para receber, por doação, mas dessa vez de forma efetiva, o terreno na esquina da avenida Rio Branco com a rua Antônio de Godói, antigo endereço do edifício Wilton Paes de Almeida. O acordo foi formalizado em maio do mesmo ano.
 
-O plano da prefeitura é construir um prédio de moradia popular, com 14 andares e cerca de 90 apartamentos, dedicados para a população de baixa renda. A construção do prédio faz parte do programa “Pode Entrar” da prefeitura, que busca construir moradia acessível.
+O plano da prefeitura é construir um prédio de moradia popular, com 14 andares e cerca de 90 apartamentos, dedicados para a população de baixa renda. A construção do prédio faz parte do programa “Pode Entrar” da prefeitura, que busca construir moradia acessível.<sup>1</sup>
 
 Em fevereiro de 2020, o prefeito Bruno Covas, afirmou que o projeto não vai dar prioridade aos ex-ocupantes do Wilton Paes de Almeida, mas sim as famílias que já estão cadastradas na lista de espera da Companhia Metropolitana de Habitação de São Paulo (COHAB).
 
 Em abril de 2020, o Plenário da Câmara dos Deputados aprovou um projeto de lei que autoriza que imóveis da União sejam vendidos em bloco. Esse projeto de lei busca minimizar a quantidade de propriedades da união que não estão cumprindo função social e abandonadas. A população espera que tragédias como essa, não aconteçam novamente.
 
+> <sup>1</sup> 10 de janeiro de 2024: terreno onde era o edifício Wilton Paes de Almeida continua vazio, sem nenhum sinal do programa "Pode Entrar".
+
 ## Sinopse, créditos e categorias
 
 ### Sinopse
 
-Primeiro de maio de 2018: um edifício de 24 andares no centro de São Paulo pega fogo e desaba em menos de duas horas de incêndio. Cerca de 400 pessoas assistiram sua casa ser consumida pelas chamas antes de se transformar em pó. Marco da arquitetura modernista da cidade, o edifício Wilton Paes de Almeida foi inaugurado em 1968, para ser a sede de uma empresa de vidros, função essa que nunca exerceu. 
+Primeiro de maio de 2018: um edifício de 24 andares no centro de São Paulo pega fogo e desaba em menos de duas horas de incêndio. Cerca de 400 pessoas assistem sua casa ser consumida pelas chamas antes de se transformar em pó. 
 
-Abandonado por seu idealizador, o prédio foi vendido para o Governo Federal e funcionou como sede da polícia Federal por cerca de 30 anos. Novamente abandonado, passa a receber moradores de movimentos sociais de luta por moradia, organizados por uma liderança problemática e bem duvidosa. 
+Marco da arquitetura modernista da cidade, o edifício Wilton Paes de Almeida foi inaugurado em 1968, para ser a sede de uma empresa de vidros, função essa que nunca exerceu. 
+
+Abandonado por seu idealizador, o prédio foi vendido para o Governo Federal e funcionou como sede da Polícia Federal por cerca de 30 anos. Novamente abandonado, passa a receber moradores de movimentos sociais de luta por moradia, organizados por uma liderança problemática e bem duvidosa. 
 
 Os anos de abandono são reconstruídos nas páginas deste livro, que de forma investigativa busca encontrar as minúcias que levaram ao incêndio, discute os problemas da falta de moradia na cidade de São Paulo e conta com detalhes cruciais como foi o trabalho de resgate do Corpo de Bombeiros, da Imprensa e do Poder Público.
 
