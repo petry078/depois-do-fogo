@@ -274,9 +274,9 @@ Como explica o coronel da reserva do Corpo de Bombeiros e atual diretor da divis
 
 ## Capítulo 04 – Fogo
 
-O psicólogo Bruno Barros Blanez, de 34 anos, acordou na madrugada do incêndio se sentindo muito mal. A casa de sua namorada fica na Santa Cecília, a pouco mais de um quilómetro de distância do edifício Wilton Paes de Almeida. Dia 31 de agosto 2018 foi um dia quente, mas durante a noite a temperatura chegou a 18° celcius. O plano do casal era visitar a balada Trackers já que o dia seguinte, primeiro de maio de 2018, era feriado.
+O psicólogo Bruno Barros Blanez, de 34 anos, acordou na madrugada do incêndio se sentindo muito mal. A casa de sua namorada fica na Santa Cecília, a pouco mais de um quilómetro de distância do edifício Wilton Paes de Almeida. Dia 31 de agosto 2018 foi um dia quente, mas durante a noite a temperatura chegou a 18° celcius. O plano do casal era visitar a balada Trackers e no dia seguinte, primeiro de maio de 2018, curtir o feriado.
 
-Na época, a Trackers ficava na rua Dom José de Barros, 337, no terceiro andar de um edifício de 81 anos, o Santa Victória, que fica de frente para a Galeria Olido, duas quadras do Wilton Paes de Almeida. Quem vai de bicicleta não paga e era esse o objetivo, mas decidiram ficar em casa.
+Na época, a Trackers ficava na rua Dom José de Barros, 337, no terceiro andar de um edifício de 81 anos, o Santa Victória, que fica de frente para a Galeria Olido, duas quadras do Wilton Paes de Almeida. Quem vai de bicicleta não paga e era esse o objetivo, mas de última hora, decidiram ficar em casa.
 
 “Eu estava capotado na sala, fiquei vendo TV até tarde, estava friozinho, fui dormir de coberta e acordei lá pelas 4h da manhã com muito calor mesmo, tirei todas as cobertas e vi que tava todo suado. Fiquei incomodado e não consegui dormir, era muito calor e eu estava suado a ponto de sentir a camiseta grudada nas costas e a gola inteira molhada”, disse.
 
@@ -284,31 +284,31 @@ No dia seguinte, conversou com sua namorada Gladys, que tinha dormido no quarto.
 
 “Gostava do prédio. Tinha aquela pixação Opus 666 com o pentagrama na fachada, que eu achava bem legal. De repente, passei lá e não o vi mais. A paisagem fica completamente diferente”, lamenta Bruno.
 
-De acordo com testemunhas no local, o fogo começou no quinto andar por volta das 1h30 da manhã. Demorou apenas oito segundos para os 12 mil metros quadrados de área construída se transformarem em uma fogueira de mais de 650 metros quadrados no centro de uma das cidades mais densas do mundo.
+De acordo com testemunhas no local, o fogo no edifício Wilton Paes de Almeida começou no quinto andar por volta das 1h30 da manhã. Demorou apenas oito segundos para os 12 mil metros quadrados de área construída se transformarem em uma fogueira de mais de 650 metros quadrados no centro de uma das cidades mais densas do mundo.
 
 Depois do desastre, uma história de que uma briga de casal teria dado início ao fogo circulou entre os sobreviventes acampados e os jornalistas que cobriam a tragédia. No entanto, a perícia feita futuramente identificou que o fogo teria começado em uma tomada no quinto andar que estava com sobrecarga.
 
-Essa tomada era uma das pontas de uma ligação elétrica irregular no poste de luz da rua. Uma geladeira, uma televisão e um micro-ondas exigem energia suficiente para uma sobrecarga em um fio condutor comum. No caso, o revestimento de borracha do fio não resistiu a alta temperatura gerada pelo atrito da eletricidade e derreteu causando um curto circuito. Um curto circuito em um fio fino gera uma chama pequena, mas que foi o suficiente para derrubar um prédio de 24 andares.
+Essa tomada vinha de uma ligação elétrica irregular no poste de luz da rua. Uma geladeira, uma televisão e um micro-ondas consomem energia suficiente para uma sobrecarga em um fio condutor comum. No caso, o revestimento de borracha do fio não resistiu a alta temperatura gerada pelo atrito da eletricidade e derreteu causando um curto circuito. Um curto circuito em um fio fino gera uma chama pequena, mas que foi o suficiente para derrubar um prédio de 24 andares.
 
-Os andares do Wilton Paes de Almeida, que foram construídos sem paredes internas, estavam recheado de madeira seca, usada pelos moradores como divisória de suas casas. A madeira serviu como combustível para as chamas, que rapidamente chegaram ao fosso do elevador. Às 2h16 da manhã, o Corpo de Bombeiros de São Paulo que já estava trabalhando no local com 24 viaturas e 57 profissionais relatou no Twitter, que o edifício estava com muito fogo, além de um homem no último andar pedindo socorro.
+Os andares do Wilton Paes de Almeida, que foram construídos sem paredes internas, estavam recheado de madeira seca, usada pelos moradores como divisória de suas casas. A madeira serviu como combustível para as chamas, que rapidamente chegaram ao fosso do elevador. Às 2h16 da manhã, o Corpo de Bombeiros de São Paulo, que já estava trabalhando no local com 24 viaturas e 57 profissionais, relatou no Twitter que o edifício estava com muito fogo, além de um homem no último andar pedindo socorro.
 
 Ainda de acordo com a perícia, o fosso dos 3 elevadores do edifício funcionou como uma chaminé, carregando toda a fumaça para cima, aliviando a presença de gás carbônico nos andares, sobrando somente oxigênio e muita madeira de combustível. Além disso, os fossos dos elevadores eram utilizados pelos moradores como lixão.
 
 O processo de decomposição do lixo doméstico gera inúmeros gases inflamáveis, entre eles os gases sulfídricos e metano. O gás metano é gerado naturalmente na decomposição, não tem cheiro e é extremamente inflamável. Já o gás sulfídrico é extremamente inflamável e tem cheiro forte, característico de decomposição. Ele é gerado a partir da combinação de hidrogênio com enxofre, substâncias produzidas na decomposição.
 
-Por esse motivo, alguns andares tinham as entradas para os elevadores fechadas com madeira, para evitar o cheiro apodrecido do gás como também a entrada e saída de ratos, que se alimentavam daquele lixo. Quando o fogo chegou ao espaço do elevador, todo o gás armazenado de quase 15 anos de decomposição do lixo explodiu, elevando a temperatura do vão a ponto de derreter o aço e danificar o concreto interno. O concreto perde cerca de 75% de sua rigidez a 900° celsius e o aço derrete a uma temperatura de quase 1500° celsius.
+Por esse motivo, alguns andares tinham as entradas para os elevadores fechadas com madeira, para evitar o cheiro apodrecido do gás como também a entrada e saída de animais e insetos que viviam no meio do lixo no elevador. Quando o fogo chegou ao espaço do elevador, todo o gás armazenado de quase 15 anos de decomposição do lixo explodiu, elevando a temperatura do vão a ponto de derreter o aço e danificar o concreto interno. O concreto perde cerca de 75% de sua rigidez a 900° celsius e o aço derrete a uma temperatura de quase 1500° celsius.
 
 Um dos quatro principais pilares estruturais da construção também era a coluna de um dos elevadores. Com a alta temperatura interna o pilar se rompeu e a gravidade fez seu papel, puxando toda a construção para baixo e o prédio desabou às 2h50 da manhã, depois de pegar fogo por menos de uma hora e meia. Uma hora e meia, é o tempo médio que um trabalhador de São Paulo leva no trajeto da sua casa para o trabalho.
 
-O fogo começou na primeira hora de um feriado emblemático na cidade de São Paulo. No Dia do Trabalhador, muitos profissionais são liberados do trabalho para descansar em casa.
+O fogo no edifício Wilton Paes de Almeida começou na primeira hora de um feriado emblemático para a população de São Paulo. Primeiro de maio. Dia do Trabalhador. Neste dia, muitos trabalhadores são liberados para descansar em casa. A cidade estava cheia.
 
-O edifício Wilton Paes de Almeida estava cheio neste dia. As famílias da ocupação se viram obrigadas a descer do edifício imediatamente. Alguns moradores ainda se preocuparam em subir até as últimas casas no décimo andar, onde o fogo nem sequer chegou, para avisar que o prédio estava em chamas.
+Quando o fogo começou, as famílias da ocupação se viram obrigadas a descer do edifício imediatamente. Alguns moradores ainda se preocuparam em subir até os andares de cima, onde o fogo nem sequer chegou, para avisar que o prédio estava em chamas.
 
-Na praça, os sobreviventes relataram ter tentado chamar o maior número de vizinhos e resgatar o máximo possível, mas a fumaça era tão densa, que algumas pessoas não conseguiram pegar nem seus pets, deixando praticamente tudo para trás. Os moradores perderam além de seus bens materiais, bons amigos e a sua casa. Alguns sobreviventes não foram capazes nem de pegar os próprios documentos.
+Na praça da igreja, em frente ao edifício, os sobreviventes relataram ter tentado chamar o maior número de vizinhos e resgatar o máximo de pessoas possível, mas a fumaça era tão densa, que algumas pessoas não conseguiram pegar nem seus pets, deixando praticamente tudo para trás. Os moradores perderam além de seus bens materiais, bons amigos e até suas casas. Alguns sobreviventes não foram capazes nem de pegar os próprios documentos.
 
 O edifício Wilton Paes de Almeida não contava com qualquer tipo de segurança contra incêndios, muito menos extintores. De acordo com o coronel Edison Ramos de Quadros, a morte de somente sete pessoas (mais dois desaparecidos), pode ser considerada um milagre. O coronel explica que qualquer morte é lamentável, no entanto nessa situação, devido a estrutura danificada do edifício, a falta de ferramentas de combate a incêndios e ausência de saída de emergência era de se esperar um número de mortos muito maior.
 
-Nessas condições, o desastre poderia ter sido drasticamente mais cruel, como foi o caso dos últimos incêndios no centro da cidade de São Paulo. Em 1972 o edifício Andraus, pegou fogo e deixou 19 mortos. O desastre do edifício Joelma em 1974 deixou 191 mortos. Já o segundo incêndio do edifício Grande Avenida na avenida Paulista deixou 17 mortos em 1981.
+Nessas condições, o desastre poderia ter sido drasticamente mais cruel, como é o caso de grandes incêndios no centro da cidade de São Paulo. Em 1972 o edifício Andraus, pegou fogo e deixou 19 mortos. O desastre do edifício Joelma em 1974 deixou 191 mortos. Já o segundo incêndio do edifício Grande Avenida, em em 1981, na avenida Paulista, deixou 17 mortos.
 
 Mesmo sabendo que os jatos de água das viaturas do Corpo de Bombeiros não chegam nos andares mais altos de um edifício e também que não haviam extintores, muito menos saída de emergência segura, entre 2016 e 2017 foram emitidos pela prefeitura de São Paulo, três laudos que afirmavam o edifício Wilton Paes de Almeida não tinha risco de desabar.
 
@@ -316,29 +316,33 @@ O engenheiro Álvaro de Godoy Filho, um dos responsáveis por esses documentos, 
 
 No entanto, uma vistoria de abril de 2015 feita pelo Corpo de Bombeiros indicava possíveis riscos de incêndio, já que o prédio não contava com o mínimo de equipamentos e sistemas de combate em caso de fogo. A vistoria dos bombeiros foi feita para que a corporação organizasse um plano de ação rápida em caso de incêndio. O documento foi encaminhado para a prefeitura, que disse não ter feito nada, pois estava esperando orientação do Ministério Público Federal, órgão responsável pela investigação do prédio.
 
-Em 2016, o Ministério Público de São Paulo solicitou providências ao governo federal, dono do imóvel. Na época, Cláudia Fellice, que era a superintendente do Patrimônio da União disse custaria R$ 16 mil, para contratar empresas para retirar os moradores do prédio, mas a ordem era economizar e cortar despesas.
+Em 2016, o Ministério Público de São Paulo solicitou providências ao governo federal, dono do imóvel. Na época, Cláudia Fellice, que era a superintendente do Patrimônio da União disse custaria R$ 16 mil para contratar empresas para retirar os moradores do prédio, mas a ordem era economizar e cortar despesas.
 
 Já em janeiro de 2017, outro relatório condenava o prédio, anunciando seu alto risco de incêndio. Nessa vistoria realizada pela Secretaria Municipal de Licenciamento, os engenheiros relataram ausência de diversos itens fundamentais como extintores, mangueiras de combate a incêndio, luzes de emergência, sistema de alarme e corrimão nas escadas. Além disso, “o sistema de hidrantes estava inoperante e as instalações elétricas eram irregulares, com fios sem isolamento adequado e expostos”. O engenheiro responsável, José Luiz Amadio concluiu que “a edificação não atende às condições mínimas de segurança contra incêndios”. A investigação foi arquivada pelo Ministério Público.
 
 O engenheiro civil, professor da USP e diretor da PhD Engenharia, Paulo Helene, visitou os escombros na semana seguinte do desabamento. Ao analisar o que restou do edifício ele concluiu que a estrutura do prédio era toda de concreto armado. Em um comunicado à imprensa, o professor explicou que a falta de manutenção e o fosso do elevador ter servido como chaminé foram os principais responsáveis pelo colapso.
 
-O incêndio e a queda do edifício Wilton Paes de Almeida, atingiu mais três construções ao seu redor. A Igreja Luterana no seu lado direito, o edifício Caracú no seu lado esquerdo e o edifício Joamar na sua frente. A igreja teve 80% de sua construção danificada pelo impacto. Já o prédio da frente foi fortemente atingido pelo fogo e correu risco de queda. Além destes, mais dois foram interditados por falta de segurança. Entre eles, o estacionamento onde um dia foi o Cine Ouro.
+O incêndio e a queda do edifício Wilton Paes de Almeida, atingiu mais três construções ao seu redor. A Igreja Luterana no seu lado direito, o edifício Caracú no seu lado esquerdo e o edifício Joamar do outro lado da rua. A igreja teve 80% de sua construção danificada pelo impacto. Já o prédio da frente foi fortemente atingido pelo fogo e correu risco de queda. Além destes, mais dois foram interditados por falta de segurança. Entre eles, o estacionamento onde um dia foi o Cine Ouro.
 
-O Corpo de Bombeiros encontrou os corpos de 7 ex-moradores: Selma Almeida da Silva, 40 anos; Wendel e Werner da Silva Saldanha, gêmeos de 10 anos, filhos de Selma;Francisco Lemos Dantas, 56 anos; Walmir Souza Santos, 47 anos; Ricardo Oliveira Galvão Pinheiro (Tatuagem), 39 anos e Alexandre de Menezes, 40 anos. Eva Barbosa Lima, 42 anos e Gentil de Souza Rocha, 53 anos ainda não foram encontrados.
+{sugestão de imagem: mapa com destaque aos edifícios mencionados}
 
-No cadastro feito pela SEHAB dois meses antes do desabamento, 171 famílias foram contabilizadas, dessas, 46 eram famílias de imigrantes. No total 455 pessoas, sendo 131 crianças, quase 30% dos moradores. Mas no momento do desabamento, os bombeiros só contaram 317 pessoas. Muitos sobreviventes acreditam que o número de mortos e desaparecidos é muito maior.
+Nos escombros, o Corpo de Bombeiros identificou os corpos de 7 ex-moradores: Selma Almeida da Silva, 40 anos; Wendel e Werner da Silva Saldanha, gêmeos de 10 anos, filhos de Selma;Francisco Lemos Dantas, 56 anos; Walmir Souza Santos, 47 anos; Ricardo Oliveira Galvão Pinheiro (Tatuagem), 39 anos e Alexandre de Menezes, 40 anos. Eva Barbosa Lima, 42 anos e Gentil de Souza Rocha, 53 anos ainda não foram encontrados.
+
+No cadastro feito pela SEHAB dois meses antes do desabamento, 171 famílias foram contabilizadas, dessas, 46 eram famílias de imigrantes. No total 455 pessoas, sendo 131 crianças, quase 30% dos moradores. Mas no momento do desabamento, os bombeiros só contaram 317 pessoas. Muitos acreditam que o número de mortos e desaparecidos é muito maior.
 
 ## Capítulo 05 – Corpo de Bombeiros
 
-Cerca de 10 minutos depois do fogo ter começado, vinte viaturas do Corpo de Bombeiros de São Paulo carregaram 45 profissionais para atender a um chamado de incêndio no centro de São Paulo. A denúncia que havia um edifício em chamas no Largo do Paissandu foi recebida à 1h36, minutos depois do fogo ter começado.
+Cerca de 10 minutos depois do fogo ter começado, vinte viaturas do Corpo de Bombeiros de São Paulo carregaram 45 profissionais para atender a um chamado de incêndio no centro de São Paulo. A denúncia que havia um edifício em chamas no Largo do Paissandu foi recebida à 1h36, logo depois do fogo começar.
 
-Quando os bombeiros chegaram no local e viram o fogo consumir o edifício igual papel, reforços operacionais foram exigidos. O comportamento do fogo que começou no quinto andar era assustador e em questão de segundos se espalhou pelo resto do prédio. Às 2h16 a corporação enviou mais quatro viaturas e mais 12 bombeiros para o combate do incêndio.
+Quando os bombeiros chegaram no local e viram o fogo consumir o edifício igual papel, reforços operacionais foram exigidos. O comportamento do fogo que começou no quinto andar era assustador e em questão de segundos se espalhou para outras partes do prédio. Às 2h16 a corporação enviou mais quatro viaturas e mais 12 bombeiros para o combate do incêndio.
 
 Antes dos bombeiros chegarem, Ricardo “Tatuagem” de Oliveira Galvão, de 39 anos, um dos ex moradores do Wilton Paes de Almeida, estava preso no último andar do edifício.
 
 Não era mais possível sair pela entrada no térreo. O fogo já tinha chegado nas escadas dos andares mais baixos. Ricardo ficou preso no último andar depois de entrar no prédio para buscar vizinhos que não tinha encontrado na praça. Sem opção e sem oxigênio, subiu até o terraço onde ligou para o resgate.
 
 Quatro bombeiros foram enviados para o resgate de Ricardo. Os bombeiros subiram os quinze andares de escada do edifício vizinho, o Caracú, mas para chegar ao terraço foi necessário abrir um buraco na parede, já que o prédio não tem porta de saída na altura das telhas. Às 2h50 da manhã, quando ele já estava a cerca de quatro metros dos bombeiros, a estrutura do Wilton Paes de Almeida não resistiu ao calor interno e desabou. O corpo de Ricardo foi encontrado aos pedaços nos escombros dias depois.
+
+{sugestão de imagem: tatuagem no momento da queda do edifício.}
 
 Antes do desabamento, na rua, os caminhões jogavam água na construção em chamas. De acordo com o coronel Edison Ramos de Quadros, o combate a incêndios é uma tarefa muito complicada, principalmente em edifícios mais altos, já que o alcance do jato de água dos caminhões é limitado e não consegue atingir os andares mais altos. A água então foi utilizada para reduzir a temperatura interna no edifício, para garantir que mais pessoas conseguissem chegar até a saída, além de tornar possível a entrada de bombeiros de resgate.
 
@@ -376,17 +380,17 @@ Denise Zmekhol acordou com o telefone tocando. “O prédio pegou fogo e desabou
 
 Seu celular estava cheio de mensagens de amigos e colegas comentando sobre o incêndio e queda do edifício Wilton Paes de Almeida. Denise só foi entender a gravidade da situação quando viu as imagens do prédio desabando. “Parece que meu pai morreu outra vez”, comentou em uma entrevista à imprensa local. Denise é filha de Roger Zmekhol, o arquiteto do prédio.
 
-Ainda muito confusa, sem saber direito o que fazer, decidiu ir para o Brasil o mais rápido possível, afinal, além de filha do arquiteto, ela está produzindo um documentário sobre o edifício e obra de seu pai desde outubro de 2017. Chamado de Pele de Vidro, o documentário está em fase de edição, com expectativa de finalização para 2021.
+Ainda muito confusa, sem saber direito o que fazer, decidiu ir para o Brasil o mais rápido possível, afinal, além de filha do arquiteto, ela está produzindo um documentário sobre o edifício e obra de seu pai desde outubro de 2017, chamado Pele de Vidro.
 
 A cineasta chegou ao Brasil na quinta-feira, dia 3 de maio de 2018, dois dias depois do desabamento. Foi o mais rápido que conseguiu devido a disponibilidade de passagens aéreas. Imediatamente seguiu para o Largo do Paissandu, onde encontrou os sobreviventes da tragédia, alguns tinham o abrigo improvisado de barracas, outros dormiam no chão, mas todos ainda respiravam a fumaça e poeira que vinha dos escombros.
 
 Nem todos ali vivenciaram sua casa pegar fogo e desabar. Junto aos sobreviventes haviam também os que já dormiam na praça, os que dormiam em frente ao Wilton Paes de Almeida, além de muitos outros moradores das ruas de São Paulo, que por curiosidade, se aproximaram, alguns até se misturaram aos sobreviventes.
 
-A ampla região em volta do Largo do Paissandu se transformou em um grande acampamento, que com o tempo foi se organizando até se transformar em um típico acampamento de ocupação rural ou de terrenos urbanos. Nessas ocupações rurais, as pessoas dormem em barracas e se alimentam dos pratos feitos na cozinha comunitária.
+A ampla região em volta do Largo do Paissandu se transformou em um grande acampamento, que com o tempo foi se organizando até se transformar em um típico acampamento de ocupação rural ou de amplos terrenos urbanos. Nessas ocupações rurais, as pessoas dormem em barracas e comem o que é feito na cozinha comunitária do acampamento.
 
 O dia em que Denise chegou no acampamento foi também o dia que o Corpo de Bombeiros liberou o acesso aos cinco edifícios que também foram atingidos pelo fogo, mas evacuados por medidas de segurança. Os moradores desses prédios, que também dividiam o local com os sobreviventes do Wilton Paes de Almeida foram liberados para pegar somente o necessário, como documentos e medicamentos.
 
-O trânsito na região permaneceu bloqueado até o final do trabalho do Corpo de Bombeiros. Cerca de duas semanas depois, somente os ônibus que passam em volta da praça foram autorizados a circular. A região é repleta de comércios, restaurantes e edifícios residenciais. Depois da manhã do dia primeiro de maio de 2018 até os próximos meses, o cenário, que já era caótico e duvidoso passou a ser também desesperador.
+O trânsito na região permaneceu bloqueado até o final do trabalho do Corpo de Bombeiros. Cerca de duas semanas depois, somente os ônibus que passam em volta da praça foram autorizados a circular. A região é repleta de comércios, restaurantes e edifícios residenciais. Depois da manhã do dia primeiro de maio de 2018 até os próximos meses, o cenário, que já era caótico e perigoso passou a ser desesperador também.
 
 Durante as primeiras semanas depois do fogo era possível identificar uma grande quantidade de curiosos, além de aglomerações de pessoas nas cinco sacadas da Galeria do Rock, que buscavam a vista privilegiada da construção para conseguir ângulos mais panorâmicos do pandemônio que se tornou o Largo do Paissandu.
 
@@ -394,15 +398,15 @@ O acampamento dos sobreviventes foi montado a cerca de 10 metros de distância d
 
 A tragédia gerou forte comoção social e o acampamento recebeu grande quantidade de doações. Durante os dois primeiros meses, vans cheias de doações chegavam com certa frequência. De início foram barracas, roupas, água e alimentos. Alguns dias depois, a cozinha comunitária já operava a todo vapor.
 
-A grande quantidade de doações e a presença da cozinha comunitária foi muito preocupante para a SEHAB, já que a praça do Largo do Paissandu, assim como qualquer outra praça pública, não é um espaço adequado para receber moradores. A falta de fonte de água, higiene e saneamento básico colaboram para que a vida humana se tornasse ainda mais frá gil. Além disso, quanto maior é o número de doações, maior é o número de interessados. Embora existissem doações de comida, água e itens de higiene, o Brasil sofria naquele momento uma crise de abastecimento, por conta da greve dos caminhoneiros, que durou até o dia 21 de maio de 2018.
+A grande quantidade de doações e a presença da cozinha comunitária foi muito preocupante para a SEHAB, já que a praça do Largo do Paissandu, assim como qualquer outra praça pública, não é um espaço adequado para receber moradores. A falta de fonte de água, higiene e saneamento básico colaboram para que a vida humana se tornasse ainda mais frágil. Além disso, quanto maior é o número de doações, maior é o número de interessados. Embora existissem doações de comida, água e itens de higiene, o Brasil sofria naquele momento uma crise de abastecimento, por conta da greve dos caminhoneiros, que durou até o dia 21 de maio de 2018.
 
 Quando chegou no Largo do Paissandu, Denise se deparou com famílias, trabalhadores e crianças dormindo no chão, que era rodeado de lixo e ratos. Não haviam banheiros, nem fonte de água limpa. As pessoas lutavam por sua dignidade enfrentando situações extremas.
 
-Maria do Paissandu, como prefere ser chamada, é uma das responsáveis pelo Bar do China, quando o dono não está. O Bar do China fica na rua Antônio de Godói, de frente para a praça, bem próximo da esquina do Wilton Paes de Almeida. Desde 2017, quando começou a trabalhar lá, ela ajudou o pessoal da ocupação com água e até mesmo alimentos. “Eles vinham aqui, pediam água, prato de comida e ‘nois’ dava”, conta.
+Maria do Paissandu, como prefere ser chamada, trabalha no bar do China, e é responsável por ele quando o dono não está. O bar do China fica na rua Antônio de Godói, de frente para a praça, bem próximo da esquina do Wilton Paes de Almeida. Desde 2017, quando começou a trabalhar lá, ela ajudou o pessoal da ocupação com água e até mesmo alimentos. “Eles vinham aqui, pediam água, prato de comida e ‘nois’ dava”, conta.
 
 No bar, um de seus companheiros é Izaque, o garçon, um rapaz jovem e quieto. Antes de ser contratado no bar, Izaque dormia na rua, muitas vezes em frente ao Wilton Paes de Almeida, endereço que usava para receber documentos e correspondências quando necessário, mas não tinha dinheiro suficiente para morar na ocupação. A contribuição era de R$ 200 a R$ 400 reais por mês.
 
-Quando o prédio desabou, Maria que já era uma figura extremamente conhecida na região não conseguiu ver a tragé dia de braços cruzados e como já ajudava com água, continuou com a contribuição. Mas agora, o número de pessoas sem água era muito maior. “Minha conta, que era de 80 reais, foi para 180 no mês, por causa do tanto de água que dava pro pessoal”, diz.
+Quando o prédio desabou, Maria que já era uma figura extremamente conhecida na região não conseguiu ver a tragédia de braços cruzados e como já ajudava com água, continuou com a contribuição. Mas agora, o número de pessoas sem água era muito maior. “Minha conta, que era de 80 reais, foi para 180 no mês, por causa do tanto de água que dava pro pessoal”, diz.
 
 No celular, Maria mostra fotos de Izaque enchendo galões de 30 litros com água da torneira, para distribuir no acampamento. Mas quando começa a falar das crianças, se emociona. “Era muita criança, muita criança mesmo! Eu deixava eles dar banho nas crianças aqui no tanque. Um tanque que tem ali no andar de cima. Já os mais velhos não sei como se viravam”, conta, limpando as lágrimas que escorriam e escondendo o rosto no celular. De acordo com o cadastro da SEHAB, 30% das pessoas da ocupação eram crianças.
 
@@ -412,15 +416,15 @@ A falta de chuvas em maio de 2018 bateu recordes históricos, com uma média de 
 
 As péssimas condições higiênicas e a falta de saneamento básico do acampamento aliadas a uma atmosfera e clima atípico, fizeram com que a gripe se tornasse um surto. Os representantes do acampamento relataram muitas pessoas com a doença e reforçaram os pedidos de doação de remédios para gripe.
 
-No terceiro dia de acampamento, a prefeitura de São Paulo começou a pagar o auxílio-moradia para as famílias que tinham como provar que moravam na ocupação. O auxílio teve duração de 12 meses, sendo a primeira parcela de R$ 1200 e as outras de R$ 400. Mas identificar quem realmente morava no Wilton Paes de Almeida foi um trabalho incerto.
+No terceiro dia de acampamento, a prefeitura de São Paulo começou a pagar o auxílio moradia para as famílias que tinham como provar que moravam na ocupação. O auxílio teve duração de 12 meses, sendo a primeira parcela de R$ 1200 e as outras de R$ 400. Mas identificar quem realmente morava no Wilton Paes de Almeida foi um trabalho incerto.
 
-De acordo com a Secretaria de Assistência Social da Prefeitura, que cadastrou as pessoas no acampamento em parceria com a SEHAB, no segundo dia de cadastro apareceram mais de 2 mil pessoas que afirmavam morar no edifício no momento da queda. No entanto, o cadastro da SEHAB feito dois meses antes do desabamento contabilizou cerca de 450 pessoas.
+De acordo com a Secretaria de Assistência Social da Prefeitura, que cadastrou as pessoas no acampamento em parceria com a SEHAB, no segundo dia de cadastro apareceram mais de 2 mil pessoas que afirmavam morar no edifício no momento da queda. No entanto, o cadastro da SEHAB, feito dois meses antes do desabamento contabilizou cerca de 450 pessoas.
 
 Para a autenticação dos casos, a SEHAB cruzou dados com a Assistência Social, que já trabalhava no local mesmo antes do incêndio, mas como a rotatividade de pessoas na ocupação era muito alta, muitas pessoas tinham comprovantes de pagamento.
 
 Neste primeiro momento, 56 famílias receberam o auxílio. Uma semana depois, o número de famílias beneficiadas chegaou a 116. Mais de 90 famílias que tiveram suas casas interditadas para o trabalho dos bombeiros também receberam o auxílio.
 
-A liderança da ocupação não apareceu no acampamento, mas enviou representantes. Ricardo Luciano Lima, mais conhecido como Careca e um advogado representaram Ananias e a liderança do MLSM durante quase uma semana, até que na sexta-feira, dia 6 de maio, Careca e o advogado são expulsos da praça. Uma comissão de ex-moradores, liderados por Fábia, Rafael e Désirée assume as negociações com a SEHAB.
+A liderança da ocupação não apareceu no acampamento, mas enviou representantes. Ricardo Luciano Lima, mais conhecido como Careca e um advogado representaram Ananias e a liderança do MLSM durante quase uma semana, até que na sexta-feira, dia 6 de maio, Careca e o advogado foram expulsos da praça pelos próprios ex-moradores. Uma comissão de ex-moradores, liderados por Fábia, Rafael e Désirée assumiram as negociações com a SEHAB.
 
 A essa altura, uma boa parte das famílias já tinha ido para um alojamento no viaduto Pedroso, uma antiga ocupação, que foi aberta pela prefeitura em caráter emergencial na tentativa de retirar as famílias da praça. O alojamento era um dos únicos lugares onde os adultos poderiam tomar banho, mas fica a uma distância de 3 km do largo, uma caminhada de aproximadamente 40 minutos.
 
@@ -430,7 +434,7 @@ Márcia Terlizzi, da SEHAB foi a responsável por representar a prefeitura nas n
 
 Onze dias depois do desastre no Largo do Paissandu, outra ocupação pegou fogo. A ocupação Douglas Vieira, na zona leste era muito menor do que a ocupação do Wilton Paes de Almeida. O incêndio começou por volta das 1h45 do dia 12 de maio de 2018. De acordo com a imprensa local, oito animais morreram, 40 pessoas ficaram desabrigadas e o fogo ainda destruiu mais 10 imóveis vizinhos. Não foram registradas pessoas feridas.
 
-Cerca de 500 famílias foram contabilizadas acampadas na praça depois de 30 dias da tragédia. Segundo dados da SEHAB e da Assistência Social, 178 famílias foram cadastradas para receber o auxílio e supostamente deixaram a praça.
+Cerca de 500 famílias foram contabilizadas acampadas depois de 30 dias da tragédia. Segundo dados da SEHAB e da Assistência Social, 178 famílias foram cadastradas para receber o auxílio e supostamente deixaram a praça.
 
 Algumas famílias foram buscar moradia em outras ocupações do centro, outras, por falta de opção foram para o abrigo no viaduto Pedroso. O restante das pessoas, que não conseguiram provar que moravam no Wilton Paes de Almeida permaneceram na praça até dia o dia 10 de agosto de 2018, quando foram encaminhados para o recém inaugurado Centro Temporário de Acolhimento (CTA) Canindé, pela Companhia de Desenvolvimento Habitacional e Urbano (CDHU). O CTA Canindé fica no começo da zona norte, a pouco menos de 4 km do Largo do Paissandu.
 
