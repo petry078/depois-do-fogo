@@ -444,19 +444,19 @@ De acordo com testemunhas locais, a desocupação do largo foi pacífica. Neste 
 
 Na manhã da primeira sexta-feira (04) do mês de maio de 2018, Fernando Degaspari e o fotógrafo Rogério Soares sairam da redação do jornal A Tribuna de Santos a caminho do Santos Business Center, centro de negócios e braço administrativo do time de futebol, que fica em São Paulo capital, uma viagem de cerca de 80 km de distância. Mais um dia de trabalho comum para os repórteres de esporte que cobrem o Santos Futebol Clube.
 
-Fernando é um dos responsáveis pela cobertura dos acontecimentos que envolvem o time caiçara e mesmo o time treinando, jogando e vivendo na cidade do litoral, o presidente José Carlos Peres (desde 2017) prefere que a maioria dos anúncios oficiais sejam feitos no Santos Business Center, que fica na avenida Pacaembu, 1897, bem próximo do Complexo Esportivo do Pacaembu, onde fica um dos estádios mais famosos da cidade, o Estádio Municipal Paulo Machado de Carvalho.
+Fernando é um dos responsáveis pela cobertura dos acontecimentos que envolvem o time caiçara e mesmo o time treinando, jogando e vivendo na cidade do litoral, o presidente José Carlos Peres (desde 2017) prefere que a maioria dos anúncios oficiais sejam feitos na cidade de São Paulo, no Santos Business Center, que fica na avenida Pacaembu, 1897, bem próximo do Complexo Esportivo do Pacaembu, onde fica um dos estádios mais famosos da cidade, o Estádio Municipal Paulo Machado de Carvalho.
 
 “Tá afim de passar em um lugar?”, pergunta Soares depois de terminar o trabalho no centro administrativo do time. O fotógrafo sabia que um edifício no centro da cidade tinha desabado. Como ainda não conhecia São Paulo muito bem, o jornalista topou sem nem pensar duas vezes.
 
-Ao chegar no Largo do Paissandu, Rogério já começou a fotografar. Fernando que não tinha ideia do que tinha acontecido resolveu começar a apuração com as pessoas mais próximas. Conversou com os ex-moradores do prédio, com os que não moravam no prédio, com o Corpo de Bombeiros e com outros jornalistas.
+Ao chegar no Largo do Paissandu, Rogério já começou a fotografar. Fernando que não tinha ideia do que tinha acontecido começou sua apuração com as pessoas mais próximas. Conversou com os ex-moradores do prédio, com os que não moravam no prédio, com o Corpo de Bombeiros e com outros jornalistas.
 
 No trabalho de apuração do repórter, Fernando ouve um “Eaí malandrão! Não estava no futebol não?”. De costas e confuso, Fernando se vira e encontra Filippo Mancuso, repórter na Globo News, que estava cobrindo o caso desde o primeiro dia do desabamento. Conversaram por um bom tempo, sobre o caso e sobre outras coisas também. Felippo que também estava cobrindo a queda do edifício conta o que sabe e Fernando volta para sua apuração.
 
-Na redação, “a gente passou no prédio que pegou fogo e desabou. O Rogério fez umas fotos se for interessante posso fazer uma matéria”, disse aos editores do jornal e foi redigir a nota do Santos. Afinal, o jornalista tinha ido para São Paulo em busca daquela pauta.
+Na redação, “a gente passou no prédio que pegou fogo e desabou. O Rogério fez umas fotos se for interessante posso fazer a matéria”, disse aos editores do jornal e foi redigir a nota do Santos. Afinal, o jornalista tinha ido para São Paulo em busca daquela pauta.
 
 O jornal A Tribuna de Santos, assim como qualquer outro jornal da região, já estava cobrindo o caso do Wilton Paes de Almeida, com informações de agências de notícias e cobertura tradicional. O responsável pela editoria de Porto e Mar do jornal, Leopoldo Figueiredo também era o editor responsável pelo fechamento daquela edição de sábado (dia seguinte), discutiu a pauta com Fernando e decidiram publicar a matéria com um texto em primeira pessoa.
 
-“Cheiro de queimado e ar de abandono”, descreve o repórter. Este foi o sentimento do jornalista ao começar a investigar a situação. O sentimento foi tão marcante, que esse foi o título dado a matéria, publicada na edição de sábado, dia 5 de maio de 2018.
+“Cheiro de queimado e ar de abandono”, descreve o repórter. Este foi o sentimento do jornalista ao começar a investigar a situação. O sentimento foi tão marcante, que esse foi o título dado ao texto, publicada na edição de sábado, dia 5 de maio de 2018.
 
 Assim que chegou no Largo do Paissandu, jornalistas tentavam buscar mais detalhes sobre o corpo que os bombeiros haviam encontrado. O corpo de Ricardo Galvão, o Tatuagem, foi encontrado depois de mais de 22 horas de escavação manual, sem o uso de máquinas, pois os bombeiros ainda trabalhavam com a ideia de encontrar vítimas com vida.
 
@@ -468,7 +468,7 @@ O trabalho dos jornalistas na cobertura do caso foi muito além de publicar o qu
 
 Durante o mês de maio de 2018, somente o G1, portal de notícias da Globo, publicou mais de 70 matérias sobre o caso, embora a cobertura do G1 tenha sido feita de forma bem tradicional, com objetivo de reconstruir a cena para os leitores, outros jornais aproveitaram a vasta quantidade de histórias com relação ao edifício e a mídia ficou consumida pelo assunto durante os primeiros meses.
 
-O cinegrafista Abiatar Arruda, da TV Globo foi um dos únicos profissionais que conseguiu uma imagem nítida no momento do desabamento. Era um plantão de feriado, Abiatar e o repórter Guilherme Pimentel estavam fazendo uma matéria em um hospital em Itaquera, na zona leste da cidade. Marina Ferreira, uma das editoras da Globo News avisou a dupla sobre o incêndio e a equipe correu pra lá.
+O cinegrafista Abiatar Arruda, da TV Globo foi um dos poucos que conseguiu uma imagem nítida no momento do desabamento. Era um plantão de feriado, Abiatar e o repórter Guilherme Pimentel estavam fazendo uma matéria em um hospital em Itaquera, na zona leste da cidade. Marina Ferreira, uma das editoras da Globo News avisou a dupla sobre o incêndio e a equipe correu pra lá.
 
 Guilherme e Abiatar chegaram no Largo do Paissandu por volta de 1h30, quando o fogo já tinha consumido a maior parte do edifício. Eles ficaram na avenida Rio Branco, do lado esquerdo do prédio. Assustado com a quantidade de fogo e fumaça, Abiatar teve certeza que era hora de começar a filmar.
 
@@ -482,9 +482,7 @@ Três meses depois do desastre do edifício Wilton Paes de Almeida, o jornalista
 
 “O jornalismo da Carta Capital acaba sendo muito de redação. Então eles não tinham muito contato com os movimentos de ocupação. Eu peguei a pauta pra mim. Na redação eu discutia ideias diariamente, então vendi a pauta logo na primeira oportunidade. O jornalismo feito fora da cadeira, quando aparece lá é muito bem-vindo. O Mino [diretor] não é um cara que breca as ideias”, comenta sobre o processo de produção da matéria.
 
-Fred voltou lá alguns dias para conversar com os sobreviventes e contar porque estavam alí. “Tem uma hora que a pobreza organizada ela gera uma dignidade. Mas a miséria quando ela começa a desorganizar o seu entorno, a ponto da higiene deixar de ser prioridade, a dignidade vai desaparecendo e aí você começa a se aproximar da debilidade, do vício, da pobreza. Quando cheguei ali estava diante desse tipo de miséria.
-
-Tive sensações estranhas, de pena, mas ao mesmo tempo de tristeza. Um retrato do absolutamente largado”, diz.
+Fred voltou lá alguns dias para conversar com os sobreviventes e contar porque estavam alí. “Tem uma hora que a pobreza organizada ela gera uma dignidade. Mas a miséria quando ela começa a desorganizar o seu entorno, a ponto da higiene deixar de ser prioridade, a dignidade vai desaparecendo e aí você começa a se aproximar da debilidade, do vício, da pobreza. Quando cheguei ali estava diante desse tipo de miséria. Tive sensações estranhas, de pena, mas ao mesmo tempo de tristeza. Um retrato do absolutamente largado”, diz.
 
 Fred sabia que aquele não era um movimento organizado, que a liderança não tinha objetivos concretos que normalmente fazem parte dos principais objetivos de uma ocupação e que os moradores poderiam estar sendo enganados.
 
