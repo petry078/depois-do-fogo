@@ -2,8 +2,8 @@
 
 | META | ESTADO | 
 |------|--------| 
-| Transcrever conteúdo para Markdown. | Em execução |
-| Adicionar comentários. | Em execução |
+| Transcrever conteúdo para Markdown. | Concluído |
+| Adicionar comentários. | Concluído |
 | Curadoria de imagens para a próxima edição. | Aguardando |
 | ISBN e código de barras. | Aguardando |
 | Rediagramar páginas de conteúdo (LaTeX). | Aguardando |
