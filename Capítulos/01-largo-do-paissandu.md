@@ -1,0 +1,63 @@
+## Capítulo 01 – Largo do Paissandu
+
+O edifício Wilton Paes de Almeida foi inaugurado em 1968 no Largo do Paissandu, uma região bastante movimentada no centro de São Paulo. No entanto, desde as primeiras construções do Largo do Paissandu, em meados de 1600 até 2018, quando o edifício Wilton Paes de Almeida pegou fogo e desabou, muita história foi escrita<sup>1</sup>.
+
+A Igreja Nossa Senhora do Rosário dos Homens Pretos é umas das primeiras construções do Largo do Paissandu que ainda está por lá. A igreja foi construída quando o local ainda não tinha ruas definidas e era, majoritariamente, desabitado. No entanto, a atual Igreja Nossa Senhora do Rosário dos Homens Pretos, que fica no centro da praça do Largo do Paissandu, de frente para a avenida São João e a Galeria do Rock, é uma reconstrução.
+
+A primeira Igreja Nossa Senhora do Rosário dos Homens Pretos foi construída no Largo do Rosário (hoje conhecido como praça Antônio Prado), que é uma praça próxima a Catedral da Sé, marco central da cidade. Atualmente a região da Praça Antônio Prado é principalmente ocupada por edifícios comerciais, restaurantes e comércios diversos. O tráfego na região é exclusivo para pedestres, mas é comum ver policiais militares a cavalo além de vans e carros da corporação. A praça fica entre as ruas São Bento, João Brícola e Quinze de Novembro.
+
+Em 1728, a Câmara de São Paulo atendeu a um pedido da Irmandade de Nossa Senhora dos Homens Pretos e cedeu um terreno, no alto de uma colina, para que fosse construído uma igreja católica, exclusiva para escravos, que já demonstravam devoção e fé no local. A construção ficou sob responsabilidade do ermitão Domingos de Melo Tavares, que durante cerca de 2 anos, pediu esmolas e recebeu ajudas de religiosos em Minas Gerais. Domingos conseguiu juntar dez mil cruzados, o suficiente para a construção do prédio, já que contaria com mão de obra escrava para o trabalho. Acredita-se que a igreja tenha sido inaugurada em 1737.
+
+Durante o período de escravidão no Brasil, os negros e escravos eram proibidos de frequentar a mesma igreja frequentada por brancos descendentes de europeus, mas ao mesmo tempo, era proibido que praticassem cultos religiosos tradicionais de seu povo. Por esse motivo, foi fundada em meados do século XVI a Irmandade de Nossa Senhora do Rosário dos Homens Pretos, que teoricamente teria exclusividade em abrigar escravos e negros, para o culto católico. 
+
+Sendo assim, os negros vindos da África, mesmo com suas próprias crenças, viam-se sem opção e eram obrigados a se juntar a irmandade dos negros, para o culto religioso. Por isso, ainda hoje, é comum ver ao redor das igrejas da irmandade dos negros, oferendas e práticas religiosas originárias de povos africanos. As igrejas da Irmandade dos Homens Pretos são católicas, mas com forte influência e presença de práticas de religiões africanas.
+
+A igreja no alto da colina do Largo do Rosário, construída para a fé do povo negro, foi umas das primeiras da irmandade dos negros no Brasil, e mesmo assim, foi demolida em 1904, para que fosse dado início ao projeto de expansão e urbanização da região. Esse projeto de expansão, no entanto, foi exclusivamente motivado por fatores políticos da época.
+
+Em 1852, o vigário, religioso responsável pela igreja, Joaquim Machado Gonçalves Cavalheiro ordenou que os cultos deveriam ser realizados em ruas ao redor, como a rua João Brícola e a rua da Boa Vista, que ficam mais distantes da praça. A ordem foi dada a pedido dos moradores da região, que se incomodavam com os cultos dos negros no local.
+
+Já em 1901, com objetivo de estabelecer e fortalecer relações políticas com o atual prefeito Antônio da Silva Prado, o vereador Olavo Egídio, apresentou sua ideia de expandir o Largo do Rosário, com o alargamento da praça. Para isso, seria necessário a desapropriação dos prédios do largo, inclusive o da igreja.
+
+A prefeitura de São Paulo negociou com a Irmandade dos Homens Pretos, uma recompensa de 250 contos de réis, além de um pequeno território, em um local ainda pouco habitado, a cerca de 600 metros de distância do Largo do Rosário. A Igreja foi demolida em 1904, e o Largo do Rosário passou a ser chamado pelo seu nome atual, praça Antônio Prado. No mesmo ano, as obras da reconstrução da igreja começaram no Largo do Paissandu.
+
+Há cerca de 50 anos, o Largo do Paissandu era chamado de Praça das Lagoas, devido a presença de um conjunto de riachos e lagoas, que se espalhavam pela região<sup>2</sup>. Em homenagem a Batalha do Paysandú, precursora da Guerra do Paraguai, a prefeitura decidiu que o local, que contava com inúmeros rios fosse aterrado e terraplanado, além de rebatizado, como Largo do Paissandu.
+
+Devido a problemas com o solo recém aterrado e terraplanado, a construção da igreja teve que superar desafios gerados pela forte e rápida alteração do terreno. Por esse motivo, demorou alguns anos para ser concluída. Em abril de 1906, a nova igreja já estava de pé, mas seu primeiro culto ainda demorou mais dois anos para acontecer e a igreja foi finalmenteinaugurada em 1908.
+
+Outro edifício marcante que passou a integrar a paisagem do Largo do Paissandu na mesma época foi a Igreja Evangélica Luterana de São Paulo, que começou a ser construída em 1907. A comunidade luterana chegou em São Paulo com a vinda de imigrantes alemães para o Brasil. O primeiro culto da comunidade luterana em São Paulo foi feito inteiro na língua alemã, em 1858. Em 1907, a comunidade já contava com 150 membros e a construção de sua primeira igreja só foi possível depois que os irmãos empresários Daniel e Hermann Heydenreich doaram o terreno para a comunidade.
+
+Construída no estilo neogótico, a igreja é a primeira paróquia luterana da cidade. O desenho é obra do arquiteto alemão Guilherme Von Eÿe que projetou uma construção com um único pavimento de 465 metros quadrados. Também conhecida como Igreja Martin Luther, a paróquia operou cultos em alemão até 1942, quando o presidente Getúlio Vargas colocou em prática a Campanha de Nacionalização, um conjunto de medidas nacionalistas, entre elas a proibição de se falar, estudar e usar nomes comerciais em alemão, italiano e japonês.
+
+Por motivos políticos, o Brasil se aliou aos Estados Unidos durante a Segunda Guerra Mundial, e passou a fazer parte do grupo de países combatentes chamados de Aliança. O principal objetivo da Campanha de Nacionalização foi diminuir a influência das comunidades de imigrantes de países do eixo inimigo, que era Alemanha, Itália e Japão. 
+
+Mesmo antes da Campanha de Nacionalização (1938 - 1986), em 1920, São Paulo já era ponto de atração populacional e de capital de todo o país, chegando em 1930 a marca de 1 milhão de habitantes, tornando-se a principal metrópole do país. Em 1929 foi inaugurado, a 500 metros do Largo do Paissandu, o edifício Martinelli, primeiro arranha-céu da cidade, com 30 andares e 105 metros de altura.
+
+No início do século XX, o Largo do Paissandu também foi cenário de desenvolvimento cultural na cidade de São Paulo. É comum em diversas cidades do mundo, que artistas, profissionais do circo e da indústria cultural se encontrem nas segundas-feiras, quando normalmente é o dia de folga para quem trabalha nesse mercado.
+
+O movimento dos artistas de São Paulo, no entanto, não começou no Largo do Paissandu. Sua história se confunde com a história da igreja, onde inicialmente começou no Largo do Rosário, atual Praça Antônio Prado e depois passou a ser no Largo do Paissandu.
+
+A principal justificativa para essa mudança foi o desenvolvimento no entorno do largo, principalmente o desenvolvimento cultural da cidade, já que começaram a aparecer circos e com o tempo, cinemas. Durante as décadas de 20 e 30 a região das avenidas Ipiranga, Rio Branco e São João, que compõem o Largo do Paissandu ficaram conhecidas como Cinelândia, pela vasta quantidade de cinemas e por sempre ser frequentado por artistas. Segundo documentos da prefeitura de São Paulo, nos anos 60, haviam mais de 30 cinemas nos arredores do largo.
+
+Conhecido como Café dos Artistas, o encontro dos artistas não tinha endereço fixo, mas já funcionou em um bar e restaurante que fica na esquina da avenida São João com a rua do Largo do Paissandu, de frente para a Galeria Olido, como também já foi em frente do seu estabelecimento vizinho, o restaurante Ponto Chic, os criadores do tradicional lanche Bauru.
+
+O bar ainda existe com outro nome e embora o centro de São Paulo ainda seja um ponto de encontro de artistas, não é como era durante o auge da Cinelândia. O Ponto Chic continua vendendo Baurus e outros lanches no mesmo local. Na época do Café dos Artistas, o bar abria às 11h da manhã, nesse momento já haviam pessoas na calçada. Às segundas feiras o dia ali era agitado. O encontro era tradicional, durou quase um século. Presença obrigatória para os artistas da época. O escritor e dramaturgo, Plínio Marcos, conhecido por diversas peças de teatro narra sua chegada a São Paulo em seu livro “O Truque dos Espelhos”.
+
+“Cheguei em São Paulo numa tarde fria. Chovia muito. Fui logo pro ponto dos artistas de circo, um bar que tinha no Largo do Paissandu, bem no centrão – aliás, era o único lugar que eu sabia ir nessa grande cidade. Não tinha ninguém conhecido. Era muito cedo pro pessoal do circo dar o ar das suas graças. Me abriguei embaixo da marquise do bar; me encolhi o mais que pude. Fiquei escutando o relógio da igreja bater as horas. Nove. Dez. Onze horas. Meio-dia. Panela no fogo, barriga vazia”, escreve.
+
+Já de acordo com Tito Neto, autor do livro “Minha Vida no Circo” de 1986, os circos e artistas começaram a aparecer na região ainda no final do século XIX, “que acabou virando tradição, dos circenses se encontrarem em seu dia de folga, segunda-feira, num ou em torno de um café”, conta em seu livro.
+
+Tito conta que em uma segunda-feira normal se reuniam no Café dos Artistas uma média de 500 pessoas. Além do encontro social, também eram fechados negócios e contratos de funcionários, serviços, empresários e artistas. O Café dos Artistas acabou na década de 80, conforme os circos foram fechando. Atualmente o encontro dos artistas e profissionais do circo acontece na praça Roosevelt, que fica a poucas quadras do largo.
+
+Com o desenvolvimento, o Largo do Paissandu passou a ser uma região movimentada, além dos circos e cinemas, também apareceram salões de dança, teatros, bares, hotéis, restaurantes e até estúdios de rádio e redações de jornais. Um dos primeiros cinemas da cidade foi construído na avenida São João, inaugurado em 1936 como Cine Ufa Palace e depois rebatizado para Cine Art Palácio. O cinema era elegante e luxuoso. O prédio com arquitetura modernista de seis andares também era um hotel, o Plaza Hotel, que existe até hoje. Já o cinema, fechou em 1992.
+
+Outro cinema luxuoso da época foi o Cine Bandeirantes, inaugurado em 1939 onde hoje funciona um estacionamento. Em 1966 o cinema foi comprado pelo empresário Paulo Sá Pinto e passou a se chamar Cine Ouro. O cinema foi um sucesso com sessões históricas que geraram filas enormes na calçada, até perder seu glamour e sobreviver seus últimos anos de vida exibindo filmes pornográficos. O Cine Ouro também foi fechado em 1992, mas deixou seu legado.
+
+Os antigos cinemas de rua da Cinelândia que sobreviveram aos anos 90 exibem filmes pornográficos ou se transformaram em casas de swing. Com exceção do único cinema da Cinelândia que ainda funciona exibindo filmes que não são pornográficos, o Cine Ipiranga, que fica no térreo do imponente Marabá Hotel na avenida Ipiranga.
+
+Inaugurado em 1943, o cinema é um marco da arquitetura moderna, que dominava a região, tanto por sua fachada externa como por seu interior. Ele foi comprado pela distribuidora de filmes PlayArte em 1992, mas assim como os outros, também exibiu filmes pornográficos para sobreviver, antes de ser comprado.
+
+A Igreja Nossa Senhora do Rosário dos Homens Pretos, a Igreja Evangélica Luterana de São Paulo, o Cine Ipiranga e o edifício Wilton Paes de Almeida, assim como muitos outros edifícios clássicos da região foram tombados em 1992.
+
+> <sup>1</sup>Também pode ser interpretado como uma brincadeira ou autocrítica do autor, não satisfeito por detalhar demais um capítulo de introdução, que merece ser mais curto e até sedutor.
+
+> <sup>2</sup>Assim como praticamente toda a cidade de São Paulo, que era cheia de rios e lagos. Todos foram aterrados, terraplanados ou tiveram seus cursos modificados com corregos. A cidade hoje vive em cima de inúmeos rios que foram desabilitados. Um desastre ambiental e arquitetônico que nunca será reparado.
