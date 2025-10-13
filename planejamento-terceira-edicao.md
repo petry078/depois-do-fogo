@@ -18,7 +18,7 @@
 | Largo do Paissandu | OK     |
 | Construção         | OK     |
 | Ocupação           | OK     |
-| Fogo               |        |
+| Fogo               | OK     |
 | Corpo de Bombeiros |        |
 | Acampamento        |        |
 | Imprensa           |        |

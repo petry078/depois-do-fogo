@@ -1,22 +1,22 @@
 ## Capítulo 04 – Fogo
 
-O psicólogo Bruno Barros Blanez, de 34 anos, acordou na madrugada do incêndio se sentindo muito mal. A casa de sua namorada fica na Santa Cecília, a pouco mais de um quilómetro de distância do edifício Wilton Paes de Almeida. Dia 31 de agosto 2018 foi um dia quente, mas durante a noite a temperatura chegou a 18° celcius. O plano do casal era visitar a balada Trackers e no dia seguinte, primeiro de maio de 2018, curtir o feriado.
+O psicólogo Bruno Barros Blanez, de 34 anos, acordou na madrugada do incêndio se sentindo muito mal. A casa de sua namorada fica a pouco mais de um quilómetro de distância do edifício Wilton Paes de Almeida. Dia 31 de agosto 2018 foi um dia quente, mas durante a noite a temperatura chegou a 18° celcius. O plano do casal era visitar a balada Trackers e no dia seguinte, primeiro de maio de 2018, curtir o feriado.
 
-Na época, a Trackers ficava na rua Dom José de Barros, 337, no terceiro andar de um edifício de 81 anos, o Santa Victória, que fica de frente para a Galeria Olido, duas quadras do Wilton Paes de Almeida. Quem vai de bicicleta não paga e era esse o objetivo, mas de última hora, decidiram ficar em casa.
+Na época, a Trackers ficava na rua Dom José de Barros, 337, no terceiro andar de um edifício de 81 anos, o Santa Victória, que fica de frente para a Galeria Olido, uma quadra do Wilton Paes de Almeida. Nesse dia da Trackers, quem fosse de bicicleta não pagava e era esse o objetivo, mas de última hora, decidiram ficar em casa.
 
 “Eu estava capotado na sala, fiquei vendo TV até tarde, estava friozinho, fui dormir de coberta e acordei lá pelas 4h da manhã com muito calor mesmo, tirei todas as cobertas e vi que tava todo suado. Fiquei incomodado e não consegui dormir, era muito calor e eu estava suado a ponto de sentir a camiseta grudada nas costas e a gola inteira molhada”, disse.
 
 No dia seguinte, conversou com sua namorada Gladys, que tinha dormido no quarto. Ela descreveu a mesma sensação de calor extremo. Foi quando ele viu a notícia e relacionou o calor com o incêndio. “Era muito calor, mas mesmo assim pensei que era coisa do clima mesmo, normal. Depois tive a notícia, não lembro se foi na internet ou no jornal. Aquele calor... Só pode ser isso, o calor chegou até o prédio. Não tem outra explicação pro que aconteceu, era muito calor, pensei que era um fenômeno natural, mas que nada”.
 
-“Gostava do prédio. Tinha aquela pixação Opus 666 com o pentagrama na fachada, que eu achava bem legal. De repente, passei lá e não o vi mais. A paisagem fica completamente diferente”, lamenta Bruno.
+“Eu gostava do prédio. Tinha aquela pixação Opus 666 com o pentagrama na fachada, que eu achava bem legal. De repente, passei lá e não o vi mais. A paisagem fica completamente diferente”, lamenta Bruno.
 
-De acordo com testemunhas no local, o fogo no edifício Wilton Paes de Almeida começou no quinto andar por volta das 1h30 da manhã. Demorou apenas oito segundos para os 12 mil metros quadrados de área construída se transformarem em uma fogueira de mais de 650 metros quadrados no centro de uma das cidades mais densas do mundo.
+De acordo com testemunhas no local, o fogo no edifício Wilton Paes de Almeida começou no quinto andar, por volta das 1h30 da manhã. Demorou apenas oito segundos para os 12 mil metros quadrados de área construída se transformarem em uma fogueira do tamanho do terreno do prédio, no centro de uma das cidades mais densas do mundo.
 
-Depois do desastre, uma história de que uma briga de casal teria dado início ao fogo circulou entre os sobreviventes acampados e os jornalistas que cobriam a tragédia. No entanto, a perícia feita futuramente identificou que o fogo teria começado em uma tomada no quinto andar que estava com sobrecarga.
+Depois do desastre, uma história de que uma briga de casal teria dado início ao fogo circulou entre os sobreviventes acampados e os jornalistas que cobriam a tragédia. No entanto, a perícia feita futuramente identificou que o fogo teria começado em uma tomada no quinto andar que estava com sobrecarga<sup>1</sup>.
 
 Essa tomada vinha de uma ligação elétrica irregular no poste de luz da rua. Uma geladeira, uma televisão e um micro-ondas consomem energia suficiente para uma sobrecarga em um fio condutor comum. No caso, o revestimento de borracha do fio não resistiu a alta temperatura gerada pelo atrito da eletricidade e derreteu causando um curto circuito. Um curto circuito em um fio fino gera uma chama pequena, mas que foi o suficiente para derrubar um prédio de 24 andares.
 
-Os andares do Wilton Paes de Almeida, que foram construídos sem paredes internas, estavam recheado de madeira seca, usada pelos moradores como divisória de suas casas. A madeira serviu como combustível para as chamas, que rapidamente chegaram ao fosso do elevador. Às 2h16 da manhã, o Corpo de Bombeiros de São Paulo, que já estava trabalhando no local com 24 viaturas e 57 profissionais, relatou no Twitter que o edifício estava com muito fogo, além de um homem no último andar pedindo socorro.
+Os andares do Wilton Paes de Almeida, que foram construídos sem paredes internas, estavam recheado de madeira seca, usada pelos moradores como divisória de suas casas. A madeira serviu como combustível para as chamas, que rapidamente chegou no fosso do elevador. Às 2h16 da manhã, o Corpo de Bombeiros de São Paulo, que já estava trabalhando no local com 24 viaturas e 57 profissionais, relatou no Twitter que o edifício estava com muito fogo, além de um homem no último andar pedindo socorro.
 
 Ainda de acordo com a perícia, o fosso dos 3 elevadores do edifício funcionou como uma chaminé, carregando toda a fumaça para cima, aliviando a presença de gás carbônico nos andares, sobrando somente oxigênio e muita madeira de combustível. Além disso, os fossos dos elevadores eram utilizados pelos moradores como lixão.
 
@@ -52,6 +52,8 @@ O incêndio e a queda do edifício Wilton Paes de Almeida, atingiu mais três co
 
 {sugestão de imagem: mapa com destaque aos edifícios mencionados}
 
-Nos escombros, o Corpo de Bombeiros identificou os corpos de 7 ex-moradores: Selma Almeida da Silva, 40 anos; Wendel e Werner da Silva Saldanha, gêmeos de 10 anos, filhos de Selma;Francisco Lemos Dantas, 56 anos; Walmir Souza Santos, 47 anos; Ricardo Oliveira Galvão Pinheiro (Tatuagem), 39 anos e Alexandre de Menezes, 40 anos. Eva Barbosa Lima, 42 anos e Gentil de Souza Rocha, 53 anos ainda não foram encontrados.
+Nos escombros, o Corpo de Bombeiros identificou os corpos de 7 ex-moradores: Selma Almeida da Silva, 40 anos; Wendel e Werner da Silva Saldanha, gêmeos de 10 anos, filhos de Selma; Francisco Lemos Dantas, 56 anos; Walmir Souza Santos, 47 anos; Ricardo Oliveira Galvão Pinheiro (Tatuagem), 39 anos e Alexandre de Menezes, 40 anos. Eva Barbosa Lima, 42 anos e Gentil de Souza Rocha, 53 anos ainda não foram encontrados.
 
 No cadastro feito pela SEHAB dois meses antes do desabamento, 171 famílias foram contabilizadas, dessas, 46 eram famílias de imigrantes. No total 455 pessoas, sendo 131 crianças, quase 30% dos moradores. Mas no momento do desabamento, os bombeiros só contaram 317 pessoas. Muitos acreditam que o número de mortos e desaparecidos é muito maior.
+
+> <sup>1</sup>Novamente um caso de conspiração e confiabilidade de documentos oficiais. Acreditamos nos curiosos em volta na praça após a queda do edifício, no nos relatórios oficiais da perícia técnica?
