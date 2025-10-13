@@ -16,7 +16,7 @@
 |--------------------|--------|
 | Prefácio           | OK     |
 | Largo do Paissandu | OK     |
-| Construção         |        |
+| Construção         | OK     |
 | Ocupação           |        |
 | Fogo               |        |
 | Corpo de Bombeiros |        |
