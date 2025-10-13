@@ -15,7 +15,7 @@
 | CAPÍTULO           | ESTADO |
 |--------------------|--------|
 | Prefácio           | OK     |
-| Largo do Paissandu |        |
+| Largo do Paissandu | OK     |
 | Construção         |        |
 | Ocupação           |        |
 | Fogo               |        |
