@@ -1,16 +1,16 @@
-# Planejamento para segunda edição
+# Planejamento - Segunda Edição
 
 | META                               | ESTADO       | 
 |------------------------------------|--------------| 
 | Transcrever conteúdo para Markdown | Concluído    |
 | Adicionar comentários              | Em andamento |
 | Revisão                            | Em andamento |
-| Diagramação                        | Aguardando   |
 | Curadoria de imagens               | Aguardando   |
+| Diagramação                        | Aguardando   |
 | ISBN e código de barras            | Aguardando   |
-| Impressão da terceira edição.      | Aguardando   |
+| Impressão da segunda edição        | Aguardando   |
 
-## Planilha de acompanhamento da revisão
+## Acompanhamento da Revisão
 
 | CAPÍTULO           | ESTADO |
 |--------------------|--------|
@@ -19,7 +19,7 @@
 | Construção         | OK     |
 | Ocupação           | OK     |
 | Fogo               | OK     |
-| Corpo de Bombeiros |        |
+| Corpo de Bombeiros | OK     |
 | Acampamento        |        |
 | Imprensa           |        |
 | Poder Público      |        |
