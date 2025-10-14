@@ -1,6 +1,7 @@
 ## Capítulo 07 – Imprensa
 
-Na manhã da primeira sexta-feira (04) do mês de maio de 2018, Fernando Degaspari e o fotógrafo Rogério Soares sairam da redação do jornal A Tribuna de Santos a caminho do Santos Business Center, centro de negócios e braço administrativo do time de futebol, que fica em São Paulo capital, uma viagem de cerca de 80 km de distância. Mais um dia de trabalho comum para os repórteres de esporte que cobrem o Santos Futebol Clube.
+Na manhã da primeira sexta-feira (04) do mês de maio de 2018, Fernando Degaspari e o fotógrafo Rogério Soares sairam da redação do jornal A Tribuna de Santos a caminho do Santos Business Center, centro de negócios e braço administrativo do time de futebol, que fica em São Paulo capital, uma viagem de cerca de 80
+km de distância. Mais um dia de trabalho comum para os repórteres de esporte que cobrem o Santos Futebol Clube.
 
 Fernando é um dos responsáveis pela cobertura dos acontecimentos que envolvem o time caiçara e mesmo o time treinando, jogando e vivendo na cidade do litoral, o presidente José Carlos Peres (desde 2017) prefere que a maioria dos anúncios oficiais sejam feitos na cidade de São Paulo, no Santos Business Center, que fica na avenida Pacaembu, 1897, bem próximo do Complexo Esportivo do Pacaembu, onde fica um dos estádios mais famosos da cidade, o Estádio Municipal Paulo Machado de Carvalho.
 
@@ -8,9 +9,9 @@ Fernando é um dos responsáveis pela cobertura dos acontecimentos que envolvem 
 
 Ao chegar no Largo do Paissandu, Rogério já começou a fotografar. Fernando que não tinha ideia do que tinha acontecido começou sua apuração com as pessoas mais próximas. Conversou com os ex-moradores do prédio, com os que não moravam no prédio, com o Corpo de Bombeiros e com outros jornalistas.
 
-No trabalho de apuração do repórter, Fernando ouve um “Eaí malandrão! Não estava no futebol não?”. De costas e confuso, Fernando se vira e encontra Filippo Mancuso, repórter na Globo News, que estava cobrindo o caso desde o primeiro dia do desabamento. Conversaram por um bom tempo, sobre o caso e sobre outras coisas também. Felippo que também estava cobrindo a queda do edifício conta o que sabe e Fernando volta para sua apuração.
+No trabalho de apuração do repórter, Fernando ouve um “Eaí malandrão! Não estava no futebol não?”. De costas e confuso, Fernando se vira e encontra Filippo Mancuso, repórter da TV Globo, que estava cobrindo o caso desde o primeiro dia do desabamento. Conversaram por um bom tempo, sobre o caso e sobre outras coisas também. Felippo que também estava cobrindo a queda do edifício conta o que sabe e Fernando volta para sua apuração.
 
-Na redação, “a gente passou no prédio que pegou fogo e desabou. O Rogério fez umas fotos se for interessante posso fazer a matéria”, disse aos editores do jornal e foi redigir a nota do Santos. Afinal, o jornalista tinha ido para São Paulo em busca daquela pauta.
+Na redação, “a gente passou no prédio que pegou fogo e desabou. O Rogério fez umas fotos se for interessante posso fazer a matéria”, disse aos editores do jornal e foi redigir a nota do Santos. Afinal, o jornalista tinha ido para São Paulo em busca do anúncio do Santos.
 
 O jornal A Tribuna de Santos, assim como qualquer outro jornal da região, já estava cobrindo o caso do Wilton Paes de Almeida, com informações de agências de notícias e cobertura tradicional. O responsável pela editoria de Porto e Mar do jornal, Leopoldo Figueiredo também era o editor responsável pelo fechamento daquela edição de sábado (dia seguinte), discutiu a pauta com Fernando e decidiram publicar a matéria com um texto em primeira pessoa.
 
@@ -48,7 +49,7 @@ Não demorou pra perceber que junto aos sobreviventes do incêndio, estavam acam
 
 “Uma centena de famílias e de miseráveis. Sobreviventes junto com um tanto de gente que não morava no prédio. Gente que colou ali e foi chegando”. Fred acreditou em todos os depoimentos que coletou, mas “prova de que moravam no prédio não tenho nenhuma. É uma matéria impossível de solucionar, no final das contas”, comenta.
 
-Foram produzidas matérias escritas publicadas no portal, além de uma matéria em vídeo com os depoimentos das pessoas na praça, publicada no canal da revista no YouTube. A Carta não tinha um corpo de cinegrafistas, por isso, contaram com o trabalho do fotógrafo Marcelo Justo.
+Foram produzidas matérias escritas publicadas no portal da Carta Capital, além de uma matéria em vídeo com os depoimentos das pessoas na praça, publicada no canal da revista no YouTube. A Carta não tinha um corpo de cinegrafistas, por isso, contaram com o trabalho do fotógrafo Marcelo Justo.
 
 “O jornalista é muito usado, de cima para baixo. Só fiz aquela matéria porque era bom pra eles. Só pude fazer daquele jeito lá porque eu era da Carta, uma publicação que se alinha com a luta deles. De certa forma fui usado. Como posso ter sido usado por oportunistas. Mas quem sou eu para chamar eles de oportunistas?”, questiona.
 
@@ -66,4 +67,4 @@ No episódio “Ocupar e resistir é a solução?” ele visita uma ocupação p
 
 Fred participa de um grupo onde estão diversos atores dessa cena, jornalistas, ativistas, líderes de movimentos, mas mesmo sendo parte do meio, não tinha muitas informações sobre as lideranças do Wilton Paes de Almeida.
 
-“A constituição, de certa maneira, garante o direito das ocupações. O direito de ocupar propriedades que não cumprem função social. Mas aquele prédio era diferente, ele não tinha ligação com os movimentos que eu conheço. Uma ocupação organizada é de fato organizada, possui regras que evitam uma série de problemas, entre eles um incêndio. Mesmo assim, achava aquela ocupação esteticamente impressionante, o tamanho, o prédio, aquela fachada, bem naquele cruzamento”, comenta.
+“A constituição, de certa maneira, garante o direito das ocupações. O direito de ocupar propriedades que não cumprem função social. Mas aquele prédio era diferente, ele não tinha ligação com os movimentos que eu conheço. Uma ocupação organizada é de fato organizada, possui regras que evitam uma série de problemas, entre eles um incêndio. Mesmo assim, achava aquela ocupação esteticamente impressionante, o tamanho, o prédio, aquela fachada, bem naquele cruzamento...”, conclui.

@@ -21,5 +21,5 @@
 | Fogo               | OK     |
 | Corpo de Bombeiros | OK     |
 | Acampamento        | OK     |
-| Imprensa           |        |
+| Imprensa           | OK     |
 | Poder Público      |        |
