@@ -20,6 +20,6 @@
 | Ocupação           | OK     |
 | Fogo               | OK     |
 | Corpo de Bombeiros | OK     |
-| Acampamento        |        |
+| Acampamento        | OK     |
 | Imprensa           |        |
 | Poder Público      |        |
