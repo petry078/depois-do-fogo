@@ -24,7 +24,7 @@ Antes de começar as visitas, a SEHAB mapeou todas as ocupações do centro e id
 
 Durante as visitas, três prédios foram interditados por não contarem com segurança mínima. Dez estão com processos de reintegração de posse em andamento. Em outros 11 prédios a prefeitura quer transformá-los em moradias populares.
 
-“Nas visitas, foram observados diversos itens relacionados à segurança da edificação, como eletricidade irregular, escadas desprotegidas, uso de gás, ausência de alarme e iluminação de emergência. O principal objetivo dessa primeira fase é apresentar um panorama geral, a partir da consolidação dos dados apurados nas visitas, para apontar estratégias e ações de mitigação de risco e segurança das famílias residentes nessas ocupações. Ao todo são 11 mil pessoas vivendo nesses locais (3.551 famílias)”, diz a prefeitura em nota à imprensa de julho de 2018.
+“Nas visitas, foram observados diversos itens relacionados à segurança da edificação, como eletricidade irregular, escadas desprotegidas, uso de gás, ausência de alarme e iluminação de emergência. O principal objetivo dessa primeira fase é apresentar um panorama geral, a partir da consolidação dos dados apurados nas visitas, para apontar estratégias e ações de mitigação de risco e segurança das famílias residentes nessas ocupações. Ao todo são 11 mil pessoas vivendo nesses locais (3.551 famílias)”, diz a prefeitura em nota à imprensa, publicada em julho de 2018.
 
 O grupo executivo (responsável pelas vistorias), foi dividido em três equipes, que se revezaram durante três vistorias por dia, uma de manhã e duas a tarde. O principal objetivo das equipes era avaliar a situação estrutural dos prédios, qual o risco de incêndio e se os moradores estavam seguros lá. Além disso, no final de cada visita, o grupo apresentava quais eram as mudanças de segurança que deveriam ser feitas no prédio.
 
@@ -36,21 +36,23 @@ O coordenador da Defesa Civil, Edison Ramos de Quadros, também foi um dos respo
 
 Para o coordenador, a questão social e habitacional da cidade não foi ignorada. “Essa não foi uma ação fiscalizatória, com objetivo de punir os edifícios em péssimas condições, mas sim uma oportunidade de diagnóstico e melhoria desses prédios”, diz.
 
-Nos prédios o grupo observou características estruturais da instalação, sistema de proteção contra incêndio, características de condição e uso, fachada, condições de abandono e acesso, compartimentação e acabamento interno, condições das instalações elétricas, condições das habitações, organização e limpeza.
+Nos prédios, o grupo observou características estruturais da instalação, sistema de proteção contra incêndio, características de condição e uso, fachada, condições de abandono e acesso, compartimentação e acabamento interno, condições das instalações elétricas, condições das habitações, organização e limpeza.
 
 Essas características foram analisadas para identificar o risco estrutural, o risco de acidente e o risco de incêndio de cada prédio.
 
-Edison explica que é desejável que não aconteça acidentes nem incêndios. Mas para que não ocorram incêndios é necessário comportamento de segurança, controle de fontes de ignição e controle de materiais combustíveis. Já para que não ocorram acidentes é necessário cuidar dos fios desencapados e proteger os vãos abertos, para que não caiam pessoas ou itens domésticos na rua.
+Edison explica que é desejável que não aconteça acidentes nem incêndios. Mas para que não ocorram incêndios, é necessário adotar um comportamento de segurança, controle de fontes de ignição e controle de materiais combustíveis. Já para que não ocorram acidentes é necessário cuidar dos fios desencapados e proteger os vãos abertos, para que não caiam pessoas ou itens domésticos na rua.
 
 Para que prédios sejam considerados seguros, eles devem ser capazes de evitar que esses acidentes aconteçam como também devem ter capacidade de conter o fogo em caso de incêndio, além de corredores e saída livres, para que seja possível o abandono imediato do edifício.
 
 “Onde não foram identificadas medidas mitigadoras razoáveis, viáveis ou suficientes para reduzir os riscos de acidente, incêndio ou ruína da edificação, indicou-se a remoção dos moradores, em razão do alto risco à vida e à integridade física das pessoas, propondo-se a desocupação preventiva da edificação”, disse Edison durante o Seminário de Acidentes Prediais do Instituto de Engenharia em setembro de 2018.
 
-O principal problema encontrado nas ocupações foi a falta de rota de fuga e de extintores, assim como ligações irregulares de eletricidade. Para o secretário de habitação de São Paulo, Fernando Chucre, a situação das ocupações no centro de São Paulo não é preocupante. Segundo o secretário, as ocupações visitadas apresentam condições superiores a do edifício que desabou no Largo do Paissandu e são coordenadas por movimentos organizados.
+Após as vistorias, o principal problema encontrado nas ocupações foi a falta de rotas de fuga e de extintores, assim como ligações irregulares de eletricidade. Um problema comum de ocupações desorganizadas ou que ainda não se organizaram. 
+
+Para o secretário de habitação de São Paulo, Fernando Chucre, a situação das ocupações no centro de São Paulo não é preocupante. Segundo o secretário, as ocupações visitadas apresentam condições superiores a do edifício que desabou no Largo do Paissandu e são coordenadas por movimentos organizados.
 
 A primeira interdição imediata do grupo foi na ocupação da rua do Carmo, 88. Edifício de estacionamento inacabado, com estrutura exposta. As paredes que estão construídas possuem buracos. O concreto e os tijolos estão expostos. Não há luz, água e muito menos saneamento básico. O lixo é jogado no vão interno dentro do edifício, como também ao redor da torre do lado de fora. Na região o prédio é conhecido por diversos apelidos, como “caveirão”, “favelão” e “clandestino”.
 
-Nesta ocupação viviam 79 famílias, que foram cadastradas para atendimento emergencial. As famílias devem receber auxílio-aluguel, semelhante ao dado a algumas famílias vítimas do Wilton Paes de Almeida ou serão encaminhadas para abrigos.
+Nesta ocupação viviam 79 famílias, que foram cadastradas para atendimento emergencial. As famílias devem receber auxílio-aluguel, semelhante ao dado a algumas famílias vítimas do Wilton Paes de Almeida, ou serão encaminhadas para abrigos.
 
 “Este prédio foi construído para ser um edifício garagem. Só tem uma entrada, feita para carros. Ao entrar, uma única escada de madeira dá acesso aos andares superiores. Além disso ele tem um formato único: um grande vão no meio, onde era para ser instalado o elevador de carros e as “garagens” de cada lado. Ou seja, o prédio tem um buraco no meio, onde acumula lixo e todas as escadas que levam pros outros andares são de madeira. Se o prédio pegasse fogo, as escadas provavelmente queimariam e todas as famílias morreriam. A partir do momento que a prefeitura tem conhecimento dessa situação ela não pode deixar aquelas pessoas lá. A única organização que tinha lá era o tráfico. Tráfico muito pesado. O risco lá era imenso. Qualquer incêndio poderia matar todo mundo”, conta Márcia.
 
@@ -78,7 +80,7 @@ Os 17 investigados são Ananias Pereira dos Santos, Edinalva Silva Franco Pereir
 
 No dia 15 de junho de 2019, Marco Antonio Martin Vargas, juiz do Tribunal de Justiça do Estado de São Paulo (TJ-SP), autorizou o mandado de busca e apreensão e ainda decretou a prisão temporária (cinco dias) a nove desses investigados. “Decreto as prisões temporárias dos averiguados Ananias Pereira dos Santos, Edinalva Silva Ferreira, Carmenda Silva Ferreira, Andreya Tamara Santos de Oliveira, Hamilton Coelho Resende, Sidney Ferreira da Silva, Janice Ferreira Silva, Angélica dos Santos Lima e Josiane Cristina Barranco”. O mandado de prisão temporária foi logo convertido em prisão preventiva (de até 360 dias).
 
-De acordo com o juiz, as prisões “se revelam necessárias para garantir a continuidade das investigações, inclusive, com a possibilidade de se obter maiores elementos acerca das graves condutas criminosas noticiadas e, ainda, para evitar que venham a se furtar dos procedimentos a serem realizados pela Autoridade Policial e para proteção das testemunhas protegidas mas, não vislumbro a premência e necessidade, por ora, de se decretar as prisões temporárias dos demais averiguados por ser medida extrema e cuja investigação deve ser mais aprofundada para verificação da participação de cada um destes no comando dos crimes de extorsão”. O juiz deixou claro (fonte 4 valores maior que o resto do texto, itálico e negrito), que “fica proibida o acesso da imprensa durante a diligência [busca e apreensão])”.
+De acordo com o juiz, as prisões “se revelam necessárias para garantir a continuidade das investigações, inclusive, com a possibilidade de se obter maiores elementos acerca das graves condutas criminosas noticiadas e, ainda, para evitar que venham a se furtar dos procedimentos a serem realizados pela Autoridade Policial e para proteção das testemunhas protegidas mas, não vislumbro a premência e necessidade, por ora, de se decretar as prisões temporárias dos demais averiguados por ser medida extrema e cuja investigação deve ser mais aprofundada para verificação da participação de cada um destes no comando dos crimes de extorsão”. O juiz deixou claro, fonte 4 valores maior que o resto do texto, itálico e negrito, que “fica proibida o acesso da imprensa durante a diligência [busca e apreensão]”.
 
 De acordo com o portal de notícias G1, no dia 24 de junho de 2019, quatro dos nove investigados foram presos: os irmãos Sidney e Janice Ferreira da Silva, conhecida como Preta Ferreira, do Movimento dos Sem Teto do Centro (MSTC), Angélica dos Santos Lima e Edinalva Silva Pereira, ambas do Movimento de Moradia para Todos (MMPT).
 
@@ -92,10 +94,12 @@ A Plataforma de Direitos Humanos Dhesca Brasil, uma rede de organizações e art
 
 Em janeiro de 2020, a Prefeitura de São Paulo fechou um acordo com o governo federal para receber, por doação, mas dessa vez de forma efetiva, o terreno na esquina da avenida Rio Branco com a rua Antônio de Godói, antigo endereço do edifício Wilton Paes de Almeida. O acordo foi formalizado em maio do mesmo ano.
 
-O plano da prefeitura é construir um prédio de moradia popular, com 14 andares e cerca de 90 apartamentos, dedicados para a população de baixa renda. A construção do prédio faz parte do programa “Pode Entrar” da prefeitura, que busca construir moradia acessível.<sup>1</sup>
+O plano da prefeitura é construir um prédio de moradia popular, com 14 andares e cerca de 90 apartamentos, dedicados para a população de baixa renda. A construção do prédio faz parte do programa “Pode Entrar” da prefeitura, que busca construir moradia acessível.<sup>1</sup><sup>2</sup>
 
 Em fevereiro de 2020, o prefeito Bruno Covas, afirmou que o projeto não vai dar prioridade aos ex-ocupantes do Wilton Paes de Almeida, mas sim as famílias que já estão cadastradas na lista de espera da Companhia Metropolitana de Habitação de São Paulo (COHAB).
 
 Em abril de 2020, o Plenário da Câmara dos Deputados aprovou um projeto de lei que autoriza que imóveis da União sejam vendidos em bloco. Esse projeto de lei busca minimizar a quantidade de propriedades da união que não estão cumprindo função social e abandonadas. A população espera que tragédias como essa, não aconteçam novamente.
 
-> <sup>1</sup> 10 de janeiro de 2024: terreno onde era o edifício Wilton Paes de Almeida continua vazio, sem nenhum sinal do programa "Pode Entrar".
+> <sup>1</sup>Janeiro de 2024: terreno onde era o edifício Wilton Paes de Almeida continua vazio, sem nenhum sinal do programa "Pode Entrar".
+
+> <sup>2</sup>Outubro de 2025: terreno onde era o edifício Wilton Paes de Almeida continua vazio.

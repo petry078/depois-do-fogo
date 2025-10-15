@@ -3,9 +3,9 @@
 | META                               | ESTADO       | 
 |------------------------------------|--------------| 
 | Transcrever conteúdo para Markdown | Concluído    |
-| Adicionar comentários              | Em andamento |
-| Revisão                            | Em andamento |
-| Curadoria de imagens               | Aguardando   |
+| Adicionar comentários              | Concluído    |
+| Revisão                            | Concluído    |
+| Curadoria de imagens               | Em andamento |
 | Diagramação                        | Aguardando   |
 | ISBN e código de barras            | Aguardando   |
 | Impressão da segunda edição        | Aguardando   |
@@ -22,4 +22,4 @@
 | Corpo de Bombeiros | OK     |
 | Acampamento        | OK     |
 | Imprensa           | OK     |
-| Poder Público      |        |
+| Poder Público      | OK     |
