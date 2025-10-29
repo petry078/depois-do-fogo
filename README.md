@@ -1,15 +1,26 @@
 # Guilherme Petry - Technical Writer
+
+*SEGURANÇA E EXPERIÊNCIA*
+
 ## Introdução
 
 Meu nome é **Guilherme Petry**, moro no centro de São Paulo e trabalho como **redator para o mercado de tecnologia desde 2019**.
 
 Como Technical Writer, trabalhei na **Azion**, **Senhasegura** e **BMP**.
 
-Meu maior lema nessa área é abordar conceitos técnicos e específicos com uma linguagem simples, acessível para todos os públicos e que não deixa brechas para dupla interpretação.
+Meu maior lema nessa área é abordar conceitos técnicos com uma linguagem simples, acessível para todos os públicos e que **não deixa brechas para dupla interpretação**.
 
-Acredito que a documentação técnica deve resolver o problema do usuário da forma mais rápida e direta possível. Afinal, ninguém gosta de ler documentação, a gente lê porque precisa.
+Também tento sempre trazer clareza para **evitar ao máximo viezes cognitivos negativos** na interpretação do conteúdo.
 
-Uma boa experiência em um portal de documentação é uma experiência rápida.
+Sempre busco implementar boas práticas para **melhorar a experiência do usuário** no portal de documentação.
+
+Como por exemplo, **chunking**, dividir a informação em blocos de tamanhos parecidos, parágrafos curtos, amigáveis e fáceis de consumir. 
+
+Busco entender o contexto do usuário, para **facilitar o escaneamento do conteúdo** e permitir que ele encontre o que precisa.
+
+Acredito que a documentação técnica deve resolver o problema do usuário da forma mais rápida e direta possível. Afinal, **ninguém gosta de ler documentação, a gente lê porque precisa**.
+
+Uma boa experiência em um portal de documentação é uma experiência **rápida**.
 
 ## Experiências Profissionais
 
