@@ -1,0 +1,23 @@
+---
+title: "16 - Calculate Grid Installments"
+openapi: post /Proposta/CalcularGridParcelas
+version: 'English'
+---
+
+Through this endpoint, the partner simulates the values of the proposal before even finalizing it in the system.
+This method allows the override of some values originally captured from the initial store network configuration.
+
+<Expandable title="Messaging - Calculate Grid Installments">
+| Category | Operation           | Action              | Code   | Detailed Code    | Message                                                                                               |
+|----------|---------------------|---------------------|--------|------------------|--------------------------------------------------------------------------------------------------------|
+| Proposta | CalculaGridParcelas | CalcularGridParcelas | C0013  | V0001            | Produto não configurado para esta integração                                                          |
+| Proposta | CalculaGridParcelas | CalcularGridParcelas | C0195  | V0001            | O número de dias de acréscimo não pode ser negativo                                                     |
+| Proposta | CalculaGridParcelas | CalcularGridParcelas | C0196  | V0001            | O valor solicitado não é válido                                                                       |
+| Proposta | CalculaGridParcelas | CalcularGridParcelas | C0196  | V0002            | Formato de cálculo inválido                                                                           |
+| Proposta | CalculaGridParcelas | CalcularGridParcelas | C0196  | V0003            | É necessário o produto                                                                              |
+| Proposta | CalculaGridParcelas | CalcularGridParcelas | C0196  | V0004            | Prazo inválido ou não localizado para este Produto x Rede                                             |
+| Proposta | CalculaGridParcelas | CalcularGridParcelas | C0196  | V0005            | Não é possível aprovar a proposta. Produto x Rede x Parcela não possui juros configurado             |
+| Proposta | CalculaGridParcelas | CalcularGridParcelas | C0196  | V0006            | Configuração deve ser enviada para proposta HotMoney                                                   |
+| Proposta | CalculaGridParcelas | CalcularGridParcelas | C0196  | V0007            | Produto Rotativo e HotMoney aceitam apenas formato de cálculo com juros                               |
+| Proposta | CalculaGridParcelas | CalcularGridParcelas | C0196  | V0008            | Formato de Cálculo não informado                                                                     |
+</Expandable>

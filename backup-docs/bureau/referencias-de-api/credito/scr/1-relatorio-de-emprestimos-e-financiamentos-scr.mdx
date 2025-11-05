@@ -1,0 +1,329 @@
+---
+title: "1 - Relatório de Empréstimos e Financiamentos (SCR)"
+openapi: post /Bureau/ConsultarSCR
+---
+
+Por meio desse endpoint é possível realizar a consulta do Relatório de Empréstimos e Financiamentos (SCR), onde mostra as dívidas de Pessoa Física e Pessoa Jurídica (em dia, vencidas e em prejuízos), com bancos e financeiras, além de outros compromissos financeiros  em Reais e moeda estrangeira.
+ 
+* Tipo de operação;
+* Carteira ativa;
+* Em Atraso;
+* Com prejuízo;
+* Coobrigações;
+* Limite/Crédito disponíveis;
+* Desde quando tem relacionamento com Ifs;
+* Evolução do risco.
+
+## Modalidades
+
+As modalidades de operação são os códigos que identificam os tipos de crédito registrados no SCR.
+
+Estrutura geral:
+
+* **Tipo**: mostra se o crédito está **A VENCER** ou **VENCIDO** na base de dados do SCR;
+* **Modalidade**: código que identifica a operação no SCR;
+* **Domínio**: categoria ampla de operações, por exemplo, **Empréstimos**, **Financiamentos** ou **Direitos Creditórios**.
+* **Subdomínio**: modalidade específica dentro do domínio, por exemplo **Crédito Pessoal Consigna+do**, **Crédito Rotativo**, **Vendor**, **Financiamento de Veículos**.
+
+Cada código deve ser lido conforme sua descrição oficial. 
+
+### Exemplo de Retorno com Modalidades
+
+O campo `modalidades` do retorno completo do endpoint, representa a soma de todos os valores de uma determinada operação.
+
+Acesse as tabelas de referências dos códigos por modalidade abaixo.
+
+<Expandable title="Retorno com campo modalidades">
+
+```json
+       {
+           "tipo": "A VENCER",
+           "modalidade": "1801",
+           "dominio": "Títulos de crédito (fora da carteira classificada)",
+           "subdominio": "CPR - Cédula de Produto Rural",
+           "valorVencimento": 123456
+       }, 
+       {
+           "tipo": "A VENCER",
+           "modalidade": "1350",
+           "dominio": "Outros créditos",
+           "subdominio": "Recebíveis adquiridos",
+           "valorVencimento": 123456
+       }
+```
+
+Para descobrir qual modalidade estes exemplos representam, acesse a tabela abaixo:
+<br/>
+Exemplo: `"modalidade": "1350"` => Recebíveis Adquiridos
+
+</Expandable>
+
+<Expandable title="Tabelas">
+
+#### Adiantamentos a Depositantes
+
+| Código | Descrição |
+|--------|-----------|
+| 0101   | Adiantamentos a Depositantes |
+
+#### Empréstimos
+
+| Código | Descrição |
+|--------|-----------|
+| 0202 | Crédito Pessoal - com Consignação em Folha de Pagamento |
+| 0203 | Crédito Pessoal - sem Consignação em Folha de Pagamento |
+| 0204 | Crédito Rotativo Vinculado a Cartão de Crédito |
+| 0207 | Vendor |
+| 0208 | Compror |
+| 0209 | ARO - Adiantamento de Receitas Orçamentárias |
+| 0210 | Cartão de Crédito – Compra, Fatura Parcelada ou Saque Financiado pela Instituição Emitente do Cartão |
+| 0211 | Home Equity |
+| 0212 | Microcrédito |
+| 0213 | Cheque Especial |
+| 0214 | Conta Garantida |
+| 0215 | Capital de Giro com Prazo de Vencimento Até 365 Dias |
+| 0216 | Capital de Giro com Prazo Vencimento Superior 365 Dias |
+| 0217 | Capital de Giro com Teto Rotativo |
+| 0218 | Cartão de Crédito - Não Migrado |
+| 0250 | Recebíveis Adquiridos |
+| 0290 | Financiamento de Projeto |
+| 0299 | Outros Empréstimos |
+
+#### Direitos Creditórios Descontados
+
+| Código | Descrição |
+|--------|-----------|
+| 0301 | Desconto de Duplicatas |
+| 0302 | Desconto de Cheques |
+| 0303 | Antecipação de Fatura de Cartão de Crédito |
+| 0398 | Outros Direitos Creditórios Descontados |
+| 0399 | Outros Títulos Descontados |
+
+#### Financiamentos
+
+| Código | Descrição |
+|--------|-----------|
+| 0401 | Aquisição de Bens – Veículos Automotores |
+| 0402 | Aquisição de Bens – Outros Bens |
+| 0403 | Microcrédito |
+| 0404 | Vendor |
+| 0405 | Compror |
+| 0406 | Cartão de Crédito – Compra ou Fatura Parcelada pela Instituição Financeira Emitente do Cartão |
+| 0440 | Financiamentos Agroindustriais |
+| 0450 | Recebíveis Adquiridos |
+| 0490 | Financiamento de Projeto |
+| 0499 | Outros Financiamentos |
+
+#### Financiamentos à Exportação
+
+| Código | Descrição |
+|--------|-----------|
+| 0501 | Financiamento à Exportação |
+| 0502 | Adiantamento sobre Contratos de Câmbio |
+| 0503 | Adiantamento sobre Cambiais Entregues |
+| 0504 | Créditos Decorrentes de Contratos de Exportação–Export Note |
+| 0590 | Financiamento de Projeto |
+| 0599 | Outros Financiamentos à Exportação |
+
+#### Financiamentos à Importação
+
+| Código | Descrição |
+|--------|-----------|
+| 0601 | Financiamento à Importação |
+| 0690 | Financiamento de Projeto |
+
+#### Financiamentos com Interveniência
+
+| Código | Descrição |
+|--------|-----------|
+| 0701 | Aquisição de Bens com Interveniência – Veículos Automotores |
+| 0702 | Aquisição de Bens com Interveniência – Outros Bens |
+| 0790 | Financiamento de Projeto |
+| 0799 | Outros Financiamentos com Interveniência |
+
+#### Financiamentos Rurais
+
+| Código | Descrição |
+|--------|-----------|
+| 0801 | Custeio |
+| 0802 | Investimento |
+| 0803 | Comercialização |
+| 0804 | Industrialização |
+
+#### Financiamentos Imobiliários
+
+| Código | Descrição |
+|--------|-----------|
+| 0901 | Financiamento Habitacional – SFH |
+| 0902 | Financiamento Habitacional – Exceto SFH |
+| 0903 | Financiamento Imobiliário – Empreendimentos, Exceto Habitacional |
+| 0990 | Financiamento de Projeto |
+
+#### Financiamentos de Infraestrutura e Desenvolvimento
+
+| Código | Descrição |
+|--------|-----------|
+| 1101 | Financiamento de Infraestrutura e Desenvolvimento |
+| 1190 | Financiamento de Projeto |
+
+#### Operações de Arrendamento
+
+| Código | Descrição |
+|--------|-----------|
+| 1201 | Arrendamento Financeiro Exceto Veículos Automotores e Imóveis |
+| 1202 | Arrendamento Financeiro Imobiliário |
+| 1203 | Subarrendamento |
+| 1205 | Arrendamento Operacional |
+| 1206 | Arrendamento Financeiro de Veículos Automotores |
+| 1290 | Financiamento de Projeto |
+
+#### Outros Créditos
+
+| Código | Descrição |
+|--------|-----------|
+| 1301 | Avais e Fianças Honrados |
+| 1302 | Devedores por Compra de Valores e Bens |
+| 1303 | Títulos e Créditos a Receber |
+| 1304 | Cartão de Crédito – Compra à Vista e Parcelado Lojista |
+| 1350 | Recebíveis Adquiridos |
+| 1390 | Financiamento de Projeto |
+| 1399 | Outros com Característica de Crédito |
+
+#### Relações Interfinanceiras
+
+| Código | Descrição |
+|--------|-----------|
+| 1401 | Repasses Interfinanceiros |
+| 1402 | Recebíveis de Arranjo de Pagamento |
+| 1403 | Outros Valores a Receber Relativos a Transações de Pagamento |
+
+#### Coobrigações
+
+| Código | Descrição |
+|--------|-----------|
+| 1501 | Beneficiários de Garantias Prestadas para Operações com PJ Financeira |
+| 1502 | Beneficiários de Garantias Prestadas para Operações com Outras Pessoas |
+| 1503 | Beneficiários de Garantias Prestadas para Fundos Constitucionais |
+| 1504 | Beneficiários de Garantias Prestadas para Participação em Processo Licitatório |
+| 1505 | Carta de Crédito de Importação |
+| 1511 | Coobrigação Assumida em Cessão com Coobrigação para Pessoa Integrante do SFN |
+| 1512 | Coobrigação Assumida Em Cessão com Coobrigação para Pessoa Não Integrante Do Sfn, Inclusive Securitizadora e Fundos de Investimento |
+| 1513 | Beneficiários de Outras Coobrigações |
+| 1590 | Financiamento de Projeto |
+| 1599 | Beneficiários de Outras Garantias Prestadas |
+
+#### Títulos de Crédito Fora da Carteira Classificada
+
+| Código | Descrição |
+|--------|-----------|
+| 1801 | CPR - Cédula de Produto Rural |
+| 1802 | EN - Nota de Exportação |
+| 1803 | Debêntures |
+| 1804 | Notas Comerciais |
+| 1899 | Outros |
+
+#### Limite
+
+| Código | Descrição |
+|--------|-----------|
+| 1901 | Limite Global |
+| 1902 | Cheque Especial |
+| 1903 | Conta Garantida |
+| 1904 | Cartão de Crédito |
+| 1905 | Capital de Giro |
+| 1906 | Crédito Pessoal |
+| 1907 | Vendor |
+| 1908 | Compror |
+| 1909 | Descontos |
+| 1910 | Aquisição de Bens |
+| 1999 | Outros |
+
+#### Retenção de Risco
+
+| Código | Descrição |
+|--------|-----------|
+| 2001 | Retenção de Risco Assumida por Aquisição de Cotas de Fundos |
+| 2002 | Retenção de Risco Assumida por Aquisição de Instrumentos com Lastros Em Operações de Crédito |
+
+</Expandable>
+
+## Faixas de Vencimento
+
+As faixas de vencimento, identificadas pelos códigos, classificam as operações de crédito conforme sua situação no tempo:
+
+* Quanto falta para vencer;
+* Quando os recursos serão liberados;
+* Há quanto tempo estão vencidas;
+* Se já foram baixadas.
+
+Categorias e códigos aplicáveis:
+
+* Limites de Crédito: v20, v40;
+* Créditos a Liberar: v60, v80;
+* Créditos a Vencer: v110 a v199;
+* Créditos Vencidos: v205 a v290;
+* Créditos Baixados: v310 a v330;
+
+Cada faixa deve ser usada conforme seu significado ao relizar consultas e regras de negócio, garantindo consistência na análise.
+
+Acesse as tabelas de referências dos códigos por Faixa de Vencimento abaixo.
+
+<Expandable title="Tabelas">
+
+### Limite de Crédito
+
+| Código | Descrição                                           |
+|--------|-----------------------------------------------------|
+| v20    | Limite de Crédito com Vencimento até 360 dias.      | 
+| v40    | Limite de Crédito com Vencimento acima de 360 dias. |
+
+### Créditos a Liberar
+
+| Código | Descrição                             |
+|--------|---------------------------------------|
+| v60    | Créditos a Liberar até 360 dias.      |
+| v80	 | Créditos a Liberar acima de 360 dias. |
+
+### Créditos a Vencer
+
+| Código | Descrição                                  |
+|--------|--------------------------------------------|
+| v110   | Créditos a Vencer até 30 dias.             |
+| v120   | Créditos a Vencer de 31 a 60 dias.         |
+| v130   | Créditos a Vencer de 61 a 90 dias.         |
+| v140   | Créditos a Vencer de 91 a 180 dias.        |
+| v150   | Créditos a Vencer de 181 a 360 dias.       |
+| v160   | Créditos a Vencer de 361 a 720 dias.       |
+| v165   | Créditos a Vencer de 721 a 1080 dias.      |
+| v170   | Créditos a Vencer de 1081 a 1440 dias.     |
+| v175   | Créditos a Vencer de 1441 a 1800 dias.     |
+| v180   | Créditos a Vencer de 1801 a 5400 dias.     |
+| v190   | Créditos a Vencer acima de 5400 dias.      |
+| v199   | Créditos a Vencer com Prazo Indeterminado. |
+
+### Créditos Vencidos
+
+| Código | Descrição                            |
+|--------|--------------------------------------|
+| v205   | Créditos Vencidos de 1 a 14 dias.    |
+| v210   | Créditos Vencidos de 15 a 30 dias.   |
+| v220   | Créditos Vencidos de 31 a 60 dias.   |
+| v230   | Créditos Vencidos de 61 a 90 dias.   |
+| v240   | Créditos Vencidos de 91 a 120 dias.  |
+| v245   | Créditos Vencidos de 121 a 150 dias. |
+| v250   | Créditos Vencidos de 151 a 180 dias. |
+| v255   | Créditos Vencidos de 181 a 240 dias. |
+| v260   | Créditos Vencidos de 241 a 300 dias. |
+| v270   | Créditos Vencidos de 301 a 360 dias. |
+| v280   | Créditos Vencidos de 361 a 540 dias. |
+| v290   | Créditos Vencidos acima de 540 dias. |
+
+### Créditos Baixados como Prejuízo
+
+| Código | Descrição                                                     |
+|--------|---------------------------------------------------------------|
+| v310   | Créditos Baixados como Prejuízo até 12 meses                  | 
+| v320	 | Créditos Baixados como Prejuízo há mais de 12 e até 48 meses. |
+| v330	 | Créditos Baixados como Prejuízo há mais de 48 meses.          |
+
+</Expandable>

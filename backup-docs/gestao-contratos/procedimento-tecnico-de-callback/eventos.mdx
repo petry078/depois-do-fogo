@@ -1,0 +1,391 @@
+---
+title: "Eventos"
+version: 'Português'
+---
+
+O sistema de callback da **Agenda de Gestão de Contratos** é uma solução automatizada para monitoramento em tempo real de cancelamentos de propostas e para retorno de simulações assíncronas de saldo.
+
+## 1. Criação de Agenda de Gestão de Contratos
+
+O exemplo de notificação abaixo mostra o valor total e a quantidade de parcelas de um financiamento.
+
+```json
+{
+    "QtdeParcelas": 8,
+    "VlrTotalDivida": 11.2,
+    "DtFinanciado": "06-09-2024",
+    "Credito": {
+        "DtCredito": null,
+        },
+    "Conta": {
+        "CodigoBanco": null,
+        "NomeBanco": null,
+        "Agencia": null,
+        "Conta": null,
+        "ContaDigito": null
+    }
+},
+{
+    "Parcelas": [{
+        "NroParcela": 1,
+        "VlrParcela": 1.4,
+        "VlrPrincipal": 1.25,
+        "VlrDespesas": 0.15,
+        "VlrSaldoDevedor": 9.8,
+        "DtVencimento": "16-09-2024"
+    }],
+{
+    "NroParcela": 2,
+    "VlrParcela": 1.4,
+    "VlrPrincipal": 1.25,
+    "VlrDespesas": 0.15,
+    "VlrSaldoDevedor": 8.4,
+    "DtVencimento": "16-10-2024" 
+}
+}
+``` 
+
+| Campo                 | Tipo        | Descrição                                                         |
+|-----------------------|-------------|-------------------------------------------------------------------|
+| `QtdeParcelas`        | Int         | Descreve a quantidade de parcelas.                                |
+| `VlrTotalDivida`      | Float       | Valor total da dívida incluindo taxas e impostos.                 | 
+| `DtFinanciado`        | Date        | Data da contratação do financiamento.                             |
+| `DtCredito`           | Date        | Data em que foi cedido o credito, desembolso do valor.            |
+| `CodigoBanco`         | Int         | Codigo de identificação do banco.                                 |
+| `NomeBanco`           | String      | Nome do banco.                                                    |
+| `Agência`             | Int         | Numero de identificação da agencia.                               |
+| `Conta`               | Int         | Numero de identificação da conta.                                 |
+| `ContaDigito`         | Int         | Digito da conta.                                                  |
+| `NroParcela`          | Int         | Número da parcela.                                                |
+| `VlrParcela`          | Float       | Valor total da parcela.                                           |
+| `VlrPrincipal`        | Float       | Valor sem taxas,juros e impostos.                                 |
+| `VlrDespesas`         | Float       | Valor das despesas adicionais incluídas na parcela taxas e juros. |
+| `VlrSaldoDevedor`     | Float       | Saldo devedor após o pagamento da parcela.                        |
+| `DtVencimento`        | Date        | Data de vencimento da parcela.                                    |
+
+## 2. Cancelamento de Agenda de Gestão de Contratos
+
+Este exemplo de corpo do callback mostra uma visão geral sobre o cancelamento de uma agenda, incluindo o tipo e nome do evento, número da proposta e a data em que o cancelamento ocorreu, podendo realizar o cancelamento enquanto o status não for para paga ou cedida.
+
+```json
+{
+"TipoEvento": 1,
+"NomeEvento": "Cancelamento de Agenda",
+"NroProposta": 3543743,
+"DtEvento": "2024-09-05",
+"AcrescimoAbatimento": null,
+"LancamentoParcela": null,
+"ProrrogacaoVencimento": null,
+"GeracaoBoleto": null,
+"CancelamentoBoleto": null
+} 
+```
+
+| Campo                   | Tipo     | Descrição                                                                           |  
+|-------------------------|----------|-------------------------------------------------------------------------------------|
+| `TipoEvento`            | Int      | Identificador numérico do tipo de evento.                                           |
+| `NomeEvento`            | String   | Nome do evento.                                                                     |
+| `NroProposta`           | Int      | Número da proposta associada.                                                       |
+| `DtEvento`              | String   | Data em que o evento ocorreu.                                                       |
+| `AcrescimoAbatimento`   | Object   | Objeto contendo informações sobre acréscimos ou abatimentos relacionados ao evento. |
+| `LancamentoParcela`     | Object   | Objeto contendo informações sobre o lançamento de parcelas.                         |
+| `GeracaoBoleto`         | Object   | Objeto contendo informações sobre a geração do boleto.                              |
+| `ProrrogacaoVencimento` | Datetime | Data e hora da prorrogação do vencimento.                                           |
+| `CancelamentoBoleto`    | Object   | Objeto contendo informaçoes do cancelamento.                                        |
+
+## 3. Acréscimo/Abatimento
+
+Este exemplo de corpo de callback mostra os detalhes dos ajustes no valor de uma dívida referente ao acréscimo ou abatimento referente a parcela.
+
+```json
+{
+  "TipoEvento": 2,
+  "NomeEvento": "Acréscimo/Abatimento",
+  "NroProposta": 3543753,
+  "DtEvento": "2024-09-05",
+  "AcrescimoAbatimento": {
+    "NroParcela": 2,
+    "VlrSaldo": 0,
+    "VlrAcrescimo": 10,
+    "VlrAbatimento": 0,
+    "VlrSaldoAtual": 10
+  },
+  "LancamentoParcela": null,
+  "ProrrogacaoVencimento": null,
+  "GeracaoBoleto": null,
+  "CancelamentoBoleto": null
+}
+```
+
+| Campo                    | Tipo         | Descrição                                                                           |
+|--------------------------|--------------|-------------------------------------------------------------------------------------|
+| `TipoEvento`             | Int          | Identificador numérico do tipo de evento.                                           |
+| `NomeEvento`             | String       | Nome do evento.                                                                     |
+| `NroProposta`            | Int          | Número da proposta associada.                                                       |
+| `DtEvento`               | String       | Data em que o evento ocorreu.                                                       |
+| `AcrescimoAbatimento`    | Object       | Objeto contendo informações sobre acréscimos ou abatimentos relacionados ao evento. |
+| `NroParcela`             | Int          | Número da parcela afetada pelo acréscimo/abatimento.                                |
+| `LancamentoParcela`      | Object       | Objeto contendo informações sobre o lançamento de parcelas.                         |
+| `GeracaoBoleto`          | Object       | Objeto contendo informações sobre a geração do boleto.                              |
+| `ProrrogacaoVencimento`  | Datetime     | Data e hora da prorrogação do vencimento.                                           |
+| `CancelamentoBoleto`     | Object       | Objeto contendo informações do cancelamento.                                        |
+| `VlrAcrescimo`           | Float        | Valor do acréscimo aplicado à parcela.                                              |
+| `VlrAbatimento`          | Float        | Valor do abatimento aplicado à parcela.                                             |
+
+## 4. Lançamento na Parcela
+
+Este exemplo de corpo de callback mostra os detalhes sobre o lançamento de uma parcela, incluindo o valor original, o valor pago, e a situação da parcela (liquidada ou não), bem como informações sobre o vencimento e boletos associados.
+
+```json
+{
+  "TipoEvento": 3,
+  "NomeEvento": "Lançamento na Parcela",
+  "NroProposta": 3543603,
+  "DtEvento": "2024-09-05",
+  "AcrescimoAbatimento": null,
+  "LancamentoParcela": {
+    "NroParcela": 1,
+    "VlrOriginalParcela": 72.24,
+    "VlrSaldo": 0,
+    "ParcelaLiquidada": true,
+    "VlrEncargos": 0,
+    "VlrAbatimento": 0,
+    "VlrPagamento": 72.24,
+    "VlrDesconto": 0,
+    "VlrSaldoAtual": 0,
+    "VlrExcedente": 0,
+    "DtVencimento": "2024-09-15",
+    "DtVencimentoAtual": "2024-10-30",
+    "Boleto": {
+      "NroBoleto": null,
+      "Liquidacao": null
+    }
+  },
+  "ProrrogacaoVencimento": null,
+  "GeracaoBoleto": null,
+  "CancelamentoBoleto": null
+}
+``` 
+
+| Campo                 | Tipo    | Descrição                                          |
+|-----------------------|---------|----------------------------------------------------|
+| `DtEvento`            | Date    | Data em que o evento ocorreu.                      |
+| `AcrescimoAbatimento` | Object  | Acréscimo ou abatimento aplicável (não aplicável). |
+| `NroParcela`          | Int     | Número da parcela.                                 |
+| `VlrOriginalParcela`  | Float   | Valor original da parcela.                         |
+| `VlrSaldo`            | Float   | Saldo restante após o pagamento (inicialmente 0).  |
+| `ParcelaLiquidada`    | Boolean | Indica se a parcela foi totalmente liquidada.      |
+| `VlrEncargos`         | Float   | Valor dos encargos aplicados (se houver).          |
+| `VlrAbatimento`       | Float   | Valor de abatimento aplicado (se houver).          |
+| `VlrPagamento`        | Float   | Valor efetivamente pago.                           |
+| `VlrDesconto`         | Float   | Valor de desconto concedido (se houver).           |
+| `VlrSaldoAtual`       | Float   | Saldo atual após pagamento.                        |
+| `VlrExcedente`        | Float   | Valor excedente pago (se houver).                  |
+| `DtVencimento`        | Date    | Data de vencimento original da parcela.            |
+| `DtVencimentoAtual`   | Date    | Data de vencimento atualizada da parcela.          |
+| `NroBoleto`           | Int     | Número do boleto associado (não aplicável).        |
+| `Liquidacao`          | Boolean | Indica se houve liquidação (não aplicável).        |
+
+## 5. Prorrogação do Vencimento
+
+Este exemplo de corpo de callback mostra informações sobre a prorrogação do vencimento de uma parcela, incluindo o número da proposta, a data do evento e as novas datas de vencimento.
+
+```json
+{
+  "TipoEvento": 4,
+  "NomeEvento": "Prorrogação de Vencimento",
+  "NroProposta": 3543603,
+  "DtEvento": "2024-09-05",
+  "AcrescimoAbatimento": null,
+  "LancamentoParcela": null,
+  "ProrrogacaoVencimento": {
+    "NroParcela": 1,
+    "DtVencimentoAnterior": "2024-09-15",
+    "DtVencimentoAtual": "2024-10-30"
+  },
+  "GeracaoBoleto": null,
+  "CancelamentoBoleto": null
+}
+```
+
+| Campo                   | Tipo         | Descrição                                                  |
+|-------------------------|--------------|------------------------------------------------------------|
+| `CodigoProposta`        | String       | UID da proposta retornada no response da inclusão.         |
+| `codigoOperacao`        | String       | Identificador único da operação.                           |
+| `nroParcela`            | Int          | Número da parcela afetada pela prorrogação.                |
+| `NovoVencimento`        | String       | Nova data de vencimento da parcela.                        |
+| `MotivoAlteracao`       | String       | Descrição do motivo pelo qual o vencimento foi prorrogado. |
+| `TipoEvento`            | Int          | Identificador numérico do tipo de evento.                  |
+| `NomeEvento`            | String       | Nome do evento de prorrogação.                             |
+| `NroProposta`           | Int          | Número da proposta associada ao evento.                    |
+| `DtEvento`              | String       | Data em que o evento de prorrogação ocorreu.               |
+| `ProrrogacaoVencimento` | Object       | Detalhes da prorrogação do vencimento.                     |
+| `NroParcela`            | Int          | Número da parcela prorrogada.                              |
+| `DtVencimentoAnterior`  | String       | Data de vencimento original antes da prorrogação.          |
+| `DtVencimentoAtual`     | String       | Nova data de vencimento após a prorrogação.                |
+
+## 6. Geração de Boleto
+
+O exemplo do corpo do callback exibe detalhes sobre a geração de um boleto, incluindo:
+
+* Tipo;
+* Nome;
+* Número da proposta.
+
+```json
+{
+  "TipoEvento": 5,
+  "NomeEvento": "Geração de Boleto",
+  "NroProposta": 3544197,
+  "DtEvento": "2024-09-06",
+  "AcrescimoAbatimento": null,
+  "LancamentoParcela": null,
+  "ProrrogacaoVencimento": null,
+  "GeracaoBoleto": {
+    "CodigoBoleto": "8a72e6a3-cf73-46cb-99ee-b698335f1e12",
+    "NroBoleto": 48924,
+    "VlrBoleto": 1.4,
+    "DtVencimento": "2024-09-25",
+    "Liquidacao": true
+  },
+  "CancelamentoBoleto": null
+}
+``` 
+
+| Campo            | Tipo     | Descrição                                                |
+|------------------|----------|-------------------------------------------------------------------------------------------|
+| `TipoEvento`            | Int     | Identificador numérico do tipo de evento.                                           |
+| `NomeEvento`            | String  | Nome do evento.                                                                     |
+| `NroProposta`           | Int     | Número da proposta associada.                                                       |
+| `DtEvento`              | String  | Data em que o evento ocorreu.                                                       |
+| `AcrescimoAbatimento`   | Object  | Objeto contendo informações sobre acréscimos ou abatimentos relacionados ao evento. |
+| `LancamentoParcela`     | Object  | Objeto contendo informações sobre o lançamento de parcelas.                         |
+| `GeracaoBoleto`         | Object  | Objeto contendo informações sobre a geração do boleto.                              |
+| `CodigoBoleto`          | String  | Código de identificação do boleto.                                                  |
+| `Liquidação`            | Boolean | Identifica se é verdadeiro ou falso a situação da liquidação.                       |
+| `VlrBoleto`             | Float   | Valor do boleto.                                                                    |
+| `DtVencimento`          | Date    | Data de vencimento do boleto.                                                       |
+| `NroBoleto`             | Int     | Número de identificação do boleto.                                                  |
+| `ProrrogacaoVencimento` | Datetim | Data e hora da prorrogação do vencimento.                                           |
+| `CancelamentoBoleto`    | Object  | Objeto contendo informações do cancelamento.                                        |
+
+## 7. Cancelamento de Boletos
+
+Este exemplo de corpo de callback fornece informações detalhadas sobre o cancelamento de um boleto. Os dados incluem:
+
+* Número de proposta;
+* Data de cancelamento;
+* Número do boleto;
+* Parcelas afetadas;
+* Código do boleto cancelado;
+* Além de outros dados.
+
+```json
+{
+  "TipoEvento": 1,
+  "NomeEvento": "Cancelamento de Agenda",
+  "NroProposta": 3543743,
+  "DtEvento": "2024-09-05",
+  "AcrescimoAbatimento": null,
+  "LancamentoParcela": null,
+  "ProrrogacaoVencimento": null,
+  "GeracaoBoleto": null,
+  "CancelamentoBoleto": {
+    "CodigoBoleto": "8f3898e2-c99b-40f2-9d13-6a23e5b7e082",
+    "NroBoleto": 48681,
+    "Parcelas": [
+      3
+    ]
+  }
+}
+``` 
+
+| Campo                   | Tipo     | Descrição                                                                           |
+|-------------------------|----------|-------------------------------------------------------------------------------------|
+| `TipoEvento`            | Int      | Identificador numérico do tipo de evento.                                           |
+| `NomeEvento`            | String   | Nome do evento.                                                                     |
+| `NroProposta`           | Int      | Número da proposta associada.                                                       |
+| `DtEvento`              | String   | Data em que o evento ocorreu.                                                       |
+| `AcrescimoAbatimento`   | Object   | Objeto contendo informações sobre acréscimos ou abatimentos relacionados ao evento. |
+| `LancamentoParcela`     | Object   | Objeto contendo informações sobre o lançamento de parcelas.                         |
+| `GeracaoBoleto`         | Object   | Objeto contendo informações sobre a geração do boleto.                              |
+| `ProrrogacaoVencimento` | Datetime | Data e hora da prorrogação do vencimento.                                           |
+| `CancelamentoBoleto`    | Object   | Objeto contendo informações do cancelamento.                                        |
+
+## 8. Registro de Cobrança
+
+Este exemplo de corpo de callback fornece informações sobre a emissão de cobranças (boleto, boleto híbrido ou PIX).
+
+```json
+{
+  "TipoEvento": 8,
+  "NomeEvento": "Registro de Cobrança",
+  "NroProposta": 49401165,
+  "DtEvento": "2025-05-06",
+  "AcrescimoAbatimento": null,
+  "LancamentoParcela": null,
+  "ProrrogacaoVencimento": null,
+  "GeracaoBoleto": null,
+  "CancelamentoBoleto": null,
+  "GeracaoCobranca": {
+    "CodigoLiquidacao": "f079c5f2-1473-4c2e-aa19-c49a0c789691",
+    "CodigoBoleto": null,
+    "NroBoleto": null,
+    "Emv": null, //código do pix copia e cola
+    "Imagem": null, //imagem do qr code
+    "Parcelas": [
+      1
+    ]
+  },
+  "CancelamentoCobranca": null
+}
+```
+| Campo                   | Tipo       | Descrição                                      |
+|-------------------------|------------|------------------------------------------------|
+| `TipoEvento`            | Int        | Identificador numérico do tipo de evento.      |
+| `NomeEvento`            | String     | Nome do evento.                                |
+| `NroProposta`           | Int        | Número da proposta associada.                  |
+| `DtEvento`              | String     | Data em que o evento ocorreu.                  |
+| `AcrescimoAbatimento`   | Object     | Informações sobre acréscimos ou abatimentos.   |
+| `LancamentoParcela`     | Object     | Informações sobre o lançamento de parcelas.    |
+| `ProrrogacaoVencimento` | Object     | Informações sobre a prorrogação do vencimento. |
+| `GeracaoBoleto`         | Object     | Informações sobre a geração do boleto.         |
+| `CancelamentoBoleto`    | Object     | Informações sobre o cancelamento do boleto.    |
+| `GeracaoCobranca`       | Object     | Informações sobre a geração de cobrança.       |
+| `CodigoLiquidacao`      | String     | Código de liquidação.                          |
+| `CodigoBoleto`          | String     | Código do boleto.                              |
+| `NroBoleto`             | Int        | Número do boleto.                              |
+| `Emv`                   | String     | Código do PIX (copia e cola).                  |
+| `Imagem`                | String     | Imagem do QR Code.                             |
+| `Parcelas`              | Array[Int] | Lista de parcelas associadas à cobrança.       |
+| `CancelamentoCobranca`  | Object     | Informações sobre o cancelamento da cobrança.  |
+
+## 9. Liquidação
+
+Este exemplo de corpo de callback é enviado ao parceiro quando todas as parcelas foram pagas (liquidação da agenda).
+
+```json
+{
+  "TipoEvento": 7,
+  "NomeEvento": "Liquidação de Agenda",
+  "NroProposta": 4521938,
+  "DtEvento": "2025-01-27",
+  "AcrescimoAbatimento": null,
+  "LancamentoParcela": null,
+  "ProrrogacaoVencimento": null,
+  "GeracaoBoleto": null,
+  "CancelamentoBoleto": null
+}
+```
+
+| Campo                   | Tipo       | Descrição                                      |
+|-------------------------|------------|------------------------------------------------|
+| `TipoEvento`            | Int        | Identificador numérico do tipo de evento.      |
+| `NomeEvento`            | String     | Nome do evento.                                |
+| `NroProposta`           | Int        | Número da proposta associada.                  |
+| `DtEvento`              | String     | Data em que o evento ocorreu.                  |
+| `AcrescimoAbatimento`   | Object     | Informações sobre acréscimos ou abatimentos.   |
+| `LancamentoParcela`     | Object     | Informações sobre o lançamento de parcelas.    |
+| `ProrrogacaoVencimento` | Object     | Informações sobre a prorrogação do vencimento. |
+| `GeracaoBoleto`         | Object     | Informações sobre a geração do boleto.         |
+| `CancelamentoBoleto`    | Object     | Informações sobre o cancelamento do boleto.    |

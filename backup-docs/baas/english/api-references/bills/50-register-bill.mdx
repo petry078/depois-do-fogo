@@ -1,0 +1,10 @@
+---
+title: "50 - Register Bill"
+openapi: post /api/Boleto/Registrar
+---
+
+Through this endpoint, the partner can register a boleto. The integrator's API process registers the boleto with the appropriate agency.
+
+Before registering the boleto, the issuer must have a payee number linked to the account and a registered wallet. Wallet "1" is used for a simple boleto, which is the applicable status for this endpoint, and "9" for a CNAB (National Bank of Brazil). 
+
+Payee registration must be performed at the /api/Payee endpoint, and the payee's link to a wallet must be performed at the /api/Payee/Add Wallet endpoint.

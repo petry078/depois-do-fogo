@@ -1,0 +1,6653 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "BMPDigitalCore.ApiExterna.Pessoa.API",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.bmpdigital.moneyp.dev.br/",
+      "description": "Localhost"
+    }
+  ],
+  "paths": {
+    "/HealthCheck": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Pessoa/ConsultarDocumento": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultarDocumentoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultarDocumentoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultarDocumentoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/ConsultarPessoa": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SelectPessoaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SelectPessoaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SelectPessoaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SelectPessoaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SelectPessoaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SelectPessoaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/ConsultarSituacaoOnBoarding": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaSituacaoOnBoardingCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaSituacaoOnBoardingCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaSituacaoOnBoardingCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultaSituacaoOnBoardingResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultaSituacaoOnBoardingResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultaSituacaoOnBoardingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/IncluirDocumento": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IncluirDocumentoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IncluirDocumentoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IncluirDocumentoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/IncluirPessoaOnBoarding": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistraPessoaOnBoardingCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistraPessoaOnBoardingCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistraPessoaOnBoardingCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistraPessoaOnBoardingResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistraPessoaOnBoardingResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistraPessoaOnBoardingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/Salvar": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarBanco": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaBancoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaBancoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaBancoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaBancoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaBancoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaBancoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarBancos": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaBancosCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaBancosCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaBancosCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaBancosResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaBancosResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaBancosResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarClienteFornecedor": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaClienteFornecedorCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaClienteFornecedorCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaClienteFornecedorCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaClienteFornecedorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaClienteFornecedorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaClienteFornecedorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarClienteFornecedores": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaClienteFornecedoresCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaClienteFornecedoresCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaClienteFornecedoresCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaClienteFornecedoresResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaClienteFornecedoresResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaClienteFornecedoresResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarContato": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaContatoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaContatoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaContatoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaContatoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaContatoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaContatoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarContatos": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaContatosCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaContatosCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaContatosCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaContatosResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaContatosResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaContatosResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarDependente": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaDependenteCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaDependenteCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaDependenteCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaDependenteResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaDependenteResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaDependenteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarDependentes": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaDependentesCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaDependentesCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaDependentesCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaDependentesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaDependentesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaDependentesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarEmpresaColigada": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaEmpresaColigadaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaEmpresaColigadaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaEmpresaColigadaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaEmpresaColigadaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaEmpresaColigadaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaEmpresaColigadaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarEmpresasColigadas": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaEmpresasColigadasCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaEmpresasColigadasCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaEmpresasColigadasCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaEmpresasColigadasResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaEmpresasColigadasResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaEmpresasColigadasResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarEndereco": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaEnderecoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaEnderecoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaEnderecoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaEnderecoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaEnderecoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaEnderecoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarEnderecos": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaEnderecosCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaEnderecosCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaEnderecosCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaEnderecosResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaEnderecosResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaEnderecosResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarFrota": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaFrotaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaFrotaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaFrotaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaFrotaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaFrotaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaFrotaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarFrotas": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaFrotasCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaFrotasCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaFrotasCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaFrotasResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaFrotasResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaFrotasResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarHistoricoDigitado": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaHistoricoDigitadoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaHistoricoDigitadoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaHistoricoDigitadoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaHistoricoDigitadoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaHistoricoDigitadoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaHistoricoDigitadoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarHistoricosDigitados": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaHistoricosDigitadosCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaHistoricosDigitadosCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaHistoricosDigitadosCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaHistoricosDigitadosResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaHistoricosDigitadosResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaHistoricosDigitadosResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarParceiroCustomizacao": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaParceiroCustomizacaoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaParceiroCustomizacaoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaParceiroCustomizacaoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaParceiroCustomizacaoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaParceiroCustomizacaoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaParceiroCustomizacaoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarProdutoComercial": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaProdutoComercialCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaProdutoComercialCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaProdutoComercialCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaProdutoComercialResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaProdutoComercialResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaProdutoComercialResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarProdutosComerciais": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaProdutosComerciaisCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaProdutosComerciaisCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaProdutosComerciaisCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaProdutosComerciaisResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaProdutosComerciaisResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaProdutosComerciaisResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarQualificacao": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaQualificacaoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaQualificacaoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaQualificacaoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaQualificacaoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaQualificacaoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaQualificacaoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarQualificacoes": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaQualificacoesCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaQualificacoesCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaQualificacoesCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaQualificacoesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaQualificacoesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaQualificacoesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarReferencia": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaReferenciaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaReferenciaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaReferenciaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaReferenciaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaReferenciaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaReferenciaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarReferencias": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaReferenciasCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaReferenciasCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaReferenciasCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaReferenciasResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaReferenciasResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaReferenciasResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarRelacionamentoEmpresa": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaRelacionamentoEmpresaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaRelacionamentoEmpresaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaRelacionamentoEmpresaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaRelacionamentoEmpresaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaRelacionamentoEmpresaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaRelacionamentoEmpresaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarSocio": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaSocioCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaSocioCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaSocioCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaSocioResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaSocioResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaSocioResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pessoa/SalvarSocios": {
+      "post": {
+        "tags": [
+          "Pessoa"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaSociosCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaSociosCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdatePessoaSociosCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaSociosResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaSociosResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdatePessoaSociosResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BuscarDocumentoDTO": {
+        "type": "object",
+        "properties": {
+          "authHeaderName": {
+            "type": "string",
+            "description": "Parâmetro para autenticação na URL do parceiro",
+            "nullable": true
+          },
+          "authHeaderValue": {
+            "type": "string",
+            "description": "Valor do parâmetro para autenticação na URL do parceiro",
+            "nullable": true
+          },
+          "method": {
+            "type": "string",
+            "description": "GET/POST/PUT",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "description": "Indica o formato desejado pela URL, Exemplo: text/plain, application/json",
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "description": "Url definida pelo parceiro que deverá devolver como resposta o DTO",
+            "nullable": true
+          },
+          "body": {
+            "type": "string",
+            "description": "Corpo da mensagem que a URL deve receber. Exemplo: Parâmetros para que localize o documento na base do parceiro.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaSituacaoOnBoardingCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/PessoaOnboardingDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaSituacaoOnBoardingResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "onBoarding": {
+            "$ref": "#/components/schemas/ConsultaSituacaoOnboardingDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaSituacaoOnboardingDTO": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentoFederal": {
+            "type": "string",
+            "nullable": true
+          },
+          "situacaoCallback": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtCallback": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultarDocumentoCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FindPessoaDTO"
+          },
+          "busca": {
+            "$ref": "#/components/schemas/BuscarDocumentoDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaBancoCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/PessoaBancoDTO"
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaBancoResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaBancosCommand": {
+        "type": "object",
+        "properties": {
+          "dtos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaBancoDTO"
+            },
+            "nullable": true
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaBancosResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateUpdatePessoaBancoResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaClienteFornecedorCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/PessoaClienteFornecedorDTO"
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaClienteFornecedorResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaClienteFornecedoresCommand": {
+        "type": "object",
+        "properties": {
+          "dtos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaClienteFornecedorDTO"
+            },
+            "nullable": true
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaClienteFornecedoresResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateUpdatePessoaClienteFornecedorResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/PessoaDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaContatoCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/PessoaContatoDTO"
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaContatoResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaContatosCommand": {
+        "type": "object",
+        "properties": {
+          "dtos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaContatoDTO"
+            },
+            "nullable": true
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaContatosResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateUpdatePessoaContatoResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaDependenteCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/PessoaDependenteDTO"
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaDependenteResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaDependentesCommand": {
+        "type": "object",
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          },
+          "dtos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaDependenteDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaDependentesResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateUpdatePessoaDependenteResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaEmpresaColigadaCommand": {
+        "type": "object",
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          },
+          "dto": {
+            "$ref": "#/components/schemas/PessoaEmpresaColigadaDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaEmpresaColigadaResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaEmpresasColigadasCommand": {
+        "type": "object",
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          },
+          "dtos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaEmpresaColigadaDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaEmpresasColigadasResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateUpdateResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaEnderecoCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/PessoaEnderecoDTO"
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaEnderecoResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaEnderecosCommand": {
+        "type": "object",
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          },
+          "dtos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaEnderecoDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaEnderecosResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateUpdatePessoaEnderecoResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaFrotaCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/PessoaFrotaDTO"
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaFrotaResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaFrotasCommand": {
+        "type": "object",
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          },
+          "dtos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaFrotaDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaFrotasResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateUpdatePessoaFrotaResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaHistoricoDigitadoCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/PessoaHistoricoDigitadoDTO"
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaHistoricoDigitadoResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaHistoricosDigitadosCommand": {
+        "type": "object",
+        "properties": {
+          "dtos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaHistoricoDigitadoDTO"
+            },
+            "nullable": true
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaHistoricosDigitadosResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateUpdatePessoaHistoricoDigitadoResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaParam": {
+        "required": [
+          "documentoCliente"
+        ],
+        "type": "object",
+        "properties": {
+          "documentoCliente": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Documento federal do cliente",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaParceiroCustomizacaoCommand": {
+        "type": "object",
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          },
+          "dtos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaParceiroCustomizacaoDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaParceiroCustomizacaoResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateUpdateResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaProdutoComercialCommand": {
+        "type": "object",
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          },
+          "dto": {
+            "$ref": "#/components/schemas/PessoaProdutoComercialDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaProdutoComercialResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaProdutosComerciaisCommand": {
+        "type": "object",
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          },
+          "dtos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaProdutoComercialDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaProdutosComerciaisResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateUpdateResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaQualificacaoCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/PessoaQualificacaoDTO"
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaQualificacaoResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaQualificacoesCommand": {
+        "type": "object",
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          },
+          "dtos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaQualificacaoDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaQualificacoesResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateUpdatePessoaQualificacaoResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaReferenciaCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/PessoaReferenciaDTO"
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaReferenciaResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaReferenciasCommand": {
+        "type": "object",
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          },
+          "dtos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaReferenciaDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaReferenciasResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateUpdatePessoaReferenciaResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaRelacionamentoEmpresaCommand": {
+        "type": "object",
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          },
+          "dto": {
+            "$ref": "#/components/schemas/PessoaRelacionamentoEmpresaDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaRelacionamentoEmpresaResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaSocioCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/PessoaSocioDTO"
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaSocioResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaSociosCommand": {
+        "type": "object",
+        "properties": {
+          "dtos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaSocioDTO"
+            },
+            "nullable": true
+          },
+          "param": {
+            "$ref": "#/components/schemas/CreateUpdatePessoaParam"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdatePessoaSociosResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateUpdatePessoaSocioResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUpdateResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentoResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tipoDocumento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeArquivo": {
+            "type": "string",
+            "nullable": true
+          },
+          "extensao": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtValidade": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "arquivo": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorType": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "FilterPessoaDTO": {
+        "required": [
+          "documentoCliente",
+          "tipoRegistro"
+        ],
+        "type": "object",
+        "properties": {
+          "tipoRegistro": {
+            "$ref": "#/components/schemas/TipoRegistro"
+          },
+          "documentoCliente": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Documento federal do cliente",
+            "nullable": true
+          },
+          "childDirectID": {
+            "type": "string",
+            "nullable": true
+          },
+          "childSearch": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FindPessoaDTO": {
+        "required": [
+          "documentoCliente"
+        ],
+        "type": "object",
+        "properties": {
+          "documentoCliente": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Documento federal do cliente",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IncluirDocumentoCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FindPessoaDTO"
+          },
+          "documento": {
+            "$ref": "#/components/schemas/UploadDocumentDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "messageType": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "context": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "field": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaBancoDTO": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "maxLength": 3,
+            "minLength": 0,
+            "type": "string",
+            "description": "Guid da tabela de Bancos",
+            "nullable": true
+          },
+          "codigoBanco": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Consultar tabela de Bancos",
+            "format": "int32",
+            "nullable": true
+          },
+          "tipoConta": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Consultar tabela de tipo de conta",
+            "format": "int32",
+            "nullable": true
+          },
+          "agencia": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "description": "Número da Agência",
+            "nullable": true
+          },
+          "agenciaDig": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string",
+            "description": "Dígito da Agência",
+            "nullable": true
+          },
+          "conta": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Número da Conta",
+            "nullable": true
+          },
+          "contaDig": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string",
+            "description": "Dígito da Conta",
+            "nullable": true
+          },
+          "dtAberturaConta": {
+            "type": "string",
+            "description": "Data de abertura da conta",
+            "format": "YYYY-MM-DD",
+            "nullable": true
+          },
+          "nomeGerente": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome do gerente",
+            "nullable": true
+          },
+          "telefoneGerente": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone do gerente",
+            "nullable": true
+          },
+          "contaPagamento": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "documentoFederalPagamento": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Documento Federal do proprietário da conta bancária",
+            "nullable": true
+          },
+          "nomePagamento": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome do proprietário da conta bancária",
+            "nullable": true
+          },
+          "numeroBanco": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Número do banco",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaClienteFornecedorDTO": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Será preenchido apenas pelo método SelectPessoa",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "integer",
+            "description": "Tipo de registro 1 – Cliente, 2 – Fornecedor, 3 – Ambos.",
+            "format": "int32",
+            "nullable": true
+          },
+          "nome": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome do Cliente/Fornecedor.",
+            "nullable": true
+          },
+          "documentoFederal": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Número do Cadastro de Pessoa Física (CPF) ou do Cadastro Nacional de Pessoa Jurídica (CNPJ) do Cliente/Fornecedor. Se informado deve ser válido.",
+            "nullable": true
+          },
+          "telefone1": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone de contato.",
+            "nullable": true
+          },
+          "telefone2": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone de contato.",
+            "nullable": true
+          },
+          "email": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "E-mail de contato.",
+            "nullable": true
+          },
+          "paginaWeb": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "Endereço de página web.",
+            "nullable": true
+          },
+          "nomeContato1": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome do 1º contato.",
+            "nullable": true
+          },
+          "nomeContato2": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome do 2º contato.",
+            "nullable": true
+          },
+          "vlrNegociado": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor negociado com o Cliente/Fornecedor.",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaContatoDTO": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Será preenchido apenas pelo método SelectPessoa",
+            "nullable": true
+          },
+          "tipoContato": {
+            "type": "integer",
+            "description": "Consultar tabela tipo de contato",
+            "format": "int32",
+            "nullable": true
+          },
+          "documentoFederal": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Número do cadastro de Pessoa Física (CPF) ou do Cadastro Nacional de Pessoa Jurídica (CNPJ) do contato",
+            "nullable": true
+          },
+          "nome": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome do contato",
+            "nullable": true
+          },
+          "cep": {
+            "maximum": 8,
+            "minimum": 0,
+            "type": "string",
+            "description": "Código de endereçamento postal (CEP)",
+            "nullable": true
+          },
+          "logradouro": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "description": "Logradouro",
+            "nullable": true
+          },
+          "nroLogradouro": {
+            "type": "string",
+            "description": "Número do Logradouro",
+            "nullable": true
+          },
+          "bairro": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Bairro",
+            "nullable": true
+          },
+          "complemento": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Complemento",
+            "nullable": true
+          },
+          "cidade": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Cidade",
+            "nullable": true
+          },
+          "uf": {
+            "maxLength": 2,
+            "minLength": 0,
+            "type": "string",
+            "description": "Unidade Federal (UF). Exemplo: SC (sigla de Santa Catarina)",
+            "nullable": true
+          },
+          "telefoneFixo": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone fixo",
+            "nullable": true
+          },
+          "telefoneCelular": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone celular",
+            "nullable": true
+          },
+          "email": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "E-mail",
+            "nullable": true
+          },
+          "enderecoDesde": {
+            "type": "string",
+            "description": "Data de início no endereço",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaDTO": {
+        "required": [
+          "documentoFederal",
+          "nome"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nome": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome da Pessoa",
+            "nullable": true
+          },
+          "documentoFederal": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Número do Documento de Cadastro de Pessoas Físicas (CPF) e Documento do Cadastro Nacional de Pessoas Jurídicas (CNPJ) com ou sem formatação",
+            "nullable": true
+          },
+          "identificadorEmpresaERP": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Identificador da pessoa no sistema ERP do parceiro",
+            "nullable": true
+          },
+          "codigoAtividadeProfissional": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Código Atividade Profissional",
+            "format": "int32",
+            "nullable": true
+          },
+          "textoInfoHistCliente": {
+            "maxLength": 2000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Texto com informações gerais da pessoa que podem ser utilizadas para análise da proposta",
+            "nullable": true
+          },
+          "score": {
+            "type": "string",
+            "description": "Score do Cliente",
+            "nullable": true
+          },
+          "rating": {
+            "type": "string",
+            "description": "Rating do Cliente",
+            "nullable": true
+          },
+          "pf": {
+            "$ref": "#/components/schemas/PessoaPFDTO"
+          },
+          "pj": {
+            "$ref": "#/components/schemas/PessoaPJDTO"
+          },
+          "pessoaDadosContato": {
+            "$ref": "#/components/schemas/PessoaDadosContatoDTO"
+          },
+          "pessoaDadoFinanceiro": {
+            "$ref": "#/components/schemas/PessoaDadoFinanceiroDTO"
+          },
+          "pessoaQualificacao": {
+            "$ref": "#/components/schemas/PessoaQualificacaoDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaDadoFinanceiroDTO": {
+        "type": "object",
+        "properties": {
+          "ano1": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ano1VlrAtivoCirculante": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano1VlrAtivoImobilizado": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano1VlrCapitalTerceiros": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano1VlrReceitaOperacionalBruta": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano1VlrDisponibilidade": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano1VlrEstoque": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano1VlrPassivoCirculante": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano1VlrResultadoOperacionalBruto": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano1VlrPatrimonioLiquido": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano1VlrPassivoNaoCirculante": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano1VlrAtivoNaoCirculante": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano1VlrReceitaOperacionalLiquida": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano2": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ano2VlrAtivoCirculante": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano2VlrAtivoImobilizado": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano2VlrCapitalTerceiros": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano2VlrReceitaOperacionalBruta": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano2VlrDisponibilidade": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano2VlrEstoque": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano2VlrPassivoCirculante": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano2VlrResultadoOperacionalBruto": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano2VlrPatrimonioLiquido": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano2VlrPassivoNaoCirculante": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano2VlrAtivoNaoCirculante": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano2VlrReceitaOperacionalLiquida": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano3": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ano3VlrAtivoCirculante": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano3VlrAtivoImobilizado": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano3VlrCapitalTerceiros": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano3VlrReceitaOperacionalBruta": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano3VlrDisponibilidade": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano3VlrEstoque": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano3VlrPassivoCirculante": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano3VlrResultadoOperacionalBruto": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano3VlrPatrimonioLiquido": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano3VlrPassivoNaoCirculante": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano3VlrAtivoNaoCirculante": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ano3VlrReceitaOperacionalLiquida": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "faturamentoMes1": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "description": "Descritivo do período. Exemplo: De janeiro de 2022 até dezembro de 2022.",
+            "nullable": true
+          },
+          "vlrFaturamentoMes1": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes2": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes3": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes4": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes5": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes6": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes7": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes8": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes9": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes10": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes11": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes12": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "irMes1": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "description": "Descritivo do período. Exemplo: De janeiro de 2022 até dezembro de 2022.",
+            "nullable": true
+          },
+          "vlrIRMes1": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Imposto de Renda (IR) do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrIRMes2": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Imposto de Renda (IR) do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrIRMes3": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Imposto de Renda (IR) do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrIRMes4": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Imposto de Renda (IR) do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrIRMes5": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Imposto de Renda (IR) do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrIRMes6": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Imposto de Renda (IR) do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrIRMes7": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Imposto de Renda (IR) do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrIRMes8": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Imposto de Renda (IR) do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrIRMes9": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Imposto de Renda (IR) do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrIRMes10": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Imposto de Renda (IR) do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrIRMes11": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Imposto de Renda (IR) do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrIRMes12": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Imposto de Renda (IR) do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "extratoMes1": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "description": "Descritivo do período. Exemplo: De janeiro de 2022 até dezembro de 2022.",
+            "nullable": true
+          },
+          "vlrExtratoMes1": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Extrato do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrExtratoMes2": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Extrato do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrExtratoMes3": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Extrato do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrExtratoMes4": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Extrato do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrExtratoMes5": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Extrato do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrExtratoMes6": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Extrato do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrExtratoMes7": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Extrato do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrExtratoMes8": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Extrato do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrExtratoMes9": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Extrato do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrExtratoMes10": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Extrato do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrExtratoMes11": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Extrato do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrExtratoMes12": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de Extrato do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes13": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes14": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes15": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes16": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes17": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes18": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes19": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes20": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes21": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes22": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes23": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrFaturamentoMes24": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de faturamento do mês",
+            "format": "double",
+            "nullable": true
+          },
+          "recebiveisMes1": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "description": "Descritivo do período. Exemplo: De janeiro de 2022 até dezembro de 2022.",
+            "nullable": true
+          },
+          "vlrRecebiveisMes1": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de recebíveis no mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrRecebiveisMes2": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de recebíveis no mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrRecebiveisMes3": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de recebíveis no mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrRecebiveisMes4": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de recebíveis no mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrRecebiveisMes5": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de recebíveis no mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrRecebiveisMes6": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de recebíveis no mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrRecebiveisMes7": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de recebíveis no mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrRecebiveisMes8": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de recebíveis no mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrRecebiveisMes9": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de recebíveis no mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrRecebiveisMes10": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de recebíveis no mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrRecebiveisMes11": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de recebíveis no mês",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrRecebiveisMes12": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor de recebíveis no mês",
+            "format": "double",
+            "nullable": true
+          },
+          "anoMesInicioFaturamento": {
+            "type": "string",
+            "description": "Período inicial de faturamento",
+            "format": "YYYY-MM-DD",
+            "nullable": true
+          },
+          "anoMesInicioRecebiveis": {
+            "type": "string",
+            "description": "Período inicial de recebíveis",
+            "format": "YYYY-MM-DD",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaDadosContatoDTO": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "E-mail de contato",
+            "nullable": true
+          },
+          "telefoneFixo1": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone fixo",
+            "nullable": true
+          },
+          "telefoneFixo2": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone fixo",
+            "nullable": true
+          },
+          "telefoneCelular1": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone fixo",
+            "nullable": true
+          },
+          "telefoneCelular2": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone fixo",
+            "nullable": true
+          },
+          "telefoneFax": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone fixo",
+            "nullable": true
+          },
+          "paginaWeb": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "Endereço de Internet",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaDependenteDTO": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Será preenchido apenas pelo método SelectPessoa",
+            "nullable": true
+          },
+          "tipoDependente": {
+            "type": "integer",
+            "description": "Consultar tabela tipo de dependente",
+            "format": "int32",
+            "nullable": true
+          },
+          "nome": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome do contato",
+            "nullable": true
+          },
+          "telefone": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone fixo",
+            "nullable": true
+          },
+          "dtNasc": {
+            "type": "string",
+            "description": "Data de nascimento",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaEmpresaColigadaDTO": {
+        "required": [
+          "razaoSocial"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Será preenchido apenas pelo método SelectPessoa",
+            "nullable": true
+          },
+          "razaoSocial": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "description": "Razão social da empresa",
+            "nullable": true
+          },
+          "nomeFantasia": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome Fantasia da empresa",
+            "nullable": true
+          },
+          "cnpj": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Número do Cadastro Nacional de Pessoa Jurídica (CNPJ) da empresa segmento: Segmento da atuação",
+            "nullable": true
+          },
+          "segmento": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Segmento da atuação",
+            "nullable": true
+          },
+          "marketPlaceAtivo": {
+            "type": "boolean",
+            "description": "Indicador de Marketplace ativo",
+            "nullable": true
+          },
+          "email": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "E-mail para contatos gerais",
+            "nullable": true
+          },
+          "telefone": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone para contatos gerais",
+            "nullable": true
+          },
+          "dtInclusao": {
+            "type": "string",
+            "description": "Data de Inclusão do registro",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaEnderecoDTO": {
+        "required": [
+          "cep",
+          "cidade",
+          "logradouro",
+          "tipoEndereco",
+          "tipoResidencia",
+          "uf"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Será preenchido apenas pelo método SelectPessoa",
+            "nullable": true
+          },
+          "cep": {
+            "maximum": 8,
+            "minimum": 0,
+            "type": "string",
+            "description": "Código de endereçamento postal (CEP)",
+            "nullable": true
+          },
+          "logradouro": {
+            "type": "string",
+            "description": "Logradouro",
+            "nullable": true
+          },
+          "nroLogradouro": {
+            "type": "string",
+            "description": "Número do Logradouro",
+            "nullable": true
+          },
+          "bairro": {
+            "type": "string",
+            "description": "Bairro",
+            "nullable": true
+          },
+          "complemento": {
+            "type": "string",
+            "description": "Complemento",
+            "nullable": true
+          },
+          "cidade": {
+            "type": "string",
+            "description": "Cidade",
+            "nullable": true
+          },
+          "uf": {
+            "type": "string",
+            "description": "Unidade Federal (UF). Exemplo: SC (Sigla de Santa Catarina)",
+            "nullable": true
+          },
+          "tipoEndereco": {
+            "type": "integer",
+            "description": "Consultar tabela Tipo de Endereço",
+            "format": "int32",
+            "nullable": true
+          },
+          "tipoResidencia": {
+            "type": "integer",
+            "description": "Consultar tabela Tipo de residência",
+            "format": "int32",
+            "nullable": true
+          },
+          "enderecoDesde": {
+            "type": "string",
+            "description": "Data de início no endereço",
+            "format": "date-time",
+            "nullable": true
+          },
+          "enderecoPrincipal": {
+            "type": "boolean",
+            "description": "Indica se é o endereço principal",
+            "nullable": true
+          },
+          "enderecoCorrespondencia": {
+            "type": "boolean",
+            "description": "Indica se é o endereço que recebe correspondências",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaFrotaDTO": {
+        "required": [
+          "codigoTipoProduto"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Será preenchido apenas pelo método SelectPessoa",
+            "nullable": true
+          },
+          "codigoTipoProduto": {
+            "type": "integer",
+            "description": "Consultar método SelectFrota",
+            "format": "int32"
+          },
+          "codigoMarca": {
+            "type": "integer",
+            "description": "Consultar método SelectFrota",
+            "format": "int32",
+            "nullable": true
+          },
+          "codigoModelo": {
+            "type": "integer",
+            "description": "Consultar método SelectFrota",
+            "format": "int32",
+            "nullable": true
+          },
+          "descricaoModelo": {
+            "type": "string",
+            "description": "Descrição do modelo",
+            "nullable": true
+          },
+          "anoModelo": {
+            "type": "integer",
+            "description": "Ano do modelo",
+            "format": "int32",
+            "nullable": true
+          },
+          "anoFabricacao": {
+            "type": "integer",
+            "description": "Ano de fabricação",
+            "format": "int32",
+            "nullable": true
+          },
+          "vlrItem": {
+            "type": "number",
+            "description": "Valor do item",
+            "format": "double",
+            "nullable": true
+          },
+          "placa": {
+            "type": "string",
+            "description": "Placa",
+            "nullable": true
+          },
+          "numeroChassi": {
+            "type": "string",
+            "description": "Número do chassi",
+            "nullable": true
+          },
+          "numeroRastreador": {
+            "type": "string",
+            "description": "Número do rastreador",
+            "nullable": true
+          },
+          "emFinanciamento": {
+            "type": "boolean",
+            "description": "Indica se está em financiamento",
+            "nullable": true
+          },
+          "nomeFinanceira": {
+            "type": "string",
+            "description": "Nome da financeira que está em financiamento",
+            "nullable": true
+          },
+          "parcelasPagas": {
+            "type": "integer",
+            "description": "Número de parcelas pagas",
+            "format": "int32",
+            "nullable": true
+          },
+          "parcelasPrazo": {
+            "type": "integer",
+            "description": "Número de parcelas do contrato",
+            "format": "int32",
+            "nullable": true
+          },
+          "onerado": {
+            "type": "boolean",
+            "description": "Indica se item está onerado",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaHistoricoDigitadoDTO": {
+        "required": [
+          "descricao"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Será preenchido apenas pelo método SelectPessoa",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição que identifica o histórico digitado",
+            "nullable": true
+          },
+          "vlrFinanciado": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Total de Valor Financiado",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrPMT": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Total de Valor em Pagamento",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrPago": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Total de Valor Pago",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrAVencer": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Total de Valor a Vencer",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrVencido": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Total de Valor Vencido",
+            "format": "double",
+            "nullable": true
+          },
+          "textoObs": {
+            "type": "string",
+            "description": "Observações",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaOnboardingDTO": {
+        "required": [
+          "documentoFederal"
+        ],
+        "type": "object",
+        "properties": {
+          "documentoFederal": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Documento federal do cliente",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaPFDTO": {
+        "type": "object",
+        "properties": {
+          "apelido": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Apelido da pessoa",
+            "nullable": true
+          },
+          "rg": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Registro Geral (RG) da pessoa",
+            "nullable": true
+          },
+          "rgOrgao": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "description": "Órgão de emissão do Registro Geral (RG)",
+            "nullable": true
+          },
+          "rguf": {
+            "maxLength": 2,
+            "minLength": 0,
+            "type": "string",
+            "description": "Órgão de emissão do Registro Geral (RG)",
+            "nullable": true
+          },
+          "rgData": {
+            "type": "string",
+            "description": "Data de emissão do Registro Geral (RG)",
+            "format": "YYYY-MM-DDTHH:mm:ss.fffZ",
+            "nullable": true
+          },
+          "dtNasc": {
+            "type": "string",
+            "description": "Data de Nascimento",
+            "format": "YYYY-MM-DDTHH:mm:ss.fffZ",
+            "nullable": true
+          },
+          "sexo": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string",
+            "description": "“M” – Masculino e “F” - Feminino",
+            "nullable": true
+          },
+          "nacionalidade": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Natural do País",
+            "nullable": true
+          },
+          "naturalDeCidade": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Cidade de Naturalização",
+            "nullable": true
+          },
+          "naturalDeUF": {
+            "maxLength": 2,
+            "minLength": 0,
+            "type": "string",
+            "description": "Unidade Federal (UF) de Naturalização",
+            "nullable": true
+          },
+          "estadoCivil": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Consultar tabela de estado civil. Se “Casado” deve informar cônjuge",
+            "format": "int32",
+            "nullable": true
+          },
+          "escolaridade": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Consultar tabela de escolaridade",
+            "format": "int32",
+            "nullable": true
+          },
+          "nomeCargo": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoOcupacao": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Consultar tabela de tipo de ocupação",
+            "format": "int32",
+            "nullable": true
+          },
+          "outrasRendas": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "Texto para descrever valor de outras rendas",
+            "nullable": true
+          },
+          "vlrOutrasRendas": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor proveniente de outras rendas",
+            "format": "10^16",
+            "nullable": true
+          },
+          "nomePai": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome do pai",
+            "nullable": true
+          },
+          "telefonePai": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone de contato do Pai",
+            "nullable": true
+          },
+          "emailPai": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "E-mail do Pai",
+            "nullable": true
+          },
+          "nomeMae": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome da Mãe",
+            "nullable": true
+          },
+          "telefoneMae": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone de contato da Mãe",
+            "nullable": true
+          },
+          "emailMae": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "E-mail da Mãe",
+            "nullable": true
+          },
+          "nomeConjuge": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome do Cônjuge",
+            "nullable": true
+          },
+          "dtNascConjuge": {
+            "type": "string",
+            "description": "Data de Nascimento do Cônjuge",
+            "format": "YYYY-MM-DDTHH:mm:ss.fffZ",
+            "nullable": true
+          },
+          "telefoneFixoConjuge": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone fixo do Cônjuge",
+            "nullable": true
+          },
+          "telefoneCelularConjuge": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Telefone celular do Cônjuge",
+            "nullable": true
+          },
+          "emailConjuge": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "E-mail do Cônjuge",
+            "nullable": true
+          },
+          "tempoCasadoConjuge": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Tempo de casado em anos",
+            "format": "int32",
+            "nullable": true
+          },
+          "cpfConjuge": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Número do Documento de Cadastro de Pessoas Físicas (CPF) do Cônjuge. Se informado deve ser válido",
+            "nullable": true
+          },
+          "rgConjuge": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Número do Registro Geral (RG) do Cônjuge",
+            "nullable": true
+          },
+          "rgOrgaoConjuge": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "description": "Órgão de emissão do Registro Geral (RG) do Cônjuge",
+            "nullable": true
+          },
+          "rgufConjuge": {
+            "maxLength": 2,
+            "minLength": 0,
+            "type": "string",
+            "description": "Unidade Federal (UF) de emissão do Registro Geral (RG) do Cônjuge",
+            "nullable": true
+          },
+          "rgDataConjuge": {
+            "type": "string",
+            "description": "Data de emissão do Registro Geral (RG) do Cônjuge",
+            "format": "YYYY-MM-DDTHH:mm:ss.fffZ",
+            "nullable": true
+          },
+          "mostrarConjugeCCB": {
+            "type": "boolean",
+            "description": "Indica se mostra o Cônjuge na Cédula de Crédito Bancária (CCB). Para propostas empresariais",
+            "nullable": true
+          },
+          "fielDepositario": {
+            "type": "boolean",
+            "description": "Indica se o cônjuge é Fiel Depositário",
+            "nullable": true
+          },
+          "terceiroGarantidor": {
+            "type": "boolean",
+            "description": "Indica se o cônjuge é Terceiro Garantidor",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaPJDTO": {
+        "type": "object",
+        "properties": {
+          "nomeFantasia": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome fantasia da empresa",
+            "nullable": true
+          },
+          "documentoEstadual": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Inscrição Estadual",
+            "nullable": true
+          },
+          "documentoMunicipal": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Inscrição Municipal",
+            "nullable": true
+          },
+          "dtAberturaEmpresa": {
+            "type": "string",
+            "description": "Data de abertura da empresa",
+            "format": "YYYY-MM-DDTHH:mm:ss.fffZ",
+            "nullable": true
+          },
+          "nomeResponsavelEmpresa": {
+            "maxLength": 60,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome do Responsável da empresa",
+            "nullable": true
+          },
+          "cpfResponsavelEmpresa": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Número do Cadastro de Pessoa Física (CPF) do Responsável da empresa. Se informado deve ser válido",
+            "nullable": true
+          },
+          "rgResponsavelEmpresa": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Registro Geral (RG) do Responsável da empresa",
+            "nullable": true
+          },
+          "codigoRede": {
+            "type": "string",
+            "description": "Código do parceiro",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaParceiroCustomizacaoDTO": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Será preenchido apenas pelo método SelectPessoa",
+            "nullable": true
+          },
+          "nomeCampo": {
+            "type": "string",
+            "description": "Nome do Campo que será utilizado para acessar o valor",
+            "nullable": true
+          },
+          "valorCampo": {
+            "type": "string",
+            "description": "Valor que deverá ser utilizado no sistema, pode ser um número, data ou texto. O sistema nunca tomará decisões com base nestes valores e são apenas de cunho informativo.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaProdutoComercialDTO": {
+        "required": [
+          "segmento",
+          "tipo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Será preenchido apenas pelo método SelectPessoa",
+            "nullable": true
+          },
+          "tipo": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string",
+            "description": "Tipo de produto (deve ser um valor único).",
+            "nullable": true
+          },
+          "segmento": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "Segmento do produto",
+            "nullable": true
+          },
+          "percVendas": {
+            "maximum": 99999999.9,
+            "minimum": 0,
+            "type": "number",
+            "description": "Percentual de Vendas do produto",
+            "format": "double",
+            "nullable": true
+          },
+          "dtInclusao": {
+            "type": "string",
+            "description": "Data de Inclusão do registro",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaQualificacaoDTO": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Será preenchido apenas pelo método SelectPessoa",
+            "nullable": true
+          },
+          "codigoProfissao": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Consultar tabela de Profissões",
+            "format": "int32",
+            "nullable": true
+          },
+          "vlrRenda": {
+            "maximum": 99999999.9,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor da Renda",
+            "format": "double",
+            "nullable": true
+          },
+          "dtAdmissao": {
+            "type": "string",
+            "description": "Data de Admissão",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dtDemissao": {
+            "type": "string",
+            "description": "Data de demissão",
+            "format": "date-time",
+            "nullable": true
+          },
+          "nroMatricula": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Número de matricula",
+            "nullable": true
+          },
+          "nomeEmpresa": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string",
+            "description": "Nome da Empresa.",
+            "nullable": true
+          },
+          "cep": {
+            "maxLength": 8,
+            "minLength": 1,
+            "type": "string",
+            "description": "Código de endereçamento postal",
+            "nullable": true
+          },
+          "logradouro": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "Logradouro",
+            "nullable": true
+          },
+          "nroLogradouro": {
+            "maxLength": 15,
+            "minLength": 1,
+            "type": "string",
+            "description": "Número do Logradouro",
+            "nullable": true
+          },
+          "bairro": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string",
+            "description": "Bairro",
+            "nullable": true
+          },
+          "complemento": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string",
+            "description": "Complemento",
+            "nullable": true
+          },
+          "cidade": {
+            "maxLength": 40,
+            "minLength": 1,
+            "type": "string",
+            "description": "Cidade",
+            "nullable": true
+          },
+          "uf": {
+            "maxLength": 2,
+            "minLength": 1,
+            "type": "string",
+            "description": "Unidade Federativa (UF). Exemplo: SC (Sigla de Santa Catarina)",
+            "nullable": true
+          },
+          "telefoneFixo": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Telefone de contato",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaReferenciaDTO": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Será preenchido apenas pelo método SelectPessoa.",
+            "nullable": true
+          },
+          "tipoReferencia": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Consultar tabela de tipo de referência",
+            "format": "int32",
+            "nullable": true
+          },
+          "nome": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string",
+            "description": "Nome da referência",
+            "nullable": true
+          },
+          "documentoFederal": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Número do Cadastro de pessoa física (CPF) ou do Cadastro Nacional de Pessoa Jurídica (CNPJ) da referência",
+            "nullable": true
+          },
+          "tipoContato": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Consultar tabela de tipo de contato",
+            "format": "int32",
+            "nullable": true
+          },
+          "rg": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "RG da referência",
+            "nullable": true
+          },
+          "telefoneFixo": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Telefone fixo da referência",
+            "nullable": true
+          },
+          "telefoneCelular": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Telefone celular da referência",
+            "nullable": true
+          },
+          "email": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string",
+            "description": "E-mail da referência",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaRelacionamentoEmpresaDTO": {
+        "type": "object",
+        "properties": {
+          "cnaePrimario": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string",
+            "description": "Código da Classificação Nacional de Atividades Econômicas (CNAE) primário",
+            "nullable": true
+          },
+          "cnaeSecundario": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string",
+            "description": "Códigos da Classificação Nacional de Atividades Econômicas (CNAE) secundários",
+            "nullable": true
+          },
+          "descricaoSegmentoAtuacao": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "Segmento de atuação",
+            "nullable": true
+          },
+          "dtInicioRelacEmpresa": {
+            "type": "string",
+            "description": "Data de início do relacionamento com o integrador",
+            "format": "date-time",
+            "nullable": true
+          },
+          "percIndiceReclamacao": {
+            "maximum": 99999999.9,
+            "minimum": 0,
+            "type": "number",
+            "description": "Percentual do índice de reclamação",
+            "format": "double",
+            "nullable": true
+          },
+          "percIndiceEstornoCancelamento": {
+            "maximum": 99999999.9,
+            "minimum": 0,
+            "type": "number",
+            "description": "Percentual do índice de estorno e cancelamento",
+            "format": "double",
+            "nullable": true
+          },
+          "percIndicePerformanceEntrega": {
+            "maximum": 99999999.9,
+            "minimum": 0,
+            "type": "number",
+            "description": "Percentual do índice de entrega",
+            "format": "double",
+            "nullable": true
+          },
+          "percIndiceContato": {
+            "maximum": 99999999.9,
+            "minimum": 0,
+            "type": "number",
+            "description": "Percentual do índice de contato",
+            "format": "double",
+            "nullable": true
+          },
+          "ticketMedio": {
+            "maximum": 99999999.9,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor do ticket médio",
+            "format": "double",
+            "nullable": true
+          },
+          "qtdeContato": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Média de contatos",
+            "format": "int32",
+            "nullable": true
+          },
+          "tempoEntregaDias": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Média em dias do tempo de entrega",
+            "format": "int32",
+            "nullable": true
+          },
+          "emailComercial": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string",
+            "description": "E-mail comercial",
+            "nullable": true
+          },
+          "telefoneComercial": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Telefone comercial",
+            "nullable": true
+          },
+          "emailAdministrativo": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string",
+            "description": "E-mail administrativo",
+            "nullable": true
+          },
+          "telefoneAdministrativo": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Telefone administrativo",
+            "nullable": true
+          },
+          "emailFinanceiro": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string",
+            "description": "E-mail financeiro",
+            "nullable": true
+          },
+          "telefoneFinanceiro": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Telefone financeiro",
+            "nullable": true
+          },
+          "urlMarketPlace": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string",
+            "description": "URL do lojista no MarketPlace do integrador",
+            "nullable": true
+          },
+          "modeloRepasse": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "Modelo de repasse",
+            "nullable": true
+          },
+          "vlrCapitalSocial": {
+            "maximum": 99999999.9,
+            "minimum": 0,
+            "type": "number",
+            "description": "Valor do capital social",
+            "format": "double",
+            "nullable": true
+          },
+          "dtInclusao": {
+            "type": "string",
+            "description": "Data de inclusão",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PessoaSocioDTO": {
+        "required": [
+          "documentoFederal"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Será preenchido apenas pelo método SelectPessoa.",
+            "nullable": true
+          },
+          "nome": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string",
+            "description": "Nome do Sócio",
+            "nullable": true
+          },
+          "documentoFederal": {
+            "type": "string",
+            "description": "Número do Cadastro de Pessoa Física (CPF) ou do Cadastro Nacional de Pessoa Jurídica (CNPJ) do Sócio",
+            "nullable": true
+          },
+          "rg": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Registro Geral (RG)",
+            "nullable": true
+          },
+          "rgOrgao": {
+            "maxLength": 10,
+            "minLength": 1,
+            "type": "string",
+            "description": "Órgão de emissão do Registro Geral (RG)",
+            "nullable": true
+          },
+          "rguf": {
+            "maxLength": 2,
+            "minLength": 1,
+            "type": "string",
+            "description": "UF de emissão do Registro Geral (RG)",
+            "nullable": true
+          },
+          "rgData": {
+            "type": "string",
+            "description": "Data de emissão do Registro Geral (RG)",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dtNascimento": {
+            "type": "string",
+            "description": "Data de Nascimento se sócio é Pessoa Física",
+            "format": "date-time",
+            "nullable": true
+          },
+          "percCota": {
+            "maximum": 9999.9,
+            "minimum": 0,
+            "type": "number",
+            "description": "Percentual na sociedade",
+            "format": "double",
+            "nullable": true
+          },
+          "estadoCivil": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Consulta tabela de estado civil",
+            "format": "int32",
+            "nullable": true
+          },
+          "tipoUniao": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Tipo de união: 1 – Comunhão parcial de bens, 2 – Comunhão universal de bens, 3 – Separação total de bens",
+            "format": "int32",
+            "nullable": true
+          },
+          "nomeConjuge": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string",
+            "description": "Nome do cônjuge",
+            "nullable": true
+          },
+          "cpfConjuge": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Número do Cadastro de Pessoa Física (CPF) do cônjuge",
+            "nullable": true
+          },
+          "rgConjuge": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Registro Geral (RG) do cônjuge",
+            "nullable": true
+          },
+          "dtNascimentoConjuge": {
+            "type": "string",
+            "description": "Data de nascimento do cônjuge",
+            "format": "date-time",
+            "nullable": true
+          },
+          "mostrarSocioCCB": {
+            "type": "boolean",
+            "description": "Indica se o Sócio aparece na Cédula de Crédito Bancário (CCB)",
+            "nullable": true
+          },
+          "mostrarConjugeCCB": {
+            "type": "boolean",
+            "description": "Indica se o Cônjuge aparece na Cédula de Crédito Bancário (CCB)",
+            "nullable": true
+          },
+          "fielDepositario": {
+            "type": "boolean",
+            "description": "Indica se o Sócio é Fiel Depositário",
+            "nullable": true
+          },
+          "terceiroGarantidor": {
+            "type": "boolean",
+            "description": "Indica se o Sócio é Terceiro Garantidor",
+            "nullable": true
+          },
+          "cep": {
+            "maxLength": 8,
+            "minLength": 1,
+            "type": "string",
+            "description": "Código de endereçamento Postal (CEP) do Sócio",
+            "nullable": true
+          },
+          "logradouro": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "Logradouro do Sócio",
+            "nullable": true
+          },
+          "nroLogradouro": {
+            "maxLength": 15,
+            "minLength": 1,
+            "type": "string",
+            "description": "Número do logradouro do Sócio",
+            "nullable": true
+          },
+          "bairro": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string",
+            "description": "Bairro do Sócio",
+            "nullable": true
+          },
+          "complemento": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string",
+            "description": "Complemento do endereço do Sócio",
+            "nullable": true
+          },
+          "cidade": {
+            "maxLength": 40,
+            "minLength": 1,
+            "type": "string",
+            "description": "Cidade do Sócio",
+            "nullable": true
+          },
+          "uf": {
+            "maxLength": 2,
+            "minLength": 1,
+            "type": "string",
+            "description": "Unidade Federal (UF) do Sócio",
+            "nullable": true
+          },
+          "dtFundacao": {
+            "type": "string",
+            "description": "Data de fundação quando Sócio é Pessoa Jurídica (PJ)",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dtEntradaSocio": {
+            "type": "string",
+            "description": "Data de Entrada do sócio na sociedade",
+            "format": "date-time",
+            "nullable": true
+          },
+          "nacionalidade": {
+            "maxLength": 40,
+            "minLength": 1,
+            "type": "string",
+            "description": "Nacionalidade do sócio",
+            "nullable": true
+          },
+          "naturalDeCidade": {
+            "maxLength": 40,
+            "minLength": 1,
+            "type": "string",
+            "description": "Cidade de nascimento do sócio",
+            "nullable": true
+          },
+          "naturalDeUF": {
+            "maxLength": 2,
+            "minLength": 1,
+            "type": "string",
+            "description": "Unidade Federal (UF) do sócio",
+            "nullable": true
+          },
+          "telefone": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Telefone do sócio",
+            "nullable": true
+          },
+          "celular": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Celular do sócio",
+            "nullable": true
+          },
+          "email": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string",
+            "description": "E-mail do sócio",
+            "nullable": true
+          },
+          "telefoneConjuge": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Telefone do cônjuge",
+            "nullable": true
+          },
+          "celularConjuge": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string",
+            "description": "Celular do cônjuge",
+            "nullable": true
+          },
+          "emailConjuge": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string",
+            "description": "E-mail do cônjuge",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegistraPessoaOnBoardingCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/PessoaOnboardingDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegistraPessoaOnBoardingResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseBase": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SelectPessoaCommand": {
+        "type": "object",
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/FilterPessoaDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SelectPessoaResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "json": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TipoRegistro": {
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          14,
+          15,
+          16,
+          100,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211,
+          212,
+          213,
+          300,
+          301,
+          302
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "UploadDocumentDTO": {
+        "required": [
+          "arquivo",
+          "extensao",
+          "nomeArquivo",
+          "tipoDocumento"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tipoDocumento": {
+            "maximum": 9999,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Código do tipo de documento. Exemplo: 30 – Cédula de Crédito Bancária (CCB)",
+            "format": "int32"
+          },
+          "nomeArquivo": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome do arquivo",
+            "nullable": true
+          },
+          "extensao": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Extensão do arquivo",
+            "nullable": true
+          },
+          "dtValidade": {
+            "type": "string",
+            "description": "Data de validade do documento quando requisitado",
+            "format": "date-time",
+            "nullable": true
+          },
+          "arquivo": {
+            "type": "string",
+            "description": "Conteúdo base64 que representa o arquivo",
+            "format": "byte",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "Informe o token",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

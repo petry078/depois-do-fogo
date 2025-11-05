@@ -1,0 +1,42 @@
+---
+title: "8 - Gerar Múltiplos Boletos"
+openapi: post /AgendaRecebivel/GerarMultiplosBoletos
+---
+
+Permite gerar boletos para as parcelas informadas definindo data de vencimento e valor de desconto, podendo ou não notificar o cliente.
+
+## Mensagens de erro
+
+A tabela abaixo representa as mensagens de erro que podem ser retornadas ao tentar realizar uma requisição.
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+<Note>No exemplo de retorno ao lado, o campo `code` representa a coluna **Código** desta tabela; o campo `context` representa a coluna **Contexto**; e o campo `description` representa a coluna **Erro**.</Note>
+
+| Contexto | Código | Erro                                                                                                                          |
+|----------|--------|-------------------------------------------------------------------------------------------------------------------------------|
+| -        | V0001  | Parcela XXXX - Valor de desconto maior ou igual ao valor da parcela                                                           |
+| C0321    | V0002  | Não foi possível salvar os boletos                                                                                            |
+| C0166    | V0002  | Deve ser enviado pelo um boleto                                                                                               |
+| C0166    | V0003  | Data de vencimento deve ser maior a data atual                                                                                |
+| C0166    | V0004  | Valor do boleto deve ser informado                                                                                            |
+| C0166    | V0005  | Cliente não localizado                                                                                                        |
+| C0166    | V0006  | Não foi possível salvar os Boletos                                                                                            |
+| C0157    | V0001  | Nenhuma parcela informada                                                                                                     |
+| C0157    | V0002  | Nenhuma parcela encontrada                                                                                                    |
+| C0157    | V0004  | Parcelas XXXX não localizadas                                                                                                 |
+| C0157    | V0005  | Parcelas XXXX já pagas, não é possível gerar liquidação                                                                       |
+| C0157    | V0006  | Já existe uma cobrança em aberto para a agenda e parcelas em questão: XXXX                                                    |
+| C0157    | V0007  | Parcelas XXXX ser informadas com data de vencimento futuras                                                                   |
+| C0157    | V0008  | Descapitalização desabilitada para esta agenda                                                                                |
+| C0302    | V0002  | Layout não encontrado                                                                                                         |
+| C0302    | V0003  | Layout do fundo não foi encontrado                                                                                            |
+| C0302    | V0001  | Não foi configurado um modelo para o fundo                                                                                    |
+| C0302    | V0004  | A parametrização do fundo indica 'ObservarTipoContrato', mas não foi configurado um modelo para o tipo de contrato em questão |
+| C0267    | V0001  | Sequência inválida                                                                                                            |
+| C0010    | V0001  | Parceiro não tem permissão para gerar boletos na Agenda de Recebíveis                                                         |
+| C0010    | V0002  | Parceiro não tem permissão para aplicar desconto em parcelas na Agenda de Recebíveis                                          |
+
+</Expandable>

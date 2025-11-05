@@ -1,0 +1,112 @@
+---
+title: "Authentication"
+version: 'English'
+---
+
+## Authentication Methods
+
+We use the OAuth 2.0 authentication method, an industry standard for authorization, to ensure the security and integrity of user and system identification.
+
+This method involves generating tokens that allow secure access to our servers, software, and APIs. Authentication through OAuth 2.0 helps prevent cyber fraud and the leaking of confidential information by using public key cryptography to validate identities.
+
+<Steps>
+
+<Step title="Creating Public and Private Keys">
+
+Before receiving the credential, you need to generate a pair of keys: a private key and a public key. The private key will be used to sign the token, while the public key must be sent to us to validate the token signature.
+
+First, generate the **private key** using the command below via terminal:
+
+```bash
+openssl genrsa -out private.pem 2048
+```
+
+Then generate the **public key** through the terminal:
+
+```bash
+openssl rsa -in private.pem -pubout > public.pem
+```
+
+<Warning>
+
+Keep the private key in a safe place and never share it.
+
+</Warning>
+
+</Step>
+
+<Step title="Public key request">
+
+We will ask for your email address to open a request for sending the public key.
+
+After that, you will receive a message from **notifications@heflo.com** with instructions for sending the key.
+
+<Warning>
+
+Send **only** your public key for validation by our team, by replying to the HEFLO request email, without adding other people as a copy for safety. If other people are copied, this will invalidate the receipt of the public key.
+
+</Warning>
+
+</Step>
+
+<Step title = "Receiving client_id">
+
+After validating your public key, our team will generate and send your `client_id`, which will be used for authentication in the system.
+
+</Step>
+
+<Step title = "Geração do JWT">
+
+Generate a TOKEN following the **RS256** standard, containing crucial information such as unique identifier, issuance time and expiration.
+
+```javascript
+const tokenHeader = {
+  alg: "RS256", // 'alg': Algorithm used to sign the token (RS256 - RSA with SHA-256).
+  typ: "JWT"    // 'typ': Token type, in this case, JWT.
+};
+
+const tokenPayload = {
+  jti: "5e8e07e3-d3f0-4881-a644-0895f4949e9b", // 'jti': Unique Token ID.
+  sub: "client_id", // 'sub': Client identifier (fill in with the client_id sent by our team).
+  iat: 1573648398, // 'iat': Date and time the token was issued (UNIX timestamp in seconds).
+  nbf: 1573648398, // 'nbf': Date and time before which the token should not be accepted (UNIX timestamp).
+  exp: 1573648458, // 'exp': Token expiration date (UNIX timestamp).
+  iss: "client_id", // 'iss': Token issuer (fill in with the client_id sent by our team).
+  aud: "https://auth.moneyp.dev.br/connect/token" // 'aud': Token Recipient (verifies that the token is sent to the correct server).
+};
+
+```
+</Step>
+
+<Step title="Bearer Token Generation Endpoint">
+
+To generate a TOKEN using the OAuth 2.0 method, the client must send a POST request with the Content-Type Header "x-www-form-urlencoded", below is the CURL of the endpoint that will be used to generate the token:
+
+```javascript
+curl --location 'https://auth.moneyp.dev.br/connect/token' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--header 'Cache-Control: no-cache' \
+--data-urlencode 'grant_type=client_credentials' \
+--data-urlencode 'client_id=client_id' \
+--data-urlencode 'scope=bmp.digital.api.full.access' \
+--data-urlencode 'client_assertion= "<< Token JWT >>"' \ // JWT generated in the previous step.
+--data-urlencode 'client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer'
+```
+
+After authentication, the obtained access token must be used in all subsequent requests in the authorization header.
+
+```javascript
+const headers = {
+  Authorization: `Bearer <<Access token>>`
+};
+```
+
+<Warning>
+
+**Once generated, our Bearer Token is valid for 1 hour. After this period, it will be necessary to generate a new token to ensure the session continues actively and securely**
+
+</Warning>
+
+</Step>
+
+</Steps>

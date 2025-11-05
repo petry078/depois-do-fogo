@@ -1,0 +1,11 @@
+---
+title: "6 - Cancel Proposal"
+openapi: post /FGTS/CancelarProposta
+---
+
+<Warning>It is not possible to call the cancellation endpoint within 7 days of the proposal being disbursed or if it is in the assigned status (ID = 10).</Warning>
+
+Through this endpoint, the partner cancels an FGTS transaction, respecting the following rules:
+
+* The transaction cannot exceed the 7-day period from the moment of disbursement;
+* If the transaction is disbursed, the amount will need to be returned to us.

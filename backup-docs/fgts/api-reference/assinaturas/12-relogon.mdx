@@ -1,0 +1,9 @@
+---
+title: "12 - Relogon"
+openapi: post /Proposta/IncluirAssinaturaCCBFinalizada
+---
+
+
+- Por meio deste endpoint o parceiro pode realizar a assinatura da proposta, é permitida a inclusão de assinantes que já tenham realizado a assinatura no backend do integrador, pois a proposta só é finalizada após os assinantes cadastrados realizem a assinatura.
+- Este método não faz envio de e-mails de notificação com solicitação de assinatura. 
+- O método exige parâmetros de autenticação e de localização da proposta, assim como uma lista de assinantes que já realizaram a assinatura com data, hora e o endereço IP de origem.

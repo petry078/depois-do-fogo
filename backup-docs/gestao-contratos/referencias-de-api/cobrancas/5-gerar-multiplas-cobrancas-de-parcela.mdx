@@ -1,0 +1,18 @@
+---
+title: "5 - Gerar Múltiplas Cobranças de Parcela"
+openapi: post /AgendaRecebivel/GerarMultiplasCobrancas
+---
+
+Este endpoint possibilita a emissão simultânea de múltiplas cobranças, sendo ideal para contratos que possuem várias parcelas ou quando há necessidade de gerar diversas cobranças ao mesmo tempo. 
+
+Ele automatiza o processo de emissão de cobrança para múltiplas parcelas, tornando o processo mais ágil e reduzindo o tempo gasto com operações manuais.
+
+Assim como o endpoint `AgendaRecebivelGerarUnicaCobranca`, este também suporta os seguintes tipos de cobrança:
+
+* Boleto;
+* Boleto Híbrido (com PIX);
+* PIX Cobrança.
+
+Este recurso é útil especialmente para parceiros que precisam gerar faturas em massa de forma simples e eficiente, com as mesmas opções de pagamento.
+
+<Warning>O campo `codigoLiquidacao`, gerado na resposta deste endpoint, precisa ser salvo. Esse valor é necessário para solicitar o cancelamento das cobranças emitidas para as parcelas, no endpoint [6 - Cancelar Cobranças de Parcela](https://bmpmoneyplus-sandbox.mintlify.app/gestao-contratos/api-reference/post-agendarecebivelcancelarcobrancas).</Warning>

@@ -1,0 +1,281 @@
+---
+title: 11 - Consulta Empresa por Lote de CNPJs
+openapi: post /Bureau/ConsultarReceitaLoteEmpresaCNPJ
+---
+
+Utilize este endpoint para verificar em uma consulta em lote quem são os sócios e administradores de uma empresa, suas qualificações e informações relevantes sobre sua participação na empresa.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. O retorno do Bureau é enviado de forma serializada, sendo necessário deserializá-lo para uma melhor visualização. O campo `TipoCallback` deve ser enviado com o valor `2` em todas as chamadas.
+
+```json
+[
+{
+    \"Erro": false,
+    \"MensagemOperador": "OK",
+    \"ResultadoConsulta": {
+        \"Socios": [
+            {
+                \"Cpf": "00011122233",
+                \"DataInclusao": "2019-07-26",
+                \"RepresentanteLegal": {
+                    \"Cpf": "00000000000",
+                    \"Nome": "",
+                    \"Qualificacao": "00",
+                    \"DescricaoQualificacao": "Desconhecido"
+                },
+                \"TipoSocio": "2",
+                \"DescricaoTipoSocio": "Pessoa Física",
+                \"Nome": "nome sobrenome",
+                \"Qualificacao": "16",
+                \"DescricaoQualificacao": "Presidente",
+                \"Pais": {
+                    \"Codigo": "105",
+                    \"Descricao": "BRASIL"
+                }
+            },
+            {
+                \"Cpf": "22233344455",
+                \"DataInclusao": "2019-07-26",
+                \"RepresentanteLegal": {
+                    \"Cpf": "00000000000",
+                    \"Nome": "",
+                    \"Qualificacao": "00",
+                    \"DescricaoQualificacao": "Desconhecido"
+                },
+                \"TipoSocio": "2",
+                \"DescricaoTipoSocio": "Pessoa Física",
+                \"Nome": "nome sobrenome",
+                \"Qualificacao": "10",
+                \"DescricaoQualificacao": "Diretor",
+                \"Pais": {
+                    \"Codigo": "105",
+                    \"Descricao": "BRASIL"
+                }
+            }
+        ],
+        \"InformacoesAdicionais": {
+            \"OptanteSimples": "NÃO",
+            \"OptanteMei": "NÃO",
+            \"ListaPeriodosSimples": []
+        },
+        \"Ni": "11222333000155",
+        \"TipoEstabelecimento": "1",
+        \"DescricaoTipoEstabelecimento": "Matriz",
+        \"NomeEmpresarial": "Empresa S.A",
+        \"NomeFantasia": "Empresa",
+        \"SituacaoCadastral": {
+            \"Codigo": "2",
+            \"Data": "2019-07-26",
+            \"Motivo": "",
+            \"Descricao": "Ativa"
+        },
+        \"NaturezaJuridica": {
+            \"Codigo": "2054",
+            \"Descricao": "Sociedade Fechada"
+        },
+        \"DataAbertura": "2019-07-26",
+        \"CnaePrincipal": {
+            \"Codigo": "6499999",
+            \"Descricao": "Outras atividades de serviços especificadas anteriormente"
+        },
+        \"CnaeSecundarias": [
+            {
+                \"Codigo": "6204000",
+                \"Descricao": "Consultoria em tecnologia da informação"
+            },
+            {
+                \"Codigo": "6209100",
+                \"Descricao": "Suporte técnico"
+            },
+            {
+                \"Codigo": "6619399",
+                \"Descricao": "Outras atividades auxiliares"
+            },
+            {
+                \"Codigo": "6629100",
+                \"Descricao": "Atividades auxiliares dos seguros"
+            },
+            {
+                \"Codigo": "8291100",
+                \"Descricao": "Atividades de cobranças e informações cadastrais"
+            }
+        ],
+        \"Endereco": {
+            \"TipoLogradouro": "AVENIDA",
+            \"Logradouro": "PAULISTA",
+            \"Numero": "1765",
+            \"Complemento": "ANDAR 1O. ANDAR CONJ CONJUNTO 11",
+            \"Cep": "01311930",
+            \"Bairro": "BELA VISTA",
+            \"Municipio": {
+                \"Codigo": "7107",
+                \"Descricao": "SAO PAULO"
+            },
+            \"Uf": "SP",
+            \"Pais": {
+                \"Codigo": "105",
+                \"Descricao": "BRASIL"
+            }
+        },
+        \"MunicipioJurisdicao": {
+            \"Codigo": "0818000",
+            \"Descricao": "SÃO PAULO"
+        },
+        \"Telefones": [
+            {
+                \"DDD": "11",
+                \"Numero": "38109333"
+            }
+        ],
+        \"CorreioEletronico": "FISCAL@MONEYP.COM.BR",
+        \"CapitalSocial": 700000000,
+        \"Porte": "05",
+        \"DescricaoPorte": "Demais empresas",
+        \"SituacaoEspecial": "",
+        \"DataSituacaoEspecial": ""
+    }
+},
+{
+    \"Erro": false,
+    \"MensagemOperador": "OK",
+    \"ResultadoConsulta": {
+        \"Socios": [
+            {
+                \"Cpf": "00011122233",
+                \"DataInclusao": "2019-07-26",
+                \"RepresentanteLegal": {
+                    \"Cpf": "00000000000",
+                    \"Nome": "",
+                    \"Qualificacao": "00",
+                    \"DescricaoQualificacao": "Desconhecido"
+                },
+                \"TipoSocio": "2",
+                \"DescricaoTipoSocio": "Pessoa Física",
+                \"Nome": "nome sobrenome",
+                \"Qualificacao": "16",
+                \"DescricaoQualificacao": "Presidente",
+                \"Pais": {
+                    \"Codigo": "105",
+                    \"Descricao": "BRASIL"
+                }
+            },
+            {
+                \"Cpf": "22233344455",
+                \"DataInclusao": "2019-07-26",
+                \"RepresentanteLegal": {
+                    \"Cpf": "00000000000",
+                    \"Nome": "",
+                    \"Qualificacao": "00",
+                    \"DescricaoQualificacao": "Desconhecido"
+                },
+                \"TipoSocio": "2",
+                \"DescricaoTipoSocio": "Pessoa Física",
+                \"Nome": "nome sobrenome",
+                \"Qualificacao": "10",
+                \"DescricaoQualificacao": "Diretor",
+                \"Pais": {
+                    \"Codigo": "105",
+                    \"Descricao": "BRASIL"
+                }
+            }
+        ],
+        \"InformacoesAdicionais": {
+            \"OptanteSimples": "NÃO",
+            \"OptanteMei": "NÃO",
+            \"ListaPeriodosSimples": []
+        },
+        \"Ni": "11222333000155",
+        \"TipoEstabelecimento": "1",
+        \"DescricaoTipoEstabelecimento": "Matriz",
+        \"NomeEmpresarial": "Empresa S.A",
+        \"NomeFantasia": "Empresa",
+        \"SituacaoCadastral": {
+            \"Codigo": "2",
+            \"Data": "2019-07-26",
+            \"Motivo": "",
+            \"Descricao": "Ativa"
+        },
+        \"NaturezaJuridica": {
+            \"Codigo": "2054",
+            \"Descricao": "Sociedade Fechada"
+        },
+        \"DataAbertura": "2019-07-26",
+        \"CnaePrincipal": {
+            \"Codigo": "6499999",
+            \"Descricao": "Outras atividades de serviços especificadas anteriormente"
+        },
+        \"CnaeSecundarias": [
+            {
+                \"Codigo": "6204000",
+                \"Descricao": "Consultoria em tecnologia da informação"
+            },
+            {
+                \"Codigo": "6209100",
+                \"Descricao": "Suporte técnico"
+            },
+            {
+                \"Codigo": "6619399",
+                \"Descricao": "Outras atividades auxiliares"
+            },
+            {
+                \"Codigo": "6629100",
+                \"Descricao": "Atividades auxiliares dos seguros"
+            },
+            {
+                \"Codigo": "8291100",
+                \"Descricao": "Atividades de cobranças e informações cadastrais"
+            }
+        ],
+        \"Endereco": {
+            \"TipoLogradouro": "AVENIDA",
+            \"Logradouro": "PAULISTA",
+            \"Numero": "1765",
+            \"Complemento": "ANDAR 1O. ANDAR CONJ CONJUNTO 11",
+            \"Cep": "01311930",
+            \"Bairro": "BELA VISTA",
+            \"Municipio": {
+                \"Codigo": "7107",
+                \"Descricao": "SAO PAULO"
+            },
+            \"Uf": "SP",
+            \"Pais": {
+                \"Codigo": "105",
+                \"Descricao": "BRASIL"
+            }
+        },
+        \"MunicipioJurisdicao": {
+            \"Codigo": "0818000",
+            \"Descricao": "SÃO PAULO"
+        },
+        \"Telefones": [
+            {
+                \"DDD": "11",
+                \"Numero": "38109333"
+            }
+        ],
+        \"CorreioEletronico": "FISCAL@MONEYP.COM.BR",
+        \"CapitalSocial": 700000000,
+        \"Porte": "05",
+        \"DescricaoPorte": "Demais empresas",
+        \"SituacaoEspecial": "",
+        \"DataSituacaoEspecial": ""
+    }
+}
+]
+```
+
+</Expandable>
+
+<Expandable title="Tabela de dados fictícios para testes">
+
+| CNPJ           | SITUAÇÃO  | 
+|----------------|-----------|
+| 34238864000168 | ATIVO     | 
+| 54447820000155 | SUSPENSO  | 
+| 46768703000165 | INAPTO    | 
+| 31151791000184 | BAIXADO   |
+| 34428654000132 | NULO      |
+
+</Expandable>

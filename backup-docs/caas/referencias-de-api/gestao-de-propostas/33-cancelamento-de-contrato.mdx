@@ -1,0 +1,86 @@
+---
+title: "33 - Cancelamento de Contrato"
+openapi: post /Proposta/Cancelar
+---
+Por meio deste endpoint o parceiro realiza o cancelamento da proposta previamente estabelecida, para utilização desta funcionalidade considerar os seguintes requisitos:
+- A proposta não pode estar com status paga ou vinculada a uma remessa de pagamento;
+- A proposta não pode estar cedida ou vinculada a uma remessa de cessão.
+- O prazo máximo para cancelamento da proposta é de até sete dias.
+
+## Mensagens de erro
+
+A tabela abaixo representa as mensagens de erro que podem ser retornadas ao tentar realizar uma requisição.
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+<Note>No exemplo de retorno ao lado, o campo `code` representa a coluna **Código** desta tabela; o campo `context` representa a coluna **Código Detalhado**; e o campo `message` representa a coluna **Mensagem**.</Note>
+
+| Categoria | Operação         | Ação     | Código | Código Detalhado | Mensagem                                                                                                      |
+|-----------|------------------|----------|--------|------------------|---------------------------------------------------------------------------------------------------------------|
+| Proposta  | PropostaCancelar | Cancelar | C0067  | V0001            | Não é permitido o cancelamento da proposta por este parceiro                                                                                                           |
+| Proposta  | PropostaCancelar | Cancelar | C0067  | V0002            | Situação da Proposta não permite Cancelamento                                                                                                                         |
+| Proposta  | PropostaCancelar | Cancelar | C0067  | V0003            | Situação da Proposta não permite Cancelamento                                                                                                                         |
+| Proposta  | PropostaCancelar | Cancelar | C0067  | V0004            | Prazo para cancelamento de `{nroDiasCancelamento}` dias foi ultrapassado                                                                                                |
+| Proposta  | PropostaCancelar | Cancelar | C0067  | V0005            | Situação da Proposta não permite Cancelamento                                                                                                                         |
+| Proposta  | PropostaCancelar | Cancelar | C0067  | V0006            | Situação da Proposta não permite Cancelamento                                                                                                                         |
+| Proposta  | PropostaCancelar | Cancelar | C0067  | V0007            | Situação da Proposta não permite Cancelamento                                                                                                                         |
+| Proposta  | PropostaCancelar | Cancelar | C0067  | V0008            | Proposta não pode ser aprovada, pois sua situação é `{SituacaoPropostaEnum.GetDescricao(proposta.Situacao)}`                                                        |
+| Proposta  | PropostaCancelar | Cancelar | C0112  | V0001            | Proposta não encontrada                                                                                                                                                  |
+| Proposta  | PropostaCancelar | Cancelar | C0112  | V0002            | A Proposta não pertence à esta Integração                                                                                                                              |
+| Proposta  | PropostaCancelar | Cancelar | C0194  | V0001            | Proposta não localizada                                                                                                                                                  |
+| Proposta  | PropostaCancelar | Cancelar | C0194  | V0002            | Proposta já foi cancelada                                                                                                                                                 |
+| Proposta  | PropostaCancelar | Cancelar | C0194  | V0003            | Proposta está em uma Cessão, não é possível cancelar                                                                                                                     |
+| Proposta  | PropostaCancelar | Cancelar | C0194  | V0004            | Informe o motivo de cancelamento                                                                                                                                          |
+| Proposta  | PropostaCancelar | Cancelar | C0194  | V0005            | Proposta foi enviada na remessa de pagamento                                                                                                                            |
+| Proposta  | PropostaCancelar | Cancelar | C0185  | V0001            | Informe o valor aprovado e a quantidade de parcelas                                                                                                                       |
+| Proposta  | PropostaCancelar | Cancelar | C0185  | V0002            | Valor aprovado não pode ser superior ao valor solicitado                                                                                                                |
+| Proposta  | PropostaCancelar | Cancelar | C0185  | V0003            | Valor/Prazo aprovado não pode ser diferente do Valor/Prazo solicitado                                                                                                  |
+| Proposta  | PropostaCancelar | Cancelar | C0185  | V0004            | A Proposta deve ter pelo menos 1(um) Assinante cadastrado                                                                                                               |
+| Proposta  | PropostaCancelar | Cancelar | C0185  | V0005            | É necessário informar o E-mail e Celular de todos os Assinantes                                                                                                        |
+| Proposta  | PropostaCancelar | Cancelar | C0185  | V0006            | Proposta não deve ter boletos.                                                                                                                                           |
+| Proposta  | PropostaCancelar | Cancelar | C0185  | V0007            | Motivo de Rejeição deve ser informado                                                                                                                                      |
+| Proposta  | PropostaCancelar | Cancelar | C0185  | V0008            | Valor e Prazo não podem ser alterados quando o cálculo da parcela é sem juros                                                                                        |
+| Proposta  | PropostaCancelar | Cancelar | C0185  | V0009            | Percentual de Juros deve ser informado                                                                                                                                   |
+| Proposta  | PropostaCancelar | Cancelar | C0185  | V0010            | Valor da Parcela deve ser informado                                                                                                                                      |
+| Proposta  | PropostaCancelar | Cancelar | C0185  | V0011            | Proposta deve ter parcelas geradas antes de ser finalizada.                                                                                                             |
+| Proposta  | PropostaCancelar | Cancelar | C0185  | V0012            | Os documentos do cliente devem estar conferidos                                                                                                                          |
+| Proposta  | PropostaCancelar | Cancelar | C0185  | V0013            | Os documentos da proposta devem estar conferidos                                                                                                                         |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0001            | Informe o Cliente                                                                                                                                                        |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0002            | Documento do Cliente é inválido                                                                                                                                          |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0003            | Modelo de cálculo inválido                                                                                                                                               |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0004            | Data de primeiro vencimento deve ser maior que a data de hoje                                                                                                             |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0005            | Parceiro / Correspondente Bancário deve ser informado                                                                                                                    |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0006            | A proposta deve ter valor mínimo de produtoRede.VlrPropostaMinimo.Value.ToString("C")                                                                                  |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0007            | A proposta deve ter valor máximo de produtoRede.VlrPropostaMaximo.Value.ToString("C")                                                                                  |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0008            | Cliente já possui uma proposta em andamento                                                                                                                              |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0009            | HotMoney não está ativado para esta proposta                                                                                                                             |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0010            | Rotativo não está ativado para esta proposta                                                                                                                             |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0011            | Versão de CCB informada não Existe ou está indisponível para esta Integração!                                                                                          |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0012            | Versão de CCB informada está Inativa!                                                                                                                                      |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0013            | Tipo de Contrato deve ser informado                                                                                                                                      |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0014            | A Sigla do Tipo de Contrato informada não está correta                                                                                                                     |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0015            | No momento não é possível incluir uma proposta para a pessoa do Onboarding                                                                                              |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0016            | EPCodigo não informado                                                                                                                                                    |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0017            | Vendedor não encontrado                                                                                                                                                   |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0018            | Promotor não encontrado                                                                                                                                                   |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0019            | Informe o Tipo de Operação                                                                                                                                                 |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0020            | Informe o Valor                                                                                                                                                           |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0021            | Informe a Quantidade de Parcelas                                                                                                                                           |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0022            | Formato de cálculo inválido                                                                                                                                               |
+| Proposta  | PropostaCancelar | Cancelar | T0665  | D0023            | Cliente deve ser pessoa física                                                                                                                                           |
+| Proposta  | PropostaCancelar | Cancelar | C0186  | V0001            | Proposta ainda não foi aprovada pelo analista de crédito                                                                                                                   |
+| Proposta  | PropostaCancelar | Cancelar | C0198  | V0001            | Proposta não pode ser HotMoney ou Rotativo                                                                                                                               |
+| Proposta  | PropostaCancelar | Cancelar | C0198  | V0002            | Taxa deve ser de `{percJuros}`                                                                                                                                            |
+| Proposta  | PropostaCancelar | Cancelar | C0198  | V0003            | TAC deve ser de `{VlrTAC}`                                                                                                                                                  |
+| Proposta  | PropostaCancelar | Cancelar | C0196  | V0001            | O valor solicitado não é válido                                                                                                                                           |
+| Proposta  | PropostaCancelar | Cancelar | C0196  | V0002            | Formato de cálculo inválido                                                                                                                                            |
+| Proposta  | PropostaCancelar | Cancelar | C0196  | V0003            | É necessário o produto                                                                                                                                                    |
+| Proposta  | PropostaCancelar | Cancelar | C0196  | V0004            | Prazo inválido ou não localizado para este Produto x Rede                                                                                                                 |
+| Proposta  | PropostaCancelar | Cancelar | C0196  | V0005            | Não é possível aprovar a proposta. Produto x Rede x Parcela não possui juros configurado                                                                                |
+| Proposta  | PropostaCancelar | Cancelar | C0196  | V0006            | Configuração deve ser enviada para proposta HotMoney                                                                                                                      |
+| Proposta  | PropostaCancelar | Cancelar | C0196  | V0007            | Produto Rotativo e HotMoney aceitam apenas formato de cálculo com juros                                                                                                 |
+| Proposta  | PropostaCancelar | Cancelar | C0196  | V0008            | Formato de Cálculo não informado                                                                                                                                           |
+</Expandable>
+

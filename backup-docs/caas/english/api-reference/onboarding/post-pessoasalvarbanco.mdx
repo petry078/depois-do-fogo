@@ -1,0 +1,28 @@
+---
+title: "8 - Save Bank"
+openapi: post /Pessoa/SalvarBanco
+version: 'English'
+---
+
+<Expandable title="Messages">
+| Categoria | Operação | Ação | Código | Código Detalhado | Mensagem |
+|-----------|----------|------|--------|------------------|----------|
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | C0108 | V0001 | Documento Federal deve ser informado |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | C0108 | V0002 | Cliente não encontrado com o documento `{documentoCliente}` |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | C0108 | V0003 | Cliente não cadastrado pelo parceiro de integração |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | C0044 | V0001 | Banco `{dto.NumeroBanco}` não localizado |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | C0044 | V0002 | Banco `{dto.CodigoBanco}` informado não existe ou está inativo |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | T0597 | D0001 | Selecione o Banco |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | T0597 | D0002 | Banco inválido |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | T0597 | D0003 | Selecione o Tipo de Conta |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | T0597 | D0004 | Tipo de Conta inválido |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | T0597 | D0005 | Informe a Agência de Pagamento |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | T0597 | D0006 | Informe a Conta de Pagamento |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | T0597 | D0007 | Informe o Dígito da Conta de Pagamento |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | T0597 | D0008 | Agência deve ser numérica |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | T0597 | D0009 | Agência deve ter até 4 dígitos |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | T0597 | D0010 | Conta deve ser numérica |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | T0597 | D0011 | Dígito da Conta deve ser numérico |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | T0597 | D0012 | Informe o Telefone do Gerente com DDD |
+| Pessoa | CreateUpdatePessoaBanco | SalvarBanco | T0597 | D0013 | Banco inválido ou inativo |
+</Expandable>

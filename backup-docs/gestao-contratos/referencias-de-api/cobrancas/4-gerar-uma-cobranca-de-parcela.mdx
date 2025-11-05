@@ -1,0 +1,18 @@
+---
+title: "4 - Gerar uma Cobrança de Parcela"
+openapi: post /AgendaRecebivel/GerarUnicaCobranca
+---
+
+Este endpoint permite a emissão individual de cobranças para contratos ou parcelas específicas. 
+
+Ele facilita a criação de uma cobrança personalizada, onde são fornecidos parâmetros como valor, data de vencimento e forma de pagamento, atendendo a diferentes necessidades de cada cliente.
+
+A funcionalidade do endpoint abrange três modalidades de cobrança:
+
+* Boleto: para geração de boletos tradicionais;
+* Boleto Híbrido (com PIX): combinação de boleto tradicional com a opção de pagamento via PIX;
+* PIX Cobrança: geração de cobrança exclusivamente via PIX.
+
+Com essa flexibilidade, o parceiro pode criar cobranças variadas de forma eficiente e adaptada às necessidades dos clientes.
+
+<Warning>O campo `codigoLiquidacao`, gerado na resposta deste endpoint, precisa ser salvo. Esse valor é necessário para solicitar o cancelamento das cobranças emitidas para as parcelas, no endpoint [6 - Cancelar Cobranças de Parcela](https://bmpmoneyplus-sandbox.mintlify.app/gestao-contratos/api-reference/post-agendarecebivelcancelarcobrancas).</Warning>

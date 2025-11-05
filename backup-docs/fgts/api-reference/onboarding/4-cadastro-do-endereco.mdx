@@ -1,0 +1,45 @@
+---
+title: "4 - Cadastro do Endereço"
+openapi: post /Pessoa/SalvarEndereco
+---
+Por meio deste endpoint o parceiro pode criar ou atualizar registros de endereços de um cliente específico, utilizando o CPF /CNPJ já cadastrado.
+Para que ocorra uma atualização, é necessário que o campo código, seja preenchido com o número do registro na base da BMP, pois caso isso não ocorra, a busca será feita pelo campo CEP (código de endereçamento postal).
+
+### Tabelas
+
+<Expandable title = "Tabelas ">
+<Expandable title="Tabela TipoEndereco">
+  | ID  | Descrição       |
+  | --- | --------------- |
+  | 1   | Residencial     |
+  | 2   | Comercial       |
+</Expandable>
+
+<Expandable title=" Tabela TipoResidencia">
+  | ID | Descrição       |
+  |----|-----------------|
+  | 1  | Alugado         |
+  | 2  | Próprio         |
+  | 3  | Financiado      |
+  | 4  | Casa Funcional  |
+  </Expandable>
+  --------
+  </Expandable>
+
+  ### Mensagens de erro
+
+<Expandable title="Mensageria">
+| Categoria | Operação                       | Ação          | Código | Código Detalhado | Mensagem                                                          |
+|-----------|--------------------------------|---------------|--------|------------------|-------------------------------------------------------------------|
+| Pessoa    | CreateUpdatePessoaEndereco     | SalvarEndereco | C0108  | V0001            | Documento Federal deve ser informado                              |
+| Pessoa    | CreateUpdatePessoaEndereco     | SalvarEndereco | C0108  | V0002            | Cliente não encontrado com o documento `{documentoCliente}`         |
+| Pessoa    | CreateUpdatePessoaEndereco     | SalvarEndereco | C0108  | V0003            | Cliente não cadastrado pelo parceiro de integração                |
+| Pessoa    | CreateUpdatePessoaEndereco     | SalvarEndereco | T0608  | D0001            | Informe o CEP                                                     |
+| Pessoa    | CreateUpdatePessoaEndereco     | SalvarEndereco | T0608  | D0002            | CEP inválido                                                      |
+| Pessoa    | CreateUpdatePessoaEndereco     | SalvarEndereco | T0608  | D0003            | Informe o Logradouro                                               |
+| Pessoa    | CreateUpdatePessoaEndereco     | SalvarEndereco | T0608  | D0004            | Informe a Cidade                                                   |
+| Pessoa    | CreateUpdatePessoaEndereco     | SalvarEndereco | T0608  | D0005            | Informe o Estado                                                   |
+| Pessoa    | CreateUpdatePessoaEndereco     | SalvarEndereco | T0608  | D0006            | Informe o Tipo de Imóvel                                           |
+| Pessoa    | CreateUpdatePessoaEndereco     | SalvarEndereco | T0608  | D0007            | Informe o Tipo de Endereço                                         |
+| Pessoa    | CreateUpdatePessoaEndereco     | SalvarEndereco | T0608  | D0008            | Informe o tempo em que está situado no endereço                    |
+</Expandable>

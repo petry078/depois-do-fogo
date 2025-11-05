@@ -1,0 +1,16 @@
+---
+title: "16 - Transfer Resource"
+openapi: post /api/Recurso/Transferir
+---
+
+Through this endpoint, the partner can make transfers using a Pix key, bank details, or QR Code.
+
+<Info> In production, the use of HandShake and HMAC is mandatory. </Info>
+
+<Warning>
+Transfer via PIX Key: In this model, for the client to successfully complete the request, the client must query the key at the /api/Chave/Consultar endpoint to obtain the "ticket." In this case, the key that will receive the transfer is required.
+
+Transfer via Bank Details: In this model, for the client to successfully complete the request, the client must provide the destination account details, including the branch, account, account type, account model, destination ISPB (Brazilian Social Security Number), name, and beneficiary's federal ID.
+
+Transfer via QR Code: In this model, for the client to successfully complete the request, the client must query the key at the /api/QRCode/Ler endpoint to obtain the "QRCodeReadingCode" (CodigoLeituraQRCode).
+</Warning>

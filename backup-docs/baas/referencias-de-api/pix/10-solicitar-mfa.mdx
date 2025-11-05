@@ -1,0 +1,13 @@
+---
+title: "10 - Solicitar MFA"
+openapi: post /api/Mfa/Solicitar
+---
+
+
+Por meio deste endpoint, o parceiro pode solicitar a autenticação de múltiplos fatores, ou seja, a MFA.
+Trata-se de uma dupla validação de segurança para a criação de chave PIX no formato “e-mail” ou “telefone celular”. 
+Após o cadastro será enviado um token para o canal ao qual a chave foi cadastrada.
+
+***Requisitos:***
+
+É utilizado de acordo com a chave, enviado por sms ou por E-mail.

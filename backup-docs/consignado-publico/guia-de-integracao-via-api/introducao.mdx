@@ -1,0 +1,96 @@
+---
+title: "Introdução"
+version: 'Português'
+---
+
+Esta introdução foi projetada para garantir que todos os aspectos do sistema estejam funcionais e seguros antes de entrar no ambiente de produção.
+
+<Steps>
+
+<Step title="Kick-off com o Parceiro">
+
+O parceiro participa, junto com time de Implantaçã e Comercial da BMP, de um kick-off inicial, onde são apresentadas as definições e o fluxo do projeto.
+
+</Step>
+
+<Step title="Canal de Comunicação">
+
+O parceiro será adicionado em um grupo do WhatsApp, para facilitar a interação entre todos os envolvidos no projeto.
+
+</Step>
+
+<Step title="Credenciamento em Homologação">
+
+O time de Implantação realiza o credenciamento do parceiro no ambiente de homologação.
+
+</Step>
+
+<Step title="Solicitação e Cadastro de Chave Pública">
+
+Será solicitada a chave pública ao parceiro, para a inclusão na credencial em homologação. O time de Implantação irá enviar as credenciais do parceiro via e-mail.
+
+</Step>
+
+<Step title="Criação do token e chave JWT">
+
+A partir das credenciais geradas no passo anterior, o parceiro cria sua chave JWT e um token de acesso à API para integração com os serviços BMP.
+
+<Warning>As credenciais geradas no passo anterior, são fundamentais para a criação do token e da chave JWT.</Warning>
+
+</Step>
+
+<Step title="Desenvolvimento do Parceiro">
+
+O parceiro realiza todo o desenvolvimento necessário para interação com as nossas APIs. 
+
+<Note>Exemplo: aplicativo ou página web para interação com o cliente.</Note>
+
+</Step>
+
+<Step title="Geração de Propostas para Validação">
+
+Para validação de alguns cenários, o parceiro gera três propostas. São elas:
+
+* Proposta no status de finalizada com os dados bancários de desembolso incorretos;
+* Propostas no status de finalizada com os dados bancários de desembolso corretos;
+* Proposta no status de liberada com os dados bancários de desembolso corretos.
+
+<Warning> Em casos do cálculo ser emitido pelo parceiro, envie a memória de cálculo para análise do time de implantação.</Warning>
+
+</Step>
+
+<Step title="Homologação Interna BMP">
+
+São realizados os testes de homologação interna para validar as integrações e funcionalidades dos serviços implantados com o parceiro.
+
+</Step>
+
+<Step title="Signoff">
+
+Após a validação do parceiro com o time de implantação, é necessário obter a aprovação final de todas as áreas de BackOffice envolvidas.
+
+</Step>
+
+<Step title="Credenciamento de Produção">
+
+São realizados os credenciamentos no ambiente de produção e são enviadas, via e-mail, as credenciais ao parceiro.
+
+</Step>
+
+<Step title="Entrega do Ambiente de Produção">
+
+O time de implantação realiza a entrefa do ambiente de produção.
+
+</Step>
+
+</Steps>
+
+## Alertas
+
+<Warning>Toda comunicação do time de Integração com o Parceiro é feita via grupo no WhatsApp</Warning>
+
+<Note>O horário de atendimento do time de Integração é de segunda a sexta-feira, das 09h às 18h.</Note>
+
+<Warning>O time de Integração não libera credenciais de produção na sexta-feira, nem em vésperas de feriado.</Warning>
+
+<Warning>O limite de requisições no ambiente de produção é de 1 requisição por segundo.</Warning>

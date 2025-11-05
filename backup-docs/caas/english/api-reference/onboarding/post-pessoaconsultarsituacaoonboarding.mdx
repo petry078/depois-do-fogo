@@ -1,0 +1,16 @@
+---
+title: "5 - Onboarding Status Consultation"
+openapi: post /Pessoa/ConsultarSituacaoOnBoarding
+version: 'English'
+---
+
+Through this endpoint, the partner queries the status of the onboarding process.
+
+<Expandable title="Messages - Onboarding Status Consultation">
+| Categoria | Operação                     | Ação                       | Código | Código Detalhado | Mensagem                                                                                             |
+|-----------|------------------------------|----------------------------|--------|------------------|------------------------------------------------------------------------------------------------------|
+| Pessoa    | ConsultaSituacaoOnBoarding   | ConsultarSituacaoOnBoarding | C0043  | V0001            | Documento Inválido                                                                                  |
+| Pessoa    | ConsultaSituacaoOnBoarding   | ConsultarSituacaoOnBoarding | C0108  | V0001            | Documento Federal deve ser informado                                                                  |
+| Pessoa    | ConsultaSituacaoOnBoarding   | ConsultarSituacaoOnBoarding | C0108  | V0002            | Cliente não encontrado com o documento {documentoCliente}                                            |
+| Pessoa    | ConsultaSituacaoOnBoarding   | ConsultarSituacaoOnBoarding | C0108  | V0003            | Cliente não cadastrado pelo parceiro de integração                                                    |
+</Expandable>

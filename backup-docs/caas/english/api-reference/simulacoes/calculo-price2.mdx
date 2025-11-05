@@ -1,0 +1,42 @@
+---
+title: "14 - Detailed simulation"
+openapi: post /Proposta/CalcularGridParcelasSimplificadoPrice
+version: 'English'
+---
+Through this endpoint, the partner can simulate the proposal values. The system provides the calculation for the required term and details of all installment amounts, considering the calculation according to the rates applied in this modality and according to the parameters already registered in the system.
+
+---
+title: "14 - Detailed Simulation"
+openapi: post /Proposta/CalcularGridParcelasSimplificadoPrice
+version: 'English'
+---
+Through this endpoint, the partner can simulate the values of the proposal. The system calculates the required term and details of all installments, considering the calculation according to the rates applied in this modality and as per the parameters already registered in the system.
+
+<Expandable title="Messages - Calculate Simplified Installment Grid Price">
+| Category | Operation                           | Action                              | Code | Detailed Code | Message                                                                                              |
+|----------|-------------------------------------|-------------------------------------|------|---------------|------------------------------------------------------------------------------------------------------|
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0016 | V0001         | Produto não configurado para esta integração                                                          |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0016 | V0002         | Tipo Pessoa deve ser 1-PF ou 2-PJ                                                                    |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0016 | V0003         | Prazo não configurado para o produto                                                                 |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0127 | V0001         | Fluxo Irregular: Campo [NroDiasIntervaloPrazo] deve receber um valor                               |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0127 | V0002         | Preencher o campo [NroDiasIntervaloPrazo] apenas quando Fluxo Irregular                              |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0196 | V0001         | O valor solicitado não é válido                                                                      |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0196 | V0002         | Formato de cálculo inválido                                                                          |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0196 | V0003         | É necessário o produto                                                                             |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0196 | V0004         | Prazo inválido ou não localizado para este Produto x Rede                                           |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0196 | V0005         | Não é possível aprovar a proposta. Produto x Rede x Parcela não possui juros configurado           |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0196 | V0006         | Configuração deve ser enviada para proposta HotMoney                                                 |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0196 | V0007         | Produto Rotativo e HotMoney aceitam apenas formato de cálculo com juros                             |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0196 | V0008         | Formato de Cálculo não informado                                                                    |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0017 | V0001         | Produto não configurado para esta integração                                                          |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0017 | V0002         | Tipo Pessoa deve ser 1-PF ou 2-PJ                                                                    |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0017 | V0003         | Prazo não configurado para o produto                                                                 |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0197 | V0001         | O valor solicitado não é válido                                                                      |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0197 | V0002         | Formato de cálculo não é permitido                                                                   |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0197 | V0003         | Produto não utiliza método SAC                                                                       |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0197 | V0004         | É necessário o produto                                                                             |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0197 | V0005         | Prazo inválido ou não localizado para este Produto x Rede                                           |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0197 | V0006         | Não é possível aprovar a proposta. Produto x Rede x Parcela não possui juros configurado           |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0197 | V0007         | Taxa deve ser de `{percJuros}`                                                                         |
+| Proposta | CalculaGridParcelasSimplificadoPrice | CalcularGridParcelasSimplificadoPrice | C0197 | V0008         | TAC deve ser de `{VlrTAC}`                                                                           |
+</Expandable>

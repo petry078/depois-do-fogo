@@ -1,0 +1,335 @@
+---
+title: 'Eventos da Dataprev'
+version: 'Português'
+---
+
+## Configuração
+
+Para implementar os serviços do **E-Consignado Trabalhador**, é necessário que o parceiro configure uma URL para o recebimento dos eventos de callback. 
+
+Nesta etapa, o parceiro precisa configurar:
+
+1. Uma URL para recebimento dos callbacks;
+2. Essa URL precisa ter um ambiente de homologação e um de produção;
+3. A URL precisa ser desenvolvida para receber requisições do tipo `POST`;
+4. Um método de autenticação aceito pela BMP.
+
+Após configurar a URL de callback (homologação e produção), utilize o método HTTP `POST` para receber as notificações de callback e defina qual o método de autenticação deve ser utilizado.
+
+O parceiro deve informar qual método de autenticação foi utilizado para o time de integração da BMP, para que essa configuração seja parametrizada na BMP.
+
+Acompanhe, abaixo, os detalhes técnicos de cada uma dessas configurações.
+
+## 1. URL
+
+O parceiro precisa desenvolver uma URL de callback e enviá-la para a BMP.
+
+Essa URL será utilizada para a comunicação entre o parceiro e a BMP, atavés de eventos de callback.
+
+<Info>Veja os exemplos de URL no próximo passo, abaixo.</Info>
+
+## 2. Ambientes
+
+O callback para acompanhamento dos status das propostas deve ser enviado tanto para o ambiente de homologação quanto para o ambiente de produção. 
+
+Recomenda-se que sejam utilizadas URLs diferentes para cada ambiente.
+
+### 2.1 Exemplos de URL de homologação
+
+```json
+www.exemplo-de-url-de-homologacao.com.br
+```
+
+### 2.2 Exemplos de URL de produção
+
+```json
+www.exemplo-de-url.com.br
+```
+
+## 3. Método de chamada
+
+O método HTTP de chamada dos eventos da Dataprev é `POST`.
+
+## 4. Autenticação
+
+É necessário, também, que o parceiro defina um método de autenticação para recebimentos dos callbacks.
+
+Opções disponíveis incluem: 
+
+| Método de autenticação                        | Tipo da chave    | Exemplo de token                     |
+|-----------------------------------------------|------------------|--------------------------------------|
+| Bearer Token                                  | Authorization    | `Bearer eyJhbGciOiJIUzI1CI6IkpXVCJ9` |
+| API Key                                       | API-Key          | `1234567890abcdef1234567890abcdef`   |
+| Basic Authentication                          | Authorization    | `Basic dXNlcm5hbWU6cGFzc3dvcmQ`      |
+| X-API-Key                                     | X-API-Key        | `0987654321fedcba0987654321fedcba`   |
+| JWT (JSON Web Token)                          | Authorization    | `Bearer eyJhbGciOiJIUzI1NiIs`        |
+| HMAC (Hash-based Message Authentication Code) | Authorization    | `HMAC 5d41402abc4b19d911017c592`     |
+
+<Warning>Em todos os métodos de autenticação aceitamos chaves com até 255 caracteres.</Warning>
+
+## Eventos
+
+Para utilizar as APIs do **E-Consignado Trabalhador**, o parceiro deve configurar uma URL de callback pública para comunicação com a **BMP**. 
+
+Essa URL deve receber requisições do tipo `POST` e estar preparada para processar diferentes payloads, conforme o tipo de evento.
+
+A cada interação do parceiro com a API do **E-Consignado Trabalhador**, a **BMP** retornará um evento na URL de callback do parceiro.
+
+Todas os eventos de notificação por callback do **E-Consignado Trabalhador** possuem os seguintes campos: 
+
+* `codigoRequisicao`: identificador único da requisição que resultou neste callback. Será enviado como resposta síncrona na requisição do endpoint da API e na resposta assíncrona com o callback;
+* `endpoint`: corresponde ao endpoint da DATAPREV que foi realizada a requisição;
+* `payload`: o conteúdo do payload é idêntico ao retorno da requisição feita nas APIs da **DATAPREV**.
+
+## Evento de nova solicitação feita na CTPS
+
+Notificação periódica, enviada conforme identificação de novas solicitações feitas no aplicativo da CTPS.
+
+<Expandable title="Exemplo de Callback">
+
+```json
+{
+    "codigoRequisicao": "d6b6fdc1-5e3b-4e07-88d9-3b2f0416f734",
+    "endpoint": "/propostas-ctps/solicitacoes-trabalhador",
+    "payload": {
+        "idSolicitacao": 30697303,
+        "cpf": 99971503336,
+        "matricula": "MATCEN715",
+        "inscricaoEmpregador": {
+            "codigo": 1,
+            "descricao": "CNPJ"
+        },
+        "numeroInscricaoEmpregador": 42422253000101,
+        "valorLiberado": 1500,
+        "nroParcelas": 10,
+        "dataHoraValidadeSolicitacao": "01042025153522",
+        "nomeTrabalhador": "nome do trabalhador",
+        "dataNascimento": "13031982",
+        "margemDisponivel": 3230,
+        "elegivelEmprestimo": true,
+        "dataAdmissao": "13032005"
+    }
+}
+```
+
+Tabela de referência para o campo `inscricaoEmpregador`:
+
+| Código | Descrição |
+|--------|-----------|
+| 1      | CNPJ      |
+| 2      | CPF       |
+
+</Expandable>
+
+## Evento de atualização de situação de proposta
+
+Após a inclusão da proposta, essa notificação de atualização de situação de proposta é enviada para informar a posição do parceiro no leilão.
+
+<Expandable title="Exemplo de callback">
+
+```json
+{
+  "codigoRequisicao": "d6b6fdc1-5e3b-4e07-88d9-3b2f0416f734",
+  "endpoint": "/contrato/oferta-leilao/incluir-proposta",
+  "payload": {
+    "status": "Enviada",
+    "proposta": {
+      "numeroProposta": 0,
+      "valorCETAnual": 0,
+      "valorCETMensal": 0,
+      "valorEmprestimo": 0,
+      "valorIOF": 0,
+      "valorParcela": 0,
+      "valorTaxaAnual": 0,
+      "valorTaxaMensal": 0
+    }
+  }
+}
+```
+
+</Expandable>
+
+## Evento de geração de CCB
+
+Após a requisição de gerar contrato, a BMP irá gerar a **Cédula de Crédito Bancário (CCB)** e enviar o callback com os dados do contrato. Neste evento, o número da CCB e o código da proposta são enviados, para impressão do documento.
+
+<Expandable title="Exemplo de callback">
+
+```json
+{  
+  "codigoRequisicao": "d6b6fdc1-5e3b-4e07-88d9-3b2f0416f734",
+  "endpoint": "/contrato/oferta-ativa/gerar-contrato", //Para Contratação Ativa: /contrato/oferta-ativa. Para Leilão: /contrato/oferta-leilao.
+  "payload": {
+    "numeroCCB": 0,
+    "codigoProposta": "string", // GUID PARA IMPRESSÃO DA CCB
+    "valorCETAnual": 0,
+    "valorCETMensal": 0,
+    "valorEmprestimo": 0,
+    "valorIOF": 0,
+    "valorParcela": 0,
+    "valorTaxaAnual": 0,
+    "valorTaxaMensal": 0
+    }
+}
+```
+
+</Expandable>
+
+## Evento de averbação de empréstimo
+
+Embora não exista um endpoint de averbação neste projeto, a BMP precisa fazer a averbação na DATAPREV antes do envio dos documentos.
+
+<Expandable title="Exemplo de callback">
+
+```json
+{
+  "CodigoRequisicao": "befa338a-fa4b-4778-9e80-d6b604a5d938",
+  "Endpoint": "/contrato/oferta-ativa/averbar-contrato",
+  "Payload": {
+    "Mensagem": "Contrato N°5063297 incluído com sucesso na DATAPREV"
+  }
+}
+```
+
+</Expandable>
+
+## Evento de consulta de lista de vínculos empregatícios
+
+Este evento é enviado após a requisição de consulta de lista de vínculos com os vínculos empregatícios que o trabalhador possui.
+
+<Expandable title="Exemplo de callback">
+
+```json
+{
+  "codigoRequisicao": "d6b6fdc1-5e3b-4e07-88d9-3b2f0416f734",
+  "endpoint": "/trabalhadores/listar-autorizados",
+  "payload": {
+    "vinculos": [
+      {
+        "cpf": 22222222222,
+        "matricula": "0002-SP",
+        "inscricaoEmpregador": {
+          "codigo": 1,
+          "descricao": "CNPJ"
+        },
+        "numeroInscricaoEmpregador": 66812038000177,
+        "elegivel": true
+      },
+      {
+        "cpf": 22222222222,
+        "matricula": "aa",
+        "inscricaoEmpregador": {
+          "codigo": 2,
+          "descricao": "CPF"
+        },
+        "numeroInscricaoEmpregador": 11111111111,
+        "elegivel": false,
+        "motivoInelegibilidade": {
+          "codigo": 3,
+          "descricao": "Valor de remuneração zerado"
+        }
+      }
+    ]
+  }
+}
+```
+
+Tabela de referência para o campo `inscricaoEmpregador`:
+
+| Código | Descrição |
+|--------|-----------|
+| 1      | CNPJ      |
+| 2      | CPF       |
+
+</Expandable>
+
+## Evento de consulta de dados de vínculo empregatício
+
+Este evento é enviado após a requisição de consulta de dados de vínculo com os detalhes de determinado vínculo do trabalhador.
+
+<Expandable title="Exemplo de callback">
+
+```json
+{
+    "codigoRequisicao": "d6b6fdc1-5e3b-4e07-88d9-3b2f0416f734",
+    "endpoint": "/trabalhadores/consultar-dados-trabalhador",
+    "payload": {
+        "cpf": 77777777777,
+        "matricula": "0002-SP",
+        "inscricaoEmpregador": {
+            "codigo": 1,
+            "descricao": "CNPJ"
+        },
+        "numeroInscricaoEmpregador": 49451375000167,
+        "nome": "Mateus Crocs Silva",
+        "sexo": {
+            "codigo": 1,
+            "descricao": "Masculino"
+        },
+        "dataNascimento": "29102001",
+        "codigoCategoriaTrabalhador": 101,
+        "elegivel": true,
+        "valorTotalVencimentos": 10000,
+        "valorBaseMargem": 5000,
+        "valorMargemDisponivel": 3500,
+        "dataAdmissao": "16122021",
+        "pessoaExpostaPoliticamente": {
+            "codigo": 0,
+            "descricao": "Pessoa Não Exposta Politicamente"
+        },
+        "nomeEmpregador": "Empregador Massa Extra 49451375000167",
+        "nomeMae": "Catarina Inclusao Massa Extra",
+        "paisNacionalidade": {
+            "codigo": 792,
+            "descricao": "TURQUIA"
+        },
+        "cbo": {
+            "codigo": 354815,
+            "descricao": "AGENTE DE VIAGEM"
+        },
+        "dataInicioAtividadeEmpregador": "02042020"
+    }
+}
+```
+
+</Expandable>
+
+<Info>
+
+Para mais detalhes quanto ao retorno da consulta de dados de um vínculo, acesse o documento [Autorização e Consulta de dados
+do trabalhador](https://bmp-docs-462219491253.s3.sa-east-1.amazonaws.com/termo-de-autorizacao-dataprev-e-consignado.pdf) da DATAPREV. Neste documento, você encontra as descrição de todos objetos que devem ser mapeados e podem estar neste retorno.
+
+</Info>
+
+<Info>
+
+Para os campos `código` e `descrição` da **Classificação Brasileira de Ocupações (CBO)**, leia a [referência do Governo Brasileiro](https://www.gov.br/trabalho-e-emprego/pt-br/assuntos/cbo/servicos/downloads/cbo2002_lista.pdf).
+
+</Info>
+
+## Evento de Cancelamento de Contrato
+
+Este evento é enviado após uma requisição de cancelar contrato.
+
+<Expandable title="Exemplo de callback">
+
+```json
+{
+  "CodigoRequisicao": "49d54200-d36c-41f1-aa33-9f31d1b33f52",
+  "Endpoint": "/contrato/cancelar",
+  "Payload": {
+    "Conteudo": {
+      "codigoSucesso": "BF",
+      "mensagem": "Exclusão efetuada com sucesso",
+      "numeroContrato": "5116731",
+      "hashOperacao": 945117342,
+      "competenciaExclusao": 202510,
+      "tipoOperacao": null
+    },
+    "Errors": [],
+    "HashOperacao": ""
+  }
+}
+```
+
+</Expandable>

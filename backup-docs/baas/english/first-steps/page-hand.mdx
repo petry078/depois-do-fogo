@@ -1,0 +1,55 @@
+---
+title: "Technical Procedure for Handshake"
+version: 'English'
+---
+
+<Warning>This technical procedure is only necessary when using the Baas (Banking as a Service) service.</Warning>
+
+## Introduction 
+The Handshake procedure is a crucial part of the security in transactions between BMP and its partners. The process involves exchanges of encrypted information and mutual authentication to establish secure communication.
+
+<Steps>
+  <Step title="Configuration in BMP">
+    In BMP, we configure the handshake in the specific tab in the partner's registration. The configurations include:
+    - **Active**: Whether the handshake is active.
+    - **Method**: HTTP method to be used.
+    - **URL**: URL of the partner's endpoint.
+    - **HMAC Key**: Secret key for message signing.
+    - **Headers**: Desired headers in the request.
+  </Step>
+  <Step title="HMAC Key Generation by the Partner">
+    The partner must generate a robust HMAC key, ideally with 128 characters, using advanced security recommendations. This key will be used to sign the messages and verify the signatures of the messages received from BMP.
+
+    [Generate HMAC Key](https://www.geradordesenha.com.br)
+  </Step>
+  <Step title="Definition of the Partner's Handshake Endpoint">
+    The partner must configure an HTTPS endpoint that accepts POST requests. The endpoint should respond within a standard timeout of 5 seconds to ensure efficiency in the handshake process. The necessary information includes:
+    - **URL** of the endpoint
+    - **HTTP Method**
+    - **Desired Headers**
+  </Step>
+  <Step title="Receiving and Responding to the Handshake">
+    During transactions that require a handshake, BMP will send a request to the configured endpoint containing the transaction details. The partner must verify the transaction using the HMAC key and respond accordingly:
+    - **200 OK**: If the transaction is recognized and validated.
+    - **404 Not Found**: If the transaction is not recognized.
+
+    Example body of the handshake request:
+    ```json
+    {
+      "TransactionType": "SendTED",
+      "TransactionDate": "2020-06-25",
+      "Amount": 45.99,
+      "SourceAccount": "account details",
+      "DestinationAccount": "destination account details"
+    }
+    ```
+    <Tip>
+    ***The JSON we send must not be modified in any way, and values should always be sent in decimal format. 
+      For example:  100.00 in decimal should be 100.0 and 100.10 in decimal should be 100.10.***
+    </Tip>
+  </Step>
+</Steps>
+
+## Final Considerations
+
+This Handshake procedure is vital to ensure that all transactions are conducted securely and authentically, protecting both BMP and its partners against fraud and other security vulnerabilities.

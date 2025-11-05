@@ -1,0 +1,22 @@
+---
+title: "28 - Vehicle Registration"
+openapi: post  /Proposta/IncluirDadosVeiculo
+version: 'English'
+---
+Through this endpoint, the partner includes vehicle data for a proposal.
+The vehicle must have a license plate provided, and other fields are optional. 
+The vehicle data is validated by our credit analysts and serves as a basis for approving or rejecting the proposal. The use will be according to the integration needs.
+
+**Rules and Validations:**
+- The same license plate cannot be included more than once in the proposal;
+- Alphanumeric fields will be truncated according to the size defined in the manual.
+
+<Expandable title="Mensageria">
+| Categoria | Operação                     | Ação                | Código  | Código Detalhado | Mensagem                                                                                                               |
+|-----------|------------------------------|---------------------|---------|------------------|------------------------------------------------------------------------------------------------------------------------|
+| Proposta  | IncluirPropostaDadosVeiculo  | IncluirDadosVeiculo | C0112  | V0001            | Proposta não encontrada                                                                                                |
+| Proposta  | IncluirPropostaDadosVeiculo  | IncluirDadosVeiculo | C0112  | V0002            | A Proposta não pertence à esta Integração                                                                              |
+| Proposta  | IncluirPropostaDadosVeiculo  | IncluirDadosVeiculo | T0680  | D0001            | Proposta não encontrada                                                                                                |
+| Proposta  | IncluirPropostaDadosVeiculo  | IncluirDadosVeiculo | T0680  | D0002            | Chassi já cadastrada nessa proposta                                                                                    |
+| Proposta  | IncluirPropostaDadosVeiculo  | IncluirDadosVeiculo | T0680  | D0003            | Codigo identificador já cadastrado nessa proposta                                                                      |
+</Expandable>

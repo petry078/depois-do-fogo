@@ -1,0 +1,413 @@
+---
+title: 'Leilão'
+version: 'Português'
+---
+
+Na modalidade **Leilão**, o trabalhador solicitante do crédito realiza uma simulação no aplicativo da **Carteira de Trabalho Digital**. A **BMP** realiza um leilão entre parceiros internos e escolhe a melhor proposta para cobrir a simulação.
+
+A proposta vencedora é enviada para o trabalhador. Durante um período de 24 horas, o trabalhador escolhe a proposta vencedora. Após a sua seleção, o parceiro assinará o contrato junto com o trabalhador, e a proposta será averbada pela Dataprev. Após a averbação, a BMP desembolsa o crédito para o trabalhador.
+
+A comunicação de cada etapa do processo é realizada via notificações pela API de callbacks.
+
+<Note>O leilão interno tem duração de 1 minuto. Se nenhuma proposta for enviada dentro do período do leilão, consideraremos a primeira proposta enviada posteriormente.</Note>
+
+Neste documento, você encontra a sequência de endpoints necessários para participar do Leilão.
+
+Para a Dataprev há 3 conceitos que são diferentes do que usamos na BMP:
+
+* Solicitação(idSolicitacao/numeroSolicitacao) - Solicitação do trabalhador feita na CTPS. É o ponto de partida para o fluxo do modelo leilão;
+* Proposta(numeroProposta) - Proposta da IF para a solicitação acima. Leia-se como “orçamento”, pois fazer uma proposta no leilão não quer dizer que foi gerada uma proposta/numeroCCB no sistema BMP;
+* Contrato(numeroContrato) - Originado após requisição em gerar-contrato. Neste momento sim que existe uma proposta/numeroCCB no sistema BMP.
+
+Sendo assim, não considere este numeroProposta como um número de CCB, pois é apenas o identificador da proposta/orçamento para esta solicitação, mas não é uma proposta que existe no sistema de crédito para assinatura, por este motivo é necessária a requisição em gerar-contrato. 
+
+## Requisições e uso da API
+
+### 1. Realizar Proposta
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Assíncrona</span>
+
+Essa é a primeira requisição necessária para participar do Leilão. Após receber o [callback de Nova Solicitação Feita na CTPS](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/procedimento-tecnico-de-callback/eventos-da-dataprev#evento-de-nova-solicita%C3%A7%C3%A3o-feita-na-ctps). 
+
+O parceiro deve enviar sua proposta para participar do leilão interno, através do endpoint abaixo. 
+
+Utilize essa requisição para enviar a proposta para a BMP e participar do leilão interno.
+
+<Expandable title="Exemplo de Requisição">
+
+```json
+curl --request POST --location 'https://econsignadotrabalhador.moneyp.dev.br/contrato/oferta-leilao/incluir-proposta' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+ "numeroSolicitacao": "1", // Obrigatório. "idSolicitacao" do evento de nova solicitação feita na CTPS
+ "dataHoraValidadeProposta": "ddMMyyyyHHmmss", // Obrigatório
+ // Tipo URL é obrigatório
+ "contatos": [
+  {
+   "contato": "https://moneyp.com.br/",
+   "tipo": 0
+  },
+  {
+   "contato": "<telefone de contato>?text=<texto url encoded>",
+   "tipo": 1
+  },
+  {
+   "contato": "40038389",
+   "tipo": 2
+  },
+  {
+   "contato": "atendimento@moneyp.com.br",
+   "tipo": 3
+  }
+ ],
+ "valorLiberado": 9000, // Obrigatório
+ "numeroParcelas": 24, // Obrigatório
+ "valorTaxaMensal": 3.75 // Obrigatório
+}'
+```
+
+Tabela de referência do campo `contatos`:
+
+| Código | Descrição |
+|--------|-----------|
+| 0      | URL       |
+| 1      | WhatsApp  |
+| 2      | Telefone  |
+| 3      | E-mail    |
+
+</Expandable>
+
+<Expandable title="Exemplo de Notificação por Callback">
+
+Após o envio desta requisição, o parceiro deve aguardar o callback de **Atualização de Situação de Proposta**, acesse o exemplo deste callback no documento [Configuração da URL de Callback - Evento de Atualização de Situação de Proposta](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/procedimento-tecnico-de-callback/eventos-da-dataprev#evento-de-atualiza%C3%A7%C3%A3o-de-situa%C3%A7%C3%A3o-de-proposta).
+
+</Expandable>
+
+### 2. Consultar Lista de Vínculos do Trabalhador
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Assíncrona</span>
+
+Após receber o callback de **Atualização da Situação da Proposta** (recebido após a requisição do passo anterior), o parceiro deve consultar os vínculos empregatícios do trabalhador. 
+
+Utilize este endpoint para consultar a lista de vínculos empregatícios do trabalhador, o retorno será:
+
+* O **código de inscrição do empregador** (1 para CNPJ e 2 para CPF);
+* O **número de inscrição do empregador** ([majoritariamente o CNPJ raiz do empregador](https://docs.dataprev.gov.br/wp-content/uploads/2025/04/Manual-de-Comunicacao-002-Autorizacao-e-consulta-do-trabalhador-%E2%80%93-Credito-Trabalhador.pdf));
+* O **número de matrícula do trabalhador** e a **elegibilidade do vínculo**.
+
+<Note>Essa requisição é **opcional** para a contratação do Leilão.</Note>
+
+<Warning>Na primeira consulta de cada trabalhador, é necessário que o parceiro envie uma **autorização** de consulta de dados do trabalhador.</Warning>
+
+<Expandable title="Exemplo de Requisição">
+
+<Note>Quando o valor do campo `consultaCacheada` for `false`, a requisição consultará os dados do tabalhador diretamente na **Dataprev**; quando for `true`, o dado será obtido do cache da BMP, que tem duração de 24 horas. Este campo não é obrigatório, caso não seja informado, o sistema assume o valor `false` como padrão.</Note>
+
+```json
+curl --location --request POST 'https://econsignadotrabalhador.moneyp.dev.br/trabalhador/listar-autorizados' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+    "cpfTrabalhador": "string",
+    "consultaCacheada": false,
+    "autorizacao": {
+          "nsuAutorizacaoDigital": 0
+    }
+}'
+```
+
+</Expandable>
+
+<Expandable title="Exemplo de Notificação por Callback">
+
+Após o envio desta requisição, o parceiro deve aguardar o callback de **Consulta de Lista de Vínculos Empregatícios**, acesse o exemplo deste callback no documento [Configuração da URL de Callback - Evento de Consulta de Lista de Vínculos Empregatícios](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/procedimento-tecnico-de-callback/eventos-da-dataprev#evento-de-consulta-de-lista-de-v%C3%ADnculos-empregat%C3%ADcios).
+
+</Expandable>
+
+### 3. Consultar Dados do Vínculo do Trabalhador
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Assíncrona</span>
+
+Após receber o callback de **Consulta de Lista de Vínculos Empregatícios** (recebido após a requisição do passo anterior), o parceiro deve consultar os dados do vínculo do trabalhador. 
+
+Utilize este endpoint para consultar o **valor da base de margem**, **margem disponível**, **elegibilidade do vínculo** e outras informações para **análise de crédito**.
+
+<Note>Essa requisição é **opcional** para a contratação do Leilão.</Note>
+
+<Warning>Na primeira consulta de cada trabalhador, é necessário que o parceiro envie uma **autorização** de consulta de dados do trabalhador.</Warning>
+
+<Expandable title="Exemplo de Requisição">
+
+<Note>Quando o valor do campo `consultaCacheada` for `false`, a requisição consultará os dados do tabalhador diretamente na **Dataprev**; quando for `true`, o dado será obtido do cache da BMP, que tem duração de 24 horas. Este campo não é obrigatório, caso não seja informado, o sistema assume o valor `false` como padrão.</Note>
+
+```json
+curl --location --request POST 'https://econsignadotrabalhador.moneyp.dev.br/trabalhador/consultar-dados-vinculo' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+  "cpfTrabalhador": "string",
+  "matricula": "string",
+  "codigoInscricaoEmpregador ": 0,
+  "numeroInscricaoEmpregador": "string",
+  "consultaCacheada": false,
+  "autorizacao": {
+    "nsuAutorizacaoDigital": 0
+  }
+}'
+```
+
+</Expandable>
+
+<Expandable title="Exemplo de Notificação por Callback">
+
+Após o envio desta requisição, o parceiro deve aguardar o callback de **Consulta de Dados de Vínculo Empregatício**, acesse o exemplo deste callback no documento [Configuração da URL de Callback - Evento de Consulta de Dados de Vínculo Empregatício](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/procedimento-tecnico-de-callback/eventos-da-dataprev#evento-de-consulta-de-dados-de-v%C3%ADnculo-empregat%C3%ADcio).
+
+</Expandable>
+
+### 4. Cadastrar Trabalhador
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Síncrona</span>
+
+Após receber o callback de **Consulta de Dados de Vínculo Empregatício** (recebido após a requisição do passo anterior), o parceiro deve cadastrar os dados do trabalhador no sistema da BMP. 
+
+Utilize o endpoint abaixo para realizar esse cadastro.
+
+<Expandable title="Exemplo de Requisição">
+
+```json
+curl --location 'https://econsignadotrabalhador.moneyp.dev.br/trabalhador/cadastrar-vinculo' \
+--header 'Content-type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data-raw '{
+  "cpf": "string", // OBRIGATÓRIO
+  "matricula": "string", // OBRIGATÓRIO
+  "codigoInscricaoEmpregador": 1, // OBRIGATÓRIO 1 para CNPJ e 2 para CPF
+  "numeroInscricaoEmpregador": "string", // OBRIGATÓRIO
+  "nomeEmpregador": "string", // OBRIGATÓRIO
+  "nome": "string", // OBRIGATÓRIO
+  "sexo": "M", //Somente 1 caractere: M para Masculino e F para Feminino
+  "dataNascimento": "dd-MM-yyyy", // OBRIGATÓRIO
+  "codigoCategoriaTrabalhador": 0, // OBRIGATÓRIO
+  "elegivel": true, // OBRIGATÓRIO
+  "valorTotalVencimentos": 0, // OBRIGATÓRIO
+  "valorBaseMargem": 0, // OBRIGATÓRIO
+  "valorMargemDisponivel": 0, // OBRIGATÓRIO
+  "dataAdmissao": "dd-MM-yyyy", // OBRIGATÓRIO
+  "pessoaExpostaPoliticamente": 0, // OBRIGATÓRIO
+  "nomeMae": "string",
+  "paisNacionalidade": "string",
+  "cboDescricao": "string",
+  "dadosContato": {
+    "email": "string", // OBRIGATÓRIO
+    "telefoneFixo1": "string", 
+    "telefoneCelular1": "string" // OBRIGATÓRIO
+  },
+  "dadosComplementares": {
+    "rg": "string",
+    "rgOrgao": "string",
+    "rguf": "string",
+    "estadoCivil": 0
+  },
+  "endereco": { 
+    "cep": "string", // OBRIGATÓRIO
+    "logradouro": "string", // OBRIGATÓRIO
+    "nroLogradouro": "string", 
+    "bairro": "string", // OBRIGATÓRIO
+    "complemento": "string",
+    "cidade": "string", // OBRIGATÓRIO
+    "uf": "string" // OBRIGATÓRIO
+  }
+}'
+```
+
+</Expandable>
+
+A resposta dessa requisição é síncrona. O parceiro receberá a resposta imediatamente após o envio da requisição.
+
+### 5. Cadastro do Empregador
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Síncrona</span>
+
+O empregador foi cadastrado na requisição anterior, utilizando os campos `numeroInscricaoEmpregador` e `nomeEmpregador`. Caso queira atualizar ou adicionar mais detalhes do empregador, utilize o endpoint abaixo.
+
+<Info>Esta requisição tem resposta **síncrona**.</Info>
+
+<Note>Essa requisição é **opcional** para a contratação do Leilão.</Note>
+
+<Expandable title="Exemplo de Requisição">
+
+```json
+curl --location 'https://econsignadotrabalhador.moneyp.dev.br/trabalhador/cadastrar-empregador' \
+--header 'Content-type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data-raw '{
+  "nome": "string", // Obrigatório. Igual retorno da consulta do vínculo.
+  "codigoInscricaoEmpregador": 0, // Obrigatório. Igual retorno da consulta do vínculo(1-CNPJ e 2-CPF)
+  "numeroInscricaoEmpregador": "string", // Obrigatório. Igual retorno da consulta do vínculo.
+  "dadosContato": {
+    "email": "string",
+    "telefoneFixo1": "string",
+    "telefoneCelular1": "string"
+  },
+  "endereco": {
+    "cep": "string",
+    "logradouro": "string",
+    "nroLogradouro": "string",
+    "bairro": "string",
+    "complemento": "string",
+    "cidade": "string",
+    "uf": "string"
+  }
+}'
+```
+
+</Expandable>
+
+A resposta dessa requisição é síncrona. O parceiro receberá a resposta imediatamente após o envio da requisição.
+
+### 6. Gerar Contrato do Trabalhador
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Assíncrona</span>
+
+Após o aceite da proposta no aplicativo da **CTPS**, o trabalhador irá entrar em contato por meio de um dos canais informados no endpoint `/contrato/oferta-leilao/incluir-proposta`. 
+
+Utilize o endpoint `/contrato/oferta-leilao/gerar-contrato` para gerar o documento **Cédula de Crédito Bancário (CCB)** do **E-Consignado Trabalhador**. 
+
+<Warning>Após a geração do contrato, este documento deve ser assinado com a biometria facial do trabalhador e enviado no endpoint `/contrato/oferta-leilao/averbar-contrato` dentro do prazo da competência correspondente. Se o contrato for enviado após a competência, deverá ser gerado, assinado e enviado novamente.</Warning>
+
+<Warning>O trabalhador e o empregador devem ter sido previamente cadastrados, e, neste modelo, é obrigatória a consulta da margem disponível para o vínculo do trabalhador que será utilizado para o empréstimo consignado. Haverá a validação do valor da parcela do contrato sendo gerado com o valor da margem disponível, conforme o resultado da consulta do vínculo — caso a consulta esteja em cache (com duração de 24 horas).</Warning>
+
+<Expandable title="Exemplo de Requisição">
+
+```json
+curl --request POST --location 'https://econsignadotrabalhador.moneyp.dev.br/contrato/oferta-leilao/gerar-contrato' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+    "numeroSolicitacao": "30682694",
+    "valorLiberado": 9000, // Preencha apenas um campo (valorLiberado ou valorParcelas), conforme feito na simulação 
+    "valorParcela": null, // Preencha apenas um campo (valorLiberado ou valorParcelas), conforme feito na simulação
+    "numeroParcelas": 24,
+    "valorTaxaMensal": 3.75,
+    "valorSeguro": 0,
+    "numeroApolice": "string", // Obrigatório se valorSeguro for preenchido
+    "tipoContrato": "GER",
+    "propostaContaPagamento": {
+        "tipoConta": 0,
+        "agencia": "stri",
+        "agenciaDig": "s",
+        "conta": "string",
+        "contaDig": "s",
+        "numeroBanco": "string"
+    }
+}'
+```
+
+| Código | Descrição      |
+|--------|----------------|
+| 1      | Poupança       |
+| 2      | Conta Corrente |
+
+</Expandable>
+
+<Expandable title="Exemplo de Notificação por Callback">
+
+Após o envio desta requisição, o parceiro deve aguardar o callback de **Geração de CCB**, acesse o exemplo deste callback no documento [Configuração da URL de Callback - Evento de Geração de CCB](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/procedimento-tecnico-de-callback/eventos-da-dataprev#evento-de-gera%C3%A7%C3%A3o-de-ccb).
+
+</Expandable>
+
+### 7. Assinar CCB
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Síncrona</span>
+
+Após a geração do contrato, o trabalhador deve assinar o documento **Cédula de Crédito Bancário (CCB)** com a **biometria facial**.
+
+<Info>A assinatura da CCB do trabalhador deve ser realizada pelo parceiro, utilizando um **serviço de assinatura com biometria facial**.</Info>
+
+Utilize o endpoint abaixo para **imprimir a CCB**.
+
+```
+https://reports.moneyp.dev.br/ImprimirCCB?Code={{CODIGO_PROPOSTA}}&Integracao={{CODIGO_INTEGRACAO}}
+```
+
+O valor do parâmetro `code` é o `CodigoProposta`, que é retornado na resposta assíncrona do endpoint `/contrato/oferta-leilao/gerar-contrato`. 
+
+O código de integração é será informado ao parceiro na entrega das credenciais de homologação e produção. 
+
+Os padrões de assinatura eletrônica aceitos são as **Assinaturas Eletrônicas Avançadas**, conforme definido pela **Lei 14.063/2020**. 
+
+Para validação biométrica, são aceitas as bases do **Tribunal Superior Eleitoral (TSE)**, **Secretaria Nacional de Trânsito (DENATRAN)**, **Serviço Federal de Processamento de Dados (SERPRO)** e **Identidade Eletrônica do Registro Civil (IDRC)**. 
+
+A biometria facial deve atender a requisitos de garantia de vivacidade (*liveness*), conforme os padrões **IEEE Std 2790-2020**, **ISO/IEC 30107-3** e **ISO/IEC 29794-5**. 
+
+<Note>Caso não haja biometria disponível em bases governamentais, é possível utilizar a validação com a foto de um documento oficial. A biometria capturada deve ser utilizada exclusivamente para o processo de assinatura e não pode ser reutilizada. Durante a captura biométrica, é necessário informar ao trabalhador a finalidade da captura e a possibilidade de uso dos dados pelo **MTE/DATAPREV** para auditorias e apurações.</Note>
+
+Com a CCB assinada pelo trabalhador, siga com a inclusão da CCB assinada com biometria facial no próximo passo. A resposta dessa requisição é síncrona. O parceiro receberá a resposta imediatamente após o envio da requisição.
+
+### 8. Incluir CCB Assinada
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Assíncrona</span>
+
+Após a assinatura da CCB, no passo anterior, utilize o endpoint `/contrato/oferta-leilao/averbar-contrato` para incluir as informações do contrato do trabalhador. 
+
+Com a inclusão da CCB assinada, o empréstimo será averbado na **DATAPREV**. Após essa inclusão, o empréstimo estará liberado para fila de pagamento.
+
+<Expandable title="Exemplo de Requisição">
+
+```json
+curl --request POST --location 'https://econsignadotrabalhador.moneyp.dev.br/contrato/oferta-leilao/averbar-contrato' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+    "contratoEmprestimo": "Arquivo PDF da CCB assinado em base64", //OBRIGATÓRIO
+    "dataHoraAssinatura": "dd-MM-yyyy hh:mm", //OBRIGATÓRIO
+    "ip": "string", //OBRIGATÓRIO
+    "numeroContrato": "string", //OBRIGATÓRIO
+    "tipoDocumento" : 0, //1 para RG e 2 para CNH
+    "documentoOficialComFotoFrente": "Arquivo JPG da frente do documento em base64",
+    "documentoOficialComFotoVerso": "Arquivo JPG do verso do documento em base64",
+    "registroBiometricoFacial": "Arquivo JPG do registro biométrico facial em base64", //OBRIGATÓRIO
+    "baseBiometrica": "string", 
+    "score": 0,
+    "indicadorValidacaoComDocOficial": "<boolean>", //OBRIGATÓRIO
+    "latitude": 0,
+    "longitude": 0,
+    "dispositivo": "string"
+}'
+```
+
+</Expandable>
+
+<Tip>
+
+Caso o campo `indicadorValidacaoComDocOficial` seja `true`, os seguintes campos se tornam obrigatórios:
+
+* `documentoOficialComFotoFrente`;
+* `documentoOficialComFotoVerso`;
+* `tipoDocumento`.
+
+Caso o campo `indicadorValidacaoComDocOficial` seja `false`, os seguintes campos se tornam obrigatórios: 
+
+* `baseBiometrica`;
+* `score​`.
+
+</Tip>
+
+<Expandable title="Exemplo de Notificação por Callback">
+
+Após o envio desta requisição, o parceiro deve aguardar o callback de **Averbação de Empréstimo**, acesse o exemplo deste callback no documento [Configuração da URL de Callback - Evento de Averbação de Empréstimo](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/procedimento-tecnico-de-callback/eventos-da-dataprev#evento-de-averba%C3%A7%C3%A3o-de-empr%C3%A9stimo).
+
+</Expandable>
+
+## Endpoints e Documentos Auxiliares
+
+Para esta jornada, é muito importante que o parceiro conheça o [Procedimento Técnico de Callbacks do E-Consignado Trabalhador](https://bmpdocs.moneyp.com.br/e-consignado/procedimento-tecnico-de-callback/introducao) e tenha uma URL de callbacks configurada.
+
+Também podem ser úteis os seguintes endpoints do CaaS:
+
+* [28 - Consultar Contrato](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/gestao-de-propostas/28-consultar): utilizado nesta jornada para consultar os dados da proposta;
+* [38 - Consultar Comprovante de Pagamento](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/impressao-documentos/38-comprovante-de-pagamento): utilizado nesta jornada para consultar o comprovante de pagamento da proposta;
+* [11 - Cancelar Contrato](https://bmpdocs.moneyp.com.br/e-consignado/referencias-de-api/contrato/11-cancelar-contrato): utilizado nesta jornada para cancelar contratos;
+* [12 - Atualizar Dados Bancários](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/referencias-de-api/contrato/12-atualizar-dados-bancarios): utilizado nesta jornada para atualizar dados bancários de um contrato;
+* [Consulta de Escrituração e Repasse](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/casos-de-uso/consulta-de-escrituracao-e-repasse): utilizado nesta jornada para consultar Escriturações e Repasses, no contexto da integração entre instituições financeiras e o sistema do eSocial.

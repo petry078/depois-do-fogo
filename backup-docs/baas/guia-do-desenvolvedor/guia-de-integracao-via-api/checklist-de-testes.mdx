@@ -1,0 +1,139 @@
+---
+title: "Checklist de Testes"
+version: 'Português'
+---
+
+## Introdução
+
+Este checklist de testes foi projetado para garantir que todos os aspectos do sistema estejam funcionais e seguros antes de entrar no ambiente de produção. As seguintes etapas devem ser completadas para assegurar a integridade e a operacionalidade das soluções BMP.
+
+<Warning>
+Esse checklist é obrigatório para entrada em produção.
+</Warning>
+
+<Steps>
+  <Step title="Implantação do TOKEN">
+    Realizar a implantação especificamente do modelo de Token por endpoint. Este passo é crucial para garantir a segurança das transações.
+  </Step>
+  <Step title="Cadastro e encerramento de Conta">
+    Efetuar o processo de cadastro de quatro contas para testar a funcionalidade de criação de contas no sistema incluindo encerramento de conta.
+  </Step>
+  <Step title="Consulta de Extrato">
+    Efetuar o procedimento de consulta de saldo para verificar a precisão das transações registradas
+  </Step>
+  <Step title="Atualização de Correntista">
+    Processar a atualização das informações da conta para verificar a flexibilidade e robustez do sistema de gestão de contas.
+  </Step>
+  <Step title="Transferências">
+    Executar a transferência de valores para as quatro contas criadas, utilizando o processo de Handshake e HMAC para validar a segurança das transações.
+  </Step>
+  <Step title="TED">
+    Realizar uma transferência TED e confirmar que o procedimento foi executado com sucesso.
+  </Step>
+  <Step title="Comprovante">
+    Realizar a consulta de dois comprovantes para testar a funcionalidade de geração e envio de comprovantes.
+  </Step>
+  <Step title="Cedente">
+    Executar a criação de um cedente e vinculá-lo a uma carteira de cobrança para que posteriormente realizem a emissão de boletos com êxito.
+  </Step>
+  <Step title="Boleto">
+    Executar o processo de geração de um boleto e posteriormente efetuar um pagamento, validando assim os processos de emissão e liquidação de boletos. Sendo possível também realizar consultas e cancelamento de registros.
+  </Step>
+  <Step title="Boletos outros Bancos">
+    Executa a consulta de boletos registrados em outras instituições além dos boletos registrados na BMP.
+  </Step>
+  <Step title="Protesto">
+    Executa a consulta de boletos registrados em outras instituições além dos boletos registrados na BMP.
+  </Step>
+  <Step title="Arquivos CNAB">
+    Realizar o envio de um arquivo CNAB contendo boletos e outro com TEDs, executar o processamento desses arquivos e verificar o retorno dos pagamentos para testar a integração com sistemas bancários externos.
+      </Step>
+  <Step title="Processos relacionados ao PIX">
+    - Executar o processo de geração de chaves PIX (CPF/CNPJ, e-mail, telefone, chave aleatória).
+    - Solicitar MFA para criação de chave PIZ (Telefone ou e-mail)
+    - Consultar uma chave PIX externa.
+    - Executar o processo de geração de QRCode (Estático, Dinâmico e de Cobrança)
+    - Realizar leitura de QRCode.
+    - Realizar a transferência PIX por chave e dados bancários utilizando Handshake e HMAC.
+    - Executar a devolução de um PIX recebido e fazer a exclusão de uma chave PIX.
+  </Step>
+</Steps>
+
+
+## Testes e Validações
+
+---
+
+| **EXECUÇÕES**                 | **ANOTAÇÕES**                                                                                  | **ORIENTAÇÕES**                                                                                                                                                                                                         |
+|-------------------------------|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Implantação de Token**          | Implantar modelo de Token                                                                     |                                                                                                                                                                                                                         |
+| **Cadastro e encerramento de conta** | Efetuar processo de cadastro de conta. Gerar 4 contas                                       |                                                                                                                                                                                                                         |
+|                               | Consultar conta por Documento                                                                 |                                                                                                                                                                                                                         |
+|                               | Cancelar encerramento de conta                                                                |                                                                                                                                                                                                                         |
+|                               | Consultar solicitação de encerramento                                                        |                                                                                                                                                                                                                         |
+|                               | Solicitar encerramento de conta                                                              |                                                                                                                                                                                                                         |
+| **Consulta de Extrato**           | Consultar extrato                                                                             |                                                                                                                                                                                                                         |
+|                               | Consultar saldo                                                                               |                                                                                                                                                                                                                         |
+| **Atualização de correntista**    | Atualizar dados do correntista                                                                |                                                                                                                                                                                                                         |
+| **Transferências Entre contas**   | Realizar para as 4 contas criadas                                                            | Obrigatório utilizar a validação de Handshake e HMAC                                                                                                                                                                   |
+| **TED**                           | Realizar uma TED (solicite ao time de implantação uma conta para realizar a transação)                                                 | Obrigatório utilizar a validação de Handshake e HMAC.                                                                                                                       |
+| **Comprovante**                   | Realizar a consulta de dois comprovantes                                                     |                                                                                                                                                                                                                         |
+| **Cedente**                       | Cadastrar cedente                                                                            | É necessário para gerar um boleto, lembrando que após a criação do cedente precisam vincular o cedente a uma carteira no endpoint `/api/Cedente/AdicionarCarteira`                                                     |
+|                               | Consultar cedente                                                                             |                                                                                                                                                                                                                         |
+|                               | Adicionar carteira a um cedente                                                              | É necessário para gerar um boleto, lembrando que para obter sucesso neste endpoint é necessário realizar a criação do cedente no endpoint `/api/Cedente`                                                               |
+| **Boleto**                        | Pagamento Boleto                                                                             | Criado no ambiente de homologação 274                                                                                                                                                                                  |
+|                               | Registrar Boleto no Banco 274                                                                | Para obter sucesso na requisição necessário vincular um cedente a conta utilizando o endpoint `/api/Cedente` e vincular o cedente a uma carteira no endpoint `/api/Cedente/AdicionarCarteira` (número 1=Registro simples e 9= CNAB) |
+|                               | Consultar registro gerado no Banco 274                                                       | Qual a situação do boleto que está consultando                                                                                                                                                                         |
+|                               | Consultar Boletos registrados no Banco 274                                                  | Consulta todos os boletos que foram registrados abaixo do Documento Federal informado                                                                                                                                  |
+|                               | Cancelar registro                                                                            |                                                                                                                                                                                                                         |
+|                               | Consultar cancelamento                                                                       |                                                                                                                                                                                                                         |
+|                               | Alterar boleto                                                                               | O boleto precisa estar em aberto para obter sucesso no retorno                                                                                                                                                         |
+|                               | Consultar alterações                                                                         |                                                                                                                                                                                                                         |
+|                               | Consultar última alteração                                                                   |                                                                                                                                                                                                                         |
+| **Boleto (Outros Bancos)**        | Consultar Boletos de outros Bancos                                                          | Em homologação funcionará somente com boletos gerados em homologação                                                                                                                                                   |
+| **Protesto**                      | Consultar boletos protestáveis                                                              |                                                                                                                                                                                                                         |
+|                               | Solicitar protesto                                                                           |                                                                                                                                                                                                                         |
+|                               | Cancelamento do protesto                                                                     |                                                                                                                                                                                                                         |
+|                               | Solicitar Anuência                                                                           |                                                                                                                                                                                                                         |
+|                               | Consultar boletos protestados                                                               |                                                                                                                                                                                                                         |
+| **Arquivo CNAB**                  | Envio de CNAB com registro de boletos                                                       | CNAB 400                                                                                                                                                                                                               |
+|                               | Consultar Arquivos                                                                          | CNAB 400                                                                                                                                                                                                               |
+|                               | Baixar retorno dos registros                                                                | CNAB 400                                                                                                                                                                                                               |
+|                               | Consultar Arquivos                                                                          | CNAB 240                                                                                                                                                                                                               |
+|                               | Envio de CNAB pagamento                                                                     | CNAB 240- Boleto/TED/PIX                                                                                                                                                                                               |
+|                               | Retorno dos pagamentos                                                                      | CNAB 240                                                                                                                                                                                                               |
+|                               | Consultar Situação dos Logs                                                                 | CNAB 240 - Status do envio do arquivo                                                                                                                                                                                  |
+| **Chave (PIX)**                   | Gerar Chave CPF/CNPJ                                                                         |                                                                                                                                                                                                                         |
+|                               | Gerar Chave Aleatória                                                                        |                                                                                                                                                                                                                         |
+|                               | Gerar Chave E-mail                                                                          | Obrigatório o uso do endpoint `/api/Mfa/Solicitar` para obter sucesso na criação de chave                                                                                                                              |
+|                               | Gerar Chave Telefone                                                                        | Obrigatório o uso do endpoint `/api/Mfa/Solicitar` para obter sucesso na criação de chave                                                                                                                              |
+|                               | Solicitar MFA para SMS                                                                      |                                                                                                                                                                                                                         |
+|                               | Solicitar MFA para e-mail                                                                   |                                                                                                                                                                                                                         |
+|                               | Excluir Chave PIX                                                                           |                                                                                                                                                                                                                         |
+| **QRCode (PIX)**                  | Gerar QRCode Estático                                                                       |                                                                                                                                                                                                                         |
+|                               | Gerar QRCode Dinâmico                                                                       |                                                                                                                                                                                                                         |
+|                               | Gerar QRCode Cobrança                                                                       |                                                                                                                                                                                                                         |
+|                               | Ler QRCode                                                                                  |                                                                                                                                                                                                                         |
+| **Recurso (PIX)**                 | Realizar transferência PIX por Dados Bancários                                             | Obrigatório utilizar a validação de Handshake e HMAC                                                                                                                                                                   |
+|                               | Realizar transferência PIX por Chave                                                       | Obrigatório utilizar a validação de Handshake e HMAC (Para obter sucesso no teste é necessário consultar a chave no endpoint `/api/Chave/Consultar`)                                                                   |
+|                               | Realizar transferência PIX por QRCode                                                      | Obrigatório utilizar a validação de Handshake e HMAC (Para obter sucesso no teste é necessário realizar a leitura do QRCode no endpoint `/api/QRCode/Ler`)                                                             |
+|                               | Consultar chave PIX                                                                         | Obrigatório para uso do endpoint `/api/Recurso/Transferir` em caso de envio por chave PIX                                                                                                                              |
+|                               | Realizar devolução PIX recebido                                                            | `"codigoMovimento"` solicitado é localizado no callback de recebimento do PIX                                                                                                                                        |                                                                                                                                                                                                                                                                  |
+
+<Warning>O checklist acima será encaminhado pelo time de implantação</Warning>
+
+## Planilha de Testes
+
+Na planilha precisamos que seja testado todos os endpoints que forem utilizar em produção e preencham na célula "requisição completa" com o request e response completo de cada item testado com retorno 200 para que nosso time possa analisar posteriormente.
+
+<CardGroup>
+<Card title = "Planilha de Testes" icon="file" href="https://bmp-docs-462219491253.s3.sa-east-1.amazonaws.com/planilha-checklist-de-testes-baas.xlsx">
+Realize o Download da planilha de testes clicando aqui
+</Card>
+</CardGroup>
+
+<Warning>É obrigatório que todas as transações de débito sejam realizadas utilizando Handshake e HMAC</Warning>
+
+## Conclusão
+
+Ao completar todos os passos deste checklist, a equipe responsável pode ter certeza de que o sistema está pronto para ser lançado no ambiente de produção, proporcionando uma experiência segura e eficiente para os usuários finais.

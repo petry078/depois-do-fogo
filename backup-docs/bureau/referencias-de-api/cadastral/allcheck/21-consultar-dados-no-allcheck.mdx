@@ -1,0 +1,168 @@
+---
+title: 21 - Consulta Dados no AllCheck
+openapi: post /Bureau/ConsultarAllCheck
+---
+
+Este endpoint permite consultar de forma detalhada um documento de pessoa física ou jurídica. A resposta é retornada em 'String JSON' serializado e contém dados estruturados, incluindo endereço, e-mail, telefone, endereço comercial, CCF, empresas vinculadas, veículo, número do PIS, carteira profissional e informações de sociedades.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{
+    "NroConsulta": "String",
+    "Nome": "String",
+    "NumeroDocumento": "INT",
+    "RG": "String",
+    "DataNascimento": "Data",
+    "Signo": "String",
+    "Idade": "INT",
+    "Email": "String",
+    "Filiacao": "String",
+    "PIS": "String",
+    "CarteiraProf": "String",
+    "CNPJEmpregador": "String",
+    "DtAdmissao": "Data",
+    "Atividade": "String",
+    "GrauInstrucao": "String",
+    "Sexo": "String",
+    "EstadoCivil": "String",
+    "NumeroBeneficio": "String",
+    "ValorBeneficio": "INT",
+    "InicioBeneficio": "",
+    "NumeroTitulo": "String",
+    "Nacionalidade": "String",
+    "Banco": [
+        {
+            "NomeBanco": "String",
+            "NomeAgencia": "String",
+            "EnderecoAgencia": "String",
+            "Cidade": "String",
+            "Estado": "String",
+            "CEP": "String",
+            "DDD": "String",
+            "Telefone": "String",
+            "Fax": "String",
+            "Banco": "String",
+            "Agencia": "String"
+        }
+    ],
+    "CCF": [
+        {
+            "Nome": "String",
+            "Documento": "String",
+            "QtdeOcorrencias": "INT",
+            "NomeBanco": "String",
+            "NomeAgencia": "String",
+            "EnderecoAgencia": "String",
+            "Cidade": "String",
+            "UF": "String",
+            "CEP": "String",
+            "DDD": "String",
+            "Telefone": "String",
+            "Banco": "String",
+            "Agencia": "String",
+            "MotivoDevolucao": "String",
+            "DtUltimaOcorrencia": "Data"
+        }
+    ],
+    "Empresa": [
+                {
+            "CNPJ": "String",
+            "Nome": "String",
+            "NomeFantasia": "String",
+            "DtAbertura": "Data",
+            "AtividadeComercial": "String",
+            "CNAE": "String",
+            "CNAE2": "String",
+            "NaturezaJuridica": "String",
+            "CEP": "String",
+            "Logradouro": "String",
+            "NroLogradouro": "String",
+            "Bairro": "String",
+            "Complemento": "String",
+            "Cidade": "String",
+            "UF": "String",
+            "SituacaoCadastral": "String",
+            "DtSituacaoCadastral": "Data",
+            "Porte": "String",
+            "Tipo": "String",
+            "SituacaoEspecial": "String",
+            "DtSituacaoEspecial": "Data"
+        }
+    ],
+    "HistoricoTrabalho": [
+        {
+            "DtAdmissao": "Data",
+            "DtDemissao": "Data",
+            "Nome": "String",
+            "CPF": "String",
+            "CNPJ": "String",
+            "RazaoSocial": "String",
+            "Fre": ""
+        }
+    ],
+    "Obito": [ 
+        {
+            "Nome": "String",
+            "NomeMae": "String",
+            "DataObito": "String",
+            "DataNascimento": "String"
+        }
+    ],
+    "RedeVigiada": [
+        {
+            "DtConsulta": "Data",
+            "Produto": "String",
+            "Cliente": "String",
+            "Telefone": "String"
+        }
+    ],
+    "Sociedade": [
+        {
+            "Socio": "String",
+            "CPF": "String",
+            "RG": "String",
+            "CNPJ": "String",
+            "InscricaoEstadual": "String",
+            "Participacao": "String",
+            "DtIngresso": "Data",
+            "DtInicio": "Data",
+            "NomeEmpresa": "String"
+        }
+    ],
+    "Telefone": [
+        {
+            "Nome": "String",
+            "Documento": "String",
+            "DDD": "String",
+            "Telefone": "String",
+            "CEP": "String",
+            "Logradouro": " String",
+            "NroLogradouro": "String",
+            "Bairro": "String",
+            "Complemento": "String",
+            "Cidade": "String",
+            "UF": "String",
+            "DtInstalacao": "Data"
+        }
+    ],
+    "Veiculo": [
+                {
+            "Nome": "String",
+            "Documento": "String",
+            "Placa": "String",
+            "Renavam": "String",
+            "MarcaModelo": "String",
+            "AnoFabricacao": "INT",
+            "Chassis": "String"
+        }
+    ],
+    "TipoRetorno": "String",
+    "Error": "Boolean",
+    "ErrorDescription": "String"
+}
+```
+
+</Expandable>

@@ -1,0 +1,344 @@
+---
+title: "Procedimento Técnico de Callback"
+version: 'Português'
+---
+
+# Introdução 
+
+Um callback é enviado automaticamente sempre que eventos específicos ocorrem no sistema, permitindo uma comunicação eficiente entre diferentes partes de uma aplicação. Esse mecanismo é amplamente utilizado, por exemplo, para notificar atualizações de status de propostas, eliminando a necessidade de verificações constantes por parte do nosso parceiro   . Assim, as informações são recebidas de maneira automatizada e em tempo real.
+
+Esse recurso é fundamental para a automatização de processos, garantindo respostas rápidas e mantendo a comunicação fluida entre sistemas.
+
+Nesta documentação, apresentaremos de forma clara e objetiva como esse procedimento funciona, sua importância nas integrações e como utilizá-lo no desenvolvimento de soluções mais dinâmicas e eficazes.
+
+<Warning>
+
+Os nossos webhooks não devem ser mapeados de forma restrita. Campos adicionais podem ser incluídos nos payloads dos webhooks retornados. Verifique a página de [Atualizações e Comunicados](https://bmpmoneyplus-sandbox.mintlify.app/atualizacoes/comunicados).
+
+</Warning>
+
+## Configurações
+
+<Steps>
+
+<Step title = "Configuração do parceiro">
+
+Os parceiros podem configurar como desejam receber as notificações (callbacks), definindo as seguintes características: 
+
+<Step stepNumber = "1.1" title = "URL">
+
+O parceiro deve especificar a URL do callback que será chamada para o envio das informações.
+
+</Step>
+
+<Step stepNumber = "1.2" title = "Ambientes">
+
+O callback para acompanhamento dos status das propostas deve ser enviado tanto para o ambiente de homologação quanto para o ambiente de produção. Recomenda-se que sejam utilizadas URLs diferentes para cada ambiente.
+
+</Step>
+
+<Step stepNumber = "1.3" title = "Métodos de chamada">
+
+O parceiro pode selecionar o método HTTP para o envio do callback. 
+
+Opções disponíveis incluem: 
+
+•	```POST```
+•	```GET``` 
+•	```PUT```
+
+</Step>
+
+</Step>
+
+<Step stepNumber = "2" title = "Autenticação">
+
+Para garantir a segurança do callback enviado, recomendamos que o parceiro defina um método de autenticação.
+
+Seguem abaixo os métodos de autenticação disponíveis:  
+
+Opções disponíveis incluem: 
+
+#### Métodos de autenticação aceitos
+
+| **Autenticação**            | **Chave**        |**Exemplo de Token**             |
+|-----------------------------|------------------|---------------------------------|
+| Bearer Token                | Authorization    | `Bearer eyJhbGciOiJIUzI1CI6IkpXVCJ9`|
+| API Key                     | API-Key          | `1234567890abcdef1234567890abcdef` |
+| Basic Authentication        | Authorization    | `Basic dXNlcm5hbWU6cGFzc3dvcmQ` |
+| X-API-Key                   | X-API-Key        | `0987654321fedcba0987654321fedcba` |
+| JWT (JSON Web Token)        | Authorization    | `Bearer eyJhbGciOiJIUzI1NiIs` |
+| HMAC (Hash-based Message Authentication Code) | Authorization | `HMAC 5d41402abc4b19d911017c592`|
+
+<Warning>Em todos os métodos de autenticação aceitamos até 255 caracteres.</Warning>
+
+</Step>
+
+<Step  title = "Exemplo de callback de proposta ">
+
+Segue exemplo de URL e como parametrizamos para recebimento: 
+
+```json
+www.xxxxxxxxxx.com.br?proposta={PROPOSTA}&situacao={SITUACAO}&identificador={IDENTIFICADOR}
+```
+
+#### Tabela dos parâmetros do callback da proposta
+
+| **Parâmetro**  | **Descrição do parâmetro**  |
+|---------------|---------------------------|
+| **Proposta**  | Guid único gerado no response durante a inclusão da proposta.  |
+| **Situação**  | ID da situação da proposta em nosso sistema.  |
+| **Identificador**  | Caso seja enviado, esse campo representa o código da operação enviado na inclusão da proposta.  |
+
+#### Tabela de identificação de status de proposta
+
+| **ID**  | **Descrição**  | **Objetivo**  |
+|--------|--------------|--------------------------------------------------------------|
+| **2**  | Aprovada  | Proposta foi criada e está aguardando a assinatura.  |
+| **4**  | Cancelada  | Proposta foi cancelada automaticamente ou pelo integrador.  |
+| **5**  | Pendente  | Proposta foi marcada como pendente e necessita de intervenção do integrador para ser solicitada a averbação novamente.  |
+| **6**  | Finalizada  | Foi solicitada a averbação na **CEF** (Caixa Econômica Federal).  |
+| **8**  | Liberada  | Proposta averbada com sucesso e liberada para ser feito o desembolso.  |
+| **9**  | Paga  | Foi realizado o desembolso da proposta.  |
+| **10**  | Cedida  | Proposta foi adicionada em uma remessa de cessão e cedida ao fundo.  |
+| **11**  | Pendente Pagamento  | Proposta foi marcada como pendente de pagamento devido à inconsistência em dados bancários, necessitando de intervenção do integrador para informar os dados corretos de pagamento e retornar para a fila de pagamento.  |
+
+**Observação:** Caso o callback seja enviado com o método POST, além dos dados enviados na Query, o parceiro receberá no corpo da requisição:
+- ***Status 9:*** “00 - Crédito ou débito efetivado”
+- ***Status 11:*** “AB - Descrição da ocorrência”
+
+<Warning>Caso ocorra algum problema durante o recebimento do callback de proposta, o sistema realizará até 3 tentativas de envio.</Warning>
+
+</Step>
+<Step stepNumber = "4" title="Callback do FGTS">
+O sistema de callback do FGTS é uma solução automatizada que permite o monitoramento em tempo real de cancelamentos de propostas e para retorno de simulações assíncronas de saldo.
+<Step stepNumber = "4.1" title="Parametrização">
+
+Segue exemplo de URL e como parametrizamos para recebimento:   
+
+```json
+www.xxxxxxxxxxx.com.br
+```
+
+</Step>
+<Step stepNumber = "4.2" title="Eventos do FGTS">
+
+Os seguintes eventos podem acionar o envio de notificações ao callback configurado:
+
+#### Boleto Registrado
+
+Esse callback é enviado quando é solicitado o cancelamento de uma proposta e enviamos um boleto híbrido referente ao cancelamento.
+
+<Expandable title = "Informações técnicas">
+
+| **Campo**             | **Tipo**     | **Descrição**  |
+|----------------------|-------------|--------------------------------------------------------------|
+| **NumCodigoBarras**  | String      | Número do código de barras  |
+| **NumLinhaDigitavel** | String      | Linha digital do boleto  |
+| **PixCopiaCola**     | String      | Pix copia e cola  |
+| **QRCode**          | String      | QR code pix copia e cola (base64)  |
+| **VlrBoleto**       | Decimal     | Valor do boleto  |
+| **DtVencimento**    | Datetime    | Data de vencimento do boleto  |
+| **NumeroBoleto**    | String      | Número do boleto  |
+| **CodigoBoleto**    | Guid        | Identificador do boleto  |
+| **CodigoProposta**  | Guid        | Identificador da proposta  |
+| **CodigoOperacao**  | Guid        | Identificador da operação  |
+| **Detalhes**        | String      | Neste caso não retornam informações, apenas o contexto e tipo de evento (sempre NULL)  |
+| **ContextoEvento** | String      | Identificador do contexto do evento (7 - FGTS callback)  |
+| **TipoEvento**    | String      | Identificador do tipo do evento = 5  |
+| **NomeEvento**    | String      | Descrição do nome do evento  |
+| **DtEvento**      | Datetime    | Data do evento  |
+
+
+<Expandable title= "Exemplo JSON de boleto registrado">
+```json
+  {
+    "NumCodigoBarras": "27496981100000010000001090000000005902301160",
+    "NumLinhaDigitavel": "27490001019000000000159023011600698110000001000",
+    "PixCopiaCola": "00020101021226970014br.gov.bcb.pix2575qr-h.cornerpix.com.br/11581339/v2/cobv/e8fb8e99-6f1c-448e-b1b3-f5c45004a6d85204000053039865802BR5914BMP MONEY PLUS6009SAO PAULO62070503***63045155",
+    "QRCode": "iVBORw0KGgoAAAANSUhEUgAAAhIAAAISAQAAAACxRhsSAAAEw0lEQVR4nO2dW4rrOBCG/xob+tGBLKCXouzsMEuaHdhLyQIG5MeATM1DqXTp7nNOw0lEJvx6SNtu5UOGou5SRPGnY/vrjxEAGWSQQQYZZJBBBhlkVIbkMQObfYjIBYdgO5X/ng6RCwC57D7/cud1kEHG12O2P2EFgP0MhHgSAFPCdooqwJwATEmASQU4ZsU+JQCA3G8dZJDxHcbu2nF7T1DVmyBcZwDLTRA0AeE6Q1f/ninf+6+DDDK+w5DLPvvHchNgf1P922VSLv7x6HWQQUY75i+",
+    "VlrBoleto": 10.00,
+    "DtVencimento": "2024-08-17 00:00:00",
+    "NumeroBoleto": "59",
+    "CodigoBoleto": "7af52ad6-2ef1-4678-a070-29c59e95b0e1",
+    "CodigoProposta": "7e2c86b3-bf71-4ce2-a0b3-7d4f198c3c71",
+    "CodigoOperacao": "732af968-96e9-4c9f-9ee1-5fade313ffbb",
+    "Detalhes": null,
+    "ContextoEvento": 7,
+    "TipoEvento": 5,
+    "NomeEvento": "Boleto Registrado",
+    "DtEvento": "2024-08-16 11:29:19"
+  }  
+``` 
+</Expandable>
+-----------------
+</Expandable>
+
+#### Cancelamento efetivado
+
+Esse callback é enviado quando o parceiro gera um boleto de cancelamento e o cliente realiza o pagamento do boleto. Dessa forma, o cancelamento é executado com sucesso. 
+
+<Expandable title = "Informações técnicas">
+
+| **Campo**          | **Tipo**     | **Descrição**  |
+|-------------------|-------------|--------------------------------------------------------------|
+| **CodigoProposta**  | Guid        | Identificador da proposta  |
+| **CodigoOperacao**  | Guid        | Identificador da operação  |
+| **Detalhes**        | String      | Campo referente às informações do cancelamento  |
+| **ContextoEvento**  | String      | Identificador do contexto do evento (7 - FGTS callback)  |
+| **TipoEvento**     | String      | Identificador do tipo do evento = 1  |
+| **NomeEvento**     | String      | Descrição do nome do evento  |
+| **DtEvento**       | Datetime    | Data do evento  |
+
+
+<Expandable title= "Exemplo JSON de cancelamento efetivado">
+```json
+{
+    "CodigoProposta": "d573264a-f892-470e-b3db-fdc399ef1a67",
+    "CodigoOperacao": "b63bce2d-26b8-4393-9d0d-92c22c2ac827",
+    "Detalhes": null,
+    "ContextoEvento": 7,
+    "TipoEvento": 1,
+    "NomeEvento": "Cancelamento Efetivado",
+    "DtEvento": "2024-08-16T15:11:08.216886-03:00"
+}  
+``` 
+</Expandable>
+-----------------
+</Expandable>
+
+#### Pagamento parcial
+
+Esse callback é enviado quando o cliente realiza o pagamento parcial do valor do boleto.
+
+<Expandable title = "Informações técnicas">
+
+
+| **Campo**          | **Tipo**     | **Descrição**  |
+|-------------------|-------------|--------------------------------------------------------------|
+| **CodigoProposta**  | Guid        | Identificador da proposta  |
+| **CodigoOperacao**  | Guid        | Identificador da operação  |
+| **Detalhes**        | String      | Campo referente às informações do cancelamento  |
+| **ContextoEvento**  | String      | Identificador do contexto do evento (7 - FGTS callback)  |
+| **TipoEvento**     | String      | Identificador do tipo do evento = 1  |
+| **NomeEvento**     | String      | Descrição do nome do evento  |
+| **DtEvento**       | Datetime    | Data do evento  |
+
+<Expandable title= "Exemplo JSON de pagamento parcial">
+```json
+{
+    "CodigoProposta": "7e2c86b3-bf71-4ce2-a0b3-7d4f198c3c71",
+    "CodigoOperacao": “37a7bb3d-71b0-4dc6-8424-7d036537113b”,
+    "Detalhes": "Pagamento parcial de 5.00 realizado.",
+    "ContextoEvento": 7,
+    "TipoEvento": 4,
+    "NomeEvento": "Pagamento Parcial Realizado",
+    "DtEvento": "2024-08-16T12:36:50.7216804-03:00"
+}
+``` 
+</Expandable>
+-----------------
+</Expandable>
+
+#### Pagamento não realizado
+
+Esse callback é enviado quando o parceiro gera um boleto de cancelamento, mas o cliente não realiza o pagamento do boleto.
+
+<Expandable title = "Informações técnicas">
+
+| **Campo**          | **Tipo**     | **Descrição**  |
+|-------------------|-------------|--------------------------------------------------------------|
+| **CodigoProposta**  | Guid        | Identificador da proposta  |
+| **CodigoOperacao**  | Guid        | Identificador da operação  |
+| **Detalhes**        | String      | Campo referente às informações do pagamento  |
+| **ContextoEvento**  | String      | Identificador do contexto do evento (7 - FGTS callback)  |
+| **TipoEvento**     | String      | Identificador do tipo do evento = 3  |
+| **NomeEvento**     | String      | Descrição do nome do evento  |
+| **DtEvento**       | Datetime    | Data do evento  |
+
+<Expandable title= "Exemplo JSON de pagamento não realizado">
+```json
+{
+    "CodigoProposta": "7e2c86b3-bf71-4ce2-a0b3-7d4f198c3c71",
+    "CodigoOperacao": “37a7bb3d-71b0-4dc6-8424-7d036537113b”,
+    "Detalhes": "Pagamento parcial de 5.00 realizado.",
+    "ContextoEvento": 7,
+    "TipoEvento": 4,
+    "NomeEvento": "Pagamento Parcial Realizado",
+    "DtEvento": "2024-08-16T12:36:50.7216804-03:00"
+}
+``` 
+</Expandable>
+-----------------
+</Expandable>
+
+#### Cancelamento não efetivado
+
+Esse callback é enviado após o envio do call-back do “Pagamento não Realizado”. Informando que o cancelamento da operação não foi efetivado.
+
+<Expandable title = "Informações técnicas">
+
+| **Campo**          | **Tipo**     | **Descrição**  |
+|-------------------|-------------|--------------------------------------------------------------|
+| **CodigoProposta**  | Guid        | Identificador da proposta  |
+| **CodigoOperacao**  | Guid        | Identificador da operação  |
+| **Detalhes**        | String      | Campo referente às informações do cancelamento  |
+| **ContextoEvento**  | String      | Identificador do contexto do evento (7 - FGTS callback)  |
+| **TipoEvento**     | String      | Identificador do tipo do evento = 2  |
+| **NomeEvento**     | String      | Descrição do nome do evento  |
+| **DtEvento**       | Datetime    | Data do evento  |
+
+<Expandable title= "Exemplo JSON de cacelamento não efetivado">
+```json
+{
+    "CodigoProposta": "7e2c86b3-bf71-4ce2-a0b3-7d4f198c3c71",
+    "CodigoOperacao": “4745ed52-eb36-44d4-895c-f0d6a9383066”,
+    "Detalhes": "Pagamento parcial de 5.00 realizado.",
+    "ContextoEvento": 7,
+    "TipoEvento": 2,
+    "NomeEvento": "Cancelamento Não Efetivado",
+    "DtEvento": "2024-08-16T12:36:51.160533-03:00"
+}
+``` 
+</Expandable>
+-----------------
+</Expandable>
+
+#### Simulação batch concluída
+
+Esse callback é enviado quando o parceiro solicita uma simulação assíncrona e o retorno da consulta já está pronto para ser consultado.
+
+<Expandable title = "Informações técnicas">
+
+| **Campo**          | **Tipo**     | **Descrição**  |
+|-------------------|-------------|--------------------------------------------------------------|
+| **CodigoBatch**    | Guid        | Código identificador único da consulta assíncrona  |
+| **ContextoEvento** | String      | Identificador do contexto do evento (7 - FGTS callback)  |
+| **TipoEvento**     | String      | Identificador do tipo do evento = 6  |
+| **NomeEvento**     | String      | Descrição do nome do evento  |
+| **DtEvento**       | Datetime    | Data do evento  |
+
+<Expandable title= "Exemplo JSON de cacelamento não efetivado">
+```json
+{
+    "CodigoBatch": "0796d11f-e7fa-40b6-88a0-a388ce55004c",
+    "ContextoEvento": 7,
+    "TipoEvento": 6,
+    "NomeEvento": "Simulação Batch Concluída",
+    "DtEvento": "2024-08-23T12:49:33.4643361-03:00"
+} 
+``` 
+</Expandable>
+-----------------
+</Expandable>
+<Warning>Caso ocorra algum problema durante o recebimento do callback do FGTS, o sistema não realizará novas tentativas de envio</Warning>
+</Step>
+</Step>
+<Step stepNumber = " ">
+ 
+</Step>
+</Steps>
+
+
+
+

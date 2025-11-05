@@ -1,0 +1,307 @@
+---
+title: "Procedimento Técnico de Handshake"
+version: 'Português'
+---
+
+## Introdução
+
+O handshake é um procedimento técnico essencial de autenticação de segurança realizado entre a BMP e seus parceiros. 
+
+Ele garante a integridade dos dados e estabelece uma comunicação criptografada e segura, assegurando que todas as partes envolvidas concordem com os parâmetros necessários antes do início da troca de informações. Isso previne acessos não autorizados e reforça a confiabilidade das operações financeiras.
+
+Esse processo funciona como uma etapa inicial de “negociação” entre duas partes, na qual são definidos os parâmetros técnicos da comunicação. Durante o handshake, as partes se identificam mutuamente, validam suas identidades e estabelecem um canal seguro para o tráfego de dados.
+
+Nas transações financeiras, o handshake permite que a BMP e seus parceiros confirmem suas identidades antes de seguir com a operação. Com isso, o procedimento ajuda a mitigar riscos de acessos indevidos, ataques cibernéticos e fraudes.
+
+Para realizar o procedimento técnico de handshake é necessário se atentar aos seguintes parâmetros:
+
+* Protocolo de comunicação utilizado é HTTPS;
+* Os dados devem ser enviados e são recebidos no formato JSON;
+* Medidas de segurança aplicada, como criptografia e autenticação;
+* A versão da API que será utilizada.
+
+<Warning>O processo de handshake é necessário para endpoints específicos, como todos os endpoints de transações de débito.</Warning>
+
+Saiba mais sobre a obrigatoriedade do handshake em endpoints específicos abaixo.
+
+Para a **API Externa**, os seguintes endpoints são protegidos pelo handshake:
+
+* `/api/Boleto/Pagar`: para pagamento de boletos;
+* `/api/TransferenciaOutroBanco`: para transferências entre contas de instituições financeiras diferentes (TED);
+* `/api/TransferenciaEntreContas`: para transferências entre contas internas da BMP;
+* `/api/CNAB/240/Importar`: para pagamentos de boletos ou transferência em lote.
+
+Para a **API do PIX**, os seguintes endpoints são protegidos pelo handshake:
+
+* `/api/Recurso/Tranferir`: para transferências via PIX;
+* `/api/Recurso/Devolver`: para devoluções de valores enviados via PIX.
+
+## Pré-requisitos
+
+Para que a BMP possa configurar adequadamente a validação de segurança por meio do handshake, o parceiro deve se atentar as seguites informações:
+
+* Deve configurar um endpoint HTTPS que aceite requisições POST. O endpoint deve responder dentro de um timeout padrão de 5 segundos para garantir eficiência no processo de handshake. As informações necessárias incluem URL do endpoint disponibilizado na API do parceiro;
+* Método HTTPS;
+* Headers desejados.
+* Chave HMAC.
+
+### Chave HMAC
+
+A chave HMAC também é um pré-requisito para o processo de handshake. O parceiro deve gerar uma chave HMAC forte e segura, com 128 caracteres. 
+
+Essa chave será utilizada para assinar as mensagens e verificar a assinatura das mensagens recebidas da BMP.
+
+<Note>É necessário que a senha seja alfanumérica. Utilize o [Gerador de Senha](https://www.geradordesenha.com.br/) para gerar uma senha forte e segura, aceita pela BMP.</Note>
+
+## Headers
+
+É necessário informar os headers `Content-Type` e `IdempotencyKey`. O header `Content-Type` deve ser definido como `application/json`, enquanto o header `IdempotencyKey` deve conter um valor único para cada requisição, garantindo que a BMP possa identificar e evitar duplicações de transações.
+
+Exemplo de headers:
+
+```shell
+--header 'Authorization: Basic Ym1wX3dpc2VfaGFuZHNoMAtlOlJaU2dLclBTbGVKaTV3cWl2cTBjZXF2bVBVOFV6VkR2bUutVGtIeVBxTXFFRFFvVGYwbXYwV3M1a1pZRzZvWmN4OXFrRAV0Zm5NVHhrd09qVnJ2OVRGRlNMSGttVmxhWHJQanJhU1hYTkk4TDM5' \
+--header 'Content-Type: application/json' \
+--header 'IdempotencyKey: <idempotencykey>' \
+```
+
+## Body
+
+As requisições do processo de handshake devem ser enviadas sempre com o body linearizado (minificado ou compactado), sem espaços. Dessa forma:
+
+```json
+{"TipoTransacao":"EnvioTED","DataTransacao":"2025-02-14","Valor":1345.83}
+```
+
+<Warning>O body deve ser enviado dessa forma para evitar inconsistências no cálculo do hash HMAC.</Warning>
+
+Além disso, o parceiro precisa se preocupar com valores numéricos, que devem ser sempre no formato decimal. 
+
+Exemplo:
+
+```json
+{"Valor": 1345.83}
+```
+
+<Warning>O valor deve ser sempre enviado com duas casas decimais, mesmo que seja inteiro e **não utilize vírgulas nem aspas**. Exemplo: `1345.00`.</Warning>
+
+## Etapas do processo de handshake
+
+O processo de handshake da BMP inicia-se a partir da requisição para um endpoint da API da BMP, que exige este tipo de validação. 
+
+O endpoint, após receber a requisição, executa uma série de ações, das quais uma delas é a confirmação da transação através da chamada de um endpoint da API do parceiro configurado para a finalidade do handshake.
+
+### 1. Início da Transação via API BMP com Validação por Handshake
+
+Nessa primeira etapa, o parceiro envia uma requisição de transação para a API da BMP que exige validação por meio do handshake.
+
+Nesta etapa, o parceiro, já conhecendo que a requisição a ser enviada, exige validação mediante hanshake, deverá executar as seguintes ações:
+
+* Gerar o JSON do corpo da requisição com os dados da transação a ser executada;
+* Gerar um hash HMAC SHA-512 do JSON da requisição com a chave para validação do handshake que foi configurada na BMP;
+* Adicionar o hash gerado à chave `HMAC` no cabeçalho da requisição;
+* Enviar a requisição para o endpoint da API da BMP;
+* Receber o response HTTPS da requisição enviada para a API da BMP;
+* Realizar as tratativas após receber o response da requisição enviada para a API da BMP. 
+
+### 2. Processo de Validação e Confirmação de Transações no BMP
+
+BMP recebe a requisição do parceiro, valida o hash recebido, solicita a confirmação da transação para o parceiro e aguarda o retorno da confirmação
+
+Quando a BMP receber uma requisição que exige autenticação através de handshake, o middleware de validação entrará em ação, executando as seguintes ações:
+
+1. **Validação Inicial da Requisição**:
+
+   * A BMP analisa os headers da requisição recebida.
+     * Se os headers estiverem corretos:
+       * Responde com `200 - OK`.
+       * Prossegue para a próxima etapa.
+     * Se os headers estiverem incorretos:
+       * Retorna:
+         ```
+         406 - Não foi possível fornecer o recurso solicitado em um formato aceitável para o cliente
+         ```
+       * Encerra o processo.
+
+2. **Validação do Handshake**
+   * A BMP gera um hash `HMAC SHA-512` usando:
+     * O body da requisição.
+     * A chave de validação do handshake.
+   * O hash gerado é retornado ao parceiro.
+   * A BMP compara o hash gerado com o hash recebido:
+     * Se forem **iguais**: o processo segue.
+     * Se forem **diferentes**:
+       * Retorna:
+         ```
+         406 - Não foi possível fornecer o recurso solicitado em um formato aceitável para o cliente
+         ```
+       * Encerra a execução do endpoint.
+
+3. **Confirmação da Transação com o Parceiro**
+   * A BMP prepara a requisição de confirmação da transação:
+     * Inclui os dados da transação original.
+     * Adiciona headers específicos, se exigidos pelo parceiro.
+   * O parceiro recebe a requisição de confirmação:
+     * Verifica os headers obrigatórios:
+       * Se estiverem ausentes ou incorretos, encerra a execução.
+   * O parceiro valida os dados da confirmação com os dados da solicitação original:
+     * Se divergirem, a execução é encerrada.
+   * O parceiro gera um novo hash `HMAC SHA-512` a partir do JSON recebido, utilizando a mesma chave do handshake.
+   * O hash é adicionado no header da resposta na chave `"hmac"`.
+   * O parceiro retorna:
+     * `HTTP 200` indicando sucesso.
+     * Encerra a execução do endpoint de confirmação.
+
+4. **Validação Final pelo BMP**
+   * A BMP analisa o status HTTP da resposta do parceiro:
+     * Se for diferente de `200`, retorna:
+       ```
+       406 * Não foi possível fornecer o recurso solicitado em um formato aceitável para o cliente
+       ```
+       e encerra a execução.
+   * A BMP gera novamente o hash `HMAC SHA-512` com o JSON da confirmação.
+   * Compara o novo hash com o valor da chave `"hmac"` no header recebido:
+     * Se forem diferentes, retorna erro `406` e encerra a execução.
+   * Se forem iguais:
+     * Dá sequência à execução do endpoint da transação.
+     * Retorna o `response code` e o JSON da mensagem da transação.
+     * Se houver erro, retorna `406` com a mensagem de recurso inaceitável.
+
+## Referências para o body das requisições de handshake
+
+### Pagamento de boletos
+
+| Atributo pai  | Atributo         | Tipo    | Descrição                                                                                                          |
+|---------------|------------------|---------|--------------------------------------------------------------------------------------------------------------------|
+| root          | idempotencyKey   | string  | Chave única para garantir que a operação seja executada apenas uma vez.                                            |
+| root          | detalhes         | object  | Objeto com os detalhes do pagamento do boleto.                                                                     |
+| detalhes      | tipoTransacao    | string  | "Pagamento de Boleto".                                                                                             |
+| detalhes      | dataTransacao    | string  | Data e hora do pagamento do boleto.                                                                                |
+| detalhes      | contaOrigem      | object  | Objeto com os dados da conta de débito para o pagamento do boleto.                                                 |
+| contaOrigem   | Agencia          | string  | Número da agência da conta de débito para o pagamento do boleto.                                                   |
+| contaOrigem   | agenciaDigito    | string  | Dígito verificador da conta de débito para o pagamento do boleto.                                                  |
+| contaOrigem   | Conta            | string  | Número do CPF ou CNPJ do correntista titular da conta de débito para pagamento do boleto.                          |
+| contaOrigem   | contaDigito      | string  | Dígito verificador da conta de débito para o pagamento do boleto.                                                  |
+| contaOrigem   | tipoConta        | integer | Tipo de conta para pagamento do boleto. 1 para Conta Corrente, 2 para Poupança, 3 para Pagamento e 4 para Salário. |
+| contaOrigem   | documentoFederal | string  | Número do CPF ou CNPJ do correntista titular da conta de débito para pagamento do boleto.                          |
+| contaOrigem   | Nome             | string  | Nome do correntista titular da conta de débito para pagamento do boleto.                                           |
+| contaOrigem   | numeroBanco      | integer | Número da instituição financeira da conta de débito para pagamento do boleto.                                      |
+| contaOrigem   | Ispb             | string  | Código ISPB da instituição financeira da conta de débito para pagamento do boleto.                                 |
+| detalhes      | dataVencimento   | string  | Data de vencimento do boleto.                                                                                      |
+| detalhes      | codigoBarras     | string  | Código de barras do boleto.                                                                                        |
+| detalhes      | Valor            | decimal | Valor do pagamento do boleto.                                                                                      |
+| detalhes      | linhaDigitavel   | string  | Linha digitável do código de barras do boleto.                                                                     |
+
+### Transferências entre contas de instituições financeiras diferentes (TED)
+
+| Atributo pai  | Atributo         | Tipo    | Descrição                                                                                                          |
+|---------------|------------------|---------|--------------------------------------------------------------------------------------------------------------------|
+| root          | idempotencyKey   | string  | Chave única para garantir que a operação seja executada apenas uma vez.                                            |
+| root          | detalhes         | object  | Objeto com os detalhes do pagamento do boleto.                                                                     |
+| detalhes      | tipoTransacao    | string  | "Pagamento de Boleto".                                                                                             |
+| detalhes      | dataTransacao    | string  | Data e hora do pagamento do boleto.                                                                                |
+| detalhes      | contaOrigem      | object  | Objeto com os dados da conta de débito para o pagamento do boleto.                                                 |
+| contaOrigem   | Agencia          | string  | Número da agência da conta de débito para o pagamento do boleto.                                                   |
+| contaOrigem   | agenciaDigito    | string  | Dígito verificador da conta de débito para o pagamento do boleto.                                                  |
+| contaOrigem   | Conta            | string  | Número do CPF ou CNPJ do correntista titular da conta de débito para pagamento do boleto.                          |
+| contaOrigem   | contaDigito      | string  | Dígito verificador da conta de débito para o pagamento do boleto.                                                  |
+| contaOrigem   | tipoConta        | integer | Tipo de conta para pagamento do boleto. 1 para Conta Corrente, 2 para Poupança, 3 para Pagamento e 4 para Salário. |
+| contaOrigem   | documentoFederal | string  | Número do CPF ou CNPJ do correntista titular da conta de débito para pagamento do boleto.                          |
+| contaOrigem   | Nome             | string  | Nome do correntista titular da conta de débito para pagamento do boleto.                                           |
+| contaOrigem   | numeroBanco      | integer | Número da instituição financeira da conta de débito para pagamento do boleto.                                      |
+| contaOrigem   | Ispb             | string  | Código ISPB da instituição financeira da conta de origem da TED.                                                   |
+| detalhes      | contaDestino     | object  | Objeto com os dados da conta de destino da TED.                                                                    |
+| contaDestino  | Agencia          | string  | Número da agência da conta de destino da TED.                                                                      |
+| contaDestino  | agenciaDigito    | string  | Dígito verificador da agência da conta de destino da TED.                                                          |
+| contaDestino  | Conta            | string  | Número do CPF ou CNPJ do correntista titular da conta de crédito para pagamento do boleto.                         |
+| contaDestino  | contaDigito      | string  | Dígito verificador da conta de destino da TED.                                                                     |
+| contaDestino  | tipoConta        | integer | Tipo de conta para pagamento do boleto. 1 para Conta Corrente, 2 para Poupança, 3 para Pagamento e 4 para Salário. |
+| contaDestino  | Nome             | string  | Nome do correntista titular da conta de crédito para pagamento do boleto.                                          |
+| detalhes      | valor            | decimal | Valor enviado através da TED.                                                                                      |
+
+### Transferências entre contas internas da BMP
+
+| Atributo Pai     | Atributo            | Tipo     | Descrição                                                                                        |
+|------------------|---------------------|----------|--------------------------------------------------------------------------------------------------|
+| root             | idempotencyKey      | string   | Chave única para garantir que uma operação seja executada apenas uma vez.                        |
+| root             | detalhes            | object   | Objeto com os detalhes da transferência.                                                         |
+| detalhes         | tipoTransacao       | string   | “Transferência Interna”.                                                                         |
+| detalhes         | dataTransacao       | string   | Data e hora da transferência.                                                                    |
+| detalhes         | contaOrigem         | object   | Objeto com os dados da conta de origem da transferência.                                         |
+| contaOrigem      | agencia             | string   | Nº da agência da conta de origem da transferência.                                               |
+| contaOrigem      | agenciaDigito       | string   | Dígito verificador da agência da conta de origem da transferência.                               |
+| contaOrigem      | conta               | string   | Nº da conta de origem da transferência.                                                          |
+| contaOrigem      | contaDigito         | string   | Dígito verificador da conta de origem da transferência.                                          |
+| contaOrigem      | tipoConta           | integer  | Tipo da conta de origem da transferência, onde: 1=Corrente, 2=Poupança, 3=Pagamento, 4=Salário.  |
+| contaOrigem      | documentoFederal    | string   | Nº do CPF ou CNPJ do correntista titular da conta de origem da transferência.                    |
+| contaOrigem      | nome                | string   | Nome do correntista titular da conta de origem da transferência.                                 |
+| contaOrigem      | numeroBanco         | integer  | Nº da instituição financeira da conta de origem da transferência.                                |
+| contaOrigem      | ispb                | string   | Código ISPB da instituição financeira da conta de origem da transferência.                       |
+| detalhes         | contaDestino        | object   | Objeto com os dados da conta de destino da transferência.                                        |
+| detalhes         | valor               | decimal  | Valor enviado na transferência.                                                                  |
+
+
+### Envio de valores através do PIX
+
+| Atributo Pai     | Atributo           | Tipo     | Descrição                                                                                          |
+|------------------|--------------------|----------|----------------------------------------------------------------------------------------------------|
+| root             | idempotencyKey     | string   | Chave única para garantir que uma operação seja executada apenas uma vez.                          |
+| root             | detalhes           | object   | Objeto com os detalhes da transação de envio do Pix.                                               |
+| detalhes         | tipoTransacao      | string   | “Pix”.                                                                                             |
+| detalhes         | dataTransacao      | string   | Data e hora do envio do Pix.                                                                       |
+| detalhes         | contaOrigem        | object   | Objeto com os dados da conta de origem do envio do Pix.                                            |
+| contaOrigem      | agencia            | string   | Nº da agência da conta de origem do envio do Pix.                                                  |
+| contaOrigem      | agenciaDigito      | string   | Dígito verificador da agência da conta de origem do envio do Pix.                                  |
+| contaOrigem      | conta              | string   | Nº da conta de origem do envio do Pix.                                                             |
+| contaOrigem      | contaDigito        | string   | Dígito verificador da conta de origem do envio do Pix.                                             |
+| contaOrigem      | tipoConta          | integer  | Tipo da conta de origem do envio do Pix, onde: 1=Corrente, 2=Poupança, 3=Pagamento, 4=Salário.     |
+| contaOrigem      | documentoFederal   | string   | Nº do CPF ou CNPJ do correntista titular da conta de origem do envio do Pix.                       |
+| contaOrigem      | nome               | string   | Nome do correntista titular da conta de origem do envio do Pix.                                    |
+| contaOrigem      | numeroBanco        | integer  | Nº da instituição financeira da conta de origem do envio do Pix.                                   |
+| contaOrigem      | ispb               | string   | Código ISPB da instituição financeira da conta de origem do envio do Pix.                          |
+| detalhes         | contaDestino       | object   | Objeto com os dados da conta de destino do envio do Pix.                                           |
+| contaDestino     | agencia            | string   | Nº da agência da conta de destino do envio do Pix.                                                 |
+| contaDestino     | agenciaDigito      | string   | Dígito verificador da agência da conta de destino do envio do Pix.                                 |
+| contaDestino     | conta              | string   | Nº da conta de destino do envio do Pix.                                                            |
+| contaDestino     | contaDigito        | string   | Dígito verificador da conta de destino do envio do Pix.                                            |
+| contaDestino     | tipoConta          | integer  | Tipo da conta de destino do envio do Pix, onde: 1=Corrente, 2=Poupança, 3=Pagamento, 4=Salário.    |
+| contaDestino     | documentoFederal   | string   | Nº do CPF ou CNPJ do correntista titular da conta de destino do envio do Pix.                      |
+| contaDestino     | nome               | string   | Nome do correntista titular da conta de destino do envio do Pix.                                   |
+| contaDestino     | numeroBanco        | integer  | Nº da instituição financeira da conta de destino do envio do Pix.                                  |
+| contaDestino     | ispb               | string   | Código ISPB da instituição financeira da conta de destino do envio do Pix.                         |
+| detalhes         | valor              | decimal  | Valor do envio do Pix.                                                                             |
+| detalhes         | chavePix           | string   | Chave utilizada para o envio do Pix.                                                               |
+| detalhes         | tipoChave          | integer  | Tipo de chave utilizada para o envio do Pix, onde: 0=CPF, 1=CNPJ, 2=Telefone, 3=E-mail, 4=EVP.     |
+
+
+### Devolução de valores recebidos através do PIX
+
+| Atributo Pai     | Atributo           | Tipo     | Descrição                                                                                                |
+|------------------|--------------------|----------|----------------------------------------------------------------------------------------------------------|
+| root             | idempotencyKey     | string   | Chave única para garantir que uma operação seja executada apenas uma vez.                                |
+| root             | detalhes           | object   | Objeto com os detalhes da transação de devolução do Pix.                                                 |
+| detalhes         | tipoTransacao      | string   | “Devolução Pix”.                                                                                         |
+| detalhes         | dataTransacao      | string   | Data e hora da devolução do Pix.                                                                         |
+| detalhes         | contaOrigem        | object   | Objeto com os dados da conta de origem da devolução do Pix.                                              |
+| contaOrigem      | agencia            | string   | Nº da agência da conta de origem da devolução do Pix.                                                    |
+| contaOrigem      | agenciaDigito      | string   | Dígito verificador da agência da conta de origem da devolução do Pix.                                    |
+| contaOrigem      | conta              | string   | Nº da conta de origem da devolução do Pix.                                                               |
+| contaOrigem      | contaDigito        | string   | Dígito verificador da conta de origem da devolução do Pix.                                               |
+| contaOrigem      | tipoConta          | integer  | Tipo da conta de origem da devolução do Pix, onde: 1=Corrente, 2=Poupança, 3=Pagamento, 4=Salário.       |
+| contaOrigem      | documentoFederal   | string   | Nº do CPF ou CNPJ do correntista titular da conta de origem da devolução do Pix.                         |
+| contaOrigem      | nome               | string   | Nome do correntista titular da conta de origem da devolução do Pix.                                      |
+| contaOrigem      | numeroBanco        | integer  | Nº da instituição financeira da conta de origem da devolução do Pix.                                     |
+| contaOrigem      | ispb               | string   | Código ISPB da instituição financeira da conta de origem da devolução do Pix.                            |
+| detalhes         | contaDestino       | object   | Objeto com os dados da conta de destino da devolução do Pix.                                             |
+| contaDestino     | agencia            | string   | Nº da agência da conta de destino da devolução do Pix.                                                   |
+| contaDestino     | agenciaDigito      | string   | Dígito verificador da agência da conta de destino da devolução do Pix.                                   |
+| contaDestino     | conta              | string   | Nº da conta de destino da devolução do Pix.                                                              |
+| contaDestino     | contaDigito        | string   | Dígito verificador da conta de destino da devolução do Pix.                                              |
+| contaDestino     | tipoConta          | integer  | Tipo da conta de destino da devolução do Pix, onde: 1=Corrente, 2=Poupança, 3=Pagamento, 4=Salário.      |
+| contaDestino     | documentoFederal   | string   | Nº do CPF ou CNPJ do correntista titular da conta de destino da devolução do Pix.                        |
+| contaDestino     | nome               | string   | Nome do correntista titular da conta de destino da devolução do Pix.                                     |
+| contaDestino     | numeroBanco        | integer  | Nº da instituição financeira da conta de destino da devolução do Pix.                                    |
+| contaDestino     | ispb               | string   | Código ISPB da instituição financeira da conta de destino da devolução do Pix.                           |
+| detalhes         | valor              | decimal  | Valor da devolução do Pix.                                                                               |
+| detalhes         | codigoMovimento    | guid     | Código da movimentação financeira que está relacionada à solicitação de devolução do Pix.                |
+

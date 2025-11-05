@@ -1,0 +1,10 @@
+---
+title: "5 - Generate Multiple Installment Charges"
+openapi: post /AgendaRecebivel/GerarMultiplasCobrancas
+---
+
+This endpoint enables the simultaneous issuance of multiple charges, being ideal for contracts that have several installments or when there is a need to generate several charges at the same time. It automates the process of issuing billing for multiple installments, making the process more agile and reducing the time spent on manual operations. 
+
+This feature is especially useful for partners who need to generate invoices in bulk simply and efficiently, with the same payment options.
+
+<Warning>The SettlementID field, generated in this endpoint's response, needs to be saved. This amount is required to request cancellation of the charges issued for the installments, in endpoint 6 - Cancel Installment Charges.</Warning>

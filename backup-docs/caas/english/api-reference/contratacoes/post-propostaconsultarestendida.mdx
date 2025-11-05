@@ -1,0 +1,78 @@
+---
+title: "23 - Extended Consultation"
+openapi: post /Proposta/ConsultarEstendida
+version : 'English'
+---
+
+Through this endpoint, the partner can consult information regarding all changes made to the proposal, which may or may not require partner intervention.
+
+<Expandable title="Messaging">
+| Category  | Operation                   | Action              | Code   | Detailed Code   | Message                                                                                       |
+|-----------|-----------------------------|---------------------|--------|------------------|-----------------------------------------------------------------------------------------------|
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0019  | V0001            | Produto não configurado para esta integração                                                  |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0113  | V0001            | Proposta não encontrada                                                                       |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0113  | V0002            | A Proposta não pertence à esta Integração                                                     |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0000            | Análise realizada com sucesso                                                                 |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0001            | Data de nascimento não informada no cadastro do cliente da proposta                           |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0002            | Data de nascimento declarada no documento de identidade não condiz com o cadastro da proposta |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0003            | CPF não informado no cadastro do cliente da proposta                                          |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0004            | CPF declarado no documento de identidade não condiz com o cadastro do cliente da proposta     |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0005            | Nome não informado no cadastro do cliente da proposta                                         |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0006            | Nome declarado no documento de identidade não condiz com o cadastro do cliente da proposta    |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0007            | Data de nascimento não informada no cadastro do cliente da proposta                           |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0008            | Data de nascimento declarada no documento de identidade não condiz com o cadastro da proposta |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0009            | CPF não informado no cadastro do cliente da proposta                                          |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0010            | CPF declarado no documento de identidade não condiz com o cadastro do cliente da proposta     |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0011            | Nome não informado no cadastro do cliente da proposta                                         |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0012            | Nome declarado no documento de identidade não condiz com o cadastro do cliente da proposta    |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0013            | Chassi não informado no cadastro do veículo vinculado à proposta                              |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0014            | Chassi declarado no DUT não condiz com o cadastro do veículo vinculado à proposta             |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0015            | Ano de fabricação não informado no cadastro do veículo vinculado à proposta                   |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0016            | Ano de fabricação declarado no DUT não condiz com o cadastro do veículo vinculado à proposta  |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0017            | Ano do modelo não informado no cadastro do veículo vinculado à proposta                       |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0018            | Ano do modelo declarado no DUT não condiz com o cadastro do veículo vinculado à proposta      |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0019            | Modelo não informado no cadastro do veículo vinculado à proposta                              |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0020            | Modelo declarado no DUT não condiz com o cadastro do veículo vinculado à proposta             |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0021            | Marca não informada no cadastro do veículo vinculado à proposta                               |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0022            | Marca declarada no DUT não condiz com o cadastro do veículo vinculado à proposta              |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0023            | CEP não informado no cadastro do cliente da proposta                                          |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0024            | CEP declarado no comprovante de residência não condiz com o cadastro do cliente da proposta   |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0025            | Logradouro não informado no cadastro do cliente da proposta                                   |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0026            | Logradouro declarado no comprovante de residência não condiz com o cadastro da proposta       |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0027            | Placa não informada no cadastro do veículo vinculado à proposta                               |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0028            | Placa declarada no DUT não condiz com o cadastro do veículo vinculado à proposta              |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0029            | Chassi não informado no cadastro da Nota Fiscal do veículo vinculado à proposta               |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0030            | Chassi declarado na Nota Fiscal do veículo não condiz com o cadastro do veículo vinculado     |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0031            | Ano de fabricação não informado no cadastro do veículo vinculado à proposta                   |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0032            | Ano de fabricação declarado na Nota Fiscal do veículo não condiz com o cadastro do veículo    |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0033            | Marca não informada no cadastro do veículo vinculado à proposta                               |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0034            | Marca declarada na Nota Fiscal do veículo não condiz com o cadastro do veículo                |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0035            | Renavam não informado no cadastro do veículo vinculado à proposta                             |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | C0306  | V0036            | Renavam declarada no DUT não condiz com o cadastro do veículo vinculado                       |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0000            | Sucesso                                                                                       |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0001            | Não é um arquivo válido para análise                                                         |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0002            | Arquivo enviado em cópia preto e branco                                                      |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0003            | Arquivo desatualizado                                                                        |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0004            | Informações ilegíveis                                                                        |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0005            | Nome do titular inválido                                                                     |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0006            | Data de nascimento inválida                                                                  |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0007            | Número do documento inválido                                                                 |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0008            | Data de expedição inválida                                                                   |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0009            | Data de expiração inválida                                                                   |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0010            | Data da primeira emissão inválida                                                            |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0011            | Categoria inválida                                                                           |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0012            | Arquivo inválido para análise. Parâmetro: Código                                             |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0013            | Arquivo inválido para análise. Parâmetro: Tipo                                               |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0014            | Arquivo inválido para análise. Parâmetro: Base64                                             |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0015            | Arquivo inválido para análise. Parâmetro: TipoBureau                                         |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0016            | Bureau inválido para o documento consultado                                                  |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0017            | Quantidade de arquivos inválida                                                              |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0018            | Consulta não implementada                                                                    |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0019            | `{Mensagem dinâmica}`                                                                        |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0020            | Retorno de análise inválida. Parâmetro: Código                                               |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0021            | Retorno de análise inválida. Parâmetro: Tipo                                                 |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0022            | Retorno de análise inválida. Parâmetro: Situacao                                             |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0023            | `{Mensagem dinâmica}`                                                                        |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0024            | Tipo de arquivo de retorno inválido                                                          |
+| Proposta  | ConsultaPropostaEstendida   | ConsultarEstendida  | B0001  | V0099            | Erro não catalogado                                                                          |
+</Expandable>

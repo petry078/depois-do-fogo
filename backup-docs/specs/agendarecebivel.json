@@ -1,0 +1,2390 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "BMPDigitalCore.ApiExterna.AgendaRecebivel.API",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.bmpdigital.moneyp.dev.br/",
+      "description": "Localhost"
+    }
+  ],
+  "paths": {
+    "/AgendaRecebivel/CancelarBoletos": {
+      "post": {
+        "tags": [
+          "AgendaRecebivel"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelCancelaBoletosCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelCancelaBoletosCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelCancelaBoletosCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgendaRecebivel/CancelarCobrancas": {
+      "post": {
+        "tags": [
+          "AgendaRecebivel"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelCancelarCobrancasCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelCancelarCobrancasCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelCancelarCobrancasCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgendaRecebivel/ConsultarBoletos": {
+      "post": {
+        "tags": [
+          "AgendaRecebivel"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelConsultaBoletosCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelConsultaBoletosCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelConsultaBoletosCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelConsultaBoletosResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelConsultaBoletosResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelConsultaBoletosResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgendaRecebivel/ConsultarDetalhes": {
+      "post": {
+        "tags": [
+          "AgendaRecebivel"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelConsultaDetalhesCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelConsultaDetalhesCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelConsultaDetalhesCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelConsultaDetalhesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelConsultaDetalhesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelConsultaDetalhesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgendaRecebivel/ConsultarParcelas": {
+      "post": {
+        "tags": [
+          "AgendaRecebivel"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelConsultaParcelasCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelConsultaParcelasCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelConsultaParcelasCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelConsultaParcelasResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelConsultaParcelasResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelConsultaParcelasResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgendaRecebivel/GerarMultiplasCobrancas": {
+      "post": {
+        "tags": [
+          "AgendaRecebivel"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelGerarMultiplasCobrancasCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelGerarMultiplasCobrancasCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelGerarMultiplasCobrancasCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelInclusaoCobrancaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelInclusaoCobrancaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelInclusaoCobrancaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgendaRecebivel/GerarMultiplosBoletos": {
+      "post": {
+        "tags": [
+          "AgendaRecebivel"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelGeraMultiplosBoletosCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelGeraMultiplosBoletosCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelGeraMultiplosBoletosCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgendaRecebivel/GerarUnicaCobranca": {
+      "post": {
+        "tags": [
+          "AgendaRecebivel"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelGerarUnicaCobrancaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelGerarUnicaCobrancaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelGerarUnicaCobrancaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelInclusaoCobrancaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelInclusaoCobrancaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaRecebivelInclusaoCobrancaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgendaRecebivel/GerarUnicoBoleto": {
+      "post": {
+        "tags": [
+          "AgendaRecebivel"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelGeraUnicoBoletoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelGeraUnicoBoletoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelGeraUnicoBoletoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgendaRecebivel/IncluirLancamentoMultiplasParcelas": {
+      "post": {
+        "tags": [
+          "AgendaRecebivel"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelLancamentoMultiplasParcelasCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelLancamentoMultiplasParcelasCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelLancamentoMultiplasParcelasCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgendaRecebivel/IncluirLancamentoParcela": {
+      "post": {
+        "tags": [
+          "AgendaRecebivel"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelLancamentoParcelaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelLancamentoParcelaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelLancamentoParcelaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgendaRecebivel/ProrrogarVencimentoParcela": {
+      "post": {
+        "tags": [
+          "AgendaRecebivel"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelProrrogaVencimentoParcelaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelProrrogaVencimentoParcelaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRecebivelProrrogaVencimentoParcelaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/HealthCheck": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActionResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "parametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ParametroDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelCancelaBoletosCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FindAgendaRecebivelDTO"
+          },
+          "dtoCancelaBoletos": {
+            "$ref": "#/components/schemas/AgendaRecebivelCancelaBoletosDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelCancelaBoletosDTO": {
+        "required": [
+          "numerosBoletos"
+        ],
+        "type": "object",
+        "properties": {
+          "numerosBoletos": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "description": "Lista contendo os números dos boletos a serem cancelados.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelCancelarCobrancasCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FindAgendaRecebivelDTO"
+          },
+          "dtoCancelarCobrancas": {
+            "$ref": "#/components/schemas/AgendaRecebivelCancelarCobrancasDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelCancelarCobrancasDTO": {
+        "type": "object",
+        "properties": {
+          "codigosLiquidacoes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelConsultaBoletosCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FindAgendaRecebivelDTO"
+          },
+          "dtoConsultaBoletos": {
+            "$ref": "#/components/schemas/AgendaRecebivelConsultaBoletosDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelConsultaBoletosDTO": {
+        "required": [
+          "numerosBoletos"
+        ],
+        "type": "object",
+        "properties": {
+          "numerosBoletos": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "description": "Lista contendo os números dos boletos a serem consultados.",
+            "nullable": true
+          },
+          "trazerBoletosCancelados": {
+            "type": "boolean",
+            "description": "Indica se a consulta deve retornar os boletos cancelados.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelConsultaBoletosResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "boletos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Boleto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelConsultaDetalhesCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FindAgendaRecebivelParcelasDTO"
+          },
+          "dtoConsultaDetalhes": {
+            "$ref": "#/components/schemas/AgendaRecebivelConsultaDetalhesDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelConsultaDetalhesDTO": {
+        "type": "object",
+        "properties": {
+          "trazerBoleto": {
+            "type": "boolean",
+            "description": "Indica se a consulta deve retornar as informações sobre os boletos presentes na agenda.",
+            "nullable": true
+          },
+          "trazerAgendaDetalhada": {
+            "type": "boolean",
+            "description": "Indica se a consulta deve retornar a agenda detalhada, ou seja, com as informações sobre os lançamentos.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelConsultaDetalhesResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "numeroProposta": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "dtInclusao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dtCancelamento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dtLiquidacao": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "situacaoAgenda": {
+            "$ref": "#/components/schemas/SituacaoAgendaRecebivelEnum"
+          },
+          "descricaoSituacaoAgenda": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentoFederalCliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeCliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeEmpresa": {
+            "type": "string",
+            "nullable": true
+          },
+          "ecCliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "vlrFinanciado": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrRetencaoDiarioAprox": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrTotalPago": {
+            "type": "number",
+            "format": "double"
+          },
+          "qtdeParcelas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "situacaoProposta": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "descricaoTipoContrato": {
+            "type": "string",
+            "nullable": true
+          },
+          "parcelas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Parcela"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelConsultaParcelasCalculado": {
+        "type": "object",
+        "properties": {
+          "vlrMulta": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrMora": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrJurosContrato": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrEncargos": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrAbatimento": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrSaldoAtualizado": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelConsultaParcelasCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FindAgendaRecebivelParcelasDTO"
+          },
+          "dtoConsultaParcelas": {
+            "$ref": "#/components/schemas/AgendaRecebivelConsultaParcelasDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelConsultaParcelasDTO": {
+        "type": "object",
+        "properties": {
+          "dtCalculo": {
+            "type": "string",
+            "description": "Define a data que deverá ser utilizada para fins de cálculo.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "permiteDescapitalizacao": {
+            "type": "boolean",
+            "description": "Define se o valor da parcela deve ser descapitalizado para a data do pagamento/cálculo.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelConsultaParcelasParcela": {
+        "type": "object",
+        "properties": {
+          "nroParcela": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dtVencimentoAtual": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "calculado": {
+            "$ref": "#/components/schemas/AgendaRecebivelConsultaParcelasCalculado"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelConsultaParcelasResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "dtCalculo": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "parcelas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaRecebivelConsultaParcelasParcela"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelGeraMultiplosBoletosCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FindAgendaRecebivelDTO"
+          },
+          "dtoGerarMultiplosBoletos": {
+            "$ref": "#/components/schemas/AgendaRecebivelGerarMultiplosBoletosDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelGeraUnicoBoletoCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FindAgendaRecebivelParcelasDTO"
+          },
+          "dtoGerarUnicoBoleto": {
+            "$ref": "#/components/schemas/AgendaRecebivelGerarUnicoBoletoDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelGerarMultiplasCobrancasCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FindAgendaRecebivelDTO"
+          },
+          "dtoGerarMultiplasLiquidacoes": {
+            "$ref": "#/components/schemas/AgendaRecebivelGerarMultiplasLiquidacoesDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelGerarMultiplasLiquidacoesDTO": {
+        "required": [
+          "descricaoLiquidacao"
+        ],
+        "type": "object",
+        "properties": {
+          "descricaoLiquidacao": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string",
+            "description": "Define uma descrição para a cobrança gerada.",
+            "nullable": true
+          },
+          "notificarCliente": {
+            "type": "boolean",
+            "description": "Indica se o cliente deve ser notificado sobre as cobranças gerados (disponível apenas para boletos)."
+          },
+          "tipoRegistro": {
+            "type": "integer",
+            "description": "Define a modalidade de registro automático: 1 - Online; 2 - Offline.",
+            "format": "int32",
+            "nullable": true
+          },
+          "pagamentoViaBoleto": {
+            "type": "boolean",
+            "description": "Define se a cobrança gerada será um boleto.",
+            "nullable": true
+          },
+          "pagamentoViaPIX": {
+            "type": "boolean",
+            "description": "Define se a cobrança gerada será um Pix Cobrança.",
+            "nullable": true
+          },
+          "parcelas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaRecebivelGerarMultiplasLiquidacoesParcela"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelGerarMultiplasLiquidacoesParcela": {
+        "required": [
+          "dtVencimento",
+          "nroParcela"
+        ],
+        "type": "object",
+        "properties": {
+          "nroParcela": {
+            "type": "integer",
+            "description": "Número da parcela.",
+            "format": "int32"
+          },
+          "dtVencimento": {
+            "type": "string",
+            "description": "Data de vencimento da cobrança.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dtExpiracao": {
+            "type": "string",
+            "description": "Define a data limite de pagamento da cobrança.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vlrDesconto": {
+            "type": "number",
+            "description": "Define um valor de desconto para a cobrança.",
+            "format": "double",
+            "nullable": true
+          },
+          "permiteDescapitalizacao": {
+            "type": "boolean",
+            "description": "Define se o valor da parcela deve ser descapitalizado para a data do pagamento.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelGerarMultiplosBoletosDTO": {
+        "required": [
+          "descricaoBoleto"
+        ],
+        "type": "object",
+        "properties": {
+          "descricaoBoleto": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string",
+            "description": "Define uma descrição para o boleto gerado.",
+            "nullable": true
+          },
+          "notificarCliente": {
+            "type": "boolean",
+            "description": "Indica se o cliente deve ser notificado sobre os boletos gerados."
+          },
+          "tipoRegistro": {
+            "type": "integer",
+            "description": "Define a modalidade de registro automático: 1 - Online; 2 - Offline.",
+            "format": "int32",
+            "nullable": true
+          },
+          "parcelas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaRecebivelGerarMultiplosBoletosParcela"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelGerarMultiplosBoletosParcela": {
+        "required": [
+          "dtVencimento",
+          "nroParcela"
+        ],
+        "type": "object",
+        "properties": {
+          "nroParcela": {
+            "type": "integer",
+            "description": "Número da parcela.",
+            "format": "int32"
+          },
+          "dtVencimento": {
+            "type": "string",
+            "description": "Data de vencimento do boleto.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dtExpiracao": {
+            "type": "string",
+            "description": "Define a data limite de pagamento do boleto.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vlrDesconto": {
+            "type": "number",
+            "description": "Define um valor de desconto para o boleto.",
+            "format": "double",
+            "nullable": true
+          },
+          "permiteDescapitalizacao": {
+            "type": "boolean",
+            "description": "Define se o valor da parcela deve ser descapitalizado para a data do pagamento.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelGerarUnicaCobrancaCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FindAgendaRecebivelParcelasDTO"
+          },
+          "dtoGerarUnicaLiquidacao": {
+            "$ref": "#/components/schemas/AgendaRecebivelGerarUnicaCobrancaDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelGerarUnicaCobrancaDTO": {
+        "required": [
+          "descricaoLiquidacao",
+          "liquidacao"
+        ],
+        "type": "object",
+        "properties": {
+          "dtVencimento": {
+            "type": "string",
+            "description": "Data de vencimento da cobrança.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dtExpiracao": {
+            "type": "string",
+            "description": "Define a data limite de pagamento da cobrança.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "liquidacao": {
+            "type": "boolean",
+            "description": "Indica se a cobrança gerada deve liquidar a parcela."
+          },
+          "pagamentoViaBoleto": {
+            "type": "boolean",
+            "description": "Define se a cobrança gerada será um boleto."
+          },
+          "pagamentoViaPIX": {
+            "type": "boolean",
+            "description": "Define se a cobrança gerada será um Pix Cobrança."
+          },
+          "descricaoLiquidacao": {
+            "type": "string",
+            "description": "Define uma descrição para a cobrança gerada.",
+            "nullable": true
+          },
+          "vlrLiquidacao": {
+            "type": "number",
+            "description": "Define o valor da cobrança gerada. Obs.: Caso 'Liquidacao' seja verdadeiro, não deve ser informado.",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrDesconto": {
+            "type": "number",
+            "description": "Define um valor de desconto para a cobrança gerada.",
+            "format": "double",
+            "nullable": true
+          },
+          "permiteDescapitalizacao": {
+            "type": "boolean",
+            "description": "Define se o valor da parcela deve ser descapitalizado para a data de vencimento da cobrança.",
+            "nullable": true
+          },
+          "tipoRegistro": {
+            "type": "integer",
+            "description": "Define a modalidade de registro automático: 1 - Online; 2 - Offline.",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelGerarUnicoBoletoDTO": {
+        "required": [
+          "descricaoBoleto",
+          "dtVencimento"
+        ],
+        "type": "object",
+        "properties": {
+          "dtVencimento": {
+            "type": "string",
+            "description": "Data de vencimento do boleto.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dtExpiracao": {
+            "type": "string",
+            "description": "Define a data limite de pagamento do boleto.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "liquidacao": {
+            "type": "boolean",
+            "description": "Indica se o boleto deve liquidar a parcela."
+          },
+          "descricaoBoleto": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string",
+            "description": "Define uma descrição para o boleto gerado.",
+            "nullable": true
+          },
+          "vlrBoleto": {
+            "type": "number",
+            "description": "Define o valor do boleto. Obs.: para boletos de liquidação, este campo não deve ser informado.",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrDesconto": {
+            "type": "number",
+            "description": "Define um valor de desconto para o boleto.",
+            "format": "double",
+            "nullable": true
+          },
+          "permiteDescapitalizacao": {
+            "type": "boolean",
+            "description": "Define se o valor da parcela deve ser descapitalizado para a data do pagamento.",
+            "nullable": true
+          },
+          "tipoRegistro": {
+            "type": "integer",
+            "description": "Define a modalidade de registro automático: 1 - Online; 2 - Offline.",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelInclusaoCobrancaResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "cobrancas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CobrancaGeradaDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelLancamentoMultiplasParcelasCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FindAgendaRecebivelDTO"
+          },
+          "dtoLancamentoParcelas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaRecebivelLancamentoParcelasDTO"
+            },
+            "nullable": true
+          },
+          "parametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ParametroDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelLancamentoParcelaCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FindAgendaRecebivelParcelaDTO"
+          },
+          "dtoLancamentoParcela": {
+            "$ref": "#/components/schemas/AgendaRecebivelLancamentoParcelaDTO"
+          },
+          "parametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ParametroDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelLancamentoParcelaDTO": {
+        "required": [
+          "dtPagamento",
+          "vlrPagamento"
+        ],
+        "type": "object",
+        "properties": {
+          "dtPagamento": {
+            "type": "string",
+            "description": "Data do pagamento.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vlrPagamento": {
+            "type": "number",
+            "description": "Valor do pagamento.",
+            "format": "double"
+          },
+          "vlrDesconto": {
+            "type": "number",
+            "description": "Valor de desconto na parcela.",
+            "format": "double",
+            "nullable": true
+          },
+          "permiteDescapitalizacao": {
+            "type": "boolean",
+            "description": "Define se o valor da parcela deve ser descapitalizado para a data do pagamento.",
+            "nullable": true
+          },
+          "descricaoLancamento": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "Define uma descrição para o lançamento.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelLancamentoParcelasDTO": {
+        "required": [
+          "dtPagamento",
+          "nroParcela",
+          "vlrPagamento"
+        ],
+        "type": "object",
+        "properties": {
+          "nroParcela": {
+            "type": "integer",
+            "description": "Número da parcela da agenda.",
+            "format": "int32"
+          },
+          "dtPagamento": {
+            "type": "string",
+            "description": "Data do pagamento.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vlrPagamento": {
+            "type": "number",
+            "description": "Valor do pagamento.",
+            "format": "double"
+          },
+          "vlrDesconto": {
+            "type": "number",
+            "description": "Valor de desconto na parcela.",
+            "format": "double",
+            "nullable": true
+          },
+          "permiteDescapitalizacao": {
+            "type": "boolean",
+            "description": "Define se o valor da parcela deve ser descapitalizado para a data do pagamento.",
+            "nullable": true
+          },
+          "descricaoLancamento": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "Define uma descrição para o lançamento.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelProrrogaVencimentoParcelaCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FindAgendaRecebivelParcelaDTO"
+          },
+          "dtoProrrogaVencimentoParcela": {
+            "$ref": "#/components/schemas/AgendaRecebivelProrrogaVencimentoParcelaDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaRecebivelProrrogaVencimentoParcelaDTO": {
+        "required": [
+          "motivoAlteracao",
+          "novoVencimento"
+        ],
+        "type": "object",
+        "properties": {
+          "novoVencimento": {
+            "type": "string",
+            "description": "Define uma nova data de vencimento para a parcela em questão.",
+            "format": "date-time"
+          },
+          "motivoAlteracao": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string",
+            "description": "Motivo da alteração da data de vencimento.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Boleto": {
+        "type": "object",
+        "properties": {
+          "numeroBoleto": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "numeroProposta": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "liquidacao": {
+            "type": "boolean"
+          },
+          "parcelas": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtInclusao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dtVencimento": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dtCancelamento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dtExpiracao": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dtCredito": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "valorBoleto": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrPago": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "impressao": {
+            "type": "string",
+            "nullable": true
+          },
+          "linhaDigitavel": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentoFederalCliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "cliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "parceiro": {
+            "type": "string",
+            "nullable": true
+          },
+          "qrCode": {
+            "$ref": "#/components/schemas/DadosQRCodeConsultaBoletos"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BoletoGerado": {
+        "type": "object",
+        "properties": {
+          "numeroBoleto": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "liquidacao": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "dtCredito": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dtExpiracao": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "linhaDigitavel": {
+            "type": "string",
+            "nullable": true
+          },
+          "operacaoBoletoRegistro": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "situacaoBoletoRegistro": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "descricaoBoletoRegistro": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlImpressao": {
+            "type": "string",
+            "nullable": true
+          },
+          "qrCode": {
+            "$ref": "#/components/schemas/DadosQRCode"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CobrancaGeradaDTO": {
+        "type": "object",
+        "properties": {
+          "codigoLiquidacao": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parcelas": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DadosQRCode": {
+        "type": "object",
+        "properties": {
+          "emv": {
+            "type": "string",
+            "nullable": true
+          },
+          "imagem": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DadosQRCodeConsultaBoletos": {
+        "type": "object",
+        "properties": {
+          "emv": {
+            "type": "string",
+            "nullable": true
+          },
+          "imagem": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorType": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "FindAgendaRecebivelDTO": {
+        "type": "object",
+        "properties": {
+          "codigoProposta": {
+            "type": "string",
+            "description": "Código identificador da proposta na BMP.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "codigoOperacao": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Código identificador da proposta (valor exclusivo do integrador).",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FindAgendaRecebivelParcelaDTO": {
+        "required": [
+          "nroParcela"
+        ],
+        "type": "object",
+        "properties": {
+          "codigoProposta": {
+            "type": "string",
+            "description": "Código identificador da proposta na BMP.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "codigoOperacao": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Código identificador da proposta (valor exclusivo do integrador).",
+            "nullable": true
+          },
+          "nroParcela": {
+            "type": "integer",
+            "description": "Número da parcela da agenda.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FindAgendaRecebivelParcelasDTO": {
+        "required": [
+          "nroParcelas"
+        ],
+        "type": "object",
+        "properties": {
+          "codigoProposta": {
+            "type": "string",
+            "description": "Código identificador da proposta na BMP.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "codigoOperacao": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Código identificador da proposta (valor exclusivo do integrador).",
+            "nullable": true
+          },
+          "nroParcelas": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Array contendo o número das parcelas a serem consultadas.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Lancamento": {
+        "type": "object",
+        "properties": {
+          "dtVencimento": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dtLancamento": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "vlrParcela": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrMulta": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrJuros": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrMora": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrIOF": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrTarifas": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrAbatimento": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrParcelaAtualizado": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrPagamento": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrSaldoParcela": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrDesconto": {
+            "type": "number",
+            "format": "double"
+          },
+          "informarFundo": {
+            "type": "boolean"
+          },
+          "descLancamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "viaBoleto": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "messageType": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "context": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "field": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ParametroDTO": {
+        "required": [
+          "nome",
+          "valor"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "valor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Parcela": {
+        "type": "object",
+        "properties": {
+          "codigoParcela": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nroParcela": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "situacao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dtVencimento": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "vlrParcela": {
+            "type": "number",
+            "format": "double"
+          },
+          "nroOrdemPagamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "vlrSaldoAtual": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrTotalPago": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrDesconto": {
+            "type": "number",
+            "format": "double"
+          },
+          "dtVencimentoAtual": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "boletos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BoletoGerado"
+            },
+            "nullable": true
+          },
+          "pix": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PixGerado"
+            },
+            "nullable": true
+          },
+          "lancamentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Lancamento"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PixGerado": {
+        "type": "object",
+        "properties": {
+          "liquidacao": {
+            "type": "boolean"
+          },
+          "dtCredito": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dtVencimento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dtExpiracao": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "emv": {
+            "type": "string",
+            "nullable": true
+          },
+          "imagem": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseBase": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SituacaoAgendaRecebivelEnum": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "Informe o token",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

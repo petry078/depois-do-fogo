@@ -1,0 +1,50 @@
+---
+title: "Gestão de Callbacks"  
+version: 'Português'
+---
+
+**Gestão de Callbacks** é a terceira opção do menu vertical a esquerda. Nessa seção é possível acessar o histórico de callbacks enviados e também permite o reenvio de callbacks, quando disponível.
+
+Esse gerenciamento é feito através das páginas:
+
+* **Histórico de Envios**;
+* **Reenvio de Callbacks**;
+* **Configuração de Callbacks**.
+
+## Histórico de Envios
+
+Na página de **Histórico de Envios**, o parceiro tem a vizualização em lista de callbacks recebidos. Essa lista possui as colunas de **Data**, **Emitente**, **CPF/CNPJ** e **Situação**.
+
+Para interagir com a lista de callbacks, o parceiro tem acesso a três botões:
+
+* Filtro: possibilita a busca de uma proposta específica, através do código da proposta, ou uma exibição de lista de callbacks enviador durante um período de `Processado de (data) até (data)`;
+* Recarregar: recarrega a lista de histórico de callbacks;
+* Exportar para Excel: exporta a lista de callbacks enviados em um arquivo Excel.
+
+## Reenvio de Callbacks
+
+Na página **Reenvio de Callbacks**, é possível solicitar o envio de um callback já enviado.
+
+Para isso, siga os passos abaixo:
+
+1. No dropdown `Status *`, selecione o status do callback enviado anteriormente.
+    * Pode ser **Pendente**, **Finalizada**, **Conferida**, **Liberada**, **Paga**, **Cedida**, **Pendente Pagamento**.
+2. No campo `Propostas *`, informe o código das propostas que devem ter seus callbacks reenviados.
+    * Separe as propostas por linha.
+3. Clique no botão `ENVIAR`.
+
+## Configuração de Callbacks
+
+Na página de **Configuração**, é possível atualizar a **URL de Notificação**, **Tipo de Callback**, **Integração**, **Método**, **Autenticação** e **Chave**.
+
+Para isso, siga os passos abaixo:
+
+1. No dropdown `Tipo de Callback`, selecione o tipo de callback.
+    * Pode ser **Proposta**, **Agenda Recebíveis**, **Proposta Lançamento**, **FGTS**.
+2. No dropdown `Integração`, selecione a credencial que deseja configurar o callback.
+3. No campo `URL de Notificação`, informe a URL configurada para receber os callbacks.
+4. No dropdown `Método de envio`, selecione o método HTTP utilizada para receber os callbacks.
+    * Pode ser **GET**, **POST** e **PUT**.
+5. No campo `Autenticação`, informe o método de autenticação.
+6. No campo `Chave`, informe a chave da autenticação.
+7. Clique no botão `SALVAR`.

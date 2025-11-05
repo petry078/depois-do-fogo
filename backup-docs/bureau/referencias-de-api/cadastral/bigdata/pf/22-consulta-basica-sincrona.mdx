@@ -1,0 +1,35 @@
+---
+title: "22 - Consulta Básica Síncrona"
+openapi: post /Bureau/DadosBasicosReceitaFederalPF
+---
+
+Este endpoint permite consultar de forma básica, os dados cadastrais de uma pessoa física no formato de resposta rápida (Síncrono). A resposta é retornada em ‘String JSON’ serializado e inclui as seguintes informações: nome, idade, nome da mãe, número do documento, informação da Receita e indicação de óbito.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{
+    "Erro": true,
+    "MensagemOperador": "String",
+    "ResultadoConsulta": {
+        "Name": "String",
+        "Age": 66,
+        "MotherName": "String",
+        "TaxIdNumber": "String",
+        "TaxIdOrigin": "String",
+        "TaxIdStatus": "String",
+        "TaxIdFiscalRegion": "String",
+        "HasObitIndication": "Boolean",
+        "Identificador": "String",
+        "StatusConsulta": {
+            "Code": 66,
+            "Message": "String"
+        },
+        "identificador": "String"
+    }
+}
+```
+
+</Expandable>

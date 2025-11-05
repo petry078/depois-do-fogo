@@ -1,0 +1,821 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "BMPDigitalCore.ApiExterna.SolicitacaoAnalise.API",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.bmpdigital.moneyp.dev.br/",
+      "description": "Localhost"
+    }
+  ],
+  "paths": {
+    "/HealthCheck": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/SolicitacaoAnalise/ConsultarSaldo": {
+      "post": {
+        "tags": [
+          "SolicitacaoAnalise"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaSaldoAnaliseCreditoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaSaldoAnaliseCreditoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaSaldoAnaliseCreditoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultaSaldoAnaliseCreditoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultaSaldoAnaliseCreditoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultaSaldoAnaliseCreditoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/SolicitacaoAnalise/ConsultarSituacao": {
+      "post": {
+        "tags": [
+          "SolicitacaoAnalise"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitacaoAnaliseCreditoSituacaoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitacaoAnaliseCreditoSituacaoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitacaoAnaliseCreditoSituacaoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitacaoAnaliseCreditoSituacaoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitacaoAnaliseCreditoSituacaoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitacaoAnaliseCreditoSituacaoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/SolicitacaoAnalise/ConsultarSolicitacoes": {
+      "post": {
+        "tags": [
+          "SolicitacaoAnalise"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitacoesAnaliseCreditoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitacoesAnaliseCreditoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitacoesAnaliseCreditoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitacoesAnaliseCreditoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitacoesAnaliseCreditoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitacoesAnaliseCreditoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/SolicitacaoAnalise/IncluirSolicitacaoAnaliseCredito": {
+      "post": {
+        "tags": [
+          "SolicitacaoAnalise"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitacaoAnaliseCreditoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitacaoAnaliseCreditoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitacaoAnaliseCreditoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitacaoAnaliseCreditoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitacaoAnaliseCreditoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitacaoAnaliseCreditoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ConsultaSaldoAnaliseCreditoCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/ConsultaSaldoAnaliseCreditoDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaSaldoAnaliseCreditoDTO": {
+        "required": [
+          "documentoCliente"
+        ],
+        "type": "object",
+        "properties": {
+          "documentoCliente": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Refere-se ao número do documento federal do cliente.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaSaldoAnaliseCreditoResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "saldoCliente": {
+            "$ref": "#/components/schemas/SaldoClienteResult"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorType": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "messageType": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "context": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "field": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ParametroDTO": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Refere-se ao nome do parâmetro.",
+            "nullable": true
+          },
+          "valor": {
+            "type": "string",
+            "description": "Refere-se ao valor do parâmetro.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseBase": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SaldoClienteResult": {
+        "type": "object",
+        "properties": {
+          "vlrSaldoCredito": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrSaldoHotMoney": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrSaldoRotativo": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SolicitacaoAnaliseCreditoCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/SolicitacaoAnaliseCreditoDTO"
+          },
+          "parametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ParametroDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SolicitacaoAnaliseCreditoDTO": {
+        "required": [
+          "documentoCliente"
+        ],
+        "type": "object",
+        "properties": {
+          "documentoCliente": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Refere-se ao documento federal do cliente.",
+            "nullable": true
+          },
+          "identificador": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Identificação da solicitação (valor exclusivo do integrador).",
+            "nullable": true
+          },
+          "vlrSolicitadoMin": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Refere-se ao valor mínimo solicitado.",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrSolicitadoMax": {
+            "maximum": 10000000000000000,
+            "minimum": 0,
+            "type": "number",
+            "description": "Refere-se ao valor máximo solicitado.",
+            "format": "double",
+            "nullable": true
+          },
+          "observacoes": {
+            "type": "string",
+            "description": "Observações sobre a análise de crédito solicitada.",
+            "nullable": true
+          },
+          "prioridade": {
+            "maximum": 5,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Refere-se a um enumerador utilizado para discriminar a urgência da análise de crédito, sendo: Prioridade da análise de 1 a 5, onde: 1 = Muito baixa; 2 = Baixa; 3 = Normal; 4 = Alta; 5 = Muito alta. Quando não informado assume o valor 3 (normal).",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SolicitacaoAnaliseCreditoResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SolicitacaoAnaliseCreditoSituacaoCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/SolicitacaoAnaliseCreditoSituacaoDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SolicitacaoAnaliseCreditoSituacaoDTO": {
+        "type": "object",
+        "properties": {
+          "codigoSolicitacao": {
+            "type": "string",
+            "description": "Refere-se ao código da solicitação na BMP.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "identificador": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Refere-se ao código da operação do integrador (proposta/boleto/outros).",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SolicitacaoAnaliseCreditoSituacaoResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "codigoSolicitacao": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "situacao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vlrSolicitadoMin": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrSolicitadoMax": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "observacoesAnalista": {
+            "type": "string",
+            "nullable": true
+          },
+          "identificador": {
+            "type": "string",
+            "nullable": true
+          },
+          "vlrConcedido": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrParcelaMaxima": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "percJurosConcedido": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrTAC": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrHotMoney": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrParcMaxHotMoney": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "percJurosHotMoney": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrTACHotMoney": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrRotativo": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrParcMaxRotativo": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "percJurosRotativo": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrTACRotativo": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "saldoCliente": {
+            "$ref": "#/components/schemas/SaldoClienteResult"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SolicitacoesAnaliseCredito": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "identificador": {
+            "type": "string",
+            "nullable": true
+          },
+          "situacao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dtInclusao": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SolicitacoesAnaliseCreditoCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/SolicitacoesAnaliseCreditoDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SolicitacoesAnaliseCreditoDTO": {
+        "required": [
+          "documentoCliente"
+        ],
+        "type": "object",
+        "properties": {
+          "documentoCliente": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Refere-se ao número do documento federal do cliente.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SolicitacoesAnaliseCreditoResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "solicitacoes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SolicitacoesAnaliseCredito"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "Informe o token",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

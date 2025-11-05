@@ -1,0 +1,443 @@
+---
+title: "Procedimento Técnico de Callback"
+version: 'Português'
+---
+
+Para nós a conexão entre sistemas é primordial para garantir que a performance de nossas aplicações, entreguem o resultado pretendido pelos nossos parceiros.A implementação de Callback se torna indispensável, uma vez que possibilita uma gama de vantagens significativas. 
+
+Por meio das chamadas de call-back, é possível promover uma comunicação assertiva entre todas as áreas envolvidas no processo. Com isso não é necessário uma consulta incessante a API , por meio dos call-backs enviamos as informações, atualizações e notificações de maneira precisa. Dessa forma reduzimos o volume de requisições promovendo um fluxo mais eficiente no que diz respeito a performance do sistema em geral.
+
+O call-back para acompanhamento dos status das propostas, deve ser enviado, tanto para o ambiente de homologação quanto para o ambiente de produção, se possível serem URLs diferentes. Esse call-back, é enviado via Query Parameter.
+
+## Métodos de autenticação aceitos pelo callback
+
+| **Autenticação**                              | **Chave**     | **Exemplo**                                |
+|-----------------------------------------------|---------------|--------------------------------------------|
+| Bearer Token                                  | Authorization | Bearer `<token>`                           |
+| API Key                                       | API-Key       | `<sua_chave_de_api>`                       |
+| Basic Authentication                          | Authorization | Basic `<base64_encoded_username:password>` |
+| X-API-Key                                     | X-API-Key     | `<sua_chave_de_api>`                       |
+| Digest Authentication                         | Authorization | Digest `<digest_hash>`                     |
+| JWT (JSON Web Token)                          | Authorization | Bearer `<JWT_token>`                       |
+| HMAC (Hash-based Message Authentication Code) | Authorization | HMAC `<hash_value>`                        |
+| OAuth Tokens                                  | Authorization | Bearer `<OAuth_token>`                     |
+| AWS Signature                                 | Authorization | AWS `<signature>`                          |
+| Client Certificates                           | Certificate   | `<client_certificate>`                     |
+
+## Exemplo de callback de proposta
+
+Segue exemplo de URL e como parametrizamos para recebimento:
+**xxxxxxxxxx.com.br?proposta={PROPOSTA}&situacao={SITUACAO}&identificador={IDENTIFICADOR}**
+
+Sendo: 
+
+**Proposta:** GUID único da proposta gerado no response no momento da inclusão da proposta.
+
+**Situação:** ID da situação da proposta em nosso sistema.
+
+**Identificador:** Caso seja enviado, esse campo representa o código da operação enviado na inclusão da proposta.
+
+## Tabela de Ids
+
+| **ID** | **Descrição**      | **Objetivo**                                                                                                                                |
+|--------|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| 0      | Em Digitação       | Proposta encontra-se em digitação.                                                                                                          |
+| 1      | Em Análise         | Proposta foi enviada para fila de análise.                                                                                                  |
+| 2      | Aprovada           | Proposta foi aprovada pela área de análise de crédito.                                                                                      |
+| 3      | Recusada           | Proposta foi recusada pela área de análise de crédito.                                                                                      |
+| 4      | Cancelada          | Proposta foi cancelada pela área de análise de crédito.                                                                                     |
+| 5      | Pendente           | Proposta foi marcada como pendente pela área de análise de crédito, necessita de intervenção do integrador para retornar à fila de análise. |
+| 6      | Finalizada         | Proposta foi finalizada.                                                                                                                    |
+| 7      | Conferida          | Proposta foi conferida pela área de formalização.                                                                                           |
+| 8      | Liberada           | Proposta foi liberada pela área de formalização para pagamento.                                                                             |
+| 9      | Paga               | Proposta foi paga pela área financeira.                                                                                                     |
+| 10     | Cedida             | Proposta foi cedida ao fundo.                                                                                                               |
+| 11     | Pendente Pagamento | Proposta foi marcada como pendente de pagamento devido à inconsistência em dados bancários, necessita intervenção do integrador para informar os dados corretos de pagamento e retornar para a fila de pagamento. |
+
+**Observação:** Além dos dados já enviados na Query (Guid da Proposta, Status e Identificador), os call-backs de Pago "9" e Pendente pagamento "11" possuem um body com o campo "Descrição da ocorrência", que informa o motivo da pendência do pagamento quando for um status "11" e quando for status "9" retorna com o texto "Crédito ou débito efetivado". Segue abaixo exemplos de retorno:
+
+**Status 09:**
+
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src="/caas/images/status9.jpg" alt="kickoff image"  />
+</div>
+
+**Status 11:**
+
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src="/caas/images/status11.jpg" alt="kickoff image"  />
+</div>
+
+## Callbacks da Gestão de Contratos
+
+## Criação da Gestão de Contratos
+
+Callback responsável por comunicar a criação de uma agenda de parcelas, detalhando informações sobre parcelas, valores e datas relevantes:
+
+<Expandable title = "Criação da Gestão de Contratos">
+
+<Expandable title = "Retorno da Criação de Gestão de Contratos">
+
+```json
+{
+  "QtdeParcelas": 8,
+  "VlrTotalDivida": 11.2,
+  "DtFinanciado": "06-09-2024",
+  "Credito": {
+    "DtCredito": null,
+    "Conta": {
+      "CodigoBanco": null,
+      "NomeBanco": null,
+      "Agencia": null,
+      "Conta": null,
+      "ContaDigito": null
+    }
+  },
+  "Parcelas": [
+    {
+      "NroParcela": 1,
+      "VlrParcela": 1.4,
+      "VlrPrincipal": 1.25,
+      "VlrDespesas": 0.15,
+      "VlrSaldoDevedor": 9.8,
+      "DtVencimento": "16-09-2024"
+    },
+    {
+      "NroParcela": 2,
+      "VlrParcela": 1.4,
+      "VlrPrincipal": 1.25,
+      "VlrDespesas": 0.15,
+      "VlrSaldoDevedor": 8.4,
+      "DtVencimento": "16-10-2024"
+    }
+  ]
+}
+```
+
+</Expandable>
+
+## Tabela de Descrição dos Campos
+
+| **Campo**       | **Tipo** | **Descrição**                                                       |
+|-----------------|----------|---------------------------------------------------------------------|
+| QtdeParcelas    | Int      | Descreve a quantidade de parcelas.                                  |
+| VlrTotalDivida  | Float    | Valor total da dívida incluindo taxas e impostos.                   |
+| DtFinanciado    | Date     | Data da contratação do financiamento.                               |
+| DtCredito       | Date     | Data em que foi cedido o crédito, desembolso do valor.              |
+| CodigoBanco     | Int      | Código de identificação do banco.                                   |
+| NomeBanco       | String   | Nome do banco.                                                      |
+| Agência         | Int      | Número de identificação da agência.                                 |
+| Conta           | Int      | Número de identificação da conta.                                   |
+| ContaDigito     | Int      | Dígito da conta.                                                    |
+| NroParcela      | Int      | Número da parcela.                                                  |
+| VlrParcela      | Float    | Valor total da parcela.                                             |
+| VlrPrincipal    | Float    | Valor sem taxas, juros e impostos.                                  |
+| VlrDespesas     | Float    | Valor das despesas adicionais incluídas na parcela (taxas e juros). |
+| VlrSaldoDevedor | Float    | Saldo devedor após o pagamento da parcela.                          |
+| DtVencimento    | Date     | Data de vencimento da parcela.                                      |
+
+</Expandable>
+
+## Cancelamento da Gestão de Contratos
+
+Callback utilizado para notificar o cancelamento de uma agenda previamente criada, incluindo os detalhes do evento e o número da proposta associada:
+
+<Expandable title = "Cancelamento da Gestão de Contratos">
+
+<Expandable title = "Retorno do Cancelamento da Gestão de Contratos">
+
+```json
+ {
+  "TipoEvento": 1,
+  "NomeEvento": "Cancelamento de Agenda",
+  "NroProposta": 3543743,
+  "DtEvento": "2024-09-05",
+  "AcrescimoAbatimento": null,
+  "LancamentoParcela": null,
+  "ProrrogacaoVencimento": null,
+  "GeracaoBoleto": null,
+  "CancelamentoBoleto": {
+"CodigoBoleto": "8f3898e2-c99b-40f2-9d13-6a23e5b7e082",
+"NroBoleto": 48681,
+"Parcelas": [
+3
+]
+}
+}
+``` 
+
+</Expandable>
+
+## Tabela de Descrição dos Campos
+
+| **Campo**             | **Tipo** | **Descrição**                                                                       |
+|-----------------------|----------|-------------------------------------------------------------------------------------|
+| TipoEvento            | Int      | Identificador numérico do tipo de evento.                                           |
+| NomeEvento            | String   | Nome do evento.                                                                     |
+| NroProposta           | Int      | Número da proposta associada.                                                       |
+| DtEvento              | String   | Data em que o evento ocorreu.                                                       |
+| AcrescimoAbatimento   | Object   | Objeto contendo informações sobre acréscimos ou abatimentos relacionados ao evento. |
+| LancamentoParcela     | Object   | Objeto contendo informações sobre o lançamento de parcelas.                         |
+| GeracaoBoleto         | Object   | Objeto contendo informações sobre a geração do boleto.                              |
+| ProrrogacaoVencimento | Datetime | Data e hora da prorrogação do vencimento.                                           |
+| CancelamentoBoleto    | Object   | Objeto contendo informações do cancelamento.                                        |
+
+</Expandable>
+
+## Acréscimo/Abatimento
+
+Callback que informa alterações financeiras em parcelas de uma proposta, seja por acréscimos ou abatimentos aplicados:
+
+<Expandable tilte = "Acéscimo/Abatimento">
+<Expandable title = "Retorno do Acréscimo/Abatimento">
+
+```json
+ {
+  "TipoEvento": 2,
+  "NomeEvento": "Acréscimo/Abatimento",
+  "NroProposta": 3543753,
+  "DtEvento": "2024-09-05",
+  "AcrescimoAbatimento": {
+    "NroParcela": 2,
+    "VlrSaldo": 0,
+    "VlrAcrescimo": 10,
+    "VlrAbatimento": 0,
+    "VlrSaldoAtual": 10
+  },
+  "LancamentoParcela": null,
+  "ProrrogacaoVencimento": null,
+  "GeracaoBoleto": null,
+  "CancelamentoBoleto": null
+}
+``` 
+
+</Expandable>
+
+## Tabela de Descrição dos Campos
+
+| **Campo**              | **Tipo**     | **Descrição**                                                                       |
+|------------------------|--------------|-------------------------------------------------------------------------------------|
+| TipoEvento             | Int          | Identificador numérico do tipo de evento.                                           |
+| NomeEvento             | String       | Nome do evento.                                                                     |
+| NroProposta            | Int          | Número da proposta associada.                                                       |
+| DtEvento               | String       | Data em que o evento ocorreu.                                                       |
+| AcrescimoAbatimento    | Object       | Objeto contendo informações sobre acréscimos ou abatimentos relacionados ao evento. |
+| NroParcela             | Int          | Número da parcela afetada pelo acréscimo/abatimento.                                |
+| LancamentoParcela      | Object       | Objeto contendo informações sobre o lançamento de parcelas.                         |
+| GeracaoBoleto          | Object       | Objeto contendo informações sobre a geração do boleto.                              |
+| ProrrogacaoVencimento  | Datetime     | Data e hora da prorrogação do vencimento.                                           |
+| CancelamentoBoleto     | Object       | Objeto contendo informações do cancelamento.                                        |
+| VlrAcrescimo           | Float        | Valor do acréscimo aplicado à parcela.                                              |
+| VlrAbatimento          | Float        | Valor do abatimento aplicado à parcela.                                             |
+
+</Expandable>
+
+## Lançamento de Parcela
+
+Callback que comunica eventos relacionados ao lançamento de parcelas, como pagamento, abatimento, encargos ou liquidação:
+
+<Expandable title = "Lançamento de Parcela">
+<Expandable title = "Retorno do Lançamento de Parcela">
+
+```json
+{
+  "TipoEvento": 3,
+  "NomeEvento": "Lançamento na Parcela",
+  "NroProposta": 3543603,
+  "DtEvento": "2024-09-05",
+  "AcrescimoAbatimento": null,
+  "LancamentoParcela": {
+    "NroParcela": 1,
+    "VlrOriginalParcela": 72.24,
+    "VlrSaldo": 0,
+    "ParcelaLiquidada": true,
+    "VlrEncargos": 0,
+    "VlrAbatimento": 0,
+    "VlrPagamento": 72.24,
+    "VlrDesconto": 0,
+    "VlrSaldoAtual": 0,
+    "VlrExcedente": 0,
+    "DtVencimento": "2024-09-15",
+    "DtVencimentoAtual": "2024-10-30",
+    "Boleto": {
+      "NroBoleto": null,
+      "Liquidacao": null
+    }
+  },
+  "ProrrogacaoVencimento": null,
+  "GeracaoBoleto": null,
+  "CancelamentoBoleto": null
+}
+``` 
+</Expandable>
+
+## Tabela de Descrição dos Campos
+
+| **Campo**           | **Tipo**   | **Descrição**                                      |
+|---------------------|------------|----------------------------------------------------|
+| DtEvento            | Date       | Data em que o evento ocorreu.                      |
+| AcrescimoAbatimento | Object     | Acréscimo ou abatimento aplicável (não aplicável). |
+| NroParcela          | Int        | Número da parcela.                                 |
+| VlrOriginalParcela  | Float      | Valor original da parcela.                         |
+| VlrSaldo            | Float      | Saldo restante após o pagamento (inicialmente 0).  |
+| ParcelaLiquidada    | Boolean    | Indica se a parcela foi totalmente liquidada.      |
+| VlrEncargos         | Float      | Valor dos encargos aplicados (se houver).          |
+| VlrAbatimento       | Float      | Valor de abatimento aplicado (se houver).          |
+| VlrPagamento        | Float      | Valor efetivamente pago.                           |
+| VlrDesconto         | Float      | Valor de desconto concedido (se houver).           |
+| VlrSaldoAtual       | Float      | Saldo atual após pagamento.                        |
+| VlrExcedente        | Float      | Valor excedente pago (se houver).                  |
+| DtVencimento        | Date       | Data de vencimento original da parcela.            |
+| DtVencimentoAtual   | Date       | Data de vencimento atualizada da parcela.          |
+| NroBoleto           | Int        | Número do boleto associado (não aplicável).        |
+| Liquidacao          | Boolean    | Indica se houve liquidação (não aplicável).        |
+
+</Expandable>
+
+## Prorrogação de Vencimento
+
+Callback usado para notificar prorrogações de vencimento de parcelas, informando a nova data e os motivos da alteração:
+
+<Expandable title = "Prorrogação de Vencimento">
+<Expandable title = "Retorno da Prorrogação de Vencimento">
+
+```json
+{
+  "TipoEvento": 4,
+  "NomeEvento": "Prorrogação de Vencimento",
+  "NroProposta": 3543603,
+  "DtEvento": "2024-09-05",
+  "AcrescimoAbatimento": null,
+  "LancamentoParcela": null,
+  "ProrrogacaoVencimento": {
+    "NroParcela": 1,
+    "DtVencimentoAnterior": "2024-09-15",
+    "DtVencimentoAtual": "2024-10-30"
+  },
+  "GeracaoBoleto": null,
+  "CancelamentoBoleto": null
+}
+``` 
+
+</Expandable>
+
+## Tabela de Descrição dos Campos
+
+| **Campo**              | **Tipo**     | **Descrição**                                              |
+|------------------------|--------------|------------------------------------------------------------|
+| CodigoProposta         | String       | UID da proposta retornada no response da inclusão.         |
+| codigoOperacao         | String       | Identificador único da operação.                           |
+| nroParcela             | Int          | Número da parcela afetada pela prorrogação.                |
+| NovoVencimento         | String       | Nova data de vencimento da parcela.                        |
+| MotivoAlteracao        | String       | Descrição do motivo pelo qual o vencimento foi prorrogado. |
+| TipoEvento             | Int          | Identificador numérico do tipo de evento.                  |
+| NomeEvento             | String       | Nome do evento de prorrogação.                             |
+| NroProposta            | Int          | Número da proposta associada ao evento.                    |
+| DtEvento               | String       | Data em que o evento de prorrogação ocorreu.               |
+| ProrrogacaoVencimento  | Object       | Detalhes da prorrogação do vencimento.                     |
+| - NroParcela           | Int          | Número da parcela prorrogada.                              |
+| - DtVencimentoAnterior | String       | Data de vencimento original antes da prorrogação.          |
+| - DtVencimentoAtual    | String       | Nova data de vencimento após a prorrogação.                |
+
+</Expandable>
+
+## Geração de boleto
+
+Callback que informa a geração de um boleto relacionado a uma proposta, incluindo o valor, número e data de vencimento:
+
+<Expandable title = "Geração de Boleto">
+<Expandable title = "Retorno da Geração de Boleto">
+
+```json
+{
+  "TipoEvento": 5,
+  "NomeEvento": "Geração de Boleto",
+  "NroProposta": 3544197,
+  "DtEvento": "2024-09-06",
+  "AcrescimoAbatimento": null,
+  "LancamentoParcela": null,
+  "ProrrogacaoVencimento": null,
+  "GeracaoBoleto": {
+    "CodigoBoleto": "8a72e6a3-cf73-46cb-99ee-b698335f1e12",
+    "NroBoleto": 48924,
+    "VlrBoleto": 1.4,
+    "DtVencimento": "2024-09-25",
+    "Liquidacao": true
+  },
+  "CancelamentoBoleto": null
+}
+
+    ``` 
+
+</Expandable>
+
+## Tabela de Descrição dos Campos
+
+| **Campo**             | **Tipo** | **Descrição**                                                                       |
+|-----------------------|----------|-------------------------------------------------------------------------------------|
+| TipoEvento            | Int      | Identificador numérico do tipo de evento.                                           |
+| NomeEvento            | String   | Nome do evento.                                                                     |
+| NroProposta           | Int      | Número da proposta associada.                                                       |
+| DtEvento              | String   | Data em que o evento ocorreu.                                                       |
+| AcrescimoAbatimento   | Object   | Objeto contendo informações sobre acréscimos ou abatimentos relacionados ao evento. |
+| LancamentoParcela     | Object   | Objeto contendo informações sobre o lançamento de parcelas.                         |
+| GeracaoBoleto         | Object   | Objeto contendo informações sobre a geração do boleto.                              |
+| CodigoBoleto          | String   | Código de identificação do boleto.                                                  |
+| Liquidação            | Boolean  | Identifica se é verdadeiro ou falso a situação da liquidação.                       |
+| VlrBoleto             | Float    | Valor do boleto.                                                                    |
+| DtVencimento          | Date     | Data de vencimento do boleto.                                                       |
+| NroBoleto             | Int      | Número de identificação do boleto.                                                  |
+| ProrrogacaoVencimento | Datetime | Data e hora da prorrogação do vencimento.                                           |
+| CancelamentoBoleto    | Object   | Objeto contendo informações do cancelamento.                                        |
+
+</Expandable>
+
+## Cancelamento de boleto
+
+Callback utilizado para notificar o cancelamento de um boleto, incluindo o código do boleto cancelado e as parcelas associadas:
+
+<Expandable title = "Cancelamento de Boleto">
+
+<Expandable title = "Retorno do Cancelamento de Boleto">
+
+```json
+{
+  "TipoEvento": 6,
+  "NomeEvento": "Cancelamento de Boleto",
+  "NroProposta": 3541909,
+  "DtEvento": "2024-08-30",
+  "AcrescimoAbatimento": //Object
+  "LancamentoParcela": //Object
+  "ProrrogacaoVencimento": null, //Datetime
+  "GeracaoBoleto": null, //Object
+  "CancelamentoBoleto": {
+    "CodigoBoleto": "8f3898e2-c99b-40f2-9d13-6a23e5b7e082",
+    "NroBoleto": 48681,
+    "Parcelas": [
+      3
+    ]
+  }
+}
+``` 
+
+</Expandable>
+
+## Tabela de Descrição dos Retornos
+
+| **Campo**             | **Tipo** | **Descrição**                                                                       |
+|-----------------------|----------|-------------------------------------------------------------------------------------|
+| TipoEvento            | Int      | Identificador numérico do tipo de evento.                                           |
+| NomeEvento            | String   | Nome do evento.                                                                     |
+| NroProposta           | Int      | Número da proposta associada.                                                       |
+| DtEvento              | String   | Data em que o evento ocorreu.                                                       |
+| AcrescimoAbatimento   | Object   | Objeto contendo informações sobre acréscimos ou abatimentos relacionados ao evento. |
+| LancamentoParcela     | Object   | Objeto contendo informações sobre o lançamento de parcelas.                         |
+| GeracaoBoleto         | Object   | Objeto contendo informações sobre a geração do boleto.                              |
+| ProrrogacaoVencimento | Datetime | Data e hora da prorrogação do vencimento.                                           |
+| CancelamentoBoleto    | Object   | Objeto contendo informações do cancelamento.                                        |
+
+</Expandable>
+
+## Considerações Finais
+
+Recomenda-se que o endpoint configurado para receber os callbacks funcione principalmente como um repositório, minimizando o processamento no momento da recepção para evitar atrasos. Implementar processos complexos durante o recebimento dos callbacks pode resultar em timeouts e falhas na comunicação, comprometendo a eficiência do sistema. Opte por processar as mensagens recebidas de forma assíncrona para melhorar a performance e confiabilidade do seu sistema de callbacks.

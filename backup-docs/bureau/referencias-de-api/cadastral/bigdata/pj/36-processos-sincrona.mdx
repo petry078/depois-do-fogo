@@ -1,0 +1,188 @@
+---
+title: "36 - Processos Síncrona"
+openapi: post /Bureau/ProcessosPenaisPJ
+---
+
+Este endpoint realiza consultas síncronas e retorna, em formato 'String JSON' serializada, os dados de mídia negativa relacionados a um documento jurídico. 
+
+A resposta inclui: 
+
+* Quantidade de processos e suas distribuições;
+* Nomes das distribuições de processos;
+* Situação dos processos; 
+* Contagem de processos por período (7 a 360 dias).
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{
+    "AvgLawsuitsPerOwner": Numero,
+    "CnjBroadSubjectDistribution": {
+        "DIREITO CIVIL": Numero,
+        "DIREITO DO CONSUMIDOR": Numero,
+        "DIREITO ADMINISTRATIVO E OUTRAS MATERIAS DE DIREITO PUBLICO": Numero,
+        "DIREITO TRIBUTARIO": Numero,
+        "DIREITO PROCESSUAL CIVIL E DO TRABALHO": Numero,
+        "DIREITO PENAL": Numero,
+        "DIREITO DO TRABALHO": Numero
+    },
+    "CnjProcedureTypeDistribution": {
+        "PROCEDIMENTO COMUM CIVEL": Numero,
+        "APELACAO CIVEL": Numero,
+        "EXECUCAO DE TITULO EXTRAJUDICIAL": Numero,
+        "PROCEDIMENTO DO JUIZADO ESPECIAL CIVEL": Numero,
+        "CUMPRIMENTO DE SENTENCA": Numero,
+        "OUTROS PROCEDIMENTOS DE JURISDICAO VOLUNTARIA": Numero,
+        "ACAO PENAL - PROCEDIMENTO ORDINARIO": Numero,
+        "EMBARGOS DE TERCEIRO CIVEL": Numero,
+        "MONITORIA": Numero,
+        "AGRAVO DE INSTRUMENTO": Numero,
+        "CARTA PRECATORIA CIVEL": Numero,
+        "CAUTELAR INOMINADA": Numero,
+        "EMBARGOS A EXECUCAO": Numero,
+        "TUTELA ANTECIPADA ANTECEDENTE": Numero,
+        "CUMPRIMENTO PROVISORIO DE SENTENCA": Numero,
+        "REPRESENTACAO CRIMINAL/NOTICIA DE CRIME": Numero,
+        "ACAO DE CUMPRIMENTO": Numero,
+        "AGRAVO EM RECURSO ESPECIAL": Numero,
+        "RECURSO ORDINARIO TRABALHISTA": Numero
+    },
+    "CnjSubjectDistribution": {
+        "DEFEITO, NULIDADE OU ANULACAO": Numero,
+        "COMPRA E VENDA": Numero,
+        "RESCISAO DO CONTRATO E DEVOLUCAO DO DINHEIRO": Numero,
+        "ACIDENTE DE TRANSITO": Numero,
+        "CONSELHOS REGIONAIS E AFINS (ANUIDADE)": Numero,
+        "RESPONSABILIDADE CIVIL": Numero,
+        "PRESTACAO DE SERVICOS": Numero,
+        "INGRESSO E EXCLUSAO DOS SOCIOS NA SOCIEDADE": Numero,
+        "OBRIGACAO DE FAZER / NAO FAZER": Numero,
+        "RELACOES DE PARENTESCO": Numero,
+        "CONTRATOS BANCARIOS": Numero,
+        "FURTO QUALIFICADO": Numero,
+        "ESBULHO / TURBACAO / AMEACA": Numero,
+        "TRANSPORTE AEREO": Numero,
+        "OBRIGACOES": Numero,
+        "CEDULA DE CREDITO BANCARIO": Numero,
+        "PENHORA / DEPOSITO/ AVALIACAO": Numero,
+        "CORRETAGEM": Numero,
+        "DIREITO DE IMAGEM": Numero,
+        "REPRESENTACAO COMERCIAL": Numero,
+        "CITACAO": Numero,
+        "LIMINAR": Numero,
+        "ESPECIES DE CONTRATOS": Numero,
+        "ADIMPLEMENTO E EXTINCAO": Numero,
+        "EFEITO SUSPENSIVO / IMPUGNACAO / EMBARGOS A EXECUCAO": Numero,
+        "ANTECIPACAO DE TUTELA / TUTELA ESPECIFICA": Numero,
+        "INEXEQUIBILIDADE DO TITULO / INEXIGIBILIDADE DA OBRIGACAO": Numero,
+        "COMPROMISSO": Numero,
+        "ESTELIONATO": 1Numero,
+        "DESCONSIDERACAO DA PERSONALIDADE JURIDICA": Numero,
+        "OITIVA": Numero,
+        "APLICABILIDADE/CUMPRIMENTO": Numero,
+        "INDENIZACAO POR DANO MORAL": Numero,
+        "REVISAO DE JUROS REMUNERATORIOS, CAPITALIZACAO/ANATOCISMO": Numero,
+        "ESPECIES DE TITULOS DE CREDITO": Numero,
+        "LIQUIDACAO / CUMPRIMENTO / EXECUCAO": Numero,
+        "PLANOS DE SAUDE": Numero,
+        "EMPRESTIMO CONSIGNADO": Numero,
+        "AVALIACAO / REAVALIACAO": Numero
+    },
+    "CourtLevelDistribution": {
+        "1": Numero,
+        "2": Numero,
+        "3": Numero
+    },
+    "CourtNameDistribution": {
+        "TJSP": Numero,
+        "TJRJ": Numero,
+        "JFRJ": Numero,
+        "TJMG": Numero,
+        "TJBA": Numero,
+        "TJDF": Numero,
+        "TJPR": Numero,
+        "TRT2": Numero,
+        "STJ": Numero
+    },
+    "CourtTypeDistribution": {
+        "CIVEL": Numero,
+        "ESPECIAL CIVEL": Numero,
+        "TRIBUTARIA": Numero,
+        "CRIMINAL": Numero,
+        "TRABALHISTA": Numero
+    },
+    "FirstLawsuitDate": Numero,
+    "Last180DaysLawsuits": Numero,
+    "Last30DaysLawsuits": Numero,
+    "Last365DaysLawsuits": Numero,
+    "Last90DaysLawsuits": Numero,
+    "LastLawsuitDate": Numero,
+    "MaxLawsuitsPerOwner": Numero,
+    "MinLawsuitsPerOwner": Numero,
+    "PartyTypeDistribution": {
+        "CLAIMANT": Numero,
+        "CLAIMED": Numero,
+        "LAWYER": Numero,
+        "DEFENDANT": Numero,
+        "OTHER": Numero
+    },
+    "StateDistribution": {
+        "SP": Numero,
+        "RJ": Numero,
+        "MG": Numero,
+        "BA": Numero,
+        "DF": Numero,
+        "PR": Numero
+    },
+    "StatusDistribution": {
+        "JULGADO": Numero,
+        "ENCERRADO": Numero,
+        "ARQUIVADO": Numero,
+        "DISTRIBUIDO": Numero,
+        "BAIXADO": Numero,
+        "INDEFINIDO": Numero,
+        "EXTINTO": Numero,
+        "ATIVO": Numero,
+        "EM GRAU DE RECURSO": Numero
+    },
+    "TotalLawsuits": Numero,
+    "TotalLawsuitsAsAuthor": Numero,
+    "TotalLawsuitsAsDefendant": Numero,
+    "TotalLawsuitsAsOther": Numero,
+    "TotalOwners": Numero,
+    "TypeDistribution": {
+        "PROCEDIMENTO COMUM": Numero,
+        "APELACAO CIVEL": Numero,
+        "EXECUCAO DE TITULO EXTRAJUDICIAL": Numero,
+        "PROCEDIMENTO COMUM CIVEL": Numero,
+        "PROCEDIMENTO DO JUIZADO ESPECIAL CIVEL": Numero,
+        "CUMPRIMENTO DE SENTENCA": Numero,
+        "OUTROS PROCEDIMENTOS DE JURISDICAO VOLUNTARIA": Numero,
+        "ACAO PENAL": Numero,
+        "INDEFINIDO": Numero,
+        "EMBARGOS DE TERCEIRO": Numero,
+        "MONITORIA": Numero,
+        "AGRAVO DE INSTRUMENTO": Numero,
+        "APELACAO": Numero,
+        "RECURSO INOMINADO": Numero,
+        "CARTA PRECATORIA CIVEL": Numero,
+        "CAUTELAR INOMINADA": Numero,
+        "EMBARGO A EXECUCAO": Numero,
+        "TUTELA ANTECIPADA ANTECEDENTE": Numero,
+        "CUMPRIMENTO PROVISORIO DE SENTENCA": Numero,
+        "REPRESENTACAO CRIMINAL/NOTICIA DE CRIME": Numero,
+        "ACAO DE CUMPRIMENTO": Numero,
+        "RECURSO ESPECIAL": Numero,
+        "RECURSO ORDINARIO": Numero
+    },
+    "Identificador": "String",
+    "StatusConsulta": {
+        "Code": Numero,
+        "Message": "String"
+    }
+}
+```
+
+</Expandable>

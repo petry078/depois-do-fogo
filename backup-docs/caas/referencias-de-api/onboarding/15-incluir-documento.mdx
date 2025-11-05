@@ -1,0 +1,165 @@
+---
+title: "15 - Incluir Documento"
+openapi: post /Pessoa/IncluirDocumento
+version: 'Português'
+---
+
+Por meio deste endpoint o parceiro executa o upload de um documento e anexa junto ao cadastro da pessoa. 
+
+<Expandable title="Tabela TipoDocumento">
+
+| ID  | Documento                              |
+|-----|----------------------------------------|
+| 1   | Apólice de Seguro                      |
+| 2   | ART do Responsável                     |
+| 3   | Assinatura                             |
+| 4   | Ata de Assembleia                      |
+| 5   | Ata de Eleição                         |
+| 6   | Averbação de Divórcio                  |
+| 7   | Balancete com DRE                      |
+| 8   | Balanço                                |
+| 9   | Balanço Patrimonial com DRE            |
+| 10  | Boletim Subscr. Nota Comercial         |
+| 11  | Carteira Reservista                    |
+| 12  | Carteira Trabalho                      |
+| 13  | CCB                                    |
+| 14  | Certid de casamento-Rep.Legal          |
+| 15  | Certidão Casamento                     |
+| 16  | Certidao de casamento-Avalista         |
+| 17  | Certidão de Nascimento                 |
+| 18  | Certidão Divórcio                      |
+| 20  | Certidão Óbito                         |
+| 21  | CNH                                    |
+| 22  | CNH - Avalista                         |
+| 23  | CNH - Cônjuge                          |
+| 24  | CNH - Frente                           |
+| 25  | CNH - Rep. Legal                       |
+| 26  | CNH - Verso                            |
+| 27  | CNH Digital                            |
+| 28  | CNPJ                                   |
+| 29  | Comp. de renda - Avalista              |
+| 30  | Comp. de renda - Cônjuge               |
+| 31  | Comp. de renda - Rep. Legal            |
+| 32  | Comp. de resid. - Avalista             |
+| 33  | Comp. de resid. - Cônjuge              |
+| 34  | Comp. de resid. - Rep. Legal           |
+| 35  | Comprovante Conta Bancária             |
+| 36  | Comprovante Crédito Cliente            |
+| 37  | Comprovante de Averbação               |
+| 38  | Comprovante de Cancelamento            |
+| 39  | Comprovante de Débito                  |
+| 40  | Comprovante Despachante                |
+| 41  | Comprovante Endereço                   |
+| 42  | Comprovante Renda                      |
+| 43  | Comprovante Utilização Equip.          |
+| 44  | Consulta Bureau                        |
+| 50  | Conta de Terceiro(autorização)         |
+| 51  | Contrato                               |
+| 52  | Contrato Prestação de Serviço          |
+| 53  | Contrato Social                        |
+| 54  | CPF                                    |
+| 55  | CPF - Avalista                         |
+| 56  | CPF - Cônjuge                          |
+| 57  | CPF - Rep. Legal                       |
+| 58  | CPF - Representante Legal              |
+| 59  | CRV/CRLV                               |
+| 60  | Cupom Fiscal                           |
+| 61  | Declaração IR                          |
+| 62  | Diagrama Unifilar                      |
+| 63  | Doc. Compl. Vínculo Família            |
+| 64  | Doc. Titularidade do Imóvel            |
+| 65  | Documento Sócio                        |
+| 66  | Documento Veículo (DUT)                |
+| 67  | Documento Veículo (DUT-Verso)          |
+| 68  | Dossiê de Análise                      |
+| 69  | Estatuto Social                        |
+| 70  | Extrato Bancário                       |
+| 71  | Faturamento                            |
+| 72  | FGTS - Comprovante Averbacao           |
+| 73  | FGTS - Comprovante Cancel.             |
+| 74  | FGTS - Comprovante Pagamento           |
+| 75  | Ficha Cadastral                        |
+| 76  | Formulário de Cadastro                 |
+| 77  | Foto do Estabelecimento                |
+| 78  | Foto Identificação Maquinário          |
+| 79  | Foto Identificação Pessoa              |
+| 90  | Foto Identificação Veículo             |
+| 91  | Foto Veículo/Máquina                   |
+| 92  | Frota                                  |
+| 93  | Gravame                                |
+| 94  | Laudo de Avaliação do Veículo          |
+| 95  | Laudo Técnico                          |
+| 96  | Matricula do Imóvel                    |
+| 97  | Nota Fiscal                            |
+| 98  | Nota Fiscal (Veículo)                  |
+| 100 | Nota Fiscal Garantia                   |
+| 101 | Nota Fiscal Garantia Adicional         |
+| 102 | Nota Promissória                       |
+| 104 | Orçamento                              |
+| 106 | Outros                                 |
+| 107 | Parecer de Acesso                      |
+| 108 | Passaporte                             |
+| 109 | Procurações Públicas                   |
+| 110 | Proposta Comprovante Pagamento         |
+| 111 | Protocolo                              |
+| 112 | QSA (Quadro Societário)                |
+| 115 | Quitação de Garantia                   |
+| 116 | RG                                     |
+| 117 | RG - Avalista                          |
+| 118 | RG - Cônjuge                           |
+| 119 | RG - Frente                            |
+| 120 | RG - Rep. Legal                        |
+| 122 | RG - Verso                             |
+| 123 | Termo Aditivo                          |
+| 124 | Termo Const. Nota Comercial            |
+| 125 | Termo de Consentimento                 |
+| 126 | Termo de Endosso                       |
+| 127 | Termo de Garantia                      |
+| 128 | Título Eleitor                         |
+| 129 | Última Alteração Contratual            |
+  
+</Expandable>
+
+## Mensagens de erro
+
+A tabela abaixo representa as mensagens de erro que podem ser retornadas ao tentar realizar uma requisição.
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+<Note>No exemplo de retorno ao lado, o campo `code` representa a coluna **Código** desta tabela; o campo `context` representa a coluna **Código Detalhado**; e o campo `message` representa a coluna **Mensagem**.</Note>
+
+| Categoria | Operação                  | Ação             | Código | Código Detalhado | Mensagem                                                       |
+|-----------|---------------------------|------------------|--------|------------------|----------------------------------------------------------------|
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0049  | V0001            | Informe o nome do arquivo                                      |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0049  | V0002            | Falha ao enviar Documento                                      |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0049  | V0003            | Documento não pode ser alterado pois está em processo de análise automática |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0108  | V0001            | Documento Federal deve ser informado                           |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0108  | V0002            | Cliente não encontrado com o documento `{documentoCliente}`    |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0108  | V0003            | Cliente não cadastrado pelo parceiro de integração             |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0107  | V0001            | Extensão do arquivo é inválida. Permitido: txt,bmp,jpg,jpeg,gif,png,pdf,doc,docx,xls,xlsx,zip |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0107  | V0002            | Tipo de Documento inválido                                     |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0107  | V0003            | Documento deve ser enviado                                     |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0020  | V0001            | Extensão do arquivo é inválida. Permitido: `[{GRANTTYPES}]`    |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0001            | Tipo de Parceiro inválido                                      |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0002            | CPF Inválido                                                   |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0003            | CNPJ Inválido                                                  |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0004            | Documento já cadastrado                                        |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0005            | Documento já cadastrado em outro registro                      |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0006            | Nome deve ser informado                                        |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0007            | Origem de Cliente inválido                                     |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0008            | Informe o campo [Cliente Desde]                                |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0009            | Atividade Profissional Inválida                                |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0001            | Informe o Cliente                                              |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0002            | Documento do Cliente é inválido                                |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0016            | EPCodigo não informado                                         |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0017            | Vendedor não encontrado                                        |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0018            | Promotor não encontrado                                        |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0019            | Informe o Tipo de Operação                                     |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0020            | Informe o Valor                                                |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0021            | Informe a Quantidade de Parcelas                               |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0022            | Formato de cálculo inválido                                    |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0023            | Cliente deve ser pessoa física                                 |
+
+</Expandable>

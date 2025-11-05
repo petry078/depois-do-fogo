@@ -1,0 +1,59 @@
+---
+title: "36 - Salvar Proposta Garantia Bem"
+openapi: post /Proposta/SalvarPropostaGarantiaBem
+---
+
+Por meio deste endpoint o parceiro inclui mais de um Bem do tipo móvel ou imóvel, como garantia para o valor financiado.
+
+## Tabela de códigos auxuliares
+
+<Expandable title = "Tabelas">
+<Expandable title="Tabela TipoContaBancaria">
+  | ID  | Descrição        |
+  | --- | ---------------- |
+  | 1   | Poupança         |
+  | 2   | Conta Corrente   |
+  </Expandable>
+
+  <Expandable title=" TipoVeículo">
+  | ID | Descrição      |
+  |----|----------------|
+  | 1  | Particular     |
+  | 2  | Comercial      |
+  | 3  | Oficial        |
+  | 4  | Diplomático    |
+  | 5  | Especial       |
+  | 6  | Colecionador   |
+</Expandable>
+
+<Expandable title="Tabela TipoRestrição">
+  | ID | Descrição                       |
+  |----|---------------------------------|
+  | 1  | Arredondamento mercantil/leasing |
+  | 2  | Reserva e domínio/outros        |
+  | 3  | Alienação fiduciária            |
+  | 4  | Penhor                          |
+</Expandable>
+
+<Expandable title="Tabela TipoChassi">
+  | ID | Descrição   |
+  |----|-------------|
+  | 1  | Remarcado   |
+  | 2  | Normal      |
+</Expandable>
+
+<Expandable title="Tabela SituaçãoGravame">
+  | ID | Descrição                                  |
+  |----|-------------------------------------------|
+  | 2  | Significa que existe alguma pendência gravame |
+</Expandable>
+
+<Expandable title="Tabela OrigemGravame">
+  | ID | Descrição  |
+  |----|------------|
+  | 1  | Interno    |
+  | 2  | Externo    |
+  | 3  | Ambos      |
+</Expandable>
+---------------
+</Expandable>

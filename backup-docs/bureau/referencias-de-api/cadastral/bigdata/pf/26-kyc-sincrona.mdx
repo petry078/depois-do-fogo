@@ -1,0 +1,72 @@
+---
+title: "26 - KYC Síncrona"
+openapi: post /Bureau/KycSancoesPF
+---
+
+Este endpoint permite consultas básicas sobre uma pessoa física, no formato de resposta rápida (Síncrono). A resposta é uma 'String JSON' serializada que inclui as seguintes informações:
+
+* PEP: indicação se a pessoa é PEP ou não;
+* Sanções: histórico de sanções aplicadas;
+* Contribuições eleitorais: histórico de contribuição eleitoral.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{
+    "Erro": Boolean,
+    "MensagemOperador": "String",
+    "ResultadoConsulta": {
+        "PEPHistory": [
+            {
+                "Level": "String",
+                "JobTitle": "String",
+                "Department": "String",
+                "Motive": "String",
+                "Source": "String",
+                "TaxId": "String",
+                "StartDate": "Data",
+                "EndDate": "Data"
+            }
+        ],
+        "IsCurrentlyPEP": Boolean,
+        "SanctionsHistory": [],
+        "IsCurrentlySanctioned": Boolean,
+        "WasPreviouslySanctioned": Boolean,
+        "Last30DaysSanctions": int,
+        "Last90DaysSanctions": int,
+        "Last180DaysSanctions": int,
+        "Last365DaysSanctions": int,
+        "LastYearPEPOccurence": int,
+        "Last3YearsPEPOccurence": int,
+        "Last5YearsPEPOccurence": int,
+        "Last5PlusYearsPEPOccurence": int,
+        "FirstSanctionDate": null,
+        "LastSanctionDate": null,
+        "FirstPEPOccurenceDate": "Data",
+        "LastPEPOccurenceDate": "Data",
+        "IsCurrentlyElectoralDonor": Boolean,
+        "IsHistoricalElectoralDonor": Boolean,
+        "TotalElectoralDonations": int,
+        "TotalElectoralDonationAmount": float,
+        "ElectoralDonations": {
+            "String": {
+                "DonationsCount": int,
+                "AmountDonated": float
+            },
+            "String": {
+                "DonationsCount": int,
+                "AmountDonated": float
+            }
+        },
+        "Identificador": "String",
+        "StatusConsulta": {
+            "Code": int,
+            "Message": "String"
+        }
+    }
+}
+```
+
+</Expandable>

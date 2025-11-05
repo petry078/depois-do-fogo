@@ -1,0 +1,51 @@
+---
+title: 4 - Consulta por CPF
+openapi: post /Bureau/ConsultarReceitaCPF
+---
+
+Utilize este endpoint para realizar uma consulta individual, que verifica a situação cadastral fiscal de uma pessoa na Receita Federal.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{
+    \"Erro": false,
+    \"MensagemOperador": "OK",
+    \"ResultadoConsulta": {
+        \"Ni": "11122233344",
+        \"Nome": "TONY VALADÃO",
+        \"Situacao": {
+            \"Codigo": "0",
+            \"Descricao": "Regular"
+        },
+        \"Nascimento": "1985-09-03"
+    }
+}
+```
+
+</Expandable>
+
+<Expandable title="Tabela de dados fictícios para testes">
+
+| CPF          | Situação Cadastral            |
+|--------------|-------------------------------|
+| 40442820135  | CPF Regular                   |
+| 63017285995  | CPF Regular                   |
+| 91708635203  | CPF Regular                   |
+| 58136053391  | CPF Regular                   |
+| 40532176871  | Suspensa                      |
+| 47123586964  | Suspensa                      |
+| 07691852312  | Pendente de Regularização     |
+| 10975384600  | Pendente de Regularização     |
+| 01648527949  | Cancelada por Multiplicidade  |
+| 47893062592  | Cancelada por Multiplicidade  |
+| 98302514705  | Nula                          |
+| 18025346790  | Nula                          |
+| 64913872591  | Cancelada de Ofício           |
+| 52389071686  | Cancelada de Ofício           |
+| 05137518743  | Titular Falecido              |
+| 08849979878  | Titular Falecido              |
+
+</Expandable>

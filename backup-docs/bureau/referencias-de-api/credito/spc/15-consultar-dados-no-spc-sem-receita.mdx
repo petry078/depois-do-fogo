@@ -1,0 +1,1102 @@
+---
+title: 15 - Consultar Dados no SPC - Sem Receita
+openapi: post /Bureau/ConsultaSPCSemReceita
+tag: novo
+---
+
+Este endpoint fornece resultados detalhados sobre documentos de pessoa física ou jurídica. 
+
+A resposta é retornada em formato JSON serializado e contempla informações de dados cadastrados, score 12 meses, crédito concedido, CCF, cheque lojista, cheque sustado quando informado no ato da consulta, consumação da alínea 21, contravenções, alerta de documentos e protesto nacional. 
+
+Esses dados permitem uma avaliação mais precisa do perfil consultado, auxiliando na análise de risco e na tomada de decisão estratégica.
+
+## Exemplo de Retorno Completo
+
+<Expandable title="Exemplo de Retorno Completo">
+
+```json
+{
+    "Erro": "boolean",
+    "MensagemOperador": "String",
+    "ResultadoConsulta": {
+        "Protocolo": {
+            "Numero": "int",
+            "Digito": "int",
+            "ProtocoloFormatado": "String"
+        },
+        "Restricao": "boolean",
+        "DataAtTimestamp": "long",
+        "Data": "datetime",
+        "MensagemBaseExterna": [
+			{
+				"OrigemBaseExterna" : enum BaseExternaAgenteEnum,
+				"MensagemBaseExterna" : "String",
+				"CodigoRede" : "String"
+			}
+		],
+        "BaseInoperante": [
+			{
+				"String"
+			}
+		],
+        "Consumidor": {
+            "ConsumidorPessoaFisica": {
+                "CPF": {
+                    "RegiaoOrigem": "String",
+                    "Numero": "String"
+                },
+                "SituacaoCPF": {
+                    "DescricaoSituacao": "String",
+                    "DataSituacaoAtTimestamp": "long",
+                    "DataSituacao": "datetime",
+                    "UF": "String"
+                },
+                "Endereco": {
+                    "Cidade": {
+                        "Estado": {
+                            "SiglaUF": "String"
+                        },
+                        "Nome": "String"
+                    },
+                    "Logradouro": "String",
+                    "Numero": "int",
+                    "Complemento": "String",
+                    "Bairro": "String",
+                    "CEP": "int"
+                },
+                "TelefoneResidencial": {
+                    "NumeroDDD": "int",
+                    "Numero": "int"
+                },
+                "TelefoneCelular": {
+                    "NumeroDDD": "int",
+                    "Numero": "int"
+                },
+                "TelefoneComercial": {
+                    "NumeroDDD": "int",
+                    "Numero": "int"
+                },
+                "Fax": {
+                    "NumeroDDD": "int",
+                    "Numero": "int"
+                },
+                "DataNascimentoAtTimestamp": "long",
+                "DataNascimento": "datetime",
+                "Email": "String",
+                "NumeroRG": "String",
+                "EstadoRG": "String",
+                "Idade": "int",
+                "Nome": "String",
+                "NomePai": "String",
+                "NomeMae": "String",
+                "NumeroTituloEleitor": "String",
+                "Sexo": "String",
+                "Signo": "String",
+                "EstadoCivil": "String"
+            },
+            "ConsumidorPessoaJuridica": {
+				"CNPJ" : {
+					"Numero" : "String"
+				},
+				"NomeComercial" : "String",
+				"RazaoSocial" : "String",
+				"DataFundacaoAtTimestamp" : "long",
+				"DataFundacao" : "datetime",
+				"InscricaoEstadual" : "string",
+				"ValorCapitalSocial" : "float(10,2)",
+				"NumeroNIRENIRC" : "String",
+				"RazaoSocialAnterior" : "String",
+				"SituacaoCNPJ" : {
+					"DescricaoSituacao" : "String",
+					"DataSituacaoAtTimestamp" : "long",
+					"DataSituacao" : "datetime",
+					"UF" : "String"
+				},
+				"SituacaoInscricaoEstadual" : {
+					"DescricaoSituacao" : "String",
+					"DataSituacaoAtTimestamp" : "long",
+					"DataSituacao" : "datetime",
+					"UF" : "String"
+				},
+				"NaturezaJuridica" : {
+					"Codigo" : "long",
+					"Descricao" : "String"
+				},
+				"AtividadeEconomicaPrincipal" : {
+					"Codigo" : "long",
+					"Descricao" : "String"
+				},
+				"AtividadeEconomicaSecundaria" : [
+					{
+						"Codigo" : "long",
+						"Descricao" : "String"
+					},
+					{
+						"Codigo" : "long",
+						"Descricao" : "String"
+					}
+				],
+				"Email" : "String",
+				"Endereco" : {
+					"Cidade": {
+						"Estado": {
+							"SiglaUF": "String"
+						},
+						"Nome": "String"
+					},
+					"Logradouro": "String",
+					"Numero": "String",
+					"Complemento": "String",
+					"Bairro": "String",
+					"CEP": "int"
+				},
+				"Telefone" : {
+					"NumeroDDD" : "int",
+					"Numero" : "int"
+				},
+				"Fax" : {
+					"NumeroDDD" : "int",
+					"Numero" : "int"
+				}
+			}
+        },
+        "GrafiaPJ": {
+            "DetalheGrafiaPJ": [
+				{
+					"RazaoSocial" : "String"
+				},
+				{
+					"RazaoSocial" : "String"
+				}
+			]
+        },
+        "EnderecoCepConsultado": {
+            "DetalheEnderecoCepConsultado": [
+				{
+					"Endereco": {
+						"Cidade": {
+							"Estado": {
+								"SiglaUF": "String"
+							},
+							"Nome": "String"
+						},
+						"Logradouro": "String",
+						"Numero": "String",
+						"Complemento": "String",
+						"Bairro": "String",
+						"CEP": "int"
+					}
+				},
+				{
+					"Endereco": {
+						"Cidade": {
+							"Estado": {
+								"SiglaUF": "String"
+							},
+							"Nome": "String"
+						},
+						"Logradouro": "String",
+						"Numero": "String",
+						"Complemento": "String",
+						"Bairro": "String",
+						"CEP": "int"
+					}
+				}
+			]
+        },
+        "TelefoneConsultado": {
+            "Resumo": {
+                "QuantidadeTotal": "int",
+                "MesAnoPrimeiraOcorrencia": "int",
+                "DataPrimeiraOcorrenciaAtTimestamp": "long",
+                "DataPrimeiraOcorrencia": "datetime",
+                "MesAnoUltimaOcorrencia": "String",
+                "DataUltimaOcorrenciaAtTimestamp": "long",
+                "DataUltimaOcorrencia": "datetime",
+                "ValorTotal": "decimal",
+                "ValorUltimaOcorrencia": "decimal"
+            },
+            "DetalheTelefoneConsultado": [
+				{
+					"Assinante": {
+						"Telefone": {
+							"NumeroDDD": "int",
+							"Numero": "int"
+						},
+						"Endereco": {
+							"Cidade": {
+								"Estado": {
+									"SiglaUF": "String"
+								},
+								"Nome": "String"
+							},
+							"Logradouro": "String",
+							"Numero": "String",
+							"Complemento": "String",
+							"Bairro": "String",
+							"CEP": "int"
+						},
+						"Nome": "String",
+						"TipoTelefone": "String"
+					}
+				}
+			]
+        },
+        "TelefoneVinculadoAssinanteConsultado": {
+            "Resumo": {
+                "QuantidadeTotal": "int",
+                "MesAnoPrimeiraOcorrencia": "int",
+                "DataPrimeiraOcorrenciaAtTimestamp": "long",
+                "DataPrimeiraOcorrencia": "datetime",
+                "MesAnoUltimaOcorrencia": "String",
+                "DataUltimaOcorrenciaAtTimestamp": "long",
+                "DataUltimaOcorrencia": "datetime",
+                "ValorTotal": "decimal",
+                "ValorUltimaOcorrencia": "decimal"
+            },
+            "DetalheTelefoneVinculadoAssinanteConsultado": [
+                {
+                  "Assinante": {
+						"Telefone": {
+							"NumeroDDD": "int",
+							"Numero": "int"
+						},
+						"Endereco": {
+							"Cidade": {
+								"Estado": {
+									"SiglaUF": "String"
+								},
+								"Nome": "String"
+							},
+							"Logradouro": "String",
+							"Numero": "String",
+							"Complemento": "String",
+							"Bairro": "String",
+							"CEP": "int"
+						},
+						"Nome": "String",
+						"TipoTelefone": "String"
+					}
+				}
+            ] 
+        },
+        "UltimoTelefoneInformado": {
+            "DetalheUltimoTelefoneInformado": [  
+                {
+                  "Assinante": {
+						"Telefone": {
+							"NumeroDDD": "int",
+							"Numero": "int"
+						},
+						"Endereco": {
+							"Cidade": {
+								"Estado": {
+									"SiglaUF": "String"
+								},
+								"Nome": "String"
+							},
+							"Logradouro": "String",
+							"Numero": "String",
+							"Complemento": "String",
+							"Bairro": "String",
+							"CEP": "int"
+						},
+						"Nome": "String",
+						"TipoTelefone": "String"
+					}
+				}
+            ] 
+        },
+        "UltimoEnderecoInformado": {
+            "DetalheUltimoEnderecoInformado": [
+                {
+                    "Endereco": {
+                        "Cidade": {
+                            "Estado": {
+                                "SiglaUF": "String"
+                            },
+                            "Nome": "String"
+                        },
+                        "Logradouro": "String",
+                        "Numero": "String",
+                        "Complemento": "String",
+                        "Bairro": "String",
+                        "CEP": "int"
+                    }
+                }
+            ]
+        },
+        "AlertaDocumento": {
+            "Resumo": {
+                "QuantidadeTotal": "int",
+                "MesAnoPrimeiraOcorrencia": "String",
+                "DataPrimeiraOcorrenciaAtTimestamp": "long",
+                "DataPrimeiraOcorrencia": "datetime",
+                "MesAnoUltimaOcorrencia": "String",
+                "DataUltimaOcorrenciaAtTimestamp": "long",
+                "DataUltimaOcorrencia": "datetime",
+                "ValorTotal": "decimal",
+                "ValorUltimaOcorrencia": "decimal"
+            },
+            "DetalheAlertaDocumento": [
+				{
+					"TipoDocumentoAlerta": [
+						{
+							"Nome": "String",
+							"DataEmissaoNovoDocumentoAtTimestamp" : "long",
+							"DataEmissaoNovoDocumento" : "datetime"
+							
+						},
+						{
+							"Nome": "String",
+							"DataEmissaoNovoDocumentoAtTimestamp" : "long",
+							"DataEmissaoNovoDocumento" : "datetime"
+						}
+					],
+					"DataInclusaoAtTimestamp" : "long",
+					"DataInclusao": "datetime",
+					"DataOcorrenciaAtTimestamp" : "long",
+					"DataOcorrencia": "datetime",
+					"EntidadeOrigem": "String",
+					"Motivo": "String",
+					"Observacao": "String"
+				}
+
+            ]
+        },
+        "SPC": {
+            "Resumo": {
+                "QuantidadeTotal": "int",
+                "MesAnoPrimeiraOcorrencia": "String",
+                "DataPrimeiraOcorrenciaAtTimestamp": "long",
+                "DataPrimeiraOcorrencia": "datetime",
+                "MesAnoUltimaOcorrencia": "String",
+                "DataUltimaOcorrenciaAtTimestamp": "long",
+                "DataUltimaOcorrencia": "datetime",
+                "ValorTotal": "decimal",
+                "ValorUltimaOcorrencia": "decimal"
+            },
+            "DetalheSPC": [
+				{
+					"CidadeAssociado": {
+						"Estado": {
+							"SiglaUF": "String"
+						},
+						"Nome": "String"
+					},
+					"TelefoneAssociado" : {
+						"NumeroDDD": "int",
+                        "Numero": "int"
+					},
+					"NomeAssociado" : "String",
+					"CodigoEntidade" : "long",
+					"ContaContrato": "String",
+					"DataInclusaoAtTimestamp" : "long",
+					"DataInclusao" : "datetime",
+					"DataVencimentoAtTimestamp" : "long",
+					"DataVencimento" : "datetime",
+					"Reservado" : "String",
+					"NomeEntidade" : "String",
+					"Contrato": "String",
+					"RegistroInstituicaoFinanceira" : "enum" SimNaoEnum,
+					"RegistroRelevante" : "enum" SimNaoEnum,
+					"CompradorFiadorAvalista" : "String",
+					"Valor" : "decimal"
+				}
+			]
+        },
+        "ChequeLojista": {
+            "Resumo": {
+                "QuantidadeTotal": "int",
+                "MesAnoPrimeiraOcorrencia": "String",
+                "DataPrimeiraOcorrenciaAtTimestamp": "long",
+                "DataPrimeiraOcorrencia": "datetime",
+                "MesAnoUltimaOcorrencia": "String",
+                "DataUltimaOcorrenciaAtTimestamp": "long",
+                "DataUltimaOcorrencia": "datetime",
+                "ValorTotal": "decimal",
+                "ValorUltimaOcorrencia": "decimal"
+            },
+            "DetalheChequeLojista": [
+				{
+					"Alinea": {
+						"Codigo": "long",
+						"Descricao": "String"
+					},
+					"ChequeInicial": {
+						"DadosBancarios": {
+							"Endereco": {
+								"Cidade": {
+									"Estado": {
+										"SiglaUF": "String"
+									},
+									"Nome": "String"
+								},
+								"Logradouro": "String",
+								"Numero": "String",
+								"Complemento": "String",
+								"Bairro": "String",
+								"CEP": "int"
+							},
+							"Banco": {
+								"Codigo": "int",
+								"Nome": "String"
+							},
+							"Telefone" : {
+								"NumeroDDD" : "int",
+								"Numero" : "long"
+							},
+							"Fax" : {
+								"NumeroDDD" : "int",
+								"Numero" : "long"
+							},
+							"NumeroAgencia": "int",
+							"NomeAgencia" : "String",
+							"NumeroContaCorrente" : "String",
+							"DigitoContaCorrente" : "String"
+						},
+						"Numero": "int",
+						"Digito": "int",
+						"Valor": "decimal"
+					},
+					"ChequeFinal": {
+						"DadosBancarios": {
+							"Endereco": {
+								"Cidade": {
+									"Estado": {
+										"SiglaUF": "String"
+									},
+									"Nome": "String"
+								},
+								"Logradouro": "String",
+								"Numero": "String",
+								"Complemento": "String",
+								"Bairro": "String",
+								"CEP": "int"
+							},
+							"Banco": {
+								"Codigo": "int",
+								"Nome": "String"
+							},
+							"Telefone" : {
+								"NumeroDDD" : "int",
+								"Numero" : "long"
+							},
+							"Fax" : {
+								"NumeroDDD" : "int",
+								"Numero" : "long"
+							},
+							"NumeroAgencia": "int",
+							"NomeAgencia" : "String",
+							"NumeroContaCorrente" : "String",
+							"DigitoContaCorrente" : "String"
+						},
+						"Numero": "int",
+						"Digito": "int",
+						"Valor": "decimal"
+					},
+					"CidadeAssociado": {
+						"Estado": {
+							"SiglaUF": "String"
+						},
+						"Nome": "String"
+					},
+					"TelefoneAssociado": {
+						"NumeroDDD": "int",
+						"Numero": "long"
+					},
+					"NomeAssociado": "String",
+					"CodigoEntidade": "long",
+					"DataInclusaoAtTimestamp" : "long",
+					"DataInclusao": "datetime",
+					"NomeEntidade": "String",
+					"Informante" : "String",
+					"Origem" : "String"
+				}
+
+            ]
+        },
+        "CCF": {
+            "Resumo": {
+                "QuantidadeTotal": "int",
+                "MesAnoPrimeiraOcorrencia": "String",
+                "DataPrimeiraOcorrenciaAtTimestamp": "long",
+                "DataPrimeiraOcorrencia": "datetime",
+                "MesAnoUltimaOcorrencia": "String",
+                "DataUltimaOcorrenciaAtTimestamp": "long",
+                "DataUltimaOcorrencia": "datetime",
+                "ValorTotal": "decimal",
+                "ValorUltimaOcorrencia": "decimal"
+            },
+            "DetalheCCF": [
+                {
+					"Motivo": {
+						"Codigo": "long",
+						"Descricao": "String"
+					},
+					"UltimoCheque": {
+						"DadosBancarios": {
+							"Endereco": {
+								"Cidade": {
+									"Estado": {
+										"SiglaUF": "String"
+									},
+									"Nome": "String"
+								},
+								"Logradouro": "String",
+								"Numero": "String",
+								"Complemento": "String",
+								"Bairro": "String",
+								"CEP": "int"
+							},
+							"Banco": {
+								"Codigo": "int",
+								"Nome": "String"
+							},
+							"Telefone" : {
+								"NumeroDDD" : "int",
+								"Numero" : "long"
+							},
+							"Fax" : {
+								"NumeroDDD" : "int",
+								"Numero" : "long"
+							},
+							"NumeroAgencia": "int",
+							"NomeAgencia" : "String",
+							"NumeroContaCorrente" : "String",
+							"DigitoContaCorrente" : "String"
+						},
+						"Numero": "int",
+						"Digito": "int",
+						"Valor": "decimal"
+					},
+					"DataUltimoChequeAtTimestamp" : "long",
+					"DataUltimoCheque": "datetime",
+					"Origem": "String",
+					"Quantidade": "int"
+				}
+            ]
+        },
+        "ContraOrdem": {
+            "Resumo": {
+                "QuantidadeTotal": "int",
+                "MesAnoPrimeiraOcorrencia": "String",
+                "DataPrimeiraOcorrenciaAtTimestamp": "long",
+                "DataPrimeiraOcorrencia": "datetime",
+                "MesAnoUltimaOcorrencia": "String",
+                "DataUltimaOcorrenciaAtTimestamp": "long",
+                "DataUltimaOcorrencia": "datetime",
+                "ValorTotal": "decimal",
+                "ValorUltimaOcorrencia": "decimal"
+            },
+            "DetalheContraOrdem": [
+                {
+					"Motivo": {
+						"Codigo": "long",
+						"Descricao": "String"
+					},
+					"ChequeInicial": {
+						"DadosBancarios": {
+							"Endereco": {
+								"Cidade": {
+									"Estado": {
+										"SiglaUF": "String"
+									},
+									"Nome": "String"
+								},
+								"Logradouro": "String",
+								"Numero": "String",
+								"Complemento": "String",
+								"Bairro": "String",
+								"CEP": "int"
+							},
+							"Banco": {
+								"Codigo": "int",
+								"Nome": "String"
+							},
+							"Telefone" : {
+								"NumeroDDD" : "int",
+								"Numero" : "long"
+							},
+							"Fax" : {
+								"NumeroDDD" : "int",
+								"Numero" : "long"
+							},
+							"NumeroAgencia": "int",
+							"NomeAgencia" : "String",
+							"NumeroContaCorrente" : "String",
+							"DigitoContaCorrente" : "String"
+						},
+						"Numero": "int",
+						"Digito": "int",
+						"Valor": "decimal"
+					},
+					"ChequeFinal": {
+						"DadosBancarios": {
+							"Endereco": {
+								"Cidade": {
+									"Estado": {
+										"SiglaUF": "String"
+									},
+									"Nome": "String"
+								},
+								"Logradouro": "String",
+								"Numero": "String",
+								"Complemento": "String",
+								"Bairro": "String",
+								"CEP": "int"
+							},
+							"Banco": {
+								"Codigo": "int",
+								"Nome": "String"
+							},
+							"Telefone" : {
+								"NumeroDDD" : "int",
+								"Numero" : "long"
+							},
+							"Fax" : {
+								"NumeroDDD" : "int",
+								"Numero" : "long"
+							},
+							"NumeroAgencia": "int",
+							"NomeAgencia" : "String",
+							"NumeroContaCorrente" : "String",
+							"DigitoContaCorrente" : "String"
+						},
+						"Numero": "int",
+						"Digito": "int",
+						"Valor": "decimal"
+					},
+					"DataInclusaoAtTimestamp" : "long",
+					"DataInclusao" : "datetime",
+					"DataOcorrenciaAtTimestamp" : "long",
+					"DataOcorrencia" : "datetime",
+					"Origem" : "String",
+					"Informante" : "String"
+				}
+            ]
+        },
+        "Protesto": {
+            "Resumo": {
+                "QuantidadeTotal": "int",
+                "MesAnoPrimeiraOcorrencia": "String",
+                "DataPrimeiraOcorrenciaAtTimestamp": "long",
+                "DataPrimeiraOcorrencia": "datetime",
+                "MesAnoUltimaOcorrencia": "String",
+                "DataUltimaOcorrenciaAtTimestamp": "long",
+                "DataUltimaOcorrencia": "datetime",
+                "ValorTotal": "decimal",
+                "ValorUltimaOcorrencia": "decimal"
+            },
+            "DetalheProtesto": [
+                {
+					"Cartorio": {
+						"Cidade": {
+							"Estado": {
+								"SiglaUF": "String"
+							},
+							"Nome": "String"
+						},
+						"Nome": "String"
+					},
+					"NaturezaAnotacao" : {
+						"DescricaoNaturezaAnotacao" : "String",
+						"DescricaoComplementarNaturezaAnotacao" : "String"
+					},
+					"Subjudice" : {
+						"PracaSubjudice" : "String",
+						"DistritoSubjudice" : "String",
+						"VaraSubjudice" : "String",
+						"DataSubjudiceAtTimestamp" : "long",
+						"DataSubjudice" : "datetime",
+						"ProcessoSubjudice" : "String",
+						"MensagemSubjudice" : "String"
+					},
+					"Moeda" : {
+						"Simbolo" : "String"
+					},
+					"CartaAnuencia" : enum CartaAnuenciaEnum,
+					"DataCartaAnuenciaAtTimestamp" : "long",
+					"DataCartaAnuencia" : "datetime",
+					"DataInclusaoAtTimestamp" : "long",
+					"DataInclusao" : "datetime",
+					"DataProtestoAtTimestamp" : "long",
+					"DataProtesto": "datetime",
+					"RequerenteCredor" : "String",
+					"NumeroProtesto" : "String",
+					"Valor": "decimal"
+                }
+            ]
+        },
+        "Contumacia": {
+            "Resumo": {
+                "QuantidadeTotal": "int",
+                "MesAnoPrimeiraOcorrencia": "String",
+                "DataPrimeiraOcorrenciaAtTimestamp": "long",
+                "DataPrimeiraOcorrencia": "datetime",
+                "MesAnoUltimaOcorrencia": "String",
+                "DataUltimaOcorrenciaAtTimestamp": "long",
+                "DataUltimaOcorrencia": "datetime",
+                "ValorTotal": "decimal",
+                "ValorUltimaOcorrencia": "decimal"
+            },
+            "DetalheContumacia": [
+                {
+					"Motivo": {
+						"Codigo": "long",
+						"Descricao": "String"
+					},
+					"ChequeInicial": {
+						"DadosBancarios": {
+							"Endereco": {
+								"Cidade": {
+									"Estado": {
+										"SiglaUF": "String"
+									},
+									"Nome": "String"
+								},
+								"Logradouro": "String",
+								"Numero": "String",
+								"Complemento": "String",
+								"Bairro": "String",
+								"CEP": "int"
+							},
+							"Banco": {
+								"Codigo": "int",
+								"Nome": "String"
+							},
+							"Telefone" : {
+								"NumeroDDD" : "int",
+								"Numero" : "long"
+							},
+							"Fax" : {
+								"NumeroDDD" : "int",
+								"Numero" : "long"
+							},
+							"NumeroAgencia": "int",
+							"NomeAgencia" : "String",
+							"NumeroContaCorrente" : "String",
+							"DigitoContaCorrente" : "String"
+						},
+						"Numero": "int",
+						"Digito": "int",
+						"Valor": "decimal"
+					},
+					"ChequeFinal": {
+						"DadosBancarios": {
+							"Endereco": {
+								"Cidade": {
+									"Estado": {
+										"SiglaUF": "String"
+									},
+									"Nome": "String"
+								},
+								"Logradouro": "String",
+								"Numero": "String",
+								"Complemento": "String",
+								"Bairro": "String",
+								"CEP": "int"
+							},
+							"Banco": {
+								"Codigo": "int",
+								"Nome": "String"
+							},
+							"Telefone" : {
+								"NumeroDDD" : "int",
+								"Numero" : "long"
+							},
+							"Fax" : {
+								"NumeroDDD" : "int",
+								"Numero" : "long"
+							},
+							"NumeroAgencia": "int",
+							"NomeAgencia" : "String",
+							"NumeroContaCorrente" : "String",
+							"DigitoContaCorrente" : "String"
+						},
+						"Numero": "int",
+						"Digito": "int",
+						"Valor": "decimal"
+					},
+					"DataInclusaoAtTimestamp" : "long",
+					"DataInclusao" : "datetime",
+					"DataOcorrenciaAtTimestamp" : "long",
+					"DataOcorrencia" : "datetime",
+					"Origem" : "String",
+					"Informante" : "String"
+				}
+
+            ],
+            "DataFinalPeriodoConsultadoAtTimestamp": "long",
+            "DataFinalPeriodoConsultado": "datetime",
+            "DataInicialPeriodoConsultadoAtTimestamp": "long",
+            "DataInicialPeriodoConsultado": "datetime"
+        },
+        "CreditoConcedido": {
+            "Resumo": {
+                "QuantidadeTotal": "int",
+                "MesAnoPrimeiraOcorrencia": "String",
+                "DataPrimeiraOcorrenciaAtTimestamp": "long",
+                "DataPrimeiraOcorrencia": "datetime",
+                "MesAnoUltimaOcorrencia": "String",
+                "DataUltimaOcorrenciaAtTimestamp": "long",
+                "DataUltimaOcorrencia": "datetime",
+                "ValorTotal": "decimal",
+                "ValorUltimaOcorrencia": "decimal"
+            },
+            "DetalheCreditoConcedido": [
+                {
+					"NumeroContrato" : "String",
+					"AnoVencimento": "int",
+					"MesVencimento": "int",
+					"QuantidadeCredito": "int",
+					"Valor": "decimal"
+                }
+            ]
+        },
+        "ConsultaRealizada": {
+            "Resumo": {
+                "QuantidadeTotal": "int",
+                "MesAnoPrimeiraOcorrencia": "String",
+                "DataPrimeiraOcorrenciaAtTimestamp": "long",
+                "DataPrimeiraOcorrencia": "datetime",
+                "MesAnoUltimaOcorrencia": "String",
+                "DataUltimaOcorrenciaAtTimestamp": "long",
+                "DataUltimaOcorrencia": "datetime",
+                "ValorTotal": "decimal",
+                "ValorUltimaOcorrencia": "decimal"
+            },
+            "DetalheConsultaRealizada": [
+                {
+                    "OrigemAssociado": {
+                        "Estado": {
+                            "SiglaUF": "String"
+                        },
+                        "Nome": "String"
+                    },
+                    "NomeAssociado": "String",
+                    "DataConsultaAtTimestamp": "long",
+                    "DataConsulta": "datetime",
+                    "NomeEntidadeOrigem": "String"
+                }
+            ],
+            "QuantidadeDiasConsultados": "int"
+        },
+        "ChequeConsultaOnlineSRS": {
+            "Resumo": {
+                "QuantidadeTotal": "int",
+                "MesAnoPrimeiraOcorrencia": "String",
+               "DataPrimeiraOcorrenciaAtTimestamp": "int",
+                "DataPrimeiraOcorrencia": "date",
+                "MesAnoUltimaOcorrencia": "String",
+                "DataUltimaOcorrenciaAtTimestamp": "int",
+                "DataUltimaOcorrencia": "date",
+                "ValorTotal": "decimal",
+                "ValorUltimaOcorrencia": "decimal"
+            },
+            "DetalheChequeConsultaOnlineSRS": [
+				{
+					"OcorrenciaRechequeOnline" : {
+						"BancoParticipacaoRechequeOnline" : "String",
+						"MensagemIndisponibilidade" : "String"
+					},
+					"DataSituacaoContaCorrenteAtTimestamp" : "long",
+					"DataSituacaoContaCorrente" : "datetime",
+					"MensagemSituacaoContaCorrente" : "String",
+					"TipoDocumentoIdentificacao" : "String",
+					"TipoPessoaRechequeOnline" : "String"
+				}
+			]
+        },
+        "AtividadeEmpresa": {
+			"DetalheAtividadeEmpresa": [
+				{
+					"RamoAtividade" : {
+						"Codigo" : "long", 
+						"Descricao" : "String"
+					},
+					"AtividadesEconomicasSecundarias" : [
+						{
+							"Codigo" : "long", 
+							"Descricao" : "String"
+						},
+						{
+							"Codigo" : "long", 
+							"Descricao" : "String"
+						}
+					],
+					"NumeroCNAE": "String",
+					"PercentualCompra" : "decimal",
+					"PercentualVendas" : "decimal",
+					"QuantidadeEmpregados" : "int",
+					"QuantidadeFiliais" : "int"
+				}
+			]
+		},
+        "MensagemComplementar": [
+			{
+				"Mensagem": [
+					"String",
+					"String"
+				],
+				"Origem" : "String"
+			}
+		],
+        "SpcScore12Meses": {
+            "DetalheSpcScore12Meses": [
+                {
+                    "Horizonte": "int",
+                    "Classe": "String",
+                    "MensageminterpretativaScore": "String",
+                    "MensageminterpretativaProbabilidade": "String",
+                    "MesagemSemaforo": "String",
+                    "Probabilidade": "decimal",
+                    "Score": "int",
+                    "TipoClienteScore": enum TipoClienteScoreEnum
+                }
+            ]
+        },
+        "DadosAdicionaisDeContato": {
+            "Resumo": {
+                "QuantidadeTotal": "int",
+                "MesAnoPrimeiraOcorrencia": "string",
+				"DataPrimeiraOcorrenciaAtTimestamp": "long",
+                "DataPrimeiraOcorrencia": "datetime",
+                "MesAnoUltimaOcorrencia": "string",
+                "DataUltimaOcorrenciaAtTimestamp": "long",
+                "DataUltimaOcorrencia": "datetime",
+                "ValorTotal": "decimal",
+                "ValorUltimaOcorrencia": "decimal"
+			},
+            "DetalheDadosAdicionaisDeContato": [
+                {
+                    "Celulares": [
+                        "String",
+						"String"
+                    ],
+                    "Emails": [
+                        "String",
+						"String"
+                    ],
+                    "EnderecosPF": [
+                        "String",
+						"String"
+                    ],
+                    "EnderecosPJ": [
+                        "String",
+						"String"
+                    ],
+                    "Telefones": [
+                       "String",
+						"String"
+                    ]
+                },
+                {
+                    "Celulares": [
+                        "String",
+						"String"
+                    ],
+                    "Emails": [
+                        "String",
+						"String"
+                    ],
+                    "EnderecosPF": [
+                        "String",
+						"String"
+                    ],
+                    "EnderecosPJ": [
+                        "String",
+						"String"
+                    ],
+                    "Telefones": [
+                        "String",
+						"String"
+                    ]
+                }
+            ]
+        }
+	}
+}
+```
+
+</Expandable>
+
+## Informações sobre campos do retorno
+
+<Expandable title="enum BaseExternaAgenteEnum">
+
+No objeto `MensagemBaseExterna`, presente no retorno da requisição, o campo `OrigemBaseExterna`, pode vir com os seguintes valores:
+
+```
+SRF
+RENIC
+USEFN
+ACSP
+EQUIF
+SRASA_TRADUTOR_CONCENTRE
+SRASA_RELATO
+SRASA_CHEQUENET
+SRASA_CONCTR
+FORNECEDOR_INTEGRACAO
+FORNECEDOR_INTEGRACAO_CHEQUE
+SSPDSCE
+SSPGO
+SSPMT
+CHECKAUTO
+SRASA_CREDNET
+SRASA_CREDIT_BUREAU
+ASSECC_FONE
+FIBER_RENDA_PRESUMIDA
+IBOPE
+RENDA_PRESUMIDA
+CARFACTS
+CADPS
+CADPS_PONTUALIDADE_PAGAMENTO
+CADPS_COMPORTAMENTO_GASTOS
+CADPS_MOVIMENTACAO
+UNICHECK
+SPCADOS
+CADPS_SCORE
+SALES_BOX
+INSUMOS_HOT
+```
+
+</Expandable>
+
+<Expandable title="enum SimNaoEnum">
+
+No objeto `DetalheSPC`, presente no retorno da requisição, os campos `RegistroInstituicaoFinanceira` e `RegistroRelevante`, podem vir com os seguintes valores:
+
+| Código | Descrição |
+|--------|-----------|
+| 0      | Não       |
+| 1      | Sim       |
+
+</Expandable>
+
+<Expandable title="enum TipoPessoaEnum">
+
+No objeto `DetalheParticipacaoMercadoCapitais`, presente no retorno da requisição, o campo `TipoPessoa`, pode vir com os seguintes valores:
+
+| Código | Descrição |
+|--------|-----------|
+| F      | Física    |
+| J      | Jurídica  |
+
+</Expandable>
+
+<Expandable title="enum IdentificacaoPeriodoPagamentoCadastroPositivoEnum">
+
+No objeto `DetalheInsumoIndicePontualidadePagamentoCadastroPositivo`, presente no retorno da requisição, o campo `Descricao`, pode vir com os seguintes valores:
+
+```
+PAGAMENTO_EM_DIA;
+PAGAMENTO_ATE_15_DIAS;
+PAGAMENTO_ENTRE_15_E_30_DIAS_APOS_VENCIMENTO;
+PAGAMENTO_ENTRE_30_E_90_DIAS_APOS_VENCIMENTO;
+PAGAMENTO_ACIMA_DE_90_DIAS_APOS_VENCIMENTO;
+SEM_INFORMACOES_PAGAMENTO_ATE_30_DIAS_APOS_VENCIMENTO;
+SEM_INFORMACOES_PAGAMENTO_ACIMA_DE_30_DIAS_APOS_VENCIMENTO.
+```
+
+</Expandable>

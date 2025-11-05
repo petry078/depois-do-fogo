@@ -1,0 +1,24 @@
+---
+title: "32 - Transferência Entre Contas"
+openapi: post /api/TransferenciaEntreContas
+---
+
+Por meio deste endpoint, o parceiro pode executar transferências de valores entre contas BMP. 
+
+<Info> Em produção a utilização de HandShake e HMAC é obrigatória. </Info>
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+| Endpoint                                    | Mensagem de erro                                        |
+|---------------------------------------------|---------------------------------------------------------|
+| /api/LancamentosFuturos                     | Informe uma data inicial maior ou igual a data de hoje. |
+| /api/LancamentosFuturos                     | Informe uma data final maior que a data inicial.        |
+| /api/LancamentosFuturos                     | Informe uma quantidade de movimentos válida.            |
+| /api/LancamentosFuturos/{codigoAgendamento} | Lançamento futuro não encontrado.                       |
+| /api/LancamentosFuturos/{codigoAgendamento} | Ticket não encontrado para o lançamento informado.      |
+| /api/LancamentosFuturos/{codigoAgendamento} | O agendamento já está cancelado.                        |
+| /api/LancamentosFuturos/{codigoAgendamento} | A transação já foi executada.                           |
+
+</Expandable>

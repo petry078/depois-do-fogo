@@ -1,0 +1,75 @@
+---
+title: "38 - KYC Síncrona"
+openapi: post /Bureau/KycSancoesPJ
+---
+
+Este endpoint realiza consultas síncronas e retorna, em formato 'String JSON' serializada, os dados de mídia negativa relacionados a um documento jurídico. 
+
+A resposta inclui: 
+
+* Informação se é PEP;
+* Históricos de sanções;
+* Histório por período de sanções entre 07 a 360 dias.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{
+    "FirstSanctionDate": "Data",
+    "IsCurrentlyPEP": Boolean,
+    "IsCurrentlySanctioned": Boolean,
+    "Last180DaysSanctions": Numero,
+    "Last30DaysSanctions": Numero,
+    "Last365DaysSanctions": Numero,
+    "Last3YearsPEPOccurence": Numero,
+    "Last5PlusYearsPEPOccurence": Numero,
+    "Last5YearsPEPOccurence": Numero,
+    "Last90DaysSanctions": Numero,
+    "LastSanctionDate": "Data",
+    "LastYearPEPOccurence": Numero,
+    "PEPHistory": [
+        {
+            "Level": "String",
+            "JobTitle": "String",
+            "Department": "String",
+            "Motive": "String",
+            "Source": "String",
+            "TaxId": "String",
+            "FirstLevelPEPTaxId": "String",
+            "StartDate": "Data",
+            "EndDate": "Data",
+            "CreationDate": "Data",
+            "LastUpdateDate": "Data"
+        }
+    ],
+    "SanctionsHistory": [
+        {
+            "CreationDate": "Data",
+            "Details": {
+                "Grantor": "Data",
+                "Process": "Data",
+                "Recipient": "Data"
+            },
+            "EndDate": "Data",
+            "IsCurrentlyPresentOnSource": Boolean,
+            "LastUpdateDate": "Data",
+            "MatchRate": Numero,
+            "NameUniquenessScore": Float,
+            "Source": "String",
+            "StandardizedSanctionType": "String",
+            "StartDate": "Data",
+            "Type": "String"
+        }
+    ],
+    "WasPreviouslySanctioned": Boolean,
+    "Identificador": "String",
+    "StatusConsulta": {
+        "Code": Numero,
+        "Message": "String"
+    }
+}
+```
+
+</Expandable>

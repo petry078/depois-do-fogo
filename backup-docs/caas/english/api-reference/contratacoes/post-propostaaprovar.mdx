@@ -1,0 +1,28 @@
+---
+title: "20 - Approve"
+openapi: post /Proposta/Aprovar
+---
+
+Through this endpoint, the partner approves the proposal if they have the approval permission.
+
+<Expandable title="Messaging">
+| Category  | Operation         | Action      | Code   | Detailed Code   | Message                                                                                                                        |
+|-----------|-------------------|-------------|--------|------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| Proposal  | PropostaAprovar   | Aprovar     | C0063  | V0001            | Parâmetros de integração não permite aprovar a proposta                                                                        |
+| Proposal  | PropostaAprovar   | Aprovar     | C0063  | V0002            | Valor aprovado não pode ser superior ao valor solicitado                                                                       |
+| Proposal  | PropostaAprovar   | Aprovar     | C0063  | V0003            | Valor/Prazo aprovado não pode ser diferente do Valor/Prazo solicitado                                                          |
+| Proposal  | PropostaAprovar   | Aprovar     | C0063  | V0004            | Situação da proposta não permite aprovação                                                                                     |
+| Proposal  | PropostaAprovar   | Aprovar     | C0063  | V0005            | Proposta não pode ser aprovada, pois sua situação é `{SituacaoPropostaEnum.GetDescricao(proposta.Situacao)}`                     |
+| Proposal  | PropostaAprovar   | Aprovar     | C0112  | V0001            | Proposta não encontrada                                                                                                        |
+| Proposal  | PropostaAprovar   | Aprovar     | C0112  | V0002            | A Proposta não pertence à esta Integração                                                                                      |
+| Proposal  | PropostaAprovar   | Aprovar     | C0196  | V0001            | O valor solicitado não é válido                                                                                                |
+| Proposal  | PropostaAprovar   | Aprovar     | C0196  | V0002            | Formato de cálculo inválido                                                                                                    |
+| Proposal  | PropostaAprovar   | Aprovar     | C0196  | V0003            | É necessário o produto                                                                                                         |
+| Proposal  | PropostaAprovar   | Aprovar     | C0196  | V0004            | Prazo inválido ou não localizado para este Produto x Rede                                                                      |
+| Proposal  | PropostaAprovar   | Aprovar     | C0196  | V0005            | Não é possível aprovar a proposta. Produto x Rede x Parcela não possui juros configurado                                       |
+| Proposal  | PropostaAprovar   | Aprovar     | C0196  | V0006            | Configuração deve ser enviada para proposta HotMoney                                                                           |
+| Proposal  | PropostaAprovar   | Aprovar     | C0196  | V0007            | Produto Rotativo e HotMoney aceitam apenas formato de cálculo com juros                                                       |
+| Proposal  | PropostaAprovar   | Aprovar     | C0196  | V0008            | Formato de Cálculo não informado                                                                                               |
+| Proposal  | PropostaAprovar   | Aprovar     | C0186  | V0001            | Proposta ainda não foi aprovada pelo analista de crédito                                                                       |
+| Proposal  | PropostaAprovar   | Aprovar     | C0187  | V0001            | Informe o assunto do histórico                                                                                                 |
+</Expandable>

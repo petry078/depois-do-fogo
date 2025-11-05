@@ -1,0 +1,114 @@
+---
+title: "30 - Dados Cadastrais Síncrona"
+openapi: post /Bureau/DadosBasicosReceitaFederalPJ
+---
+
+Este endpoint permite consultas de forma básica, os dados cadastrais de um documento Jurídica, no formato de resposta rápida (Síncrono). A resposta é retornada em ‘String JSON’ serializado e inclui as seguintes informações: Nome, data fundação, CNAE, Email, telefones, Endereço.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{
+    "BasicData": {
+        "TaxIdNumber": "String",
+        "OfficialName": "String",
+        "TradeName": "String",
+        "FoundedDate": "Data",
+        "IsHeadquarter": Boolean,
+        "TaxIdStatus": "String",
+        "TaxIdStatusDate": "Data",
+        "Activities": [
+            {
+                "IsMain": Boolean,
+                "Code": "String",
+                "Activity": "String"
+            }
+        ],
+        "LegalNature": {
+            "Code": "String",
+            "Activity": "String"
+        },
+        "AdditionalOutputData": {
+            "Capital": "String",
+            "CapitalRS": Float
+        }
+    },
+    "Emails": {
+        "Primary": {
+            "EmailAddress": "String",
+            "Domain": "String",
+            "UserName": "String",
+            "Type": "String",
+            "LastUpdateDate": "Data"
+        },
+        "Secondary": {
+            "EmailAddress": "String",
+            "Domain": "String",
+            "UserName": "String",
+            "Type": "String",
+            "LastUpdateDate": "Data"
+        }
+    },
+    "Addresses": {
+        "Primary": {
+            "Typology": "String",
+            "Title": "String",
+            "AddressMain": "String",
+            "Number": "String",
+            "Complement": "String",
+            "Neighborhood": "String",
+            "ZipCode": "String",
+            "City": "String",
+            "State": "String",
+            "Country": "String",
+            "Type": "String",
+            "ComplementType": "String",
+            "LastUpdateDate": "Data"
+        },
+        "Secondary": {
+            "Typology": "String",
+            "Title": "String",
+            "AddressMain": "String",
+            "Number": "String",
+            "Complement": "String",
+            "Neighborhood": "String",
+            "ZipCode": "String",
+            "City": "String",
+            "State": "String",
+            "Country": "String",
+            "Type": "String",
+            "ComplementType": "String",
+            "LastUpdateDate": "Data"
+        }
+    },
+    "Phones": {
+        "Primary": {
+            "Number": "String",
+            "AreaCode": "String",
+            "CountryCode": "String",
+            "Complement": "String",
+            "Type": "String",
+            "PhoneNumberOfEntities": Numero,
+            "LastUpdateDate": "Data"
+        },
+        "Secondary": {
+            "Number": "String",
+            "AreaCode": "String",
+            "CountryCode": "String",
+            "Complement": "String",
+            "Type": "String",
+            "PhoneNumberOfEntities": Numero,
+            "LastUpdateDate": "Data"
+        }
+    },
+    "Identificador": "String",
+    "StatusConsulta": {
+        "Code": Numero,
+        "Message": "String"
+    }
+}
+```
+
+</Expandable>

@@ -1,0 +1,2306 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "BMPDigitalCore.ApiExterna.FGTS.API",
+    "version": "1.0"
+  },
+    "servers": [
+    {
+      "url": "https://api.bmpdigital.moneyp.dev.br/",
+      "description": "Localhost"
+    }
+  ],
+  "paths": {
+    "/FGTS/BuscarSimulacao": {
+      "post": {
+        "tags": [
+          "FGTS"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/FGTS/BuscarSimulacaoBatch": {
+      "post": {
+        "tags": [
+          "FGTS"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuscarSimulacaoBatchCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuscarSimulacaoBatchCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuscarSimulacaoBatchCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimulacaoBatchResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimulacaoBatchResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimulacaoBatchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/FGTS/BuscarSimulacaoMultiPeriodo": {
+      "post": {
+        "tags": [
+          "FGTS"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoMultiPeriodoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoMultiPeriodoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoMultiPeriodoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoMultiPeriodoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoMultiPeriodoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoMultiPeriodoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/FGTS/CancelarProposta": {
+      "post": {
+        "tags": [
+          "FGTS"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelarPropostaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelarPropostaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelarPropostaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelarPropostaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelarPropostaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelarPropostaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/FGTS/ConsultaProposta": {
+      "post": {
+        "tags": [
+          "FGTS"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivConsultaDadosPropostaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivConsultaDadosPropostaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivConsultaDadosPropostaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivConsultaDadosPropostaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivConsultaDadosPropostaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivConsultaDadosPropostaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/FGTS/EnfileirarSimulacaoBatch": {
+      "post": {
+        "tags": [
+          "FGTS"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnfileirarSimulacaoBatchCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnfileirarSimulacaoBatchCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnfileirarSimulacaoBatchCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimulacaoBatchResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimulacaoBatchResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimulacaoBatchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/FGTS/IncluirProposta": {
+      "post": {
+        "tags": [
+          "FGTS"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivInclusaoPropostaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivInclusaoPropostaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivInclusaoPropostaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivInclusaoPropostaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivInclusaoPropostaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivInclusaoPropostaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/FGTS/SaqAnivBuscaSimulacao": {
+      "post": {
+        "tags": [
+          "FGTS"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/FGTS/SaqAnivInclusaoProposta": {
+      "post": {
+        "tags": [
+          "FGTS"
+        ],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivInclusaoPropostaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivInclusaoPropostaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FGTSSaqAnivInclusaoPropostaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivInclusaoPropostaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivInclusaoPropostaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FGTSSaqAnivInclusaoPropostaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/HealthCheck": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BuscarSimulacaoBatchCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/BuscarSimulacaoBatchDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BuscarSimulacaoBatchDTO": {
+        "required": [
+          "CodigoBatch"
+        ],
+        "type": "object",
+        "properties": {
+          "CodigoBatch": {
+            "type": "string",
+            "description": "Código batch da simulação",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CancelarPropostaCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FGTSSaqAnivCancelarPropostaDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CancelarPropostaResponse": {
+        "type": "object",
+        "properties": {
+          "Msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "Result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "HasError": {
+            "type": "boolean"
+          },
+          "Messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "Boleto": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EnfileirarSimulacaoBatchCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/EnfileirarSimulacaoBatchDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EnfileirarSimulacaoBatchDTO": {
+        "type": "object",
+        "properties": {
+          "Simulacoes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SimulacaoDTO"
+            },
+            "description": "Lista de simulações",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorType": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "FGTSConsultaSaldoResponse": {
+        "type": "object",
+        "properties": {
+          "cpfTrabalhador": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataSaldo": {
+            "type": "string",
+            "nullable": true
+          },
+          "existeSaldoDesconsiderado": {
+            "type": "boolean"
+          },
+          "qtdPedidos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "periodos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FGTSPeriodo"
+            },
+            "nullable": true
+          },
+          "Cache": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSPeriodo": {
+        "type": "object",
+        "properties": {
+          "dataRepasse": {
+            "type": "string",
+            "nullable": true
+          },
+          "valor": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivCancelamento": {
+        "type": "object",
+        "properties": {
+          "Detalhes": {
+            "type": "string",
+            "nullable": true
+          },
+          "ContextoEvento": {
+            "type": "string",
+            "nullable": true
+          },
+          "TipoEvento": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "NomeEvento": {
+            "type": "string",
+            "nullable": true
+          },
+          "DtEvento": {
+            "type": "string",
+            "nullable": true
+          },
+          "NumCodigoBarras": {
+            "type": "string",
+            "nullable": true
+          },
+          "NumLinhaDigitavel": {
+            "type": "string",
+            "nullable": true
+          },
+          "PixCopiaCola": {
+            "type": "string",
+            "nullable": true
+          },
+          "VlrBoleto": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "DtVencimento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "NumeroBoleto": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "UrlImpressaoBoleto": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivCancelarPropostaDTO": {
+        "required": [
+          "CodigoProposta"
+        ],
+        "type": "object",
+        "properties": {
+          "CodigoProposta": {
+            "type": "string",
+            "description": "Código da proposta",
+            "format": "uuid",
+            "nullable": true
+          },
+          "CodigoOperacao": {
+            "type": "string",
+            "description": "Código operação",
+            "nullable": true
+          },
+          "TextoMotivoCancelamento": {
+            "type": "string",
+            "description": "Motivo do cancelamento",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivConsultaDadosPropostaCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FGTSSaqAnivConsultaDadosPropostaDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivConsultaDadosPropostaDTO": {
+        "required": [
+          "CodigoProposta"
+        ],
+        "type": "object",
+        "properties": {
+          "CodigoProposta": {
+            "type": "string",
+            "description": "Código da proposta",
+            "nullable": true
+          },
+          "CodigoOperacao": {
+            "type": "string",
+            "description": "Código operação",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivConsultaDadosPropostaResponse": {
+        "type": "object",
+        "properties": {
+          "Msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "Result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "HasError": {
+            "type": "boolean"
+          },
+          "Messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "Codigo": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "DtInclusao": {
+            "type": "string",
+            "nullable": true
+          },
+          "Situacao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "VlrFinanciado": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "QtdeParcelas": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "VlrTAC": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "VlrSeguro": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "VlrIOF": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "VlrOutrasDespesas": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "VlrOutrosServicos": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "VlrTotalCredito": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "VlrTotalDivida": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "PercCETMensal": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "PercCETAnual": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "PercJurosMensal": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "PercJurosAnual": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "CodigoProposta": {
+            "type": "string",
+            "nullable": true
+          },
+          "NumeroCCB": {
+            "type": "string",
+            "nullable": true
+          },
+          "MotivoRejeicao": {
+            "type": "string",
+            "nullable": true
+          },
+          "MotivoPendencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "MotivoCancelamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "TextoRetornoPagamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "AutenticacaoBancaria": {
+            "type": "string",
+            "nullable": true
+          },
+          "ControleBancario": {
+            "type": "string",
+            "nullable": true
+          },
+          "StatusProtocoloCEF": {
+            "type": "string",
+            "nullable": true
+          },
+          "PropostaLancamentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FGTSSaqAnivPropostaLancamento"
+            },
+            "nullable": true
+          },
+          "CancelamentoFGTS": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FGTSSaqAnivCancelamento"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivInclusaoPropostaCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FGTSSaqAnivInclusaoPropostaDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivInclusaoPropostaDTO": {
+        "type": "object",
+        "properties": {
+          "CodigoOperacao": {
+            "type": "string",
+            "description": "Código operação",
+            "nullable": true
+          },
+          "VlrEmprestimo": {
+            "type": "number",
+            "description": "Valor solicitado de emprestimo",
+            "format": "double",
+            "nullable": true
+          },
+          "Periodo": {
+            "type": "integer",
+            "description": "Prazo a ser antecipado do saque FGTS",
+            "format": "int32",
+            "nullable": true
+          },
+          "DtAniversario": {
+            "type": "string",
+            "description": "Data de aniversário do solicitante",
+            "format": "date-time",
+            "nullable": true
+          },
+          "TaxaMensal": {
+            "type": "number",
+            "description": "Taxa mensal a ser utilizada, quando não informada utiliza a padrão",
+            "format": "double",
+            "nullable": true
+          },
+          "VlrTAC": {
+            "type": "number",
+            "description": "Valor TAC",
+            "format": "double",
+            "nullable": true
+          },
+          "PercTAC": {
+            "type": "number",
+            "description": "Percentual TAC",
+            "format": "double",
+            "nullable": true
+          },
+          "VlrSeguro": {
+            "type": "number",
+            "description": "Valor Seguro",
+            "format": "double",
+            "nullable": true
+          },
+          "CpfTrabalhador": {
+            "type": "string",
+            "description": "Número do documento de CPF do solicitante",
+            "nullable": true
+          },
+          "TipoContrato": {
+            "type": "string",
+            "description": "Tipo de contrato",
+            "nullable": true
+          },
+          "DocumentoParceiroCorrespondente": {
+            "type": "string",
+            "description": "Documento do parceiro correspondente",
+            "nullable": true
+          },
+          "PropostaContaPagamento": {
+            "$ref": "#/components/schemas/PropostaContaPagamentoDTO"
+          },
+          "PropostaLancamentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PropostaLancamentoDTO"
+            },
+            "description": "Lista de lançamentos",
+            "nullable": true
+          },
+          "ConsultaCache": {
+            "type": "boolean",
+            "description": "Utiliza o cache caso esteja ativo na credencial do parceiro"
+          },
+          "Periodos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoPeriodosDTO"
+            },
+            "description": "Lista de Períodos de repasses",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivInclusaoPropostaResponse": {
+        "type": "object",
+        "properties": {
+          "Msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "Result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "HasError": {
+            "type": "boolean"
+          },
+          "Messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "CodigoProposta": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivPropostaLancamento": {
+        "type": "object",
+        "properties": {
+          "CampoID": {
+            "type": "string",
+            "nullable": true
+          },
+          "DescricaoCampo": {
+            "type": "string",
+            "nullable": true
+          },
+          "VlrTransacao": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "DtPrevPagto": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "DtPagamento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Situacao": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "LinhaDigitavel": {
+            "type": "string",
+            "nullable": true
+          },
+          "DtVenctoBoleto": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "VlrBoleto": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "CodigoBanco": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "NumeroBanco": {
+            "type": "string",
+            "nullable": true
+          },
+          "TipoConta": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Agencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "AgenciaDig": {
+            "type": "string",
+            "nullable": true
+          },
+          "Conta": {
+            "type": "string",
+            "nullable": true
+          },
+          "ContaDig": {
+            "type": "string",
+            "nullable": true
+          },
+          "DocumentoFederal": {
+            "type": "string",
+            "nullable": true
+          },
+          "NomePagamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "TextoRetornoPagamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "AutenticacaoBancaria": {
+            "type": "string",
+            "nullable": true
+          },
+          "ControleBancario": {
+            "type": "string",
+            "nullable": true
+          },
+          "DescricaoOcorrencia": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivSimulacao": {
+        "type": "object",
+        "properties": {
+          "Saldo": {
+            "type": "number",
+            "format": "double"
+          },
+          "Periodo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "DtInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "DtFim": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "TaxaMensal": {
+            "type": "number",
+            "format": "double"
+          },
+          "TaxaCETMensal": {
+            "type": "number",
+            "format": "double"
+          },
+          "TaxaCETAnual": {
+            "type": "number",
+            "format": "double"
+          },
+          "TaxaJurosAnual": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrEmprestimoCliente": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrJuros": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrIOF": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrIOFAdicional": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrLiberado": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrOperacao": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrTAC": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrSeguro": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrReserva": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrAmortizacao": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrTransferencia": {
+            "type": "number",
+            "format": "double"
+          },
+          "TaxaCCB": {
+            "type": "number",
+            "format": "double"
+          },
+          "SimulacaoParcelas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoParcela"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivSimulacaoCommand": {
+        "required": [
+          "dto"
+        ],
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/SimulacaoDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivSimulacaoDTO": {
+        "type": "object",
+        "properties": {
+          "Saldo": {
+            "type": "number",
+            "format": "double"
+          },
+          "Periodo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "DtInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "DtFim": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "TaxaMensal": {
+            "type": "number",
+            "format": "double"
+          },
+          "TaxaCETMensal": {
+            "type": "number",
+            "format": "double"
+          },
+          "TaxaCETAnual": {
+            "type": "number",
+            "format": "double"
+          },
+          "TaxaJurosAnual": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrEmprestimoCliente": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrJuros": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrIOF": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrIOFAdicional": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrLiberado": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrOperacao": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrTAC": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrReserva": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrAmortizacao": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrTransferencia": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrOutrasDespesas": {
+            "type": "number",
+            "format": "double"
+          },
+          "TaxaCCB": {
+            "type": "number",
+            "format": "double"
+          },
+          "SimulacaoParcelas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoParcelaDTO"
+            },
+            "nullable": true
+          },
+          "Periodos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoPeriodosDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivSimulacaoMultiPeriodo": {
+        "type": "object",
+        "properties": {
+          "Saldo": {
+            "type": "number",
+            "format": "double"
+          },
+          "Periodo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "DtInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "DtFim": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "TaxaMensal": {
+            "type": "number",
+            "format": "double"
+          },
+          "TaxaCETMensal": {
+            "type": "number",
+            "format": "double"
+          },
+          "TaxaCETAnual": {
+            "type": "number",
+            "format": "double"
+          },
+          "TaxaJurosAnual": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrEmprestimoCliente": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrJuros": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrIOF": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrIOFAdicional": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrLiberado": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrOperacao": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrTAC": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrReserva": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrAmortizacao": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrTransferencia": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrOutrasDespesas": {
+            "type": "number",
+            "format": "double"
+          },
+          "TaxaCCB": {
+            "type": "number",
+            "format": "double"
+          },
+          "SimulacaoParcelas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoParcela"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivSimulacaoMultiPeriodoCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoMultiPeriodoDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivSimulacaoMultiPeriodoDTO": {
+        "type": "object",
+        "properties": {
+          "Saldo": {
+            "type": "number",
+            "description": "Saldo na CEF do solicitante",
+            "format": "double",
+            "nullable": true
+          },
+          "VlrEmprestimo": {
+            "type": "number",
+            "description": "Valor solicitado de emprestimo",
+            "format": "double",
+            "nullable": true
+          },
+          "TaxaMensal": {
+            "type": "number",
+            "description": "Taxa mensal a ser utilizada, quando não informada utiliza a padrão",
+            "format": "double",
+            "nullable": true
+          },
+          "VlrTAC": {
+            "type": "number",
+            "description": "Valor TAC",
+            "format": "double",
+            "nullable": true
+          },
+          "PercTAC": {
+            "type": "number",
+            "description": "Percentual TAC",
+            "format": "double",
+            "nullable": true
+          },
+          "DtAniversario": {
+            "type": "string",
+            "description": "Data de aniversário do solicitante",
+            "format": "date-time",
+            "nullable": true
+          },
+          "CpfTrabalhador": {
+            "type": "string",
+            "description": "Número do documento de CPF do solicitante",
+            "nullable": true
+          },
+          "ConsultaCache": {
+            "type": "boolean",
+            "description": "Utiliza o cache caso esteja ativo na credencial do parceiro"
+          },
+          "Periodos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoPeriodosDTO"
+            },
+            "description": "Lista de Períodos de repasses",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivSimulacaoMultiPeriodoResponse": {
+        "type": "object",
+        "properties": {
+          "Msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "Result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "HasError": {
+            "type": "boolean"
+          },
+          "Messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "VlrDispSaque": {
+            "type": "number",
+            "format": "double"
+          },
+          "PeriodoMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "PeriodoMax": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Simulacoes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoMultiPeriodo"
+            },
+            "nullable": true
+          },
+          "SimulacoesErro": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SimulacaoErro"
+            },
+            "nullable": true
+          },
+          "Consulta": {
+            "$ref": "#/components/schemas/FGTSConsultaSaldoResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivSimulacaoParcela": {
+        "type": "object",
+        "properties": {
+          "VlrRepasse": {
+            "type": "number",
+            "format": "double"
+          },
+          "DtRepasse": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "VlrPrincipal": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrJuros": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrIOF": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrIOFAdicional": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrLiberado": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivSimulacaoParcelaDTO": {
+        "type": "object",
+        "properties": {
+          "VlrRepasse": {
+            "type": "number",
+            "format": "double"
+          },
+          "DtRepasse": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "VlrPrincipal": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrIOF": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrIOFAdicional": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrLiberado": {
+            "type": "number",
+            "format": "double"
+          },
+          "VlrJuros": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivSimulacaoPeriodosDTO": {
+        "type": "object",
+        "properties": {
+          "DataRepasse": {
+            "type": "string",
+            "description": "Data do repasse",
+            "format": "date-time",
+            "nullable": true
+          },
+          "VlrRepasse": {
+            "type": "number",
+            "description": "Valor do repasse",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FGTSSaqAnivSimulacaoResponse": {
+        "type": "object",
+        "properties": {
+          "Msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "Result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "HasError": {
+            "type": "boolean"
+          },
+          "Messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "IdentificadorConsulta": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "VlrDispSaque": {
+            "type": "number",
+            "format": "double"
+          },
+          "PeriodoMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "PeriodoMax": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Simulacao": {
+            "$ref": "#/components/schemas/FGTSSaqAnivSimulacao"
+          },
+          "Consulta": {
+            "$ref": "#/components/schemas/FGTSConsultaSaldoResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "MessageType": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "Context": {
+            "type": "string",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "Field": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropostaContaPagamentoDTO": {
+        "type": "object",
+        "properties": {
+          "CodigoBanco": {
+            "type": "integer",
+            "description": "Consultar tabela de bancos",
+            "format": "int32",
+            "nullable": true
+          },
+          "TipoConta": {
+            "type": "integer",
+            "description": "Consultar tabela de tipo de conta",
+            "format": "int32",
+            "nullable": true
+          },
+          "Agencia": {
+            "type": "string",
+            "description": "Número da agência",
+            "nullable": true
+          },
+          "AgenciaDig": {
+            "type": "string",
+            "description": "Dígito da agência",
+            "nullable": true
+          },
+          "Conta": {
+            "type": "string",
+            "description": "Número da conta",
+            "nullable": true
+          },
+          "ContaDig": {
+            "type": "string",
+            "description": "Dígito da conta",
+            "nullable": true
+          },
+          "NumeroBanco": {
+            "type": "string",
+            "description": "Número do Banco",
+            "nullable": true
+          },
+          "DocumentoFederalPagamento": {
+            "type": "string",
+            "description": "Documento Federal de pagamento",
+            "nullable": true
+          },
+          "NomePagamento": {
+            "type": "string",
+            "description": "Nome do pagamento",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropostaLancamentoDTO": {
+        "type": "object",
+        "properties": {
+          "CampoID": {
+            "type": "string",
+            "description": "Campo Identificador",
+            "nullable": true
+          },
+          "VlrTransacao": {
+            "type": "number",
+            "description": "Valor da transação",
+            "format": "double",
+            "nullable": true
+          },
+          "DtPagamento": {
+            "type": "string",
+            "description": "Data do pagamento",
+            "format": "date-time",
+            "nullable": true
+          },
+          "LinhaDigitavel": {
+            "type": "string",
+            "description": "Linha digitável",
+            "nullable": true
+          },
+          "CodigoBanco": {
+            "type": "integer",
+            "description": "Consultar tabela de tipo de conta",
+            "format": "int32",
+            "nullable": true
+          },
+          "NumeroBanco": {
+            "type": "string",
+            "description": "Número do Banco",
+            "nullable": true
+          },
+          "TipoConta": {
+            "type": "integer",
+            "description": "Consultar tabela de tipo de conta",
+            "format": "int32",
+            "nullable": true
+          },
+          "Agencia": {
+            "type": "string",
+            "description": "Número da agência",
+            "nullable": true
+          },
+          "AgenciaDig": {
+            "type": "string",
+            "description": "Dígito da agência",
+            "nullable": true
+          },
+          "Conta": {
+            "type": "string",
+            "description": "Número da conta",
+            "nullable": true
+          },
+          "ContaDig": {
+            "type": "string",
+            "description": "Dígito da conta",
+            "nullable": true
+          },
+          "DocumentoFederal": {
+            "type": "string",
+            "description": "Documento Federal",
+            "nullable": true
+          },
+          "NomePagamento": {
+            "type": "string",
+            "description": "Nome do pagamento",
+            "nullable": true
+          },
+          "DocumentoFederalCedente": {
+            "type": "string",
+            "description": "Documento Federal do cedente",
+            "nullable": true
+          },
+          "NomeCedente": {
+            "type": "string",
+            "description": "Nome do cedente",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseBase": {
+        "type": "object",
+        "properties": {
+          "Msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "Result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "HasError": {
+            "type": "boolean"
+          },
+          "Messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SimulacaoBatchResponse": {
+        "type": "object",
+        "properties": {
+          "Msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "Result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "HasError": {
+            "type": "boolean"
+          },
+          "Messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "CodigoBatch": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "Simulacoes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SimulacaoFGTSResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SimulacaoDTO": {
+        "required": [
+          "CpfTrabalhador"
+        ],
+        "type": "object",
+        "properties": {
+          "Saldo": {
+            "type": "number",
+            "description": "Saldo na CEF do solicitante",
+            "format": "double"
+          },
+          "VlrEmprestimo": {
+            "type": "number",
+            "description": "Valor solicitado de emprestimo",
+            "format": "double",
+            "nullable": true
+          },
+          "Periodo": {
+            "type": "integer",
+            "description": "Prazo a ser antecipado do saque FGTS",
+            "format": "int32",
+            "nullable": true
+          },
+          "TaxaMensal": {
+            "type": "number",
+            "description": "Taxa mensal a ser utilizada, quando não informada utiliza a padrão",
+            "format": "double",
+            "nullable": true
+          },
+          "VlrTAC": {
+            "type": "number",
+            "description": "Valor TAC",
+            "format": "double",
+            "nullable": true
+          },
+          "PercTAC": {
+            "type": "number",
+            "description": "Percentual TAC",
+            "format": "double",
+            "nullable": true
+          },
+          "DtAniversario": {
+            "type": "string",
+            "description": "Data de aniversário do solicitante",
+            "format": "date-time",
+            "nullable": true
+          },
+          "CpfTrabalhador": {
+            "type": "string",
+            "description": "Número do documento de CPF do solicitante",
+            "nullable": true
+          },
+          "ConsultaCache": {
+            "type": "boolean",
+            "description": "Utiliza o cache caso esteja ativo na credencial do parceiro"
+          },
+          "Periodos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SimulacaoPeriodosDTO"
+            },
+            "description": "Lista de Períodos de repasses",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SimulacaoErro": {
+        "type": "object",
+        "properties": {
+          "Msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "Result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "HasError": {
+            "type": "boolean"
+          },
+          "Messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "Periodo": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SimulacaoFGTSResponse": {
+        "type": "object",
+        "properties": {
+          "Msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "Result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "HasError": {
+            "type": "boolean"
+          },
+          "Messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "VlrDispSaque": {
+            "type": "number",
+            "format": "double"
+          },
+          "PeriodoMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "PeriodoMax": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Simulacao": {
+            "$ref": "#/components/schemas/FGTSSaqAnivSimulacaoDTO"
+          },
+          "Consulta": {
+            "$ref": "#/components/schemas/FGTSConsultaSaldoResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SimulacaoPeriodosDTO": {
+        "type": "object",
+        "properties": {
+          "DataRepasse": {
+            "type": "string",
+            "description": "Data do repasse",
+            "format": "date-time",
+            "nullable": true
+          },
+          "VlrRepasse": {
+            "type": "number",
+            "description": "Valor do repasse",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "Informe o token",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

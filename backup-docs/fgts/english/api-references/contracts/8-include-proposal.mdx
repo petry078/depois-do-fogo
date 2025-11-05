@@ -1,0 +1,352 @@
+---
+title: "8 - Include Proposal"  
+openapi: post /FGTS/IncluirProposta
+---
+
+Through this endpoint, the partner includes the proposal, after the search and simulation process of the loan amounts guaranteed by the FGTS withdrawal
+Rules:
+
+* The month of birth must be correct;
+* The CPF of the operation must be the same as the holder of the bank account informed for the disbursement.
+
+### Tables
+
+<Expandable title= "Tables">
+<Expandable title = "Table of Bank Codes and Numbers">
+
+| Code | Number | Description                                           |
+| -------|------|-----------------------------------------------------  |
+| 296|406|ACCREDITO SCD SA                                              |
+| 260|332|ACESSO SOLUCOES PAGAMENTO SA                                  |
+| 141|117|Advanced Corretora de Câmbio Ltda                            |
+| 227|272|AGK CC SA                                                   |
+| 265|349|AL5 SA CFI                                                  |
+| 166|172|Albatross Corretora de Câmbio e Valores SA                   |
+| 249|313|AMAZÔNIA CC LTDA                                             |
+| 302|461|ASAAS GESTÃO FINANCEIRA INSTITUIÇÃO DE PAGAMENTO SA         |
+| 172|188|Ativa Investimentos SA Corret de Tít Câmbio e Valores     |
+| 232|280|AVISTA SA CFI                                               |
+| 189|654|Banco A J Renner SA                                       |
+| 9|246|Banco ABC Brasil SA                                           |
+| 10|075|Banco ABN AMRO SA                                            |
+| 115|121|Banco Agibank SA                                             |
+| 11|025|Banco Alfa SA                                                |
+| 12|641|Banco Alvorada SA                                            |
+| 13|065|Banco Andbank Brasil SA                                    |
+| 176|213|Banco Arbi SA                                               |
+| 14|024|Banco BANDEPE SA                                             |
+| 15|740|Banco Barclays SA                                            |
+| 258|330|BANCO BARI SA                                               |
+| 16|107|Banco BBM SA                                                 |
+| 17|096|Banco BM&FBOVESPA SA                                          |
+| 18|318|Banco BMG SA                                                 |
+| 19|752|Banco BNP Paribas Brasil SA                                  |
+| 20|248|Banco Boavista Interatlântico SA                             |
+| 21|169|Banco Bonsucesso Consignado SA                               |
+| 22|218|Banco Bonsucesso SA                                          |
+| 23|069|Banco BPN Brasil SA                                          |
+| 24|063|Banco Bradescard SA                                          |
+| 25|036|Banco Bradesco BBI SA                                        |
+| 142|122|Banco Bradesco BERJ SA                                      |
+| 26|204|Banco Bradesco Cartões SA                                    |
+| 27|394|Banco Bradesco Financiamentos SA                             |
+| 4|237|Banco Bradesco SA                                             |
+| 28|208|Banco BTG Pactual SA                                         |
+| 300|413|Banco BV SA                                                 |
+| 197|336|Banco C6 SA  C6 Bank                                        |
+| 29|263|Banco Cacique SA                                             |
+| 30|473|Banco Caixa Geral  Brasil SA                                |
+| 182|412|Banco Capital S A                                           |
+| 31|040|Banco Cargill SA                                             |
+| 180|266|Banco Cédula SA                                             |
+| 32|739|Banco Cetelem SA                                             |
+| 33|233|Banco Cifra SA                                               |
+| 34|745|Banco Citibank SA                                            |
+| 177|241|Banco Clássico SA                                           |
+| 35|000|Banco CNH Industrial Capital SA                              |
+| 36|095|Banco Confidence de Câmbio SA                                |
+| 37|000|Banco Cooperativo do Brasil SA  BANCOOB                     |
+| 38|748|Banco Cooperativo Sicredi SA                                 |
+| 39|222|Banco Credit Agricole Brasil SA                              |
+| 40|505|Banco Credit Suisse Brasil SA                              |
+| 41|003|Banco da Amazônia SA                                         |
+| 42|083|Banco da China Brasil SA                                     |
+| 43|707|Banco Daycoval SA                                            |
+| 181|300|Banco de la Nacion Argentina                                  |
+| 184|495|Banco de La Provincia de Buenos Aires                         |
+| 183|494|Banco de La Republica Oriental del Uruguay                    |
+| 44|000|Banco de Lage Landen Brasil SA                               |
+| 45|456|Banco de TokyoMitsubishi UFJ Brasil SA                      |
+| 261|335|BANCO DIGIO                                                   |
+| 1|001|Banco do Brasil SA                                            |
+| 46|047|Banco do Estado de Sergipe SA                                |
+| 203|032|BANCO DO ESTADO DO MATO GROSSO SA                            |
+| 47|037|Banco do Estado do Pará SA                                   |
+| 48|041|Banco do Estado do Rio Grande do Sul SA                      |
+| 49|004|Banco do Nordeste do Brasil SA                               |
+| 50|265|Banco Fator SA                                               |
+| 51|224|Banco Fibra SA                                               |
+| 52|626|Banco Ficsa SA                                               |
+| 53|000|Banco Ford SA                                                |
+| 54|000|Banco GMAC SA                                                |
+| 55|612|Banco Guanabara SA                                           |
+| 56|000|Banco Honda SA                                               |
+| 57|000|Banco IBM SA                                                 |
+| 58|012|Banco INBURSA de Investimentos SA                            |
+| 59|604|Banco Industrial do Brasil SA                                |
+| 60|653|Banco Indusval SA                                            |
+| 187|630|Banco Intercap SA                                           |
+| 61|077|Banco Intermedium SA                                         |
+| 62|249|Banco Investcred Unibanco SA                                 |
+| 63|184|Banco Itaú BBA SA                                            |
+| 64|029|Banco Itaú BMG Consignado SA                                 |
+| 65|000|Banco Itaú Veículos SA                                       |
+| 66|479|Banco ItauBank SA                                             |
+| 67|376|Banco J P Morgan SA                                        |
+| 68|074|Banco J Safra SA                                            |
+| 69|217|Banco John Deere SA                                          |
+| 195|757|Banco Keb Hana do Brasil S A                                |
+| 70|600|Banco Luso Brasileiro SA                                     |
+| 178|243|Banco Máxima SA                                             |
+| 71|389|Banco Mercantil do Brasil SA                                 |
+| 72|370|Banco Mizuho do Brasil SA                                    |
+| 73|746|Banco Modal SA                                               |
+| 304|536|BANCO NEON                                                    |
+| 122|735|Banco Neon SA                                               |
+| 74|212|Banco Original SA                                            |
+| 190|712|Banco Ourinvest SA                                          |
+| 75|623|Banco PAN SA                                                 |
+| 76|611|Banco Paulista SA                                            |
+| 186|613|Banco Pecúnia S A                                           |
+| 77|094|Banco Petra SA                                               |
+| 78|643|Banco Pine SA                                                |
+| 79|000|Banco PSA Finance Brasil SA                                  |
+| 80|747|Banco Rabobank International Brasil SA                       |
+| 215|088|BANCO RANDON SA                                             |
+| 81|633|Banco Rendimento SA                                          |
+| 191|741|Banco Ribeirão Preto SA                                     |
+| 82|120|Banco Rodobens SA                                            |
+| 5|422|Banco Safra SA                                                |
+| 6|033|Banco Santander Brasil SA                                   |
+| 192|743|Banco Semear SA                                             |
+| 114|756|Banco Sicoob                                                  |
+| 194|754|Banco Sistema SA                                            |
+| 83|366|Banco Société Générale Brasil SA                             |
+| 188|637|Banco Sofisa S A                                            |
+| 84|464|Banco Sumitomo Mitsui Brasileiro SA                          |
+| 85|082|Banco Topázio SA                                             |
+| 86|000|Banco Toyota do Brasil SA                                    |
+| 87|634|Banco Triângulo SA                                           |
+| 88|000|Banco Volkswagen SA                                          |
+| 89|000|Banco Volvo Brasil SA                                        |
+| 90|655|Banco Votorantim SA                                          |
+| 91|610|Banco VR SA                                                  |
+| 92|119|Banco Western Union do Brasil SA                             |
+| 143|124|Banco Woori Bank do Brasil SA                               |
+| 93|021|BANESTES SA Banco do Estado do Espírito Santo                |
+| 94|719|BanifBanco Internacional do Funchal BrasilSA              |
+| 95|755|Bank of America Merrill Lynch Banco Múltiplo SA              |
+| 223|268|BARI CIA HIPOTECÁRIA                                          |
+| 281|378|BBC LEASING                                                   |
+| 96|081|BBN Banco Brasileiro de Negócios SA                          |
+| 276|368|BCO CSF SA                                                  |
+| 288|390|BCO GM SA                                                   |
+| 224|269|BCO HSBC SA                                                 |
+| 213|076|BCO KDB BRASIL SA                                           |
+| 283|381|BCO MERCEDESBENZ SA                                        |
+| 212|066|BCO MORGAN STANLEY SA                                       |
+| 214|079|BCO ORIGINAL DO AGRO SA                                      |
+| 287|387|BCO TOYOTA DO BRASIL SA                                     |
+| 210|018|BCO TRICURY SA                                              |
+| 290|393|BCO VOLKSWAGEN SA                                            |
+| 264|348|BCO XP SA                                                   |
+| 97|250|BCV  Banco de Crédito e Varejo SA                           |
+| 157|144|Bexs Banco de Câmbio SA                                     |
+| 179|253|Bexs Corretora de Câmbio SA                                  |
+| 149|134|BGC Liquidez Distribuidora de Títulos e Valores Mobil Ltda  |
+| 310|531|BMP SOCIEDADE DE CREDITO DIRETO SA                           |
+| 280|377|BMS SCD SA                                                  |
+| 206|007|BNDES                                                         |
+| 305|547|BNK DIGITAL SCD SA                                           |
+| 98|017|BNY Mellon Banco SA                                          |
+| 297|408|BÔNUSCRED SCD SA                                            |
+| 244|301|BPP IP SA                                                   |
+| 144|126|BR Partners Banco de Investimento SA                        |
+| 99|125|Brasil Plural SA  Banco Múltiplo                            |
+| 100|070|BRB  Banco de Brasília SA                                  |
+| 216|092|BRK SA CFI                                                  |
+| 167|173|BRL Trust Distribuidora de Títulos e Valores Mobiliários SA |
+| 155|142|Broker Brasil Corretora de Câmbio Ltda                       |
+| 239|292|BS2 DTVM SA                                                 |
+| 128|080|BT Corretora de Câmbio Ltda                                  |
+| 208|011|CSUISSE HEDGINGGRIFFO CV SA                                |
+| 2|104|Caixa Econômica Federal                                         |
+| 247|309|CAMBIONET CC LTDA                                             |
+| 237|288|CAROL DTVM LTDA                                              |
+| 254|324|CARTOS SCD SA                                               |
+| 146|130|Caruana SA Sociedade de Crédito                             |
+| 163|159|Casa do Crédito SA Soc de Créd ao Microempreendedor       |
+| 209|016|CCM DESP TRÂNS SC E RS                                        |
+| 233|281|CCR COOPAVEL                                                  |
+| 253|322|CCR DE ABELARDO LUZ                                           |
+| 289|391|CCR DE IBIAM                                                  |
+| 236|286|CCR DE OURO                                                   |
+| 231|279|CCR DE PRIMAVERA DO LESTE                                     |
+| 228|273|CCR DE SÃO MIGUEL DO OESTE                                    |
+| 282|379|CECM COOPERFORTE                                              |
+| 308|509|Celcoin Payment Institution                                   |
+| 140|114|Central das Coop Econ e Créd Mútuo do Est do Esp Santo    |
+| 130|091|Central de Coop de Econ e Créd Mútuo do Est RS  Unicred   |
+| 101|320|China Construction Bank Brasil Banco Múltiplo SA          |
+| 272|362|CIELO SA                                                    |
+| 8|477|Citibank NA                                                   |
+| 314|000|CLARO PAY SA  INSTITUICAO DE PAGAMENTO                     |
+| 319|542|CLOUDWALK INSTITUIÇÃO DE PAGAMENTO E SERVICOS LTDA            |
+| 169|180|CM Capital Markets Corretora de Câmbio                        |
+| 294|402|COBUCCIO SCD SA                                             |
+| 145|127|Codepe Corretora de Valores e Câmbio SA                     |
+| 164|163|Commerzbank Brasil SA  Banco Múltiplo                      |
+| 211|060|CONFIDENCE CC SA                                            |
+| 129|090|Coop Central de Econ e Créd Mútuo  Sicoob Unimais         |
+| 196|097|Cooperativa Central de Crédito Noroeste Brasileiro Ltda       |
+| 116|085|Cooperativa Central de Crédito UrbanoCECRED                  |
+| 121|099|Cooperativa Central de Economia e Credito Mutuo das Unicreds  |
+| 313|427|COOPERATIVA DE CREDITO DOS SERVIDORES DA UFES                 |
+| 124|089|Cooperativa de Crédito Rural da Região da Mogiana             |
+| 301|430|COOPERATIVA DE CREDITO RURAL SEARA  CREDISEARA               |
+| 202|403|CORA SCD SA                                                 |
+| 132|098|Credialiança Cooperativa de Crédito Rural                     |
+| 207|010|CREDICOAMO                                                    |
+| 262|342|CREDITAS SCD                                                  |
+| 252|321|CREFAZ SCMEPP LTDA                                            |
+| 266|350|CREHNOR LARANJEIRAS                                           |
+| 120|133|Cresol Confederação                                           |
+| 170|182|Dacasa Financeira SA  Sociedade de Crédito                  |
+| 238|289|DECYSEO CC LTDA                                              |
+| 102|487|Deutsche Bank SA  Banco Alemão                             |
+| 154|140|Easynvest  Título Corretora de Valores SA                    |
+| 291|395|F D GOLD DTVM LTDA                                            |
+| 161|149|Facta Financeira SA  Crédito Financiamento e Invest        |
+| 175|196|Fair Corretora de Câmbio SA                                 |
+| 263|343|FFA SCMEPP LTDA                                              |
+| 284|382|FIDUCIA SCMEPP LTDA                                           |
+| 298|450|FitBank                                                       |
+| 309|566|Flagship Instituicao de Pagamentos Ltda                       |
+| 259|331|FRAM CAPITAL DTVM SA                                        |
+| 235|285|FRENTE CC LTDA                                               |
+| 230|278|GENIAL INVESTIMENTOS CVM SA                                 |
+| 200|364|Gerencianet Pagamentos do Brasil                              |
+| 152|138|Get Money Corretora de Câmbio SA                            |
+| 286|384|GLOBAL SCM LTDA                                               |
+| 103|064|Goldman Sachs do Brasil Banco Múltiplo SA                   |
+| 150|135|Gradual Corretora de Câmbio                                   |
+| 168|177|Guide Investimentos SA Corretora de Valores                 |
+| 159|146|Guitta Corretora de Câmbio Ltda                              |
+| 104|078|Haitong Banco de Investimento do Brasil SA                  |
+| 105|062|Hipercard Banco Múltiplo SA                                 |
+| 173|189|HS Financeira SA Crédito                                     |
+| 7|399|HSBC Bank Brasil SA  Banco Múltiplo                          |
+| 292|396|HUB PAGAMENTOS                                                |
+| 226|271|IB CCTVM SA                                                 |
+| 162|157|ICAP do Brasil Corretora de Títulos e Valores Mobil Ltda    |
+| 148|000|ICBC do Brasil Banco Múltiplo SA                            |
+| 217|132|ICBC DO BRASIL BM SA                                        |
+| 106|492|ING Bank NV                                                 |
+| 153|000|Intesa Sanpaolo Brasil SA  Banco Múltiplo                  |
+| 218|139|INTESA SANPAOLO BRASIL SA BM                                |
+| 107|652|Itaú Unibanco Holding SA                                    |
+| 3|341|Itaú Unibanco SA                                              |
+| 303|401|IUGU INSTITUIÇÃO DE PAGAMENTO SA                            |
+| 108|488|JPMorgan Chase Bank                                           |
+| 285|383|JUNO                                                          |
+| 240|293|LASTRO RDV DTVM LTDA                                          |
+| 136|105|Lecca Crédito                                                 |
+| 158|145|Levycam  Corretora de Câmbio e Valores Ltda                 |
+| 293|397|LISTO SCD SA                                                |
+| 318|000|LOGBANK IP SA                                               |
+| 299|000|Magalu Pagamentos Ltda                                       |
+| 139|113|Magliano SA Corretora de Cambio e Valores Mobiliarios       |
+| 201|323|MERCADO PAGO                                                  |
+| 125|274|MONEY PLUS SCM EPP                                            |
+| 222|259|MONEYCORP BCO DE CÂMBIO SA                                  |
+| 109|128|MS Bank SA Banco de Câmbio                                  |
+| 151|137|Multimoney Corretora de Câmbio Ltda                           |
+| 126|014|Natixis Brasil SA Banco Múltiplo                            |
+| 268|354|NECTON INVESTIMENTOS SA CVM                                  |
+| 174|191|Nova Futura Corretora de Títulos e Valores Mobil Ltda       |
+| 193|753|Novo Banco Continental SA  Banco Múltiplo                  |
+| 119|260|Nu Pagamentos SA Nubank                                    |
+| 138|111|Oliveira Trust Distr de Títulos e Valores Mobil SA        |
+| 251|319|OM DTVM LTDA                                                  |
+| 255|325|ÓRAMA DTVM SA                                               |
+| 269|355|ÓTIMO SCD SA                                                |
+| 0|000|Outros                                                          |
+| 312|000|PAGGCERTO SOLUCOES EM PAGAMENTO SA                           |
+| 198|290|PagSeguro Internet SA                                        |
+| 110|254|Paraná Banco SA                                             |
+| 256|326|PARATI  CFI SA                                             |
+| 221|194|PARMETAL DTVM LTDA                                            |
+| 219|174|PEFISA SA  CFI                                             |
+| 250|315|PI DTVM SA                                                  |
+| 204|380|PICPAY                                                        |
+| 311|529|PINBANK BRASIL  PAGAMENTOS INTELIGENTES SA                 |
+| 133|100|Planner Corretora de Valores SA                             |
+| 131|093|Pólocred Soc Créd Microempreendedor e à Emp de Peq Porte   |
+| 137|108|PortoCred SA Crédito                                        |
+| 245|306|PORTOPAR DTVM LTDA                                            |
+| 257|329|QI SCD SA                                                   |
+| 234|283|RB CAPITAL INVESTIMENTOS DTVM LTDA                           |
+| 317|528|REAG DTVM SA                                                 |
+| 279|374|REALIZE CFI SA                                              |
+| 134|101|Renascença Distr de Títulos e Valores Mobiliários Ltda      |
+| 160|147|Rico Corretora de Títulos e Valores Mobiliários SA          |
+| 165|167|S Hayata Corretora de Câmbio SA                            |
+| 225|270|SAGITUR CC LTDA                                               |
+| 111|751|Scotiabank Brasil SA Banco Múltiplo                         |
+| 229|276|SENFF SA  CFI                                              |
+| 185|545|Senso Corretora de Câmbio e Valores Mobiliários SA          |
+| 220|190|SERVICOOP                                                     |
+| 273|363|SINGULARE CTVM SA                                           |
+| 171|183|Socred SA  Sociedade de Crédito ao Microempreendedor       |
+| 274|365|SOLIDUS SA CCVM                                             |
+| 205|000|Sorocred  Crédito                                            |
+| 243|299|SOROCRED CFI SA                                             |
+| 112|118|Standard Chartered Bank Brasil SA Bco Invest              |
+| 306|462|STARK BANK SA                                                |
+| 117|197|Stone Pagamentos SA                                          |
+| 295|404|SUMUP SCD SA                                                |
+| 199|340|Super Pagamentos e Administração de Meios Eletrônicos SA    |
+| 315|481|SUPERLÓGICA SOCIEDADE DE CRÉDITO DIRETO SA                   |
+| 246|307|TERRA INVESTIMENTOS DTVM                                      |
+| 267|352|TORO CTVM LTDA                                                |
+| 156|143|Treviso Corretora de Câmbio SA                              |
+| 271|360|TRINUS CAPITAL DTVM                                           |
+| 147|131|Tullett Prebon Brasil Corretora de Valores e Câmbio Ltda     |
+| 113|129|UBS Brasil Banco de Investimento SA                         |
+| 127|015|UBS Brasil Corretora de Câmbio                                |
+| 118|136|Unicred do Brasil                                             |
+| 123|084|Unicred Norte do Paraná                                       |
+| 278|373|UPP SEP SA                                                 |
+| 307|457|UY3 SOCIEDADE DE CRÉDITO DIRETO SA                           |
+| 242|298|VIPS CC LTDA                                                 |
+| 241|296|VISION SA CC                                                |
+| 275|367|VITREO DTVM SA                                              |
+| 248|310|VORTX DTVM LTDA                                              |
+| 277|371|WARREN CVMC LTDA                                              |
+| 320|280|WILL FINANCEIRA SA CFI                                      |
+| 135|102|XP Invest Corret de Câmbio Títulos e Valores Mobil SA    |
+| 270|359|ZEMA CFI SA                                                  |
+| 316|000|ZOOP MEIOS DE PAGAMENTOS                                      |
+</Expandable>
+
+<Expandable title="Bank Account Type Table">
+
+| ID | Description     |
+|----|-----------------|
+| 1  | Savings         |
+| 2  | Current Account |
+
+</Expandable>
+---------------
+</Expandable>
+

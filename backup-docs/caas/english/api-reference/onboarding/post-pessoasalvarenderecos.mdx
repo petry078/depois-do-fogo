@@ -1,0 +1,24 @@
+---
+title: "8 - Save Addresses"
+openapi: post /Pessoa/SalvarEnderecos
+version: 'English'
+---
+
+Through this endpoint, the partner includes or updates address records of a specific client.
+To update, it is necessary to send the "código" field, filled with the record code in the BMP database, or the search will be done through the "CEP" field.
+
+<Expandable title="Messages">
+| Categoria | Operação                  | Ação            | Código | Código Detalhado | Mensagem                                                                                           |
+|-----------|---------------------------|-----------------|--------|------------------|----------------------------------------------------------------------------------------------------|
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | C0108  | V0001            | Documento Federal deve ser informado                                                              |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | C0108  | V0002            | Cliente não encontrado com o documento `{documentoCliente}`                                        |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | C0108  | V0003            | Cliente não cadastrado pelo parceiro de integração                                                |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0001            | Informe o CEP                                                                                   |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0002            | CEP inválido                                                                                   |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0003            | Informe o Logradouro                                                                           |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0004            | Informe a Cidade                                                                              |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0005            | Informe o Estado                                                                              |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0006            | Informe o Tipo de Imóvel                                                                       |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0007            | Informe o Tipo de Endereço                                                                     |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0008            | Informe o tempo em que está situado no endereço                                                  |
+</Expandable>

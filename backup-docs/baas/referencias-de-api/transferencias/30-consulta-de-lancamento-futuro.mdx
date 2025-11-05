@@ -1,0 +1,101 @@
+---
+title: "30 - Consulta de Lançamento Futuro"
+openapi: get /api/LancamentosFuturos
+---
+
+Por meio deste endpoint, o parceiro pode visualizar um lançamento futuro de transferência ou pagamento.
+
+Tabelas de Enums:
+
+<Expandable title="Enums do campo origemTransacao">
+
+| Enum | Descrição                                 |
+|------|-------------------------------------------|
+| 0    | Movimento manual                          | 
+| 1    | Transferência interna                     |
+| 2    | Envio TED                                 |
+| 3    | Pagamento de Boleto                       |
+| 4    | Envio Transferencia CR                    |
+| 5    | Envio PIX                                 |
+| 6    | Pagamento Titulo Concessionaria           |
+| 7    | Compra Cartão                             |
+| 8    | Saque Cartão                              |
+| 9    | Solicitação Cartão                        |
+| 10   | Cobrança Recorrente                       |
+| 501  | Recebimento de Transferência              |
+| 502  | Recebimento TED                           |
+| 503  | Recebimento Boleto                        |
+| 504  | Recebimento Transferência CR              |
+| 505  | Recebimento de PIX                        |
+| 506  | Recebimento de Crédito Operacional        |
+| 507  | Recebimento de Boleto Unificado           |
+| 1001 | Devolução Transferencia                   |
+| 1002 | Revolução TED                             |
+| 1003 | Devolução Título                          |
+| 1004 | Devolução Transferência CR                |
+| 1005 | Estorno PIX                               |
+| 1006 | Devolução PIX                             |
+| 1007 | Devolução Pagamento Título Concessionária |
+| 1008 | Devolução Compra Cartão                   |
+| 1009 | Devolução Saque Cartão                    |
+| 1010 | Devolução LDL                             |
+| 1011 | Estorno Devolução LDL                     |
+| 1012 | Devolução LTR                             |
+| 1013 | Estorno Devolução LTR                     |
+| 1200 | Boleto Comunicação                        |
+| 1501 | Registro Boleto                           |
+| 1502 | Alteração Boleto                          |
+| 1503 | Cancelamento Boleto                       |
+| 1701 | Cessão Boleto                             |     
+| 1601 | Protesto Boleto                           |
+| 2001 | CNAB_REG                                  |
+| 2002 | CNAB_PGT                                  |
+| 2003 | CNAB_ALT                                  |
+| 2004 | CNAB_CAN                                  |
+| 2010 | CNAB Remessa                              |
+| 2012 | CNAB Retorno                              |
+| 2501 | Split                                     |
+| 3001 | Serviço                                   |
+| 3002 | Bloqueio Serviço                          |
+| 4001 | Safe                                      |
+| 4501 | Previa Boleto Credito                     |
+| 5001 | Rejeição Envio PIX                        |
+| 5002 | Rejeição Estorno PIX                      |
+| 5003 | Rejeição Estorno PIX                      |
+| 5004 | Rejeição Devolução PIX                    |
+
+</Expandable>
+
+<Expandable title="Enums do campo situacao">
+
+| Enum | Descrição                              |
+|------|----------------------------------------|
+| 10   | Validar                                |
+| 11   | Validando                              |
+| 12   | Validado                               |
+| 21   | Verificando Aprovacao                  |
+| 22   | Em Aprovacao                           |
+| 23   | Aprovado                               |
+| 24   | Reprovado                              |
+| 31   | Verificando Agendamento                |
+| 32   | Agendado                               |
+| 33   | Executar                               |
+| 34   | Cancelado                              |
+| 35   | Registrado Agendamento Recorrente Pix  |
+| 41   | Executando                             |
+| 42   | Executado                              |
+| 50   | Reprocessar                            |
+| 51   | Reprocessar Validacao                  |
+
+</Expandable>
+
+<Expandable title ="Enums do campo situacaoAprovacao">
+
+| Enum | Descrição |
+|------|-----------|
+| 0    | Pendente  |
+| 1    | Aprovado  |
+| 2    | Reprovado |
+| 3    | Cancelada |
+
+</Expandable>

@@ -1,0 +1,145 @@
+---
+title: 'Consulta de Escrituração e Repasse'
+version: 'Português'
+tag: new
+---
+
+Este documento apresenta os exemplos de requisição e resposta para **Consultar Escriturações** e para **Consultar Repasses**, no contexto da integração entre instituições financeiras e o sistema do **eSocial**.
+
+<div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+  <div> <h2>1. Consulta de Escrituração</h2> </div>
+  <div style={{marginTop: '30px'}}><span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Síncrona</span></div>
+</div>
+
+Após o processamento das folhas de pagamento e a escrituração das informações no eSocial pelo empregador, a instituição financeira poderá consultar todos os eventos recebidos.
+
+Para isso, é necessário informar um intervalo de tempo e o número da página desejada. Como retorno, serão exibidas as informações da página solicitada, além de uma lista de elementos de escrituração contendo dados como contato, período de referência e valor da parcela.
+
+<Expandable title="Exemplo de Requisição">
+
+```json
+curl --location --request GET 'https://econsignadotrabalhador.moneyp.dev.br/contrato/consultar-escrituracoes?dataHoraInicio=01082025000000&dataHoraFim=14082025000000&nropagina=1' \
+--header 'Authorization: Bearer <token>'
+```
+
+</Expandable>
+
+<Expandable title="Exemplo de Resposta">
+
+```json
+{
+  "CodigoRequisicao": "7b307672-a414-4b8b-9bb6-e38482581765",
+  "Origem": "/consultar-escrituracoes",
+  "Conteudo": {
+    "nroPaginaAtual": 1,
+    "nroTotalPaginas": 3,
+    "nroTotalRegistros": 105,
+    "qtdRegistrosPorPagina": 50,
+    "qtdRegistrosPaginaAtual": 50,
+    "dataHoraInicio": "ddMMyyyyHHmmss",
+    "dataHoraFim": "ddMMyyyyHHmmss",
+    "conteudo": [
+      {
+        "id": 123,
+        "idEvento": "string",
+        "periodoReferencia": 202505,
+        "codigoIF": 999,
+        "contrato": "string",
+        "valorParcelaDesconto": 0,
+        "cpf": 0,
+        "inscricaoEmpregador": {
+          "codigo": 0,
+          "descricao": "string"
+        },
+        "numeroInscricaoEmpregador": 0,
+        "matricula": "string",
+        "dataHoraInclusaoDataprev": "ddMMyyyyHHmmss",
+        "idEventoExclusao": 0,
+        "dataHoraEventoExclusao": "ddMMyyyyHHmmss",
+        "idEventoRetificacao": 0,
+        "dataHoraEventoRetificacao": "ddMMyyyyHHmmss",
+        "emprestimo": {
+          "codigoIf": 0,
+          "contrato": "string",
+          "valorParcela": 0
+        },
+        "analise": {
+          "existeTrabalhadorEscriturado": true,
+          "existeNumeroContratoEscriturado": true,
+          "vinculoCorreto": true,
+          "instituicaoFinanceiraCorreta": true,
+          "valorParcelaCorreta": true,
+          "dadosCorrespondentes": true
+        }
+      }
+    ]
+  },
+  "Erros": []
+}
+```
+
+</Expandable>
+
+<div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+  <div> <h2>2. Consulta de Repasse</h2> </div>
+  <div style={{marginTop: '30px'}}><span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Síncrona</span></div>
+</div>
+
+Através da operação supracitada, a instituição financeira poderá conferir seus repasses feitos pela Caixa, em um intervalo de tempo. 
+
+Para isso, basta informar o intervalo desejado e o número da página que se quer consultar. 
+
+Como retorno, serão apresentadas as informações da página solicitada, além de uma lista paginada contendo dados como: guias já pagas dentro do intervalo informado, número do contrato, valor da parcela paga, data e hora do pagamento da guia, data de inclusão no sistema da DATAPREV, data do repasse à instituição financeira e número da guia.
+
+<Expandable title="Exemplo de Requisição">
+
+```json
+curl --location --request GET'https://econsignadotrabalhador.moneyp.dev.br/contrato/consultar-repasses?dataHoraInicio=01082025000000&dataHoraFim=14082025000000&nropagina=1' \
+--header 'Authorization: Bearer <token>'
+```
+
+</Expandable>
+
+<Expandable title="Exemplo de Resposta">
+
+```json
+{
+  "CodigoRequisicao": "7b307672-a414-4b8b-9bb6-e38482581765",
+  "Origem": "/consultar-repasses",
+  "Conteudo": {
+    "NroPaginaAtual": 1,
+    "NroTotalPaginas": 1,
+    "NroTotalRegistros": 10,
+    "QtdRegistrosPorPagina": 250,
+    "QtdRegistrosPaginaAtual": 10,
+    "DataHoraInicio": "01082025000000",
+    "DataHoraFim": "14082025000000",
+    "Conteudo": [
+      {
+        "Id": 4146,
+        "CodigoIF": 531,
+        "Contrato": "5094853",
+        "ValorParcelaPaga": 600,
+        "DataHoraPagamentoGuia": "11082025000000",
+        "DataHoraInclusaoDataprev": "13082025110600",
+        "DataHoraRepasseIF": "12082025000000",
+        "NumeroGuia": 1755093960
+      }
+    ]
+  },
+  "Erros": []
+}
+```
+
+</Expandable>
+
+## Endpoints e Documentos Auxiliares
+
+Para esta jornada, é muito importante que o parceiro conheça o [Procedimento Técnico de Callbacks do E-Consignado Trabalhador](https://bmpdocs.moneyp.com.br/e-consignado/procedimento-tecnico-de-callback/introducao) e tenha uma URL de callbacks configurada.
+
+Também podem ser úteis os seguintes endpoints do CaaS:
+
+* [28 - Consultar Contrato](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/gestao-de-propostas/28-consultar): utilizado nesta jornada para consultar os dados da proposta;
+* [38 - Consultar Comprovante de Pagamento](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/impressao-documentos/38-comprovante-de-pagamento): utilizado nesta jornada para consultar o comprovante de pagamento da proposta;
+* [11 - Cancelar Contrato](https://bmpdocs.moneyp.com.br/e-consignado/referencias-de-api/contrato/11-cancelar-contrato): utilizado nesta jornada para cancelar contratos;
+* [12 - Atualizar Dados Bancários](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/referencias-de-api/contrato/12-atualizar-dados-bancarios): utilizado nesta jornada para atualizar dados bancários de um contrato.

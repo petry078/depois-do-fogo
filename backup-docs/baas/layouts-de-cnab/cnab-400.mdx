@@ -1,0 +1,971 @@
+---
+title: "Layout CNAB 400"
+version: 'Português'
+---
+
+## Funcionamento Operacional
+
+Emissão de boletos de cobrança:
+
+A emissão dos boletos é realizada pelo próprio cliente, basta apenas enviar o arquivo remessa para o Banco efetuar o registro dos títulos.
+
+## Procedimentos da Empresa
+
+Para a realização do teste, poderá ser transmitido quantos Arquivos Remessa lhes convier, porém, gravados com todos os dados fictícios, exigindos no layout, e deverá conter no máximo 10 registros a vencer.
+
+Após a oficialização, os Arquivos Remessa poderão conter até 5000 registros. Os arquivos devem ser zipados (.zip), bem como os registros devem ser de acordo com as especificações do layout.
+
+## Nome dos Arquivos Remessa/Retorno
+
+`CBDDMMSSSSSSS.REM`
+
+* CB: Cobrança de Boleto;
+* DD: Dia da geração do arquivo;
+* MM: Mês da geração do arquivo;
+* SSSSSS: Sequencial numérica. Exemplo: 000001,0000002, 0000003...
+* .REM: Extensão do Arquivo.
+
+Exemplo: CB01050000001.REM
+
+Neste exemplo, o arquivo de remessa é `CB01050000001.REM` e o arquivo de retorno é `CB01050000001.RET`. 
+
+<Note>No mesmo dia, não poderão ser transmitidos Arquivos-Remessa diferentes com nomes iguais. A variável no nome do arquivo serve para diferenciar um do outro.</Note>
+
+<Tip>O cliente receberá uma notificação via Callback ou deverá consultar um método da API de integração para verificar se existem arquivos de retorno disponíveis para download e realize a conciliação das informações de cobranças aceitas, rejeitadas, liquidadas, alteradas etc.</Tip>
+
+## Procedimentos BMP Money Plus
+
+Os arquivos de retorno serão separados em dois grupos: Registro e Baixa. Para cada arquivo enviado de Registro haverá um respectivo arquivo de retorno. Todos os movimentos de Baixa serão retornados em um único arquivo, podendo existir mais de um arquivo no mesmo dia. O cliente deverá consultar o método da API para realizar o download dos respectivos arquivos.
+
+## Formato CNAB
+
+| Arquivo | Reg. Lógico | Fator Bloco | Bloco     |
+|---------|-------------|-------------|-----------|
+| REM/RET | 400 Bytes   | 1           | 400 Bytes |
+
+## Descrição do Arquivo Formato CNAB
+
+### Remessa
+
+Registro 0 - Header
+Label Registro 1 - Transação
+Registro 2 - Mensagem (opcional)
+Registro 9 - Trailer
+
+### Retorno
+
+Registro 0 - Header
+Label Registro 1 - Transação
+Registro 2 - Mensagem (opcional)
+Registro 9 - Trailer
+
+### Formatação do Arquivo
+
+Arquivo texto - padrão CNAB
+
+### Meio de Registro
+
+Transmissão de Dados por meio de API de integração.
+
+### Organização
+
+Sequencial
+
+### Sistema de Codificação - Plataforma Baixa
+
+ASC II - inclusive o arquivo deverá conter delimitadores de registro no final de cada registro (ODOA), bem como finalizador de arquivo, no final do trailer (1A).
+
+### Sistema de Codificação - Sistema Host
+
+EBCDIC
+
+<Note>
+
+Conforme Circulares BACEN 3598 a 3656 foram alteradas as nomemclaturas conforme:
+
+* Sacado para Pagador;
+* Cedente para Beneficiário.
+
+</Note>
+
+## Layout do Arquivo-Remessa - Registro Header Label
+
+Layout para Cobrança com Registro e Impressão do Boleto pela Empresa
+
+Descrição de Registro - Tamanho 400 Bytes.
+
+A - Alfanumérico - Conteúdo em Caixa Alta (Letras Maiúsculas) N - Numérico
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-1.png)
+
+## Layout do Arquivo-Remessa - Registro de Transação - Tipo 1
+
+Layout para Cobrança com Registro e Impressão do Boleto pela Empresa
+
+Descrição de Registro - Tamanho 400 Bytes.
+
+A - Alfanumérico - Conteúdo em Caixa Alta (Letras Maiúsculas) N - Numérico
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-2.png)
+
+## Layout do Arquivo-Remessa - Registro de Transação - Tipo 2
+
+Layout para Cobrança com Registro e Impressão do Boleto pela Empresa
+
+Descrição de Registro - Tamanho 400 Bytes.
+
+A - Alfanumérico - Conteúdo em Caixa Alta (Letras Maiúsculas) N - Numérico
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-3.png)
+
+<Note>Para que o sistema considere uma linha para cada mensagem, deverá ser utilizado no mínimo 41 caracteres para cada intervalo de 80 posições. Exemplo: Posições 002 à 081, deverá ser preenchido até a posição 041.</Note>
+
+<Note>O sequencial do registro do tipo 2, deverá seguir a sequência do registro tipo 1. Exemplo: Linha 2: Posição 395 a 400, Número sequencial do registro 000002; Linha 3: que conterá o registro do tipo 2, deverá ser preenchido Número sequencial de registro 000002.</Note>
+
+## Layout do Arquivo-Remessa - Registro de Transação - Tipo 3
+
+Layout para Cobrança com Registro e Impressão do Boleto pela Empresa
+
+Descrição de Registro - Tamanho 400 Bytes.
+
+A - Alfanumérico - Conteúdo em Caixa Alta (Letras Maiúsculas) N - Numérico
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-4.png)
+
+Deverá informar o tipo de desconto, considerando os códigos abaixo:
+
+* Valor Fixo Até a Data Informada: 1;
+* Percentual Até a Data Informada: 2;
+* Valor de Antecipação por Dia Corrido: 3;
+* Percentual de Antecipação por Dia Corrido: 5.
+* Data informada: o desconto é aplicado com base em uma data específica fornecida.
+* Dia Corrido: o desconto é calculado com base na quantidade de dias que passam, independentemente das datas especificadas, até atingir o prazo final definido.
+
+<Note>Para que o sistema considere uma linha para cada mensagem, deverá ser utilizado no mínimo 41 caracteres para cada intervalo 80 posições. Exemplo: Posições 002 à 081, deverá ser preenchido até a posição 041.</Note>
+
+<Note>O sequencial do registro do tipo 3, deverá seguir a sequência do registro tipo 2. Exemplo: Linha 3: Posição 395 a 400, Número sequencial de registro 000003; Linha 4: que conterá o registro do tipo 3, deverá ser preenchido Número sequencial de registro 000003.</Note>
+
+## Layout do Arquivo-Remessa - Registro Trailer
+
+Descrição de Registro - Tamanho 400 Bytes.
+
+A - Alfanumérico - Conteúdo em Caixa Alta (Letras Maiúsculas) N - Numérico
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-5.png)
+
+## Arquivo Remessa
+
+Os campos numéricos deverão ser alinhados à direita e preenchidos com zeros à esquerda, quando for o caso.
+
+Os campos correspondentes a valores (moeda real), deverão ser preenchidos com duas casas decimais.
+
+## Registro Header Label
+
+### 027 - 046 - Códigos da Empresa
+
+Será informado quando o cadastramento da Conta beneficiário na sua Agência. Esse código deve ser alinhado à direita com zeros à esquerda.
+
+### 095 - 100 -  Datas da Gravação Sequencial de Remessa
+
+Para a retransmissão de um Arquivo Remessa rejeitado, será necessário alterar a data constante desse campo, bem como atualizar o número de remessa na posição 111 a 117 (número sequencial de remessa).
+
+### 111 a 117 - Números Sequencial de Remessa
+
+O número de remessa deve iniciar de 0000001 e incrementado de + 1 a cada novo Arquivo Remessa, com o objetivo de evitar que ocorra duplicidade de arquivo não podendo, em hipótese alguma, ser repetida ou zerada.
+
+## Registro de Transação - Tipo 1
+
+### 021 a 037 - Identificações da Empresa Beneficiária no Banco
+
+Deverá ser preenchido (esquerda para direita), da seguinte maneira:
+
+* 21 a 21: zero;
+* 22 a 24: códigos de carteira;
+* 25 a 29: códigos da agência beneficiários, sem dígito;
+* 30 a 36: contas corrente;
+* 37 a 37: dígitos da conta.
+
+### 038 a 052 - Número do Controle do Participante
+
+Campo destinado para uso da Empresa. A informação que constar do Arquivo Remessa será confirmada no Arquivo Retorno. Não será impresso nos boletos de cobrança.
+
+Este campo por determinação da CIP deverá conter no máximo 15 caracteres alinhados a esquerda, caso contrário o registro será invalidado.
+
+### 053 a 062 - Complemento ao Número do Controle do Participante
+
+A informação que constar do Arquivo Remessa será confirmada no Arquivo Retorno, não será impresso nos boletos de cobrança.
+
+### 063 a 066 - Identificativos de Multa
+
+* Se = 0 (sem multa);
+* Se = 2 (tem multa).
+
+### 067 a 070 - Percentual de Multa por atraso
+
+Se campo 66 a 66 = 0, preencher com zeros. Se o campo 66 a 66 = 2, preencher com percentual da multa com 2 decimais.
+
+### 071 a 082 - Identificações do Título no Banco (Nosso Número)
+
+Campo reservado para o Nosso Número do Título (Número Bancário).
+
+## Emissão do Boleto pelo Cliente
+
+Cobrança com Registro: a ficha de compensação deverá apresentar as especificações exigidas, com realção ao código de barras, conforme consta na página 43, e, neste caso, a posição 71 a 82 do registro de transação deverá vir preenchido com o Nosso Número e seu respectivo dígito de auto-conferência, o qual será confirmado no Arquivo Retorno, quando o registro do título, inclusive, apresentamos, a seguir, o critério a ser adotado para o cálculo do dígito de auto-conferência.
+
+A linha de numeração deverá ser composta de 11 algarismos mais o dígito de auto-conferência, a qual obedecerá ao seguinte formato:
+
+* Posição 71 a 81: nosso número - poderá ser gerado a partir de 00000000001, 00000000002 etc - 11 posições, devendo ser atribuído número diferenciado para identificação de cada documento na cobrança.
+* Posição 82 a 82: dígito de auto-conferência do Nosso Número - 1 posição.
+
+<Note>Para o cálculo do dígito, será necessário acrescentar o número da carteira à esquerda antes do Nosso Número, e aplicar o módulo 11, com base 7.</Note>
+
+Exemplos:
+
+1. Efetuar a multiplicação:
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-6.png)
+
+2. Efetuar o somatório, cujo resultado é = 69;
+3. Efetuar a divisão: 69/11 = 6 + 3/11
+
+A diferença entre o resto (numerador) menos o denominador será o dígito de auto-conferência. 11 - 03 = 08 (dígito de auto-conferência). Portanto, o Nosso Número será:
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-7.png)
+
+Se o resto da divisão for "1", desprezar a diferença entre o divisor menos o resto que será "10" e considerar o dígito como "P".
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-8.png)
+
+Efetuar a divisão: 67/11 = 6 + 1/11
+
+Resultado: 11 - 01 = 10. Neste caso o dígito será "0". Portanto, o Nosso Número será:
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-9.png)
+
+Se o resto da divisão for "0", desprezar o cálculo de subtração entre divisor e resto, e considerar o "0" como dígito.
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-10.png)
+
+Efetuar a divisão: 77/11 = 7 + 0/11
+
+Portanto, o Nosso Número será:
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-11.png)
+
+### 093 a 093 - Condições para Emissão do Boleto de Cobrança
+
+* Se o Nosso Número não for informado, o Banco criará automaticamente.
+* Se for igual a 2 = o cliente emite o boleto e o banco somente processa o registro. Neste caso, será obrigatório informar o Nosso Número formatado na posição 71 a 82 do registro de transação tipo 1.
+
+### 109 a 110 - Identificações de Ocorrências
+
+1. Remessa;
+2. Pedido de baixa;
+6. Alteração de vencimento;
+7. Alteração do controle do participante;
+20. Alteração do valor.
+
+### 121 a 126 - Datas do Vencimento do Título
+
+Preencher com a data de vencimento do título no formato (DDMMAA).
+
+## 148 a 149 - Espécie de Título
+
+A Espécie de Título possui tamanho do campo de 02, na qual poderá assumir os seguintes valores:
+
+1. Cheque (CH);
+2. Duplicata Mercantil (DM);
+3. Duplicata Mercantil Indicação (DMI);
+4. Duplicata de Serviço (DS);
+5. Duplicata de Serviço Indicação (DSI);
+6. Duplicata Rural (DR);
+7. Letra de Câmbio (LC);
+8. Nota de Crédito Comercial (NCC);
+9. Nota de Crédito Exportação (NCE);
+10. Nota de Crédito Industrial (NCI);
+11. Nota de Crédito Rural (NCR);
+12. Nota Promissória (NP);
+13. Nota Promissória Rural (NPR);
+14. Triplicata Mercantil (TM);
+15. Triplicata de Serviço (TS);
+16. Nota de Seguro (NS);
+17. Recibo (RC);
+18. Bloqueto (FAT);
+19. Nota de Débito (ND);
+20. Apólice de Seguro (AP);
+21. Mensalidade Escolar (ME);
+22. Parcela de Consórcio (PC);
+23. Nota Fiscal (PF);
+24. Documento de Dívida (DD);
+25. Cédula de Produto Rural;
+26. Warrant;
+27. Dívida Ativa de Estado;
+28. Dívida Ativa de Município;
+29. Dívida Ativa da União;
+30. Encargos Condominiais;
+31. Cartão de Crédito;
+32. Boleto proposta;
+99. Outros.
+
+### 157 a 160 - 1°/2° Instrução
+
+Campo destinado para pré-determinar o protesto do Título ou a baixa por decurso de prazo, quando do registro. Não havendo interesse, preencher com zeros.
+
+Porém, caso a empresa deseje se utilizar da instrução automática de protesto ou da baixa por decurso de prazo.
+
+### 161 a 173 - Valores a ser Cobrado por dia de atraso (mora dia)
+
+Campo destinado para o Beneficiário informar o valor da mora dia a ser cobrado do Pagador, no caso de pagamento com atraso (somente valor).
+
+## 315 a 326 - 1° Mensagem
+
+Campo livre para uso da Empresa. A mensagem enviada nesse campo será impressa somente no boleto e não será confirmada no Arquivo Retorno.
+
+### 335 a 335 - Tipo Sacador Avalista
+
+Quando existir um Sacador/Avalista para o boleto, o mesmo deverá ser qualificado conforme abaixo:
+
+* 0: isento;
+* 1: CPF;
+* 2: CNPJ;
+* 3: PIS/PASEP`;
+* 9: Outros.
+
+### 336 a 350 - Identificador Sacador Avalista
+
+O identificador do sacador avalista corresponde número/código atrelado ao seu Tipo (descrito acima), e deverá ser preenchido de acordo com o informado.
+
+<Note>Quando não houver Sacador/Avalista, o conteúdo que se inicia na posição 335 até a posição 394 deverá vir em BRANCO.</Note>
+
+Decomposição do campo:
+
+Mensagem a ser impressa no boleto | Condição automática do cadastro Mensagem Livre | 60 | Alfanumérico
+
+## Código de Barras do Boleto para a Cobrança
+
+Código I25 (2 de 5 intercalado)
+
+* Permite representação numérica;
+* Utiliza caracteres indetificadores de início e fim;
+* As barras estreitas (E) são representados pelo número (0);
+* As barras largas (L) são representadas pelo número 1 (um);
+* Forma de codificação de l25: de acordo com a combinação de duas barras estreitas (E) e /ou largas (L). Configuração em ASCII e EBCDIC:
+
+| EBCDIC | Barras | ASCII |
+|--------|--------|-------|
+| `<`    | INÍCIO | 3C    |
+| `<`    | SIM    | 3E    |
+| `N`    | EL     | 4E    |
+| `W`    | LL     | 57    |
+| `n`    | EE     | 6E    |
+| `w`    | LE     | 77    |
+
+Se houver uma das duplas de barras acima, deve-se primeiramente substituir os números 0 a 9 de acordo com a representação a seguir:
+
+| Número | Representação |
+|--------|---------------|
+| 0      | 00110         |
+| 1      | 00110         |
+| 2      | 01001         |
+| 3      | 11000         |
+| 4      | 00101         |
+| 5      | 10100         |
+| 6      | 01100         |
+| 7      | 01100         |
+| 8      | 10010         |
+| 9      | 01010         |
+
+Exemplo: para representar 123, teremos que acrescentar o número 0 (zero) a esquerda, de forma a obtermos número par de dígitos.
+
+Observando a representação acima, deve-se pagar o primeiro BIT do número e juntar ao primeiro BIT do número 1 formando o par 01, que significa uma barra E (estreita) e outra L (larga), que possui a configuração em ASCII igual a 4E. Então, a codificação do número 0123 será:
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-12.png)
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-13.png)
+
+Segue abaixo, tabela com todos os Pares de Barras:
+
+| Números | Pares de Barras |
+|---------|-----------------|
+| INÍCIO  | EEEE            |
+| FIM     | LEEE            |
+| 00      | EEEELLLLEE      |
+| 01      | EEEELLLLEE      |
+| 02      | EEELLELEEL      |
+| 03      | ELELLELEEE      |
+| 04      | ELELLELEEE      |
+| 05      | ELEELLLEEE      |
+| 06      | EEELLLLEEE      |
+| 07      | EEEELELLEL      |
+| 08      | ELEELELLEE      |
+| 09      | EEELLELLEE      |
+| 10      | LEEEELELLE      |
+| 11      | LLEEEEEELL      |
+| 12      | LEELEEEELL      |
+| 13      | LLELEEEELE      |
+| 14      | LEEEELEELL      |
+| 15      | LLEEELEELE      |
+| 16      | LEELELEELE      |
+| 17      | LEEEEEELLL      |
+| 18      | LLEEEEELLE      |
+| 19      | LEELEEELLE      |
+| 20      | EELEELELLE      |
+| 21      | ELLEEEEELL      |
+| 22      | EELLEEEELL      |
+| 23      | ELLLEEEELE      |
+| 24      | EELEELEELL      |
+| 25      | ELLEELEELE      |
+| 26      | EELLELEELE      |
+| 27      | EELEEEELLL      |
+| 28      | ELLEEEELLE      |
+| 29      | EELLEEELLE      |
+| 30      | LELEELELEE      |
+| 31      | LLLEEEEEEL      |
+| 32      | LELLEEEEEL      |
+| 33      | LLLLEEEEEE      |
+| 34      | LLLLEEEEEE      |
+| 35      | LLLEELEEEE      |
+| 36      | LLLEELEEEE      |
+| 37      | LELEEEELEL      |
+| 38      | LLLEEEELEE      |
+| 39      | LELLEEELEE      |
+| 40      | EEEELLELLE      |
+| 41      | ELEELEEELL      |
+| 42      | EEELLEEELL      |
+| 43      | EEELLEEELL      |
+| 44      | EEEELLEELL      |
+| 45      | ELEELLEELE      |
+| 46      | ELEELLEELE      |
+| 47      | EEEELEELLL      |
+| 48      | ELEELEELLE      |
+| 49      | ELEELEELLE      |
+| 50      | EEELLEELLE      |
+| 51      | LLEELEEEEL      |
+| 52      | LLEELEEEEL      |
+| 53      | LLELLEEEEE      |
+| 54      | LLELLEEEEE      |
+| 55      | LLEELLEEEE      |
+| 56      | LLEELLEEEE      |
+| 57      | LEELLLEEEE      |
+| 58      | LLEELEELEE      |
+| 59      | LEELLEELEE      |
+| 60      | EELELLELEE      |
+| 61      | EELELLELEE      |
+| 62      | EELLLEEEEL      |
+| 63      | ELLLLEEEEE      |
+| 64      | EELELLEEEL      |
+| 65      | EELELLEEEL      |
+| 66      | EELLLLEEEE      |
+| 67      | EELLLLEEEE      |
+| 68      | ELLELEELEE      |
+| 69      | EELLLEELEE      |
+| 70      | EEEEELLLLE      |
+| 71      | EEEEELLLLE      |
+| 72      | EEELEELELL      |
+| 73      | EEELEELELL      |
+| 74      | EEEEELLELL      |
+| 75      | ELEEELLELE      |
+| 76      | EEELELLELE      |
+| 77      | EEEEEELLLL      |
+| 78      | ELEEEELLLE      |
+| 79      | ELEEEELLLE      |
+| 80      | LEEEELLLEE      |
+| 81      | LLEEEELEEL      |
+| 82      | LLEEEELEEL      |
+| 83      | LLELEELEEE      |
+| 84      | LEEEELLEEL      |
+| 85      | LLEEELLEEE      |
+| 86      | LEELELLEEE      |
+| 87      | LEEEEELLEL      |
+| 88      | LLEEEELLEE      |
+| 89      | LEELEELLEE      |
+| 90      | EELEELLLEE      |
+| 91      | EELEELLLEE      |
+| 92      | EELLEELEEL      |
+| 93      | EELLEELEEL      |
+| 94      | ELLLEELEEE      |
+| 95      | ELLEELLEEE      |
+| 96      | EELLELLEEE      |
+| 97      | EELEEELLEL      |
+| 98      | EELEEELLEL      |
+| 99      | EELLEELLEE      |
+
+## Montagem dos Dados do Código de Barras
+
+O código de barra para cobrança contém 44 posições dispostas da seguinte forma:
+
+| Posição | Tamanho | Conteúdo                               |
+|---------|---------|----------------------------------------|
+| 01 a 03 | 3       | Identificação do Banco                 |
+| 04 a 04 | 1       | Código da Moeda. Exemplo: Real = 9     |
+| 05 a 05 | 1       | Dígito verificador do Código de Barras |
+| 06 a 09 | 4       | Fator de Vencimento (Vide Nota)        |
+| 10 a 19 | 10      | Valor                                  |
+| 20 a 44 | 25      | Campo Livre                            |
+
+As posições do campo livre ficam a critério de cada Banco arrecadadaor, sendo que o padrão é:
+
+| Posição | Tamanho | Conteúdo                                                                                          |
+|---------|---------|---------------------------------------------------------------------------------------------------|
+| 20 a 23 | 4       | Agência beneficiadora, sem o dígito verificador, completar com zeros à esquerda quando necessário |
+| 24 a 25 | 2       | Carteira                                                                                          |
+| 26 a 36 | 11      | Número do Nosso Número (sem o dígito verificador)                                                 |
+| 37 a 43 | 7       | Conta do Beneficiário, sem o dígito verificador, completar com zeros à esquerda quando necessário |
+| 44 a 44 | 1       | Zero                                                                                              |
+
+Para o cálculo do Dígito verificador do Código de Barras, proceder da seguinte forma: cálculo através do módulo 11, com base de cálculo igual a 9.
+
+Exemplo:
+```
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN - 43 Posições com todos os dados
+
+Para calcular o dígito considerar 43 Posições, sendo: da Posição 1 a 4 e da Posição 6 a 44.
+432987654329876543298765432987654329876543 - Índice de Multiplicação
+- - - - < - - - - < - - - - < - - - < - -  - Sentido do Cálculo
+```
+
+* O primeiro dígito da direita para a esquerda será multiplicado por 2, o segundo por 3, e assim sucessivamente;
+* Os resultados das multiplicações devem ser acumulados;
+* No final, o valor acumulado deverá ser dividido por 11;
+* O resto da divisão deverá ser subtraído de 11;
+* O resto da divisão deverá ser substraído por 11;
+    * Se o resultado da subtração for igual a zero, um ou maior que nove, deverão assumir o dígito igual a um;
+    * Caso contrário, o resultado da subtração será o próprio dígito.
+* Este resultado é o dígito verificador do código de barras, e deverá ser lançada para a quinta posição;
+* O dígito zero na quinta posição indicará que o código de barras não possui dígito verificador.
+
+## Montagem e Impressão do Código de Barras
+
+**2 de 5 intercalado** significa que 5 barras definem um caráter, sendo que duas delas são barras largas.
+
+**Intercalado** significa que o espaço entre as barras tem significado, de maneira análoga as barras.
+
+### Para Impressão Laser
+
+Após a montagem acima, criar a representação gráfica para a linha que contém os dados do código de barras ou utilizar a fonte adequada.
+
+* Posição do código de barras na papeleta (conforme exemplo abaixo): o início da barra deve estar 0,5 cm da margem esquerda da folha;
+* O meio da barra estar a 12 mm do final da folha;
+* Comprimento total igual a 103 mm e altura igual a 13 mm.
+
+Estas posições devem ser seguidas rigorosamente, pois são de fundamental importância para a leitura do código de barras.
+
+## Montagem dos Dados para Composição da Linha Digitável
+
+A linha digitável será composta por cinco campos:
+
+* 1° campo: composto pelo código do banco, código da moeda, as cinco primeiras posições do campo livre e o dígito verificador deste campo;
+* 2° campo: composto pelas posições 6° a 15° do campo livre e o dígito verificador deste campo; 
+* 3° campo: composto pelas posições 16° a 15° do campo livre e o dígito verificador deste campo;
+* 4° campo: composto pelo dígito verificador do código de barras, ou seja, a 5° posição do código de barras;
+* 5° campo: composto pelo fator de vencimento com 4 (quatro) caracteres e o valor do documento com 10 (dez) caracteres, sem separadores e sem edição.
+
+Entre cada campo deverá haver espaç equivalente a 2 (duas) posições, sendo a 1° interpretada por um ponto (.) e a 2° por um espaço em branco.
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-14.png)
+
+O total da multiplicação cujo, total for maior ou igual a 10 (dez), deverá haver a soma dos dois números, conforme os exemplos:
+
+* 5x2 = 10, portanto, 1+0 = 1
+* 8x2 = 16, portanto, 1+6 = 7
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-15.png)
+
+Total da multiplicação = 27 múltiplo de 10 (dez) = 30, portanto 30 - 27 = 3, assim a composição do 2° campo será: `40031.772003`.
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-16.png)
+
+Total da multiplicação = 35 múltiplo = 35 múltiplo de 10 (dez) = 40, portanto 40 - 35 = 5, assim a composição do 3° campo será: `28009.527905`.
+
+Dessa forma, teremos a seguinte configuração da linha digitável:
+
+`27490.03105 40031. 772003 28009. 527905 7 10010000000000`
+
+## Especificações do Boleto de Cobrança
+
+Os boletos deverão obedecer aos seguintes parâmetros, definidos pelo BACEN:
+
+* Número de vias ou partes - 2 (duas):
+    * Recido do pagador;
+    * Ficha de compensação;
+    * O recibo do pagador deverá conter o Valor do Documento, Nosso Número, Carteira, Agência/Código do Beneficiário e data do Vencimento.
+* Gramatura do papel: mínima de 50g/m2;
+* Dimensões:
+    * Ficha de compensação: 95 a 104 mm X 170 a 216 mm;
+    * Recibo do Pagador: critério do Banco.
+* Cor da via/impressão:
+    * Fundo branco/impressão azul;
+    * Fundo branco/impressão preta.
+* Inserção dos dados do Banco/Linha digitável na borda superior da ficha de compensação. Lado esquerdo: deverá constrar o nome do Banco, o número do banco, acrescido do dígito verificador, o código do banco deverá ser constituído com carácter de 5 mm e traços ou fios de fe 1,2 mm. Lado direito, deverá constar a linha digitável, as dimensões serão 3,5 a 4 mm e traços ou fios de 0,3mm.
+
+## Modelo para Boleto de Cobrança
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-17.png)
+
+## Modelo para Boleto de Proposta
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-18.png)
+
+## Instrução para Preenchimento dos Campos do Boleto
+
+1. Local de pagamento: campo destinado à inserção de mensagem para indicar ao pagador onde o pagamento poderá ser efetuado;
+2. Campo vencimento: o vencimento que constar neste campo deverá, obrigatoriamente, ser o mesmo constante no Fator de Vencimento da linha digitável e o código de barras;
+3. Beneficiário: razão social ou nome fantasia e CNPJ da empresa emissora do bolero bancário, devendo ser os mesmos do cadastro do banco.
+4. Agência/Código do Beneficiário: deverá ser preenchido com a agência com 4 (quatro caracteres) - dígito da agência/Conta de Cobrança com 7 (sete) caracteres - dígito da conta. Exemplo: 9999-D/9999999-D (Preencher com zeros à esquerda quando necessário).
+5. Data de emissão: preencher com a data de emissão do documento, ou a data do faturamento;
+6. Número do documento: poderá ser informada a identificação do número da fatura, duplicata, etc.
+7. Espécie do documento: de acordo com o ramo de atividade, poderão ser utilizada uma das siglas: DM-Duplicata Mercantil, NP-Nota Promissória, NS-Nota de Seguro, RC-Recibo, LC-Letras de Câmbio, ND-Nota de Débito, DS-Duplicata de Serviços, Outros.
+8. Aceite: campo destinado à inserção da informação se o título foi ou não aceito pelo sacado.
+9. Data processamento: preencher com a data de processamento do título.
+10. Carteira/Nosso Número: carteira com 2 (dois) caracteres/N.Número com 11 (onze) caracteres + digito (exemplo: 99 / 99999999999-D).
+11. Uso do Banco: não preencher.
+12. CIP: trata-se de código utilizado para identificar mensagens específicas ao beneficiário, sendo que o mesmo consta no cadastro do banco, quando não houver código cadastrado preencher com zeros "000".
+13. Carteira: carteira de cobrança que a empresa opera no banco.
+14. Moeda: campo destinado a informação do tipo de moeda na qual o documento foi emitido.
+15. Quantidade: não preencher.
+16. Valor do documento: campo destinado a informação do valor do documento, devendo ser preenchido com o mesmo valor informado no código de barras e na linha digitável. Caso o valor do documento esteja zerado no código de barras e na linha, deixar este campo em branco.
+17. Instruções: campo reservado para mensagens de responsabilidade do beneficiário.
+
+## Fator de Vencimento
+
+Regras para Inserção do Fator de Vencimento no Código de Barras. O fator de vencimento, expresso através de 4 dígitos, será utilizado para identificar a Data de Vencimento do título, devendo ser obtido através da subtração da data de vencimento da data base 07/10/1997.
+
+| Fator de Vencimento | Descrição  |
+|---------------------|------------|
+| Data de Vencimento  | 03-07-2000 |
+| Data Base           | 07-10-1997 |
+| Quantidade de Dias  | 1000       |
+
+Para aferição do cálculo de Fator de Vencimento sugerimos elaborarem alguns testes, utilizando as datas abaixo, para se certificarem que o Fator de Vencimento está correto.
+
+Tabela de Correlação:
+
+| Data de Vencimento | Fator de Vencimento |
+|--------------------|---------------------|
+| 03/07/2000         | 1000                |
+| 05/07/2000         | 1002                |
+| 01/05/2002         | 1667                |
+| 17/11/2010         | 4789                |
+| 21/02/2025         | 9999                |
+
+Nova data base: a partir de 22/02/2025 o fator de vencimento retornará para 1000 devendo ser adicionado 1 a cada dia subsequente a este fator, conforme exemplo abaixo.
+
+| Data       | Valor |
+|------------|-------|
+| 22/02/2025 | 1000  |
+| 23/02/2025 | 1001  |
+| 24/02/2025 | 1002  |
+
+## Regras para Inserção do Fator de Vencimento
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-20.png)
+
+## Layout do Arquivo-Retorno - Registro Header Label
+
+Descrição de Registro - Tamanho 400 Bytes.
+
+A - Alfanumérico - Conteúdo em Caixa Alta (Letras Maiúsculas) N - Numérico
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-21.png)
+
+## Layout do Arquivo-Retorno - Registro de Transação - Tipo 1
+
+Descrição de Registro - Tamanho 400 Bytes.
+
+A - Alfanumérico - Conteúdo em Caixa Alta (Letras Maiúsculas) N - Numérico
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-22.png)
+
+## Layout do Arquivo-Retorno - Registro Trailer
+
+Descrição de Registro - Tamanho 400 Bytes.
+
+A - Alfanumérico - Conteúdo em Caixa Alta (Letras Maiúsculas) N - Numérico
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-400/400-23.png)
+
+## Informações Complementares - Arquivo-Retorno
+
+<Note>Os campos numéricos estarão alinhados à direita e preenchidos com "zeros" à esquerda</Note>
+
+## Registro de Transação - Tipo 1
+
+### 021 a 037 - Identificações da Empresa Beneficiárias no banco
+
+Confirmação idêntica a do Arquivo-Remessa (Zero, carteira, Agência e Conta Corrente).
+
+### 071 a 082 - Identificações do Título no Banco (Nosso Número)
+
+Caso o Arquivo-Remessa tenha sido enviado com "zeros", nesse campo será confirmado o Nosso Número gerado pela BMP para o título em questão. Caso o Arquivo-Remessa tenha sido enviado com o Nosso Número formatado, ele será confirmado e retornado com a mesma formatação indicada inicialmente, contudo, os zeros a esquerda e o digito verificador (posição 82) serão suprimos. Desta forma, será retornado apenas o código raiz do Nosso Número.
+
+### 109 a 110 - Identificações de Ocorrências
+
+Para cobranças com registro:
+
+* 02: entrada confirmada;
+* 03: entrada rejeitada;
+* 06: liquidação normal;
+* 09: baixado automaticamente via arquivo;
+* 10: baixado confirme instruções da agência;
+* 11: em ser - arquivo de títulos pendentes;
+* 12: abatimento concedido;
+* 13: abatimento cancelado;
+* 17: liquidação após baixa ou título não registrado (verificar motivo na posição 319 a 328);
+* 18: acerto de depositária;
+* 21: acerto do controle do participante;
+* 22: título com pagamento cancelado;
+* 24: entrada rejeitada por CEP irregular;
+* 28: débito de tarifas/custas;
+* 29: ocorrências do pagador;
+* 32: instrução rejeitada;
+* 40: estorno de pagamento.
+
+<Note>Para as ocorrências sem motivos, as posições serão informada com zeros.</Note>
+
+### 127 a 146 - Identificações do Título no Banco (Nosso Número)
+
+Mesmo Nosso Número informado nas posições 71 a 82 do registro de transação.
+
+### 176 a 188 - Despesas de Cobrança
+
+Nesse campo será informado o valor da tarifa de registro, correspondente ao código de ocorrência 02 -entrada confirmada e o código de ocorrência 28 - débito de tarifas/custas, com motivo 03 - tarifa de sustação e motivo 04 - tarifa de protesto.
+
+### 189 a 201 - Outras Despesas
+
+Nesse campo será informado o valor referente ao código de ocorrência 28 - débito de tarifas/custas.
+
+### 228 a 240 - Abatimentos Concedidos sobre o Título
+
+Quando da confirmação de entradas, código de ocorrência 02, o valor do abatimento a ser concedido não será confirmado, porém quando da liquidação, o valor do abatimento concedido será informado na posição 241 e 253.
+
+### 241 a 253 - Descontos Concedidos
+
+Quando da confirmação de entradas, código de ocorrência 02, o valor do desconto a ser concedido não será confirmado, porém, quando da liquidação, o valor do desconto concedido será informado normalmente neste campo.
+
+### 254 a 266 - Valores Pagos
+
+Neste campo será informado o valor total recebido, sendo que na posição 267 a 279 será discrmininado o valor dos juros de mora e na posição 241 e 253, o valor do abatimento/desconto condedidos, se for o caso.
+
+<Note>
+
+Para título com abatimento, pago vencido:
+
+* Se o valor do abatimento for maior que o valor dos juros (diferença do abatimento menos os juros), se a informação será enviada nos campos 241 e 253;
+* Se o valor do abatimento for menor que o valor dos juros (diferença dos juros menos o abatimento), a informação será enviada nos campos 267 a 279.
+
+</Note>
+
+Internet: 14 INTERNET.
+
+### 319 a 328 - Motivos para os Códigos de Ocorrência
+
+Para cada código de ocorrência (posição 109 a 110), poderá ser informado até 5 motivos, neste campo, se for o caso.
+
+**Ocorrência = 02 - Entrada confirmada - Motivos:**
+
+* 00: ocorrência aceita;
+* 01: código do banco inválido;
+* 02: pendente de autorização (autorização débito automático);
+* 03: pendente de ação do pagador (autorização débito automático – data vencimento);
+* 04: código do movimento não permitido para a carteira;
+* 15: características da cobrança incompatíveis;
+* 17: data de vencimento anterior à data de emissão;
+* 21: espécie do título inválido;
+* 24: data da emissão inválida;
+* 27: valor/taxa de juros de mora inválido;
+* 43: prazo para baixa e devolução inválido;
+* 45: nome do pagador inválido;
+* 46: tipo/número de inscrição do pagador inválidos;
+* 47: endereço do pagador não informado;
+* 48: CEP inválido;
+* 50: CEP referente a banco correspondente;
+* 53: número de inscrição do pagador/avalista inválidos (CPF/CNPJ);
+* 54: pagador/avalista não informado;
+* 86: seu número do documento inválido;
+* 87: título baixado por coobrigação e devolvido para carteira:
+    * Os motivos 17, 21, 24, 38, 39, 43, 45, 46, 47, 48, 50, 53 e 54 dessa ocorrência, somente serão informados no Arquivo Retorno para os Títulos com instrução de protesto na remessa (posição 157 a 160 do registro de transação). Não rejeitaremos o Título, somente informaremos a falta de dados que ocasionará o não aceite da instrução de protesto, caso não seja regularizado em tempo hábil;
+    * O motivo 48 dessa ocorrência, somente será informado no arquivo-retorno para os Títulos cujaspapeletas são emitidas pelo Beneficiário. Não rejeitaremos o Título, somente informaremos sobre o erro desse dado que ocasionará o não aceite da instrução de protesto, caso não seja regularizado em tempo hábil.
+
+**Ocorrência = 03 - Entrada rejeitada - Motivos:**
+
+* 02: código do registro detalhe inválido;
+* 03: código da ocorrência inválida;
+* 04: código de ocorrência não permitida para a carteira;
+* 05: código de ocorrência não numérico;
+* 06: dados cadastrais do beneficiário incompletos;
+* 07: agência/conta/dígito inválido;
+* 08: nosso número inválido;
+* 09: nosso número duplicado;
+* 10: carteira inválida;
+* 11: cadastro rejeitado;
+* 13: identificação da emissão do boleto inválida;
+* 16: data de vencimento inválida;
+* 18: vencimento fora do prazo de operação;
+* 20: valor do título inválido;
+* 21: espécie do título inválida;
+* 22: espécie não permitida para a carteira;
+* 23: tipo pagamento não contratado;
+* 24: data de emissão inválida;
+* 27: valor/taxa de juros mora inválido;
+* 28: código do desconto inválido;
+* 29: valor desconto ≥ valor título;
+* 30: o boleto não pode haver mais do que três descontos;
+* 31: o código de desconto do boleto de pagamento deve ser igual em todos os registros de desconto informados (EDDA0491);
+* 32: não pode ser informada mais que uma ocorrência de desconto do boleto de pagamento para o código de desconto informado (EDDA0544);
+* 34: valor do abatimento maior ou igual ao valor do título;
+* 35: informe um código juros título válido;
+* 36: informe um código multa título válido;
+* 37: informe um UF do pagador válido;
+* 38: UF do beneficiário inválido;
+* 39: as datas de desconto informadas não podem se repetir dentro do grupo de desconto do boleto de pagamento (EDDA0492);
+* 40: data de desconto deve ser maior ou igual à data de emissão do título (EDDA0147);
+* 44: código da moeda inválido;
+* 45: nome do pagador não informado;
+* 46: tipo/número de inscrição do pagador inválidos;
+* 47: endereço do pagador não informado;
+* 48: CEP inválido;
+* 49: CEP sem praça de cobrança;
+* 50: CEP irregular - banco correspondente;
+* 51: tipo sacador/avalista inválido;
+* 52: identificador do sacador/avalista inválido;
+* 53: nome/razão social do sacador/avalista não informado;
+* 59: valor/percentual da multa inválido;
+* 63: entrada para título já cadastrado;
+* 65: limite excedido;
+* 79: data de juros de mora inválida;
+* 80: data do desconto inválida;
+* 86: seu número inválido;
+* 87: data de multa inválida;
+* 88: documento do beneficiário inválido;
+* 89: boleto de proposta ou depósito e aporte deve ser isento de juros;
+* 90: boleto de proposta ou depósito e aporte deve ser isento de multa;
+* 91: para registrar um boleto híbrido, a conta atrelada ao cedente deve ter pelo menos uma chave PIX registrada;
+* 92: para boleto híbrido, a data de vencimento deve ser maior que a data atual;
+* 93: para boleto híbrido, a data de expiração deve ser maior que a data de vencimento;
+* 94: para boleto híbrido, a data do desconto deve ser maior que a data atual e menor que a data do vencimento;
+* 95: saldo insuficiente para registrar o boleto;
+* 96: código de juros percentual dias corridos não permitido para o tipo de modelo de cálculo 01;
+* 97: código de barras já utilizado;
+* 98: o conteúdo do texto informativo do cliente beneficiário é inválido;
+* 99: erro genérico.
+
+**Ocorrência = 06 - Liquidação - Motivos:**
+
+* 00: crédito disponível - quando ocorrência 06, 15, 17 nas condições:
+    1. Se o banco cobrador for igual a 274 e a forma de pagamento for em dinheiro, débito em conta, ou cheque;
+    2. Se o banco cobrador for diferente de 274, com dias de floating maior que zero.
+* 15: crédito indisponível - quando ocorrências 06, 15 e 17, nas condições:
+    1. Se o banco cobrador for igual a 274 e o recurso utilizado para quitar o débito ou com cheque;
+    2. Se o banco cobrador for diferente de 274, com dias de floating igual a zero.
+* 18: pagamento parcial.
+
+<Note>Os clientes que contrataram o serviço de arquivo retorno devem considerar o pagamento efetivado, somente após a recepção do arquivo retorno consolidado.</Note>
+
+**Ocorrência = 09 - Baixado automaticamente via Arquivo - Motivos:**
+
+* 00: ocorrência aceita;
+* 10: baixa comandada pelo cliente.
+
+**Ocorrência = 10 - Baixado pelo Banco - Motivos:**
+
+* 00: baixado conforme instrução da agência;
+* 14: título protestado;
+* 16: título baixado pelo banco por decurso prazo;
+* 20: título baixado e transferido para desconto.
+
+**Ocorrência = 17 - Liquidação após baixa ou título não registrado - Motivos:**
+
+* 00: crédito disponível;
+* 15: crédito indisponível.
+
+**Ocorrência = 24 - Entrada Rejeitada por CEP irregular - Motivos:**
+
+* 00: ocorrência aceita;
+* 48: CEP inválido;
+* 49: CEP sem praça de cobrança.
+
+**Ocorrência = 27 - Baixa Rejeitada - Motivos:**
+
+* 02: código do registro detalhe inválido;
+* 04: código de ocorrência não permitido para a carteira;
+* 07: agência/conta/dígito inválidos;
+* 06: nosso número inválido;
+* 07: nosso número duplicado;
+* 10: carteira inválida;
+* 15: carteira/agência/conta/nosso número inválidos;
+* 16: data de vencimento inválida;
+* 18: vencimento fora do prazo de operação;
+* 20: valor do título inválido;
+* 41: título com ordem de protesto emitido;
+* 42: código para baixa/devolução inválido;
+* 43: título não registrado;
+* 45: nome do sacado não informado ou inválido;
+* 46: tipo/número de inscrição do sacado inválido;
+* 47: endereço do sacado não informado;
+* 48: CEP inválido;
+* 60: título baixado;
+* 77: transferência para desconto não permitido para a carteira;
+* 85: título com pagamento vinculado;
+* 86: seu número inválido;
+* 99: erro genérico.
+
+**Ocorrência = 28 - Débito de Tarifas/Custas - Motivos:**
+
+<Note>Os motivos abaixo, identificados com `*` serão disponibilizados no arquivo retorno, somente para as empresas cadastradas para essa condição.</Note>
+
+* 02: tarifa de permanência título cadastrado `*`;
+* 12: tarifa de registro `*`;
+* 13: tarifa título pago `*`;
+* 14: tarifa título pago compensação `*`;
+* 15: tarifa título baixado não pago;
+* 17: tarifa concessão abatimento `*`;
+* 18: tarifa cancelamento de abatimento `*`;
+* 19: tarifa concessão desconto `*`;
+* 20: tarifa cancelamento desconto `*`;
+* 40: baixa registro em duplicidade `*`;
+* 41: tarifa título baixado decurso prazo;
+* 43: tarifa título baixado via remessa;
+* 45: tarifa título baixado conf. pedido `*`;
+* 99: tr. título baixado por decurso prazo `*`.
+
+**Ocorrência = 32 - Instrução Rejeitada - Motivos:**
+
+* 01: código do banco inválido;
+* 02: código registro detalhe inválido;
+* 04: código de ocorrência não permitido para a carteira;
+* 05: código de ocorrência não numérico;
+* 08: nosso número inválido;
+* 10: carteira inválida;
+* 15: características da cobrança incompatíveis;
+* 16: data de vencimento inválida;
+* 17: data de vencimento anterior à data de emissão;
+* 18: vencimento fora do prazo de operação;
+* 20: valor do título inválido;
+* 21: espécie do título inválida;
+* 22: espécie não permitida para a carteira;
+* 23: tipo pagamento não contratado;
+* 24: data de emissão inválida;
+* 26: código juros mora inválido;
+* 27: valor/taxa juros mora inválido;
+* 28: código de desconto inválido;
+* 29: valor do desconto maior/igual ao valor do título;
+* 30: desconto a conceder não confere;
+* 31: concessão de desconto - já existe desconto anterior;
+* 33: valor do abatimento inválido;
+* 34: valor do abatimento maior/igual ao valor do título;
+* 36: concessão abatimento - já existe abatimento anterior;
+* 41: título com ordem de protesto emitido;
+* 43: título não registrado;
+* 45: nome do pagador não informado;
+* 46: tipo/número de inscrição do pagador inválidos;
+* 47: endereço do pagador não informado;
+* 48: CEP inválido;
+* 50: CEP referente a um banco correspondente;
+* 52: unidade da federação inválida;
+* 53: tipo de inscrição do pagador avalista inválidos;
+* 60: título baixado;
+* 65: limite excedido;
+* 66: número autorização inexistente;
+* 85: título com pagamento vinculado;
+* 86: seu número inválido;
+* 99: erro genérico.

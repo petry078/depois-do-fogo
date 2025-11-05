@@ -1,0 +1,10 @@
+---
+title: "27 - KYC Assíncrona"
+openapi: post /Bureau/KycSancoesPFAsync
+---
+
+Este endpoint permite consultas básicas sobre uma pessoa física, no formato de resposta assíncrona. A resposta é uma 'String JSON' serializada que inclui as seguintes informações:
+
+* PEP: indicação se a pessoa é PEP ou não;
+* Sanções: histórico de sanções aplicadas;
+* Contribuições eleitorais: histórico de contribuição eleitoral.

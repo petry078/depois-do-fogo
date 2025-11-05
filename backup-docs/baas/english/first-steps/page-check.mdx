@@ -1,0 +1,80 @@
+---
+title: "Testing Checklist"
+version: 'English'
+---
+
+## Introduction
+
+This testing checklist is designed to ensure that all aspects of the system are functional and secure before entering the production environment. The following steps must be completed to assure the integrity and operationality of BMP solutions.
+
+<Warning>
+This checklist is mandatory for entering production.
+</Warning>
+
+<Steps>
+  <Step title="Token Deployment">
+    Perform the deployment specifically of the Token model using keys. This step is crucial to ensure the security of transactions.
+  </Step>
+  <Step title="Account Registration">
+    Carry out the registration process for four accounts to test the functionality of account creation in the system.
+  </Step>
+  <Step title="Account Update">
+    Process the update of account information to verify the flexibility and robustness of the account management system.
+  </Step>
+  <Step title="Transfers">
+    Execute fund transfers to the four created accounts, using the Handshake and HMAC process to validate the security of transactions.
+  </Step>
+  <Step title="Receiving TED">
+    Perform a TED transfer and confirm that the procedure was executed successfully.
+  </Step>
+  <Step title="Statement Inquiry">
+    Perform the balance inquiry procedure to check the accuracy of recorded transactions.
+  </Step>
+  <Step title="Receipt">
+    Send two receipts to test the functionality of generating and sending receipts.
+  </Step>
+  <Step title="Bankslip">
+    Execute the process of generating a bankslip and then make a payment, thus validating the issuance and settlement processes of bankslips.
+  </Step>
+  <Step title="CNAB Files">
+    Send a CNAB file containing bankslips and another with TEDs, execute the processing of these files and check the payment returns to test integration with external banking systems.
+  </Step>
+  <Step title="PIX Related Processes">
+    - Execute the process of generating PIX keys (CPF/CNPJ, email, phone number, random key).
+    - Query an external PIX key.
+    - Perform a PIX transfer by key and bank details using Handshake and HMAC.
+    - Execute the return of a received PIX and delete a PIX key.
+  </Step>
+</Steps>
+
+## Testing Schedule
+
+----
+
+| **BUSINESS DAYS** | **ITEM**                | **NOTES**                                                      | **REQUIREMENTS**      | **RESULT**     |
+|-------------------|-------------------------|----------------------------------------------------------------|-----------------------|----------------|
+| **Day 1**         | Token                   | Deploy the Token model using KEYS                             |                       |                |
+| **Day 2**         | Account Registration     | Complete account registration process for Client A            | Account data          |                |
+|                   | Operation Blocking      | Simulate token error test and stop the service                |                       |                |
+|                   | Operation Resumption     | BMP releases process for resuming submissions                  |                       |                |
+|                   | Account Creation         | Clients B and C                                              | Account data          |                |
+|                   | Account Update          | Client A - address                                          |                       |                |
+|                   | Account Creation         | Force error in creation                                     |                       |                |
+|                   | Account Creation         | Resume Operation - Client D                                  | Account data          |                |
+| **Day 3**         | BMP Balance Creation     | Credit initial BMP account - 500010                           |                       |                |
+|                   | Validate BMP Balance     | Check balance OK                                            |                       |                |
+|                   | Initial Cost Registration | Cost per TED transaction and Cost per bankslip transaction - 2.50 |                       |                |
+|                   | Transfers               | BMP - credit Account A 200000                                 |                       |                |
+| **Day 4**         | Transfers               | TED Client A to third-party account - success                 | Third-party account    |                |
+| **Day 5**         | TED Received            | Third party sends TED to Client A - 10000000                  | Third-party account    |                |
+|                   | Statement               | Statement for Account A                                      |                       |                |
+| **Day 6**         | Bankslip Payment        | Receive bankslip from third party for Client A to pay - 10000  | Third-party bankslip   |                |
+|                   | Statement               | Statement for Account A                                      |                       |                |
+| **Day 7**         | Bankslip Generation     | Client D generates bankslip - 40000 - successful payment       | Bankslip payment       |                |
+| **Day 8**         | Bankslip Return         | Error in payment due to overdue date                           |                       |                |
+|                   | Files                   | Send CNAB with bankslips                                      |                       |                |
+| **Day 9**         | PIX                     | Generate CPF/CNPJ Key                                         |                       |                |
+
+## Conclusion
+
+By completing all the steps in this checklist, the responsible team can be assured that the system is ready to be launched in the production environment, providing a secure and efficient experience for end users.

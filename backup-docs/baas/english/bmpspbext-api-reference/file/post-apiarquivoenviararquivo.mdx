@@ -1,0 +1,12 @@
+---
+title: "28 - Register CNAB Boleto"
+openapi: post /api/Arquivo/EnviarArquivo
+version: 'English'
+---
+
+Through this endpoint, partners can send a CNAB 400 or 240 file to register boletos or process payments, transfers, and Pix transactions in the case of a 240 file.
+
+<Warning>
+    Before registering the boleto, the issuer must have a payer number linked to the account and a registered portfolio, with "1" for a simple boleto and "9" for CNAB, which applies to this endpoint.
+    The payer registration should be done via the /api/Cedente endpoint, and linking the payer to a portfolio should be done via the /api/Cedente/AdicionarCarteira endpoint.
+</Warning>

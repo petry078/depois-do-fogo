@@ -1,0 +1,8 @@
+---
+title: "12 - Relogon"
+openapi: post /Proposta/IncluirAssinaturaCCBFinalizada
+---
+
+- Through this endpoint, the partner can sign the proposal. It is allowed to include subscribers who have already signed in the integrator's backend, since the proposal is only finalized after the registered subscribers sign.
+- This method does not send notification emails with a subscription request.
+- The method requires authentication and proposal location parameters, as well as a list of subscribers who have already signed with the date, time and source IP address.

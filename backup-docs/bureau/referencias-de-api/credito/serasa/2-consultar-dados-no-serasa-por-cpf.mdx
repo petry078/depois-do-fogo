@@ -1,0 +1,171 @@
+---
+title: 2 - Consultar Dados no Serasa por CPF
+openapi: post /Bureau/ConsultaSerasaCpf
+---
+
+Por meio deste endpoint, o parceiro pode consultar documentos de Pessoa Física e Jurídica e obter um relatório detalhado em formato JSON. 
+
+O relatório apresenta uma visão da saúde financeira do documento consultado, incluindo informações como pendências financeiras, restrições, dívidas vencidas, cheques sem fundo e protestos, auxiliando na tomada de decisões seguras e informadas.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. No linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{
+    \"Erro": false,
+    \"MensagemOperador": "OK",
+    \"ResultadoConsulta": {
+        \"reports": [
+            {
+                \"reportName": "COMBO_CONCESSAO",
+                \"registration": {
+                    \"documentNumber": "00011122244",
+                    \"consumerName": "GUEDES DA COSTA",
+                    \"motherName": "Mãe GUEDES DA COSTA",
+                    \"consumerGender": "M",
+                    \"birthDate": "1984-10-12T00:00:00",
+                    \"statusRegistration": "REGULAR",
+                    \"statusDate": "2025-02-21T00:00:00",
+                    \"address": {
+                        \"addressLine": "R APOLO",
+                        \"district": "BARREIRO",
+                        \"zipCode": "30640444",
+                        \"country": "BRA",
+                        \"city": "BELO HORIZONTE",
+                        \"state": "MG"
+                    },
+                    \"phone": {
+                        \"regionCode": 55,
+                        \"areaCode": 31,
+                        \"phoneNumber": 33334444
+                    }
+                },
+                \"negativeData": {
+                    \"pefin": {
+                        \"pefinResponse": [
+                            {
+                                \"occurrenceDate": "2025-01-06T00:00:00",
+                                \"legalNatureId": "CD",
+                                \"legalNature": "CREDIARIO",
+                                \"contractId": "10000933330",
+                                \"creditorName": "SHOPEE",
+                                \"amount": 23.22,
+                                \"federalUnit": null,
+                                \"principal": true
+                            },
+                            {
+                                \"occurrenceDate": "2021-06-30T00:00:00",
+                                \"legalNatureId": "VM",
+                                \"legalNature": "VENDA MERCAD",
+                                \"contractId": "165232",
+                                \"creditorName": "RCA",
+                                \"amount": 121.3,
+                                \"federalUnit": null,
+                                \"principal": true
+                            }
+                        ],
+                        \"summary": {
+                            \"firstOccurrence": null,
+                            \"lastOccurrence": null,
+                            \"count": 2,
+                            \"balance": 144.52
+                        }
+                    },
+                    \"refin": {
+                        \"refinResponse": [
+                            {
+                                \"occurrenceDate": "2021-06-10T00:00:00",
+                                \"legalNatureId": "OO",
+                                \"legalNature": "OUTRAS",
+                                \"contractId": "011116671808514",
+                                \"creditorName": "CEF",
+                                \"amount": 29090.51,
+                                \"federalUnit": null,
+                                \"principal": true
+                            }
+                        ],
+                        \"summary": {
+                            \"firstOccurrence": null,
+                            \"lastOccurrence": null,
+                            \"count": 1,
+                            \"balance": 29090.51
+                        }
+                    },
+                    \"notary": {
+                        \"notaryResponse": [],
+                        \"summary": {
+                            \"firstOccurrence": null,
+                            \"lastOccurrence": null,
+                            \"count": 0,
+                            \"balance": 0
+                        }
+                    },
+                    \"check": {
+                        \"checkResponse": [],
+                        \"summary": {
+                            \"firstOccurrence": null,
+                            \"lastOccurrence": null,
+                            \"count": 0,
+                            \"balance": 0
+                        }
+                    },
+                    \"collectionRecords": null
+                },
+                \"score": {
+                    \"score": 278,
+                    \"scoreModel": "HSPN",
+                    \"range": "H",
+                    \"defaultRate": "31,90",
+                    \"codeMessage": 99,
+                    \"message": "ESPACO RESERVADO PARA MENSAGEM DA INSTITUICAO"
+                },
+                \"facts": {
+                    \"judgementFilings": null,
+                    \"bankrupts": null,
+                    \"inquiry": {
+                        \"inquiryResponse": [
+                            {
+                                \"occurrenceDate": "2025-02-01T00:00:00",
+                                \"segmentDescription": "BANCOS GIGANTES",
+                                \"daysQuantity": 1
+                            },
+                            {
+                                \"occurrenceDate": "2024-11-05T00:00:00",
+                                \"segmentDescription": "SERVICOS DIVERSOS",
+                                \"daysQuantity": 1
+                            },
+                            {
+                                \"occurrenceDate": "2024-07-23T00:00:00",
+                                \"segmentDescription": "CARTOES E MEIOS DE PAGAMENTO",
+                                \"daysQuantity": 1
+                            },
+                            {
+                                \"occurrenceDate": "2024-07-06T00:00:00",
+                                \"segmentDescription": "SERVICOS DIVERSOS",
+                                \"daysQuantity": 1
+                            }
+                        ],
+                        \"summary": {
+                            \"count": 4,
+                            \"balance": null
+                        }
+                    },
+                    \"stolenDocuments": {
+                        \"stolenDocumentsResponse": [],
+                        \"summary": {
+                            \"firstOccurrence": null,
+                            \"lastOccurrence": null,
+                            \"count": 0,
+                            \"balance": 0
+                        }
+                    }
+                },
+                \"partner": null
+            }
+        ],
+        \"optionalFeatures": null
+    }
+}
+```
+</Expandable>

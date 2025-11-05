@@ -1,0 +1,159 @@
+---
+title: 7 - Consulta Basic por Lote de CNPJs
+openapi: post /Bureau/ConsultarReceitaLoteBasicCNPJ
+---
+
+Utilize este endpoint para realizar consultas em lote que verificam a situação cadastral fiscal de uma empresa em um relatório centralizado.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. O retorno do Bureau é enviado de forma serializada, sendo necessário deserializá-lo para uma melhor visualização. O campo `TipoCallback` deve ser enviado com o valor `2` em todas as chamadas.
+
+```json
+[
+{
+    \"Erro": false,
+    \"MensagemOperador": "OK",
+    \"ResultadoConsulta": {
+        \"Ni": "11222333000110",
+        \"TipoEstabelecimento": "1",
+        \"DescricaoTipoEstabelecimento": "Matriz",
+        \"NomeEmpresarial": "Empresa de teste LTDA",
+        \"NomeFantasia": "",
+        \"SituacaoCadastral": {
+            \"Codigo": "2",
+            \"Data": "2024-03-23",
+            \"Motivo": "",
+            \"Descricao": "Ativa"
+        },
+        \"NaturezaJuridica": {
+            \"Codigo": "2135",
+            \"Descricao": "Empresário (Individual)"
+        },
+        \"DataAbertura": "2024-03-23",
+        \"CnaePrincipal": {
+            \"Codigo": "6399200",
+            \"Descricao": "Outras atividades de prestação de serviços de informação não especificadas anteriormente"
+        },
+        \"CnaeSecundarias": [
+            {
+                \"Codigo": "8599699",
+                \"Descricao": "Outras atividades de ensino não especificadas anteriormente"
+            }
+        ],
+        \"Endereco": {
+            \"TipoLogradouro": "RUA",
+            \"Logradouro": "FLOR",
+            \"Numero": "65",
+            \"Complemento": "",
+            \"Cep": "31270999",
+            \"Bairro": "LIBERDADE",
+            \"Municipio": {
+                \"Codigo": "4123",
+                \"Descricao": "BELO HORIZONTE"
+            },
+            \"Uf": "MG",
+            \"Pais": {
+                \"Codigo": "105",
+                \"Descricao": "BRASIL"
+            }
+        },
+        \"MunicipioJurisdicao": {
+            \"Codigo": "0610100",
+            \"Descricao": "BELO HORIZONTE"
+        },
+        \"Telefones": [
+            {
+                \"DDD": "31",
+                \"Numero": "97453524"
+            }
+        ],
+        \"CorreioEletronico": "HLAZOUBEL@GMAIL.COM",
+        \"CapitalSocial": 100000,
+        \"Porte": "01",
+        \"DescricaoPorte": "Microempresa - ME",
+        \"SituacaoEspecial": "",
+        \"DataSituacaoEspecial": ""
+    }
+},
+{
+    \"Erro": false,
+    \"MensagemOperador": "OK",
+    \"ResultadoConsulta": {
+        \"Ni": "11222333000110",
+        \"TipoEstabelecimento": "1",
+        \"DescricaoTipoEstabelecimento": "Matriz",
+        \"NomeEmpresarial": "Empresa de teste LTDA",
+        \"NomeFantasia": "",
+        \"SituacaoCadastral": {
+            \"Codigo": "2",
+            \"Data": "2024-03-23",
+            \"Motivo": "",
+            \"Descricao": "Ativa"
+        },
+        \"NaturezaJuridica": {
+            \"Codigo": "2135",
+            \"Descricao": "Empresário (Individual)"
+        },
+        \"DataAbertura": "2024-03-23",
+        \"CnaePrincipal": {
+            \"Codigo": "6399200",
+            \"Descricao": "Outras atividades de prestação de serviços de informação não especificadas anteriormente"
+        },
+        \"CnaeSecundarias": [
+            {
+                \"Codigo": "8599699",
+                \"Descricao": "Outras atividades de ensino não especificadas anteriormente"
+            }
+        ],
+        \"Endereco": {
+            \"TipoLogradouro": "RUA",
+            \"Logradouro": "FLOR",
+            \"Numero": "65",
+            \"Complemento": "",
+            \"Cep": "31270999",
+            \"Bairro": "LIBERDADE",
+            \"Municipio": {
+                \"Codigo": "4123",
+                \"Descricao": "BELO HORIZONTE"
+            },
+            \"Uf": "MG",
+            \"Pais": {
+                \"Codigo": "105",
+                \"Descricao": "BRASIL"
+            }
+        },
+        \"MunicipioJurisdicao": {
+            \"Codigo": "0610100",
+            \"Descricao": "BELO HORIZONTE"
+        },
+        \"Telefones": [
+            {
+                \"DDD": "31",
+                \"Numero": "97453524"
+            }
+        ],
+        \"CorreioEletronico": "HLAZOUBEL@GMAIL.COM",
+        \"CapitalSocial": 100000,
+        \"Porte": "01",
+        \"DescricaoPorte": "Microempresa - ME",
+        \"SituacaoEspecial": "",
+        \"DataSituacaoEspecial": ""
+    }
+}
+]
+```
+
+</Expandable>
+
+<Expandable title="Tabela de dados fictícios para testes">
+
+| CNPJ           | SITUAÇÃO  | 
+|----------------|-----------|
+| 34238864000168 | ATIVO     | 
+| 54447820000155 | SUSPENSO  | 
+| 46768703000165 | INAPTO    | 
+| 31151791000184 | BAIXADO   |
+| 34428654000132 | NULO      |
+
+</Expandable>

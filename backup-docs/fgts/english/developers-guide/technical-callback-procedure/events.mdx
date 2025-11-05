@@ -1,0 +1,207 @@
+---
+title: "Events"
+version: 'English'
+---
+
+The FGTS callback system is an automated solution for real-time monitoring of proposal cancellations.
+
+FGTS callbacks can be sent via parameters in the URL or via events in the request body.
+
+## URL parameters and proposal situations
+
+Proposal callbacks are sent via URL, in this format:
+
+```json
+www.url-de-exemplo.com.br?proposta={PROPOSAL}&situacao={SITUATION}&identificador={IDENTIFIER}
+```
+
+When sent, the values `{PROPOSAL}`, `{SITUATION}` and `{IDENTIFIER}` will be replaced by real values, described in the table below.
+
+### Proposal callback parameters table
+
+| **Parameter** | **Description** |
+|-------------------|------------------------------------------------------------------------------------------------|
+| **Proposal** | Unique GUID generated in the response during proposal inclusion. |
+| **Status** | Proposal status ID in our system (according to the table below). |
+| **Identifier** | If sent, this field represents the operation code sent when the proposal is included. |
+
+### Proposal status identification table
+
+| **ID** | **Description** | **Objective** |
+|--------|-----------------|----------------------------------------------------------------------------------------------------------|
+| **2**  | Approved        | Proposal was created and is awaiting signature.                                                          |
+| **4**  | Canceled        | Proposal was canceled automatically or by the integrator.                                                |
+| **5**  | Pending         | Proposal was marked as pending and requires intervention by the integrator to request endorsement again. |
+| **6**  | Completed       | Endorsement was requested at Caixa Econômica Federal (CEF).                                              |
+| **8**  | Released        | Proposal successfully endorsed and released for disbursement.                                            |
+| **9**  | Paid            | Proposal disbursement was made.                                                                          |
+| **10** | Assigned        | Proposal was added to an assignment shipment and assigned to the fund.                                   |
+| **11** | Pending Payment | Proposal pending payment due to inconsistency in bank details, requiring intervention from the integrator to correct and return to the payment queue. |
+
+<Note>
+
+If the callback is parameterized with the POST method, in addition to the data sent in the URL, the partner will receive in the body of the request:
+
+* **Status 9**: 00 - Crédito ou débito efetivado;
+* **Status 11**: AB - Descrição da ocorrência.
+
+</Note>
+
+<Warning>
+
+If there is a problem while receiving the proposal callback, the system will make up to 3 attempts to send it.
+
+</Warning>
+
+## Events
+
+The FGTS callback notification events are:
+
+### Registered Bill
+
+This callback is sent when a proposal is cancelled and we send a hybrid bill regarding the cancellation.
+
+```json
+{
+    "NumCodigoBarras": "27496981100000010000001090000000005902301160",
+    "NumLinhaDigitavel": "27490001019000000000159023011600698110000001000",
+    "PixCopiaCola": "00020101021226970014br.gov.bcb.pix2575qr-h.cornerpix.com.br/11581339/v2/cobv/e8fb8e99-6f1c-448e-b1b3-f5c45004a6d85204000053039865802BR5914BMP MONEY PLUS6009SAO PAULO62070503***63045155",
+    "QRCode": "iVBORw0KGgoAAAANSUhEUgAAAhIAAAISAQAAAACxRhsSAAAEw0lEQVR4nO2dW4rrOBCG/xob+tGBLKCXouzsMEuaHdhLyQIG5MeATM1DqXTp7nNOw0lEJvx6SNtu5UOGou5SRPGnY/vrjxEAGWSQQQYZZJBBBhlkVIbkMQObfYjIBYdgO5X/ng6RCwC57D7/cud1kEHG12O2P2EFgP0MhHgSAFPCdooqwJwATEmASQU4ZsU+JQCA3G8dZJDxHcbu2nF7T1DVmyBcZwDLTRA0AeE6Q1f/ninf+6+DDDK+w5DLPvvHchNgf1P922VSLv7x6HWQQUY75i+",
+    "VlrBoleto": 10.00,
+    "DtVencimento": "2024-08-17 00:00:00",
+    "NumeroBoleto": "59",
+    "CodigoBoleto": "7af52ad6-2ef1-4678-a070-29c59e95b0e1",
+    "CodigoProposta": "7e2c86b3-bf71-4ce2-a0b3-7d4f198c3c71",
+    "CodigoOperacao": "732af968-96e9-4c9f-9ee1-5fade313ffbb",
+    "Detalhes": null,
+    "ContextoEvento": 7,
+    "TipoEvento": 5,
+    "NomeEvento": "Boleto Registrado",
+    "DtEvento": "2024-08-16 11:29:19"
+}
+``` 
+
+| Field               | Type        | Description                                                                                 |
+|---------------------|-------------|---------------------------------------------------------------------------------------------|
+| `NumCodigoBarras`   | String      | Barcode number.                                                                             |
+| `NumLinhaDigitavel` | String      | Digital line of the invoice.                                                                |
+| `PixCopiaCola`      | String      | Copy and paste PIX.                                                                         |
+| `QRCode`            | String      | Base64 code of the PIX Copy and paste QR code.                                              |
+| `VlrBoleto`         | Decimal     | Invoice amount.                                                                             |
+| `DtVencimento`      | Datetime    | Invoice due date.                                                                           |
+| `NumeroBoleto`      | String      | Invoice number.                                                                             |
+| `CodigoBoleto`      | Guid        | Invoice identifier.                                                                         |
+| `CodigoProposta`    | Guid        | Proposal identifier.                                                                        |
+| `CodigoOperacao`    | Guid        | Operation identifier.                                                                       |
+| `Detalhes`          | String      | In this case, no information is returned, only the context and type of event (always NULL). |
+| `ContextoEvento`    | String      | Event context identifier (7 - FGTS callback).                                               |
+| `TipoEvento`        | String      | Event type identifier = 5.                                                                  |
+| `NomeEvento`        | String      | Event name description.                                                                     |
+| `DtEvento`          | Datetime    | Event date.                                                                                 |
+
+### Cancellation completed
+
+This callback is sent when the partner generates a cancellation slip and the customer pays the slip. This way, the cancellation is executed successfully.
+
+```json
+{
+  "CodigoProposta": "87456806-1652-48c1-92f3-e75b820104ca",
+  "CodigoOperacao": null,
+  "Detalhes": null,
+  "ContextoEvento": 7,
+  "TipoEvento": 1,
+  "NomeEvento": "Cancelamento Efetivado",
+  "MotivoCancelamento": "Valor da alienação/cessão superior ao valor disponível para o trabalhador.",
+  "DtEvento": "2024-09-11T12:34:14.4274789-03:00"
+}  
+```
+
+| Field            | Type     | Description                                   |
+|------------------|----------|-----------------------------------------------|
+| `CodigoProposta` | Guid     | Proposal identifier.                          |
+| `CodigoOperacao` | Guid     | Operation identifier.                         |
+| `Detalhes`       | String   | Field referring to cancellation information.  |
+| `ContextoEvento` | String   | Event context identifier (7 - FGTS callback). |
+| `TipoEvento`     | String   | Event type identifier = 1.                    |
+| `NomeEvento`     | String   | Event name description.                       |
+| `DtEvento`       | Datetime | Event date.                                   |
+
+### Partial payment
+
+This callback is sent when the customer makes a partial payment of the amount of the bill.
+
+```json
+{
+    "CodigoProposta": "7e2c86b3-bf71-4ce2-a0b3-7d4f198c3c71",
+    "CodigoOperacao": "37a7bb3d-71b0-4dc6-8424-7d036537113b",
+    "Detalhes": "Pagamento parcial de 5.00 realizado.",
+    "ContextoEvento": 7,
+    "TipoEvento": 4,
+    "NomeEvento": "Pagamento Parcial Realizado",
+    "DtEvento": "2024-08-16T12:36:50.7216804-03:00"
+}
+```
+
+| Field            | Type     | Description                                   |
+|------------------|----------|-----------------------------------------------|
+| `CodigoProposta` | Guid     | Proposal identifier.                          |
+| `CodigoOperacao` | Guid     | Operation identifier.                         |
+| `Detalhes`       | String   | Field referring to cancellation information.  |
+| `ContextoEvento` | String   | Event context identifier (7 - FGTS callback). |
+| `TipoEvento`     | String   | Event type identifier = 1.                    |
+| `NomeEvento`     | String   | Event name description.                       |
+| `DtEvento`       | Datetime | Event date.                                   |
+
+### Payment not made
+
+This callback is sent when the partner generates a cancellation slip, but the customer does not pay the slip.
+
+```json
+{
+    "CodigoProposta": "7e2c86b3-bf71-4ce2-a0b3-7d4f198c3c71",
+    "CodigoOperacao": "37a7bb3d-71b0-4dc6-8424-7d036537113b",
+    "Detalhes": "Pagamento parcial de 5.00 realizado.",
+    "ContextoEvento": 7,
+    "TipoEvento": 4,
+    "NomeEvento": "Pagamento Parcial Realizado",
+    "DtEvento": "2024-08-16T12:36:50.7216804-03:00"
+}
+``` 
+
+| Field            | Type     | Description                                   |
+|------------------|----------|-----------------------------------------------|
+| `CodigoProposta` | Guid     | Proposal identifier.                          |
+| `CodigoOperacao` | Guid     | Operation identifier.                         |
+| `Detalhes`       | String   | Field referring to cancellation information.  |
+| `ContextoEvento` | String   | Event context identifier (7 - FGTS callback). |
+| `TipoEvento`     | String   | Event type identifier = 1.                    |
+| `NomeEvento`     | String   | Event name description.                       |
+| `DtEvento`       | Datetime | Event date.                                   |
+
+### Cancellation not completed
+
+This callback is sent after the “Payment not completed” callback is sent. It informs that the cancellation of the transaction was not completed.
+
+```json
+{
+    "CodigoProposta": "7e2c86b3-bf71-4ce2-a0b3-7d4f198c3c71",
+    "CodigoOperacao": "4745ed52-eb36-44d4-895c-f0d6a9383066",
+    "Detalhes": "Pagamento parcial de 5.00 realizado.",
+    "ContextoEvento": 7,
+    "TipoEvento": 2,
+    "NomeEvento": "Cancelamento Não Efetivado",
+    "DtEvento": "2024-08-16T12:36:51.160533-03:00"
+}
+``` 
+
+| Field            | Type     | Description                                   |
+|------------------|----------|-----------------------------------------------|
+| `CodigoProposta` | Guid     | Proposal identifier.                          |
+| `CodigoOperacao` | Guid     | Operation identifier.                         |
+| `Detalhes`       | String   | Field referring to cancellation information.  |
+| `ContextoEvento` | String   | Event context identifier (7 - FGTS callback). |
+| `TipoEvento`     | String   | Event type identifier = 1.                    |
+| `NomeEvento`     | String   | Event name description.                       |
+| `DtEvento`       | Datetime | Event date.                                   |
+
+<Warning>If any problem occurs while receiving the FGTS callback, the system will not attempt to send it again.</Warning>

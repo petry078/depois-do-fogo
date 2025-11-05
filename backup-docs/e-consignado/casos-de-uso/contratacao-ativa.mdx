@@ -1,0 +1,654 @@
+---
+title: 'Contratação Ativa'
+version: 'Português'
+---
+
+Este caso de uso é referente ao fluxo de **Contratação Ativa**, direto pelos **Canais das Instituições Financeiras**. 
+
+Com esse fluxo, é possível oferecer empréstimos consignados através da sua própria aplicação, **sem depender** que o trabalhador faça uma solicitação no aplicativo da **Carteira de Trabalho (CTPS)**.
+
+O principal aspecto dessa modalidade é que o serviço de averbação não exigirá uma proposta vinculada a uma solicitação feita no aplicativo da CTPS para realizar a operação de averbação na **DATAPREV**. 
+
+É permitido apenas um contrato por vínculo. Se um trabalhador já tiver um contrato ativo através do Leilão, não será possível realizar uma nova proposta pela Contratação Ativa. Caso o trabalhador já tenha uma proposta ativa através da Contratação Ativa, não será possível realizar uma nova proposta pelo Leilão.
+
+Caso o trabalhador tenha enviado propostas e não as vincule na averbação, o sistema limitará automaticamente a taxa de juros à menor taxa entre as propostas ativas enviadas.
+
+## 1. Autorização para consulta de dados
+
+O primeiro passo para oferecer crédito nesta modalidade é coletar a autorização do trabalhador para consultar seus dados.
+
+Para acessa o modelo do termo da Dataprev, acesse o documento [Autorização e consulta do trabalhador - Crédito Trabalhador](https://bmp-docs-462219491253.s3.sa-east-1.amazonaws.com/termo-de-autorizacao-dataprev-e-consignado.pdf).
+
+<Warning>As informações da coleta da assinatura do termo devem ser armazenadas pelo parceiro. Em caso de auditoria da Dataprev, a BMP pode solicitar essa informações.</Warning>
+
+## 2. Consultar Lista de Vínculos do Trabalhador
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Assíncrona</span>
+
+Após coletar o termo de autorização de uso de dados do trabalhador, o parceiro deve consultar a lista de vínculos empregatícios do trabalhador.
+
+Para isso, utilize o endpoint `/trabalhador/listar-autorizados` para consultar a lista de vínculos empregatícios do trabalhador. O retorno será:
+
+* O **código de inscrição do empregador** (1 para CNPJ e 2 para CPF);
+* O **número de inscrição do empregador** ([majoritariamente o CNPJ raiz do empregador](https://docs.dataprev.gov.br/wp-content/uploads/2025/07/Manual-de-Comunicacao-002-Autorizacao-e-Consulta-do-Trabalhador-Credito-do-Trabalhador.pdf));
+* O **número de matrícula do trabalhador**;
+* A **elegibilidade do vínculo**.
+
+<Note>Essa requisição é **obrigatória** para a contratação no canal do correspondente bancário.</Note>
+
+Na primeira consulta de cada trabalhador, é necessário que o parceiro envie a **autorização** de consulta de dados do trabalhador.
+
+<Info>`nsuAutorizacaoDigital` É o número sequencial único que identifica a autorização assinada pelo cliente durante sua jornada. A BMP pode solicitar informações adicionais sobre o registro desse NSU para fins de auditoria, caso a Dataprev questione a existência do aceite do cliente para a consulta de dados.</Info>
+
+<Expandable title="Exemplo de Requisição">
+
+<Note>Quando o valor do campo `consultaCacheada` for `false`, a requisição consultará os dados do tabalhador diretamente na **Dataprev**; quando for `true`, o dado será obtido do cache da BMP, que tem duração de 24 horas. Este campo não é obrigatório, caso não seja informado, o sistema assume o valor `false` como padrão.</Note>
+
+```json
+curl --location --request POST 'https://econsignadotrabalhador.moneyp.dev.br/trabalhador/listar-autorizados' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+    "cpfTrabalhador": "string",
+    "consultaCacheada": true,
+    "autorizacao": {
+      "nsuAutorizacaoDigital": 0
+    }
+}'
+```
+
+</Expandable>
+
+<Expandable title="Exemplo de Notificação por Callback">
+
+O exemplo de notificação por callback dessa requisição está disponível no documento [Configuração da URL de callback - Evento de consulta de lista de vínculos empregatícios](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/procedimento-tecnico-de-callback/eventos-da-dataprev#evento-de-consulta-de-lista-de-v%C3%ADnculos-empregat%C3%ADcios).
+
+</Expandable>
+
+## 3. Consultar Dados do Vínculo do Trabalhador
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Assíncrona</span>
+
+Utilize este endpoint para consultar o valor da base de margem, margem disponível, elegibilidade do vínculo e outras informações para análise de crédito.
+
+Essa requisição é **obrigatória** para a contratação no canal do correspondente bancário.
+
+Na primeira consulta de cada trabalhador, é necessário que o parceiro envie a **autorização** de consulta de dados do trabalhador.
+
+<Info>`nsuAutorizacaoDigital` É o número sequencial único que identifica a autorização assinada pelo cliente durante sua jornada. A BMP pode solicitar informações adicionais sobre o registro desse NSU para fins de auditoria, caso a Dataprev questione a existência do aceite do cliente para a consulta dos dados.</Info>
+
+<Expandable title="Exemplo de Requisição">
+
+<Note>Quando o valor do campo `consultaCacheada` for `false`, a requisição consultará os dados do tabalhador diretamente na **Dataprev**; quando for `true`, o dado será obtido do cache da BMP, que tem duração de 24 horas. Este campo não é obrigatório, caso não seja informado, o sistema assume o valor `false` como padrão.</Note>
+
+```json
+curl --location --request POST 'https://econsignadotrabalhador.moneyp.dev.br/trabalhador/consultar-dados-vinculo' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+  "cpfTrabalhador": "string",
+  "matricula": "string",
+  "codigoInscricaoEmpregador": 0,
+  "numeroInscricaoEmpregador": "string",
+  "consultaCacheada": false,
+  "autorizacao": {
+    "nsuAutorizacaoDigital": 0
+  }
+}'
+ 
+```
+
+</Expandable>
+
+<Expandable title="Exemplo de Notificação por Callback">
+
+O exemplo de notificação por callback dessa requisição está disponível no documento [Configuração da URL de callback - Evento de consulta de dados de vínculo empregatício](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/procedimento-tecnico-de-callback/eventos-da-dataprev#evento-de-consulta-de-dados-de-v%C3%ADnculo-empregat%C3%ADcio).
+
+</Expandable>
+
+## 4. Simular Empréstimo
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Síncrona</span>
+
+Poucas informações são necessárias para fazer uma simulação de empréstimo. Há a possibilidade de simular com o prazo definido ou não e o mesmo para a taxa de juros.
+
+* Se informar o prazo na requisição, será retornada o resultado da simulação detalhada;
+* Se não informar o prazo, serão retornadas as alternativas de parcelamento e suas respectivas taxas e valores de parcela;
+* Se informar a taxa de juros na requisição , o cálculo será feito com a taxa informada;
+* Se não informa a taxa de juros, o cálculo será feito com a taxa previamente cadastrada na BMP.
+
+<Info>Não é obrigatório que já tenha feito o onboarding do trabalhador, mas é recomendado para que possa desabilitar opções de parcelamento que excedam a margem disponível do trabalhador.</Info>
+
+<Expandable title="Exemplo de Requisição de Simulação Detalhada">
+
+Utilize a **Simulação Detalhada** caso já saiba a quantidade de parcelas que irá ofertar para o cliente. O retorno será uma lista com os detalhes das parcelas desta simulação.
+
+Exemplo de requisição de simulação detalhada:
+
+```json
+curl --location 'https://econsignadotrabalhador.moneyp.dev.br/contrato/oferta-ativa/simular-consignado' \
+--header 'Content-type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+	"ValorLiberado": 3000,
+	"numeroParcelas": 12,
+	"ValorTaxaMensal": 2.5,
+  "valorSeguro": 0
+}'
+```
+
+Exemplo de resposta:
+
+```json
+{
+	"Prazo": 12,
+	"VlrIOF": 67.86,
+	"PercIOF": 3.00,
+	"VlrParcela": 308.30,
+	"PercCETAnual": 40.09560,
+	"PercCETMensal": 2.84947,
+	"VlrTotalDivida": 3699.60,
+	"PercJurosAnual": 34.48888,
+	"VlrTotalCredito": 3067.86,
+	"PercJurosMensal": 2.5,
+	"ValorSolicitado": 3000.0,
+	"DtPrimeiroVencimento": "2025-07-23T00:00:00-03:00",
+	"Parcelas": [
+		{
+			"Parcela": 1,
+			"Dias": 64,
+			"DtVencimento": "2025-07-23T00:00:00-03:00",
+			"VlrSaldoDevedor": 2925.50,
+			"VlrAmortizacao": 142.36,
+			"VlrJuros": 58.30,
+			"VlrPrestacaoTotal": 308.30,
+			"VlrJurosAcumulado": 165.94,
+			"VlrJurosMensal": 165.94
+		}, // Continuação da lista de parcelas
+		{
+			"Parcela": 12,
+			"Dias": 399,
+			"DtVencimento": "2026-06-23T00:00:00-03:00",
+			"VlrSaldoDevedor": 0.0,
+			"VlrAmortizacao": 300.48,
+			"VlrJuros": 58.30,
+			"VlrPrestacaoTotal": 308.30,
+			"VlrJurosAcumulado": 631.74,
+			"VlrJurosMensal": 7.82
+		}
+	]
+}
+```
+
+</Expandable>
+
+<Expandable title="Exemplo de Requisição de Simulação Multiparcelamento">
+
+Utilize a **Simulação Multiparcelamento** para apresentar as possibilidades de parcelamento com base no prazo configurado para a operação do parceiro. No exemplo abaixo apresentamos as opções de parcelamento para um produto configurado com o prazo de 1 a 36 parcelas. O retorno será uma lista com alternativas de empréstimo com base no prazo.
+
+Exemplo de requisição de Simulação Multiparcelamento:
+
+```json
+curl --location 'https://econsignadotrabalhador.moneyp.dev.br/contrato/oferta-ativa/simular-consignado' \
+--header 'Content-type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+    "ValorLiberado": 3000,
+    "ValorTaxaMensal": 2.5,
+    "valorSeguro": 0
+}'
+```
+
+Exemplo de resposta:
+
+```json
+{
+	"DtPrimeiroVencimento": "2025-07-23T00:00:00",
+	"Parcelas": [
+		{
+			"ValorSolicitado": 3000.0,
+			"Prazo": 1,
+			"VlrParcela": 3190.92,
+			"VlrIOF": 27.18,
+			"PercIOF": 3.00,
+			"VlrTotalCredito": 3027.18,
+			"VlrTotalDivida": 3190.92,
+			"PercCETMensal": 2.97562,
+			"PercCETAnual": 42.17170,
+			"PercJurosMensal": 2.5,
+			"PercJurosAnual": 34.48888,
+			"VlrRetencaoDiarioAprox": null
+		}, // Continuação dos prazos
+		{
+			"ValorSolicitado": 3000.0,
+			"Prazo": 36,
+			"VlrParcela": 135.68,
+			"VlrIOF": 90.21,
+			"PercIOF": 3.00,
+			"VlrTotalCredito": 3090.21,
+			"VlrTotalDivida": 4884.48,
+			"PercCETMensal": 2.71516,
+			"PercCETAnual": 37.91590,
+			"PercJurosMensal": 2.5,
+			"PercJurosAnual": 34.48888,
+			"VlrRetencaoDiarioAprox": null
+		}
+	]
+}
+```
+
+</Expandable>
+
+<Expandable title="Exemplo de Requisição de Simulação por Valor de Parcela">
+
+Simulação de um empréstimo consignado informando diretamente o valor da parcela desejada pelo cliente, tornando a experiência mais intuitiva e alinhada à realidade financeira do cliente, especialmente considerando a margem consignável disponível. 
+
+A partir do valor da parcela informado, o sistema realiza os cálculos necessários para determinar o valor total que pode ser liberado.
+
+Essa abordagem facilita o atendimento, pois muitos clientes têm como referência o valor que podem comprometer mensalmente, e não necessariamente o montante total do empréstimo. 
+
+```json
+curl --location --request POST 'https://econsignadotrabalhador.moneyp.dev.br/contrato/oferta-ativa/simular-consignado' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+  "numeroParcelas": 12,
+  "ValorTaxaMensal": 2.75,
+  "valorSeguro": 0,
+  "valorParcela": 1234
+}'
+```
+
+Exemplo de resposta: 
+
+```json
+{
+  "Pmt": {
+    "Resumo": {
+      "VlrSolicitado": 4296.01,
+      "Prazo": 4,
+      "Iof": 66.92,
+      "PercIOF": 0,
+      "VlrTAC": 0,
+      "VlrSeguro": 0,
+      "VlrOutrasDespesas": 0,
+      "VlrOutrosServicos": 0,
+      "VlrTotalFinanciado": 4362.93,
+      "PercJurosMensal": 2.75,
+      "PercJurosAnual": 39.1068,
+      "DtContratacao": "2025-07-24T00:00:00-03:00",
+      "DtPrimeiroVencimento": "2025-10-23T00:00:00",
+      "DtUltimoVencimento": "2026-01-23T00:00:00",
+      "VlrPMT": 1234,
+      "PercCETMensal": 3.14507,
+      "PercCETAnual": 45.0045,
+      "VlrTotalDivida": 4936,
+      "Parcelas": [
+        {
+          "ParcelaNumero": 1,
+          "DtVencimento": "2025-10-23T00:00:00",
+          "VlrPrestacaoTotal": 1234,
+          "VlrJurosMensal": 374.21,
+          "VlrAmortizacao": 859.79,
+          "VlrSaldoDevedor": 3503.14,
+          "VlrJurosAcumulado": 374.21,
+          "Dias": 91
+        },
+        {
+          "ParcelaNumero": 4,
+          "DtVencimento": "2026-01-23T00:00:00",
+          "VlrPrestacaoTotal": 1234,
+          "VlrJurosMensal": 34.12,
+          "VlrAmortizacao": 1199.88,
+          "VlrSaldoDevedor": 0,
+          "VlrJurosAcumulado": 573.07,
+          "Dias": 31
+        }
+      ]
+    }
+  },
+  "Msg": "OK",
+  "HasError": false,
+  "Messages": []
+}
+```
+
+</Expandable>
+
+## 5. Requisição para Cadastro do Trabalhador
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Síncrona</span>
+
+Para gerar o documento da **CCB**, é necessário que o parceiro faça o cadastro do **trabalhador**.
+
+<Expandable title="Exemplo de Requisição">
+
+```json
+curl --location 'https://econsignadotrabalhador.moneyp.dev.br/trabalhador/cadastrar-vinculo' \
+--header 'Content-type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data-raw '{
+  "cpf": "string", // OBRIGATÓRIO
+  "matricula": "string", // OBRIGATÓRIO
+  "codigoInscricaoEmpregador": 1, // OBRIGATÓRIO 1 para CNPJ e 2 para CPF
+  "numeroInscricaoEmpregador": "string", // OBRIGATÓRIO
+  "nomeEmpregador": "string", // OBRIGATÓRIO
+  "nome": "string", // OBRIGATÓRIO
+  "sexo": "M", //Somente 1 caractere: M para Masculino e F para Feminino
+  "dataNascimento": "dd-MM-yyyy", // OBRIGATÓRIO
+  "codigoCategoriaTrabalhador": 0, // OBRIGATÓRIO
+  "elegivel": true, // OBRIGATÓRIO
+  "valorTotalVencimentos": 0, // OBRIGATÓRIO
+  "valorBaseMargem": 0, // OBRIGATÓRIO
+  "valorMargemDisponivel": 0, // OBRIGATÓRIO
+  "dataAdmissao": "dd-MM-yyyy", // OBRIGATÓRIO
+  "pessoaExpostaPoliticamente": 0, // OBRIGATÓRIO
+  "nomeMae": "string",
+  "paisNacionalidade": "string",
+  "cboDescricao": "string",
+  "dadosContato": {
+    "email": "string", // OBRIGATÓRIO
+    "telefoneFixo1": "string", 
+    "telefoneCelular1": "string" // OBRIGATÓRIO
+  },
+  "dadosComplementares": {
+    "rg": "string",
+    "rgOrgao": "string",
+    "rguf": "string",
+    "estadoCivil": 0
+  },
+  "endereco": { 
+    "cep": "string", // OBRIGATÓRIO
+    "logradouro": "string", // OBRIGATÓRIO
+    "nroLogradouro": "string", 
+    "bairro": "string", // OBRIGATÓRIO
+    "complemento": "string",
+    "cidade": "string", // OBRIGATÓRIO
+    "uf": "string" // OBRIGATÓRIO
+  }
+}'
+```
+
+Exemplo de retorno:
+
+```json
+{
+  "CodigoRequisicao": "fecfddc4-d722-4ed1-9ad9-ad82a5ec1bd2",
+  "Mensagem": "Trabalhador e vínculo cadastrados"
+}
+```
+
+</Expandable>
+
+## 6. Requisição para Cadastro do Empregador
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Síncrona</span>
+
+O empregador foi cadastrado na requisição anterior, utilizando os campos `numeroInscricaoEmpregador` e `nomeEmpregador`. Caso queira atualizar ou adicionar mais detalhes do empregador, utilize este endpoint.
+
+<Expandable title="Exemplo de Requisição">
+
+```json
+curl --location 'https://econsignadotrabalhador.moneyp.dev.br/trabalhador/cadastrar-empregador' \
+--header 'Content-type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data-raw '{
+  "nome": "string", // Obrigatório. Igual retorno da consulta do vínculo.
+  "codigoInscricaoEmpregador": 0, // Obrigatório. Igual retorno da consulta do vínculo(1-CNPJ e 2-CPF)
+  "numeroInscricaoEmpregador": "string", // Obrigatório. Igual retorno da consulta do vínculo.
+  "dadosContato": {
+    "email": "string",
+    "telefoneFixo1": "string",
+    "telefoneCelular1": "string"
+  },
+  "endereco": {
+    "cep": "string",
+    "logradouro": "string",
+    "nroLogradouro": "string",
+    "bairro": "string",
+    "complemento": "string",
+    "cidade": "string",
+    "uf": "string"
+  }
+}'
+```
+
+</Expandable>
+
+## 7. Requisição para Gerar Contrato do Trabalhador
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Síncrona e Assíncrona</span>
+
+No modelo de contratação ativa não há uma solicitação feita na CTPS para associação do trabalhador, empregador e matrícula, sendo assim, com relação a geração de contrato no modelo leilão a diferença é que nesta requisição `numeroSolicitacao` não deve ser informado, mas `cpfTrabalhador`, `matricula` e `numeroInscricaoEmpregador` devem ser informados.
+
+<Warning>O trabalhador e o empregador devem ter sido previamente cadastrados, e, neste modelo, é obrigatória a consulta da margem disponível para o vínculo do trabalhador que será utilizado para o empréstimo consignado. Haverá a validação do valor da parcela do contrato sendo gerado com o valor da margem disponível, conforme o resultado da consulta do vínculo — caso a consulta esteja em cache (com duração de 24 horas).</Warning>
+
+<Expandable title="Exemplo de Requisição">
+
+```json
+curl --request POST --location 'https://econsignadotrabalhador.moneyp.dev.br/contrato/oferta-ativa/gerar-contrato' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+    "cpfTrabalhador": "cpf",
+    "matricula": "matricula",
+    "codigoInscricaoEmpregador": 1, // OBRIGATÓRIO 1 para CNPJ e 2 para CPF
+    "numeroInscricaoEmpregador": "numeroInscricaoEmpregador",
+    "valorLiberado": 9000, // Preencha apenas um campo (valorLiberado ou valorParcelas), conforme feito na simulação 
+    "valorParcela": null, // Preencha apenas um campo (valorLiberado ou valorParcelas), conforme feito na simulação
+    "numeroParcelas": 24,
+    "valorTaxaMensal": 3.75,
+    "valorSeguro": 0, // Obrigatório se valorSeguro for preenchido
+    "numeroApolice": "string", 
+    "tipoContrato": "GER", //OPCIONAL
+    "propostaContaPagamento": {
+        "tipoConta": 0,
+        "agencia": "stri",
+        "agenciaDig": "s",
+        "conta": "string",
+        "contaDig": "s",
+        "numeroBanco": "string"
+    },
+    "propostaLancamentos": [
+    {
+      "campoID": "<string>",
+      "vlrTransacao": 123,
+      "linhaDigitavel": "<string>",
+      "numeroBanco": "<string>",
+      "tipoConta": 123,
+      "agencia": "<string>",
+      "agenciaDig": "<string>",
+      "conta": "<string>",
+      "contaDig": "<string>",
+      "documentoFederal": "<string>",
+      "nomePagamento": "<string>"
+    }
+  ]
+}'
+```
+
+</Expandable>
+
+<Expandable title="Objeto propostaLancamentos">
+
+Esta funcionalidade permite a inclusão de TEDs ou boletos na geração do contrato, possibilitando a realização de pagamentos prévios antes do desembolso do valor de troco ao cliente.
+
+Foi desenvolvida para atender cenários em que parte do valor do empréstimo precisa ser direcionada a terceiros ou a compromissos financeiros específicos, antes da liberação do restante dos recursos ao cliente. Com isso, o sistema passa a permitir a configuração de múltiplos lançamentos financeiros dentro da mesma proposta.
+
+<Note>A soma dos lançamentos informados deve ser menor ou igual ao valor liberado.</Note>
+
+<Note>É necessária a configuração prévia dos splits pela equipe BMP para poder usar a solução.</Note>
+
+Exemplo de lançamento do tipo Boleto:
+
+```json
+{
+  ...
+  "propostaLancamentos": [
+    {
+      "campoID": "BOLETO1",
+      "linhaDigitavel": "27490.00101 90000.000175 30789.456701 7 11640000098872",
+      "documentoFederal": "49451375000167",
+      "nomePagamento": "Nome"
+    }
+  ]
+}
+```
+
+Exemplo de lançamento do tipo TED:
+
+```json
+{
+  ...
+  "propostaLancamentos": [
+    {
+      "campoID": "TED1",
+      "documentoFederal": "49451375000167",
+      "nomePagamento": "Nome",
+      "vlrTransacao": 2222,
+      "numeroBanco": "237",
+      "tipoConta": 1,
+      "agencia": "0008",
+      "agenciaDig": "1",
+      "conta": "4321",
+      "contaDig": "0"
+    }
+  ]
+}
+``` 
+
+</Expandable>
+
+Exemplo de retorno:
+
+<Expandable title="Retorno Síncrono">
+
+```json
+{
+	"CodigoRequisicao": "1667d485-f783-48e0-9b9c-3bcc64f888b6"
+}
+```
+
+</Expandable>
+
+<Expandable title="Retorno Assíncrono">
+
+```json
+{
+  "CodigoRequisicao": "1667d485-f783-48e0-9b9c-3bcc64f888b6",
+  "Endpoint": "contrato/oferta-ativa/gerar-contrato",
+  "Payload": {
+    "NumeroCCB": 4912537,
+    "ValorCETAnual": 60.8417,
+    "ValorCETMensal": 4.03989,
+    "ValorEmprestimo": 9260.47,
+    "ValorIOF": 260.47,
+    "ValorParcela": 637.32,
+    "ValorTaxaAnual": 55.54543,
+    "ValorTaxaMensal": 3.75,
+    "CodigoProposta": "guid para impressão da CCB"
+  }
+}
+```
+</Expandable>
+
+## 8. Assinar a CCB do Trabalhador com Biometria Facial
+
+Após a geração do contrato, o trabalhador deve assinar o documento **Cédula de Crédito Bancário (CCB)** com a biometria facial.
+
+<Info>
+
+A assinatura da CCB do trabalhador deve ser realizada pelo parceiro, utilizando um **serviço de assinatura com biometria facial**.
+
+</Info>
+
+Utilize o endpoint abaixo para imprimir a CCB. 
+
+<Info>Esta requisição tem resposta **síncrona**.</Info>
+
+```
+https://reports.moneyp.dev.br/ImprimirCCB?Code={{CODIGO_PROPOSTA}}&Integracao={{CODIGO_INTEGRACAO}}
+```
+
+O valor do parâmetro `code` é o `CodigoProposta`, que é retornado na resposta assíncrona do endpoint `/contrato/oferta-ativa/gerar-contrato`.
+
+O código de integração é será informado ao parceiro na entrega das credenciais de homologação e produção.
+
+Os padrões de assinatura eletrônica aceitos são as **Assinaturas Eletrônicas Avançadas**, conforme definido pela **Lei 14.063/2020**. 
+
+Para validação biométrica, são aceitas as bases do **Tribunal Superior Eleitoral (TSE)**, **Serviço Federal de Processamento de Dados (SERPRO)** e **Identidade Eletrônica do Registro Civil (IDRC)**.
+
+A biometria facial deve atender a requisitos de garantia de vivacidade (*liveness*), conforme os padrões **IEEE Std 2790-2020**, **ISO/IEC 30107-3** e **ISO/IEC 29794-5**. 
+
+<Note>Caso não haja biometria disponível em bases governamentais, é possível utilizar a validação com a foto de um documento oficial. A biometria capturada deve ser utilizada exclusivamente para o processo de assinatura e não pode ser reutilizada. Durante a captura biométrica, é necessário informar ao trabalhador a finalidade da captura e a possibilidade de uso dos dados pelo **MTE/DATAPREV** para auditorias e apurações.</Note>
+
+Com a CCB assinada pelo trabalhador, siga com a inclusão da CCB assinada com biometria facial no passo 7.
+
+## 9. Requisição para Averbar, Incluir CCB Assinada e Biometria Facial
+
+<span style={{ display: 'inline-block', borderRadius: 15, padding: '2px 8px', backgroundColor: '#4cb5e6', color: 'white' }} >Assíncrona</span>
+
+Após a assinatura no passo anterior, utilize o endpoint `/contrato/oferta-ativa/averbar-contrato` para incluir as informações do contrato do trabalhador.
+
+Com a inclusão da CCB assinada, o empréstimo será averbado na **DATAPREV**, após esta inclusão, o empréstimo estará liberado para fila de pagamento.
+
+<Warning>O tamanho do payload enviado nessa requisição deve ser menor que 10MB.</Warning>
+
+<Expandable title="Exemplo de Requisição">
+
+```json
+curl --request POST --location 'https://econsignadotrabalhador.moneyp.dev.br/contrato/oferta-ativa/averbar-contrato' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+    "contratoEmprestimo": "Arquivo PDF da CCB assinado em base64", //OBRIGATÓRIO
+    "dataHoraAssinatura": "ddMMyyyyHHmmss", //OBRIGATÓRIO - Exemplo 060219971500
+    "ip": "string", //OBRIGATÓRIO
+    "numeroContrato": "Número da CCB", //OBRIGATÓRIO - Igual ao "numeroCCB" do evento de geração de CCB
+    "tipoDocumento" : 0, //1 para RG e 2 para CNH
+    "documentoOficialComFotoFrente": "Arquivo JPG da frente do documento em base64",
+    "documentoOficialComFotoVerso": "Arquivo JPG do verso do documento em base64",
+    "registroBiometricoFacial": "Arquivo JPG do registro biométrico facial em base64", //OBRIGATÓRIO
+    "baseBiometrica": "string", 
+    "score": 0,
+    "indicadorValidacaoComDocOficial": "<boolean>", //OBRIGATÓRIO
+    "latitude": 0,
+    "longitude": 0,
+    "dispositivo": "string"
+}'
+```
+
+</Expandable>
+
+<Tip>
+
+Caso o campo `indicadorValidacaoComDocOficial` seja `true`, os seguintes campos se tornam obrigatórios:
+
+* `documentoOficialComFotoFrente`;
+* `documentoOficialComFotoVerso`;
+* `tipoDocumento`.
+
+Caso o campo `indicadorValidacaoComDocOficial` seja `false`, os seguintes campos se tornam obrigatórios: 
+
+* `baseBiometrica`;
+* `score`.
+
+</Tip>
+
+<Expandable title="Exemplo de Notificação por Callback">
+
+O exemplo de notificação por callback dessa requisição está disponível no documento [Configuração da URL de callback - Evento de averbação de empréstimo](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/procedimento-tecnico-de-callback/eventos-da-dataprev#evento-de-averba%C3%A7%C3%A3o-de-empr%C3%A9stimo).
+
+</Expandable>
+
+## Endpoints e Documentos Auxiliares
+
+Para esta jornada, é muito importante que o parceiro conheça o [Procedimento Técnico de Callbacks do E-Consignado Trabalhador](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/procedimento-tecnico-de-callback/introducao) e tenha uma URL de callbacks configurada.
+
+Também podem ser úteis os seguintes endpoints do CaaS:
+
+* [5 - Atualizar Dados Bancários](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/referencias-de-api/contrato/5-atualizar-dados-bancarios): utilizado nesta jornada para atualizar dados bancários de um contrato;
+* [6 - Cancelar Contrato](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/referencias-de-api/contrato/6-cancelar-contrato): utilizado nesta jornada para cancelar contratos;
+* [28 - Consultar Contrato](https://bmpmoneyplus-sandbox.mintlify.app/caas/referencias-de-api/gestao-de-propostas/28-consultar): utilizado nesta jornada para consultar os dados da proposta;
+* [38 - Consultar Comprovante de Pagamento](https://bmpmoneyplus-sandbox.mintlify.app/caas/referencias-de-api/impressao-documentos/38-comprovante-de-pagamento): utilizado nesta jornada para consultar o comprovante de pagamento da proposta;
+* [Consulta de Escrituração e Repasse](https://bmpmoneyplus-sandbox.mintlify.app/e-consignado/casos-de-uso/consulta-de-escrituracao-e-repasse): utilizado nesta jornada para consultar Escriturações e Repasses, no contexto da integração entre instituições financeiras e o sistema do eSocial.

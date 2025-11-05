@@ -1,0 +1,34 @@
+---
+title: "66 - Vincular Carteira"
+openapi: post /api/Cedente/AdicionarCarteira
+---
+
+Por meio deste endpoint, o parceiro pode realizar o vínculo de uma carteira.
+
+Para utilizar este endpoint é necessário ter um cedente registrado junto a BMP, o registro pode ser realizado no endpoint /api/Cedente.
+
+<Expandable title="ENUMs corretos para o campo carteira.tipoJuros">
+
+* **Código Multa**: 1 - Valor Fixo / 2 - Percentual / 3 - Isenta
+* **Código Juros**: 1 - Valor (dias corridos) / 3 - Percentual ao mês (dias corridos) / 5 - Isento / 6 - Valor (dia útil)
+* **Código Desconto**: 0 - Isento / 1 - Valor fixo até a data informada / 2 - Percentual até a data informada / 3 - Valor por antecipação dia corrido / 5 - Percentual por antecipação dia corrido
+
+</Expandable>
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+| Endpoint                       | Mensagem de erro         |
+|--------------------------------|--------------------------|
+| /api/Cedente/AdicionarCarteira | Informe uma carteira |
+| /api/Cedente/AdicionarCarteira | Conta {Situacao} |
+| /api/Cedente/AdicionarCarteira | Operador não encontrado |
+| /api/Cedente/AdicionarCarteira | Parceiro não autorizado para esta conta {Numero} |
+| /api/Cedente/AdicionarCarteira | Cedente não cadastrado ou inativo |
+| /api/Cedente/AdicionarCarteira | Carteira não cadastrada |
+| /api/Cedente/AdicionarCarteira | Cedente informado não está relacionado com a Agencia/Conta informada |
+| /api/Cedente/AdicionarCarteira | Cedente não encontrado |
+| /api/Cedente/AdicionarCarteira | Numero da Carteira não encontrada |
+
+</Expandable>

@@ -1,0 +1,87 @@
+---
+title: "Technical Procedure for Callback"
+version: 'English'
+---
+
+## Introduction
+
+The DBS Callback is an automated mechanism to notify partners about specific transactions conducted in their current accounts or services related to the issuance of bankslips. This service ensures that partners are informed in real time about financial operations, enabling efficient and responsive management of their financial activities.
+
+## Supported Callback Types
+
+### Banking Operations
+- Sending transfers between BMP bank accounts.
+- Receiving transfers between BMP bank accounts.
+- Sending TEDs to other Financial Institutions (FIs).
+- Receiving TEDs from other FIs.
+- Returning TEDs rejected by the destination FI.
+
+### Bankslip Services
+- Payment of a bankslip from another FI.
+- Registration of a bankslip.
+- Confirmation of changes to a bankslip.
+- Confirmation of a request to cancel a bankslip.
+- Confirmation of payment of a bankslip.
+
+## Callback Configuration
+
+Partners must provide a URL endpoint to which DBS will send the callback notifications. The specifications include:
+
+- **Endpoint**: URL para recebimento dos callbacks.
+- **Tentativas**: O número máximo de tentativas de envio é de 10. Se este número for excedido, a mensagem de callback será descontinuada.
+
+### Exemplo de Configuração
+
+```json
+{
+"url": "https://seupartner.com/callbacks",
+"tentativas": 10
+}
+```
+
+## Delivery Mechanism
+
+Callbacks are managed through a system that attempts to send the notification up to the defined maximum number of attempts.
+
+<Note>
+The interval between these attempts increases exponentially, starting at 1 second and capping at 15 minutes to avoid overload.
+</Note>
+
+## Callback Message Format
+
+Each callback message is formatted in JSON, including a header with general transaction information and a body detailing specific transaction elements.
+
+### Exemplo de Mensagem de Callback
+
+```json
+{
+"Header": {
+"TipoEvento": "PagamentoBoleto",
+"Timestamp": "2024-04-08T11:47:07.037"
+},
+"Body": {
+"IDTransacao": "228dee66-2a89-4566-b48d-02c97dc223e7",
+"Status": "Concluído",
+"Valor": 758.50,
+"Detalhes": {
+"BancoOrigem": 274,
+"AgenciaOrigem": "0001",
+"ContaOrigem": "12345678"
+}
+}
+}
+```
+
+## Callback Responses
+
+It is essential that the configured endpoint for receiving callbacks responds with an HTTP 200 status code to indicate successful receipt.
+
+## Simulating Callback Reception
+
+To assist in the development and testing of the callback integration without impacting production systems, we recommend using tools like WebHook.site. This tool allows for simulating the receipt of messages in a controlled environment, facilitating verification and adjustments in the integration process.
+
+<Link href="https://webhook.site">Access WebHook.site for simulation</Link>
+
+## Final Considerations
+
+It is recommended that the endpoint configured to receive callbacks primarily functions as a repository, minimizing processing at the time of receipt to avoid delays. Implementing complex processes during callback receipt can result in timeouts and communication failures, compromising system efficiency. Opt to process received messages asynchronously to improve performance and reliability of your callback system.

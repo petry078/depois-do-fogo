@@ -1,0 +1,18 @@
+---
+title: "31 - Incluir Campo Extra"
+openapi: post /Proposta/IncluirCampoExtra
+---
+
+Por meio deste endpoint o parceiro insere campos extras, ilimitados para uso na impressão de CCB.
+
+Estes campos não devem sem utilizados pelos nossos analistas a fim de interpretação de regras de negócio.
+
+A cada envio os valores anteriores são excluídos, o processo para utilização é:
+
+*	Definição de nomes dos campos juntamente com a nossa equipe técnica de integraçã
+*	Definição do local de uso de cada um dos campos extras.
+*	Envio da proposta por um dos métodos possíveis.
+*	Envio dos campos extras, o método permite receber uma lista contendo “NomeCampo” e “ValorCampo”.
+*	Quando necessitar  de atualização de um dos campos extras, todo o lote de campos deve ser enviado novamente.
+*	NomeCampo é limitado a 30 posições alfanuméricas.
+*	ValorCampo é de tamanho ilimitado.

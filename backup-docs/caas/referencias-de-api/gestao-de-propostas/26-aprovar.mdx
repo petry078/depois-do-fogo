@@ -1,0 +1,37 @@
+---
+title: "26 - Aprovar"
+openapi: post /Proposta/Aprovar
+---
+
+Por meio deste endpoint o parceiro aprova a proposta, caso tenha permissão de aprovação.
+
+## Mensagens de erro
+
+A tabela abaixo representa as mensagens de erro que podem ser retornadas ao tentar realizar uma requisição.
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+<Note>No exemplo de retorno ao lado, o campo `code` representa a coluna **Código** desta tabela; o campo `context` representa a coluna **Código Detalhado**; e o campo `message` representa a coluna **Mensagem**.</Note>
+
+| Categoria | Operação         | Ação      | Código | Código Detalhado | Mensagem                                                                                                                        |
+|-----------|------------------|-----------|--------|------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Proposta  | PropostaAprovar   | Aprovar   | C0063  | V0001            | Parâmetros de integração não permite aprovar a proposta                                                                          |
+| Proposta  | PropostaAprovar   | Aprovar   | C0063  | V0002            | Valor aprovado não pode ser superior ao valor solicitado                                                                         |
+| Proposta  | PropostaAprovar   | Aprovar   | C0063  | V0003            | Valor/Prazo aprovado não pode ser diferente do Valor/Prazo solicitado                                                            |
+| Proposta  | PropostaAprovar   | Aprovar   | C0063  | V0004            | Situação da proposta não permite aprovação                                                                                       |
+| Proposta  | PropostaAprovar   | Aprovar   | C0063  | V0005            | Proposta não pode ser aprovada, pois sua situação é `{SituacaoPropostaEnum.GetDescricao(proposta.Situacao)}`                       |
+| Proposta  | PropostaAprovar   | Aprovar   | C0112  | V0001            | Proposta não encontrada                                                                                                         |
+| Proposta  | PropostaAprovar   | Aprovar   | C0112  | V0002            | A Proposta não pertence à esta Integração                                                                                       |
+| Proposta  | PropostaAprovar   | Aprovar   | C0196  | V0001            | O valor solicitado não é válido                                                                                                  |
+| Proposta  | PropostaAprovar   | Aprovar   | C0196  | V0002            | Formato de cálculo inválido                                                                                                      |
+| Proposta  | PropostaAprovar   | Aprovar   | C0196  | V0003            | É necessário o produto                                                                                                           |
+| Proposta  | PropostaAprovar   | Aprovar   | C0196  | V0004            | Prazo inválido ou não localizado para este Produto x Rede                                                                        |
+| Proposta  | PropostaAprovar   | Aprovar   | C0196  | V0005            | Não é possível aprovar a proposta. Produto x Rede x Parcela não possui juros configurado                                        |
+| Proposta  | PropostaAprovar   | Aprovar   | C0196  | V0006            | Configuração deve ser enviada para proposta HotMoney                                                                             |
+| Proposta  | PropostaAprovar   | Aprovar   | C0196  | V0007            | Produto Rotativo e HotMoney aceitam apenas formato de cálculo com juros                                                           |
+| Proposta  | PropostaAprovar   | Aprovar   | C0196  | V0008            | Formato de Cálculo não informado                                                                                                 |
+| Proposta  | PropostaAprovar   | Aprovar   | C0186  | V0001            | Proposta ainda não foi aprovada pelo analista de crédito                                                                          |
+| Proposta  | PropostaAprovar   | Aprovar   | C0187  | V0001            | Informe o assunto do histórico                                                                                                   |
+</Expandable>

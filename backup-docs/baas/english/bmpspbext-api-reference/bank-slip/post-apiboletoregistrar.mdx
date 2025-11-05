@@ -1,0 +1,11 @@
+---
+title: "49 - Register Bankslip"
+openapi: post /api/Boleto/Registrar
+version: 'English'
+---
+
+Through this endpoint, partners can register a bankslip. The API process conducted by the integrator registers the bankslip with the responsible entity.
+
+Before registering the bankslip, the issuer must have a payer number linked to the account and a registered portfolio, with "1" for a simple bankslip (applicable to this endpoint) and "9" for CNAB.
+
+The payer registration should be completed through the /api/Cedente endpoint, and linking the payer to a portfolio should be done via the /api/Cedente/AdicionarCarteira endpoint.

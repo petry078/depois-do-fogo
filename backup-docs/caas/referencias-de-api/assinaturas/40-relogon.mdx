@@ -1,0 +1,14 @@
+---
+title: "40 - Relogon"
+openapi: post /Proposta/IncluirAssinaturaCCBFinalizada
+---
+
+Utilize este endpoint para realizar a assinatura da proposta na modalidade Relogon.
+
+Nesta modalidade, é permitido a inclusão de assinantes que já tenham realizado a assinatura no backend do integrador, pois a proposta só é finalizada após os assinantes cadastrados realizem a assinatura. 
+
+Assinaturas nesta modalidade, não fazem o envio de e-mails de notificação com solicitação de assinatura. 
+
+O método exige parâmetros de autenticação e de localização da proposta, assim como uma lista de assinantes que já realizaram a assinatura com data, hora e o endereço IP de origem.
+
+Para mais informações sobre a implementação e requisitos deste endpoint, acesse o documento [Guia Completo dos Métodos de Assinatura de Cédulas de Crédito Bancário](https://bmpmoneyplus-sandbox.mintlify.app/caas/assinaturas#como-utilizar%3F-2).

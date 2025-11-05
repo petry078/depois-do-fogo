@@ -1,0 +1,92 @@
+---
+title: "53 - Cadastro de Favorecido"
+openapi: post /api/
+---
+
+A API tem a função de criar favorecidos para as contas e pagamentos.
+
+## Exemplo de Requisição
+
+```json
+curl --request POST \
+  --url https://api.ext.dbs.moneyp.dev.br/api/Favorecido \
+  --header 'Authorization: <api-key>' \
+  --header 'Content-Type: application/json' \
+  --header 'IdempotencyKey: <idempotencykey>' \
+  --header 'IgnoraHandshake: <ignorahandshake>' \
+  --data '{
+      "contaDto": {
+    "agencia": "<string>",
+    "agenciaDigito": "<string>",
+    "conta": "<string>",
+    "contaDigito": "<string>",
+    "contaPgto": "<string>",
+    "tipoConta": 1,
+    "modeloConta": 1
+  },
+  "nome": "<string>",
+  "documentoFederal": "<string>",
+  "numeroBanco": 123,
+  "agencia": "<string>",
+  "agenciaDigito": "<string>",
+  "conta": "<string>",
+  "contaDigito": "<string>",
+  "contaPagamento": "<string>",
+  "tipoConta": 1
+}'
+```
+
+## Exemplos de Resposta
+
+### 200 OK
+
+```json
+{
+  "sucesso": true,
+  "mensagem": "<string>",
+  "jsonErros": "<string>",
+  "codigoFavorecido": "3c90c3cc-0d44-4b50-8888-8dd25736052a"
+}
+```
+### 400 Bad Request
+
+```json
+{
+  "sucesso": true,
+  "mensagem": "<string>"
+}
+```
+### 500 Internal Server Error
+
+```json
+{
+  "sucesso": true,
+  "mensagem": "<string>"
+}
+```
+
+## Descrição dos campos da requisição
+
+Objeto `contaDto`:
+
+| Campo         | Tipo    | Descrição                                                                                     | Observações                                          |
+|---------------|---------|-----------------------------------------------------------------------------------------------|------------------------------------------------------|
+| agencia       | string  | Número da agência bancária.                                                                   | Até 4 caracteres.                                    |  
+| agenciaDigito | string  | Dígito verificador da agência bancária.                                                       | Apenas 1 caractere.                                  | 
+| conta         | string  | Para localizar a conta, informe contaPgto ou ambos conta e contaDigito; se nenhum for informado, a requisição falhará por falta de dados essenciais. | Até 12 caracteres.  |
+| contaDigito   | string  | Dígito verificador do número da conta bancária.                                               | Apenas 1 caractere.                                  |
+| contaPgto     | string  | Número da conta bancária seguido do dígito verificador.                                       | Até 20 caracteres.                                   |
+| tipoConta     | integer | Tipo da conta bancária. 1 para Corrente, 2 para Poupança, 3 para Pagamento e 4 para Salário.  | Apenas 1 caractere.                                  |
+| modeloConta   | integer | Modelo da conta bancária. 1 para Movimento, 2 para Escrow e 3 para Vinculada.                 | Apenas 1 caractere.                                  |
+
+| Campo                 | Tipo    | Descrição                                                                                                                        |
+|-----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------|
+| nome                  | string  | Nome completo do favorecido.                                                                                                     |
+| documentoFederal      | string  | Número do CPF ou CNPJ do favorecido.                                                                                             |
+| numeroBanco           | integer | Código identificador do banco. Exemplo: 001 para Banco do Brasil.                                                                |
+| agencia               | string  | Número da agência bancária do favorecido.                                                                                        |
+| agenciaDigito         | string  | Dígito verificador da agência bancária do favorecido.                                                                            |
+| conta                 | string  | Número da conta bancária do favorecido.                                                                                          |
+| contaDigito           | string  | dígito verificador do número da conta bancária do favorecido.                                                                    |
+| contaPagamento        | string  | Número da conta bancária do favorecido seguido do dígito verificador.                                                            |
+| tipoConta             | integer | Tipo da conta bancária do favorecido. 1 para Corrente, 2 para Poupança, 3 para Pagamento e 4 para Salário.                       |

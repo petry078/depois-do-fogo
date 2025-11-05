@@ -1,0 +1,8 @@
+---
+title: "29 - CNAB Bill Registration"
+openapi: post /api/Arquivo/EnviarArquivo
+---
+
+Through this endpoint, the partner can send a CNAB 400 file to register boletos in batches.
+
+<Warning> Before registering a boleto, the issuer must have a payee number linked to the account and a registered wallet. Wallet number "1" for a simple boleto and "9" for a CNAB, which is the case for this endpoint. The payee must be registered at the /api/Cedente endpoint, and the payee must be linked to a wallet at the `/api/Cedente/AdicionarCarteira` endpoint.</Warning>

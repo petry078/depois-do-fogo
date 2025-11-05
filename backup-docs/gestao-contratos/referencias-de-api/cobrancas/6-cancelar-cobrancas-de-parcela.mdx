@@ -1,0 +1,18 @@
+---
+title: "6 - Cancelar Cobranças de Parcela"
+openapi: post /AgendaRecebivel/CancelarCobrancas
+---
+
+Este endpoint oferece a possibilidade de cancelar cobranças que foram previamente registradas, seja de PIX Cobrança ou Boletos (comum ou híbrido). 
+
+Ele garante que as cobranças associadas as parcelas possam ser canceladas e reemitidas, permitindo um controle mais preciso sobre o fluxo de pagamentos.
+
+O processo de cancelamento é assíncrono, ou seja, a operação é realizada em segundo plano, e um callback é disparado para o parceiro assim que o cancelamento do registro da cobrança é concluído, informando que o cancelamento foi realizado com sucesso. Esse processo abrange:
+
+* Cancelamento de Boleto;
+* Cancelamento de Boleto Híbrido;
+* Cancelamento de PIX Cobrança.
+
+Esse endpoint oferece flexibilidade no gerenciamento de cobranças, permitindo que o parceiro cancele registros de forma simples e mantenha um controle adequado de suas operações financeiras.
+
+<Warning>Utilize o valor gerado pelo campo `codigoLiquidacao`, retornado na resposta dos endpoints [4 - Gerar uma Cobrança de Parcela](https://bmpmoneyplus-sandbox.mintlify.app/gestao-contratos/api-reference/post-agendarecebivelgerarunicacobranca) e [5 - Gerar Múltiplas Cobranças de Parcela](https://bmpmoneyplus-sandbox.mintlify.app/gestao-contratos/api-reference/post-agendarecebivelgerarunicacobranca), para cancelar uma negociação de cobrança.</Warning>

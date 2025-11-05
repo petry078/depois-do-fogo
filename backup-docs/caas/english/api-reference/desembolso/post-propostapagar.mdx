@@ -1,0 +1,31 @@
+---
+title: "39 - Pay"
+openapi: post /Proposta/Pagar
+version: 'English'
+---
+
+Through this endpoint, the partner changes the proposal status to "paid," provided they have permission to execute this procedure.
+
+<Expandable title="Messaging">
+| Category | Operation         | Action   | Code   | Detailed Code | Message                                                                                                      |
+|----------|-------------------|----------|--------|---------------|--------------------------------------------------------------------------------------------------------------|
+| Proposta | PropostaPagar     | Pagar    | C0066  | V0001         | The proposal cannot be paid as it is pending payment data update                                           |
+| Proposta | PropostaPagar     | Pagar    | C0066  | V0002         | Proposal has been sent in payment remittance `{remessa.Sequencia.ToString("00000000")}`                   |
+| Proposta | PropostaPagar     | Pagar    | C0066  | V0003         | Payment of the proposal is not allowed by this partner                                                      |
+| Proposta | PropostaPagar     | Pagar    | C0066  | V0004         | The proposal cannot be paid as its status is `{SituacaoPropostaEnum.GetDescricao(proposta.Situacao)}`      |
+| Proposta | PropostaPagar     | Pagar    | C0066  | V0005         | Proposal sent for automatic payment. Cancellation not allowed.                                              |
+| Proposta | PropostaPagar     | Pagar    | C0066  | V0006         | Awaiting reservation request                                                                                 |
+| Proposta | PropostaPagar     | Pagar    | C0112  | V0001         | Proposal not found                                                                                           |
+| Proposta | PropostaPagar     | Pagar    | C0112  | V0002         | The Proposal does not belong to this Integration                                                             |
+| Proposta | PropostaPagar     | Pagar    | C0187  | V0001         | Provide the subject of the history                                                                          |
+| Proposta | PropostaPagar     | Pagar    | T0665  | D0001         | Provide the Customer                                                                                         |
+| Proposta | PropostaPagar     | Pagar    | T0665  | D0002         | Customer document is invalid                                                                                |
+| Proposta | PropostaPagar     | Pagar    | T0665  | D0016         | EPCodigo not provided                                                                                         |
+| Proposta | PropostaPagar     | Pagar    | T0665  | D0017         | Seller not found                                                                                            |
+| Proposta | PropostaPagar     | Pagar    | T0665  | D0018         | Promoter not found                                                                                           |
+| Proposta | PropostaPagar     | Pagar    | T0665  | D0019         | Provide the Type of Operation                                                                               |
+| Proposta | PropostaPagar     | Pagar    | T0665  | D0020         | Provide the Value                                                                                           |
+| Proposta | PropostaPagar     | Pagar    | T0665  | D0021         | Provide the Number of Installments                                                                           |
+| Proposta | PropostaPagar     | Pagar    | T0665  | D0022         | Invalid calculation format                                                                                   |
+| Proposta | PropostaPagar     | Pagar    | T0665  | D0023         | Customer must be an individual                                                                              |
+</Expandable>

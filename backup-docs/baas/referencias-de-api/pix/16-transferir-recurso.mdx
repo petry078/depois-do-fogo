@@ -1,0 +1,16 @@
+---
+title: "16 - Transferir Recurso"
+openapi: post /api/Recurso/Transferir
+---
+
+Por meio deste endpoint, o parceiro pode efetuar transferências de valores através de uma chave Pix, dados bancários ou por QrCode.
+
+<Info> Em produção a utilização de HandShake e HMAC é obrigatória. </Info>
+
+<Warning>
+Transferência via Chave PIX: Neste modelo para que o cliente obtenha sucesso na requisição é necessário realizar a consulta da chave no endpoint /api/Chave/Consultar para obter o “ticket” nesse caso é obrigatória a informação da chave que receberá a transferência do recurso.
+
+Transferência via Dados Bancários: Neste modelo para que o cliente obtenha sucesso na requisição é necessário informar os dados da conta destino, incluindo agencia, conta, tipo de conta, modelo de conta, ISPB do destino, nome e documento federal beneficiário.
+
+Transferência via QrCode: Neste modelo para que o cliente obtenha sucesso na requisição é necessário realizar a consulta da chave no endpoint /api/QRCode/Ler para obter o “codigoLeituraQRCode
+</Warning>

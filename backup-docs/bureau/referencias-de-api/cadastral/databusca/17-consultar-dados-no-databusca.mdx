@@ -1,0 +1,549 @@
+---
+title: "17 - Consultar Dados no DataBusca"
+openapi: post /Bureau/ConsultarDataBusca
+---
+
+Este endpoint permite a realização de consultas detalhadas a partir do documento do cliente, seja pessoa física ou jurídica. 
+
+A resposta é retornada em formato JSON e contém dados estruturados, incluindo endereço, e-mail, telefone, endereço comercial, situação fiscal e informações sobre parcerias. 
+
+Esses dados são extraídos de fontes confiáveis e podem ser utilizados para análise e tomada de decisões com base em informações cadastrais e fiscais do cliente.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+
+```json
+{
+    \"Erro": false,
+    \"MensagemOperador": "OK",
+    \"ResultadoConsulta": {
+        \"CompanyData": {
+            \"Data": {
+                \"ContactId": 11222333000145,
+                \"SequencialId": 32561755,
+                \"Flags": 4,
+                \"FlagList": [
+                    0,
+                    4
+                ],
+                \"NameBrasil": "INTERNET LTDA",
+                \"NameSocial": null,
+                \"DeathDate": null,
+                \"BirthDate": "2012-03-27T00:00:00.000Z",
+                \"Age": 13,
+                \"Zodiac": null,
+                \"ZodiacDescription": null,
+                \"Person": null,
+                \"Company": {
+                    \"TaxModel": 0,
+                    \"BusinessSize": 2,
+                    \"BusinessSizeOriginal": "DEMAIS",
+                    \"OptingSimple": false,
+                    \"IsMei": null,
+                    \"LegalNatureId": 2062,
+                    \"TotalEmployees": 196,
+                    \"TotalCompanies": 37,
+                    \"TotalPartners": 4,
+                    \"TotalCompanyPartners": 6,
+                    \"MainCompanyDocument": null,
+                    \"LegalNature": "Sociedade Empresária Limitada"
+                },
+                \"CreditScore": {
+                    \"D00": 472,
+                    \"D30": 39,
+                    \"D60": 39,
+                    \"D90": 39,
+                    \"Ranking": 20230601,
+                    \"CreateDate": "2023-06-01T00:00:00.000Z",
+                    \"Status": 1,
+                    \"StatusDescription": "Active"
+                },
+                \"MarketingScore": {
+                    \"D00": -1,
+                    \"D30": null,
+                    \"D60": null,
+                    \"D90": null,
+                    \"Ranking": 20250624,
+                    \"CreateDate": null,
+                    \"Status": null,
+                    \"StatusDescription": null
+                },
+                \"PreScreening": {
+                    \"D00": 49,
+                    \"D30": 49,
+                    \"D60": 49,
+                    \"D90": 49,
+                    \"Ranking": 20230601,
+                    \"CreateDate": "2023-06-01T00:00:00.000Z",
+                    \"Status": 1,
+                    \"StatusDescription": "Active"
+                },
+                \"Income": null,
+                \"Revenue": {
+                    \"Shared": 971633543,
+                    \"Presumed": 27152798.13,
+                    \"Balance": 27152798.13,
+                    \"Ranking": 20220930,
+                    \"CreateDate": "2022-09-30T00:00:00.000Z",
+                    \"Status": null,
+                    \"StatusDescription": null
+                },
+                \"FiscalSituation": {
+                    \"Condition": 0,
+                    \"CheckCode": null,
+                    \"DeathYear": null,
+                    \"CheckDate": "2025-06-14T00:00:00.000Z",
+                    \"Description": "Regular ativa",
+                    \"Ranking": 20250614,
+                    \"CreateDate": "2012-03-27T00:00:00.000Z",
+                    \"Status": 2,
+                    \"StatusDescription": "Verified"
+                },
+                \"DigitalBehavior": null,
+                \"VoterRegistry": null,
+                \"OtherDocuments": [
+                    {
+                        \"Type": 2,
+                        \"Document": "11122233310",
+                        \"ExpeditionDate": null,
+                        \"ExpirationDate": null,
+                        \"State": "SP",
+                        \"Data": null,
+                        \"Ranking": 20170601,
+                        \"CreateDate": null,
+                        \"Status": 1,
+                        \"StatusDescription": "Active"
+                    },
+                    {
+                        \"Type": 1,
+                        \"Document": "11888999000110",
+                        \"ExpeditionDate": null,
+                        \"ExpirationDate": null,
+                        \"State": null,
+                        \"Data": null,
+                        \"Ranking": 0,
+                        \"CreateDate": null,
+                        \"Status": null,
+                        \"StatusDescription": null
+                    }
+                ],
+                \"Activities": [
+                    {
+                        \"Type": 1,
+                        \"Code": 6204000,
+                        \"IsPrimary": null,
+                        \"RemoveDate": null,
+                        \"Description": "A DA INFORMACAO",
+                        \"Ranking": 20250618,
+                        \"CreateDate": "2012-03-27T00:00:00.000Z",
+                        \"Status": 1,
+                        \"StatusDescription": "Active"
+                    }
+                ],
+                \"Relateds": [
+                    {
+                        \"Type": 32,
+                        \"TypeDescription": "Partner",
+                        \"IsPep": false,
+                        \"IsVip": false,
+                        \"Name": "O DE FARIAS",
+                        \"Gender": 1,
+                        \"GenderDescription": "Individual male",
+                        \"Document": 12277799910,
+                        \"DocumentType": 0,
+                        \"DocumentFormatted": "290.810.658-23",
+                        \"Ranking": 20250601,
+                        \"CreateDate": "2024-11-22T00:00:00.000Z",
+                        \"Status": 1,
+                        \"StatusDescription": "Active"
+                    },
+                    {
+                        \"Type": 32,
+                        \"TypeDescription": "Partner",
+                        \"IsPep": false,
+                        \"IsVip": false,
+                        \"Name": "ANDRADE VASQUES",
+                        \"Gender": 1,
+                        \"GenderDescription": "Individual male",
+                        \"Document": 99988844410,
+                        \"DocumentType": 0,
+                        \"DocumentFormatted": "295.124.278-69",
+                        \"Ranking": 20250601,
+                        \"CreateDate": "2024-11-22T00:00:00.000Z",
+                        \"Status": 1,
+                        \"StatusDescription": "Active"
+                    }
+                ],
+                \"Phones": [
+                    {
+                        \"AreaCode": 11,
+                        \"Number": 999159444,
+                        \"FormattedNumber": "(11) 99915-9444",
+                        \"OperatorId": 55320,
+                        \"Operator": "VIVO S.A.",
+                        \"IsFacebook": true,
+                        \"IsWhatsapp": true,
+                        \"IsProcon": false,
+                        \"IsMobile": true,
+                        \"InstallationDate": null,
+                        \"RemovalDate": null,
+                        \"Ranking": 20250501,
+                        \"CreateDate": "2006-08-28T00:00:00.000Z",
+                        \"Status": 3,
+                        \"StatusDescription": "Hot"
+                    },
+                    {
+                        \"AreaCode": 11,
+                        \"Number": 993574444,
+                        \"FormattedNumber": "(11) 99357-4444",
+                        \"OperatorId": 55320,
+                        \"Operator": "VIVO S.A.",
+                        \"IsFacebook": true,
+                        \"IsWhatsapp": true,
+                        \"IsProcon": false,
+                        \"IsMobile": true,
+                        \"InstallationDate": null,
+                        \"RemovalDate": null,
+                        \"Ranking": 20250501,
+                        \"CreateDate": "2013-01-01T00:00:00.000Z",
+                        \"Status": 3,
+                        \"StatusDescription": "History"
+                    }
+                ],
+                \"Emails": [
+                    {
+                        \"Email": "ido.car@gmail.com",
+                        \"IsValidated": true,
+                        \"IsFacebook": true,
+                        \"IsLinkedIn": false,
+                        \"IsDigitalBehavior": true,
+                        \"IsFromPartner": true,
+                        \"Domain": "gmail.com",
+                        \"Score": 10,
+                        \"Ranking": 20250601,
+                        \"CreateDate": "2014-05-26T13:46:02.393Z",
+                        \"Status": 3,
+                        \"StatusDescription": "Hot"
+                    },
+                    {
+                        \"Email": "guir@gmail.com",
+                        \"IsValidated": true,
+                        \"IsFacebook": true,
+                        \"IsLinkedIn": false,
+                        \"IsDigitalBehavior": true,
+                        \"IsFromPartner": true,
+                        \"Domain": "gmail.com",
+                        \"Score": 10,
+                        \"Ranking": 20250601,
+                        \"CreateDate": "2014-05-26T13:46:02.393Z",
+                        \"Status": 3,
+                        \"StatusDescription": "History"
+                    }
+                ],
+                \"Addresses": [
+                    {
+                        \"Street": "DAS NACOES UNIDAS",
+                        \"Number": "12901",
+                        \"Complement": {
+                            \"ANDAR": "0",
+                            \"SALA": "1",
+                            \"PAULO": null
+                        },
+                        \"District": "PAULISTA",
+                        \"ZipCode": 4578910,
+                        \"City": "SAO PAULO",
+                        \"Type": "AVENIDA",
+                        \"Title": null,
+                        \"State": "SP",
+                        \"DneId": null,
+                        \"Ibge": null,
+                        \"CensusSector": null,
+                        \"Geolocation": null,
+                        \"Borders": null,
+                        \"ComplementFormatted": "ANDAR 0 SALA SAO PAULO",
+                        \"Alias": "AVENIDA, 12901 - ANDAR 0 SALA SAO PAULO, SAO PAULO - SP (CEP: 04578-910)",
+                        \"ShortAlias": "AVENIDA, 12901 - ANDAR 0 SALA SAO PAULO, BROOKLIN PAULISTA",
+                        \"CompanyDocument": null,
+                        \"CompanyName": null,
+                        \"Score": 10,
+                        \"Ranking": 20250601,
+                        \"CreateDate": "2024-06-20T00:00:00.000Z",
+                        \"Status": 3,
+                        \"StatusDescription": "Hot",
+                        \"Zone": null,
+                        \"Section": null,
+                        \"Issuer": null
+                    }
+                ],
+                \"BusinessAddresses": null,
+                \"Vehicles": [
+                    {
+                        \"LicensePlate": "CQI-0000",
+                        \"Renavan": "00310008",
+                        \"FrameSerial": "B8155176",
+                        \"YearManufacturing": 1968,
+                        \"YearModel": 1968,
+                        \"BrandId": 0,
+                        \"ModelId": 0,
+                        \"VersionId": 0,
+                        \"Brand": "VOLKSWAGEN",
+                        \"Model": "KOMBI",
+                        \"Version": null,
+                        \"Type": 13,
+                        \"Color": 0,
+                        \"LicenseDate": "2018-07-12T00:00:00.000Z",
+                        \"SalesDate": "2020-12-18T00:00:00.000Z",
+                        \"FipeCode": null,
+                        \"FipePrice": 0,
+                        \"IPVA": null,
+                        \"LastDpvat": null,
+                        \"NextOwner": {
+                            \"EntryDate": null,
+                            \"Quote": null,
+                            \"Role": null,
+                            \"LegalRepresentative": null,
+                            \"Name": " PHILIPP james",
+                            \"Gender": 1,
+                            \"GenderDescription": "Individual male",
+                            \"Document": 11199900066,
+                            \"DocumentType": 0,
+                            \"DocumentFormatted": "234.237.938-21",
+                            \"Ranking": 20220701,
+                            \"CreateDate": null,
+                            \"Status": 1,
+                            \"StatusDescription": "Active",
+                            \"PurchaseDate": "0001-01-01T00:00:00.000Z"
+                        },
+                        \"PreviousOwner": {
+                            \"EntryDate": null,
+                            \"Quote": null,
+                            \"Role": null,
+                            \"LegalRepresentative": null,
+                            \"Name": "DIGITAL LIMITADA",
+                            \"Gender": 10,
+                            \"GenderDescription": "Private company",
+                            \"Document": 88999222000110,
+                            \"DocumentType": 1,
+                            \"DocumentFormatted": "11.216.478/0001-70",
+                            \"Ranking": 20140401,
+                            \"CreateDate": null,
+                            \"Status": 0,
+                            \"StatusDescription": "History",
+                            \"PurchaseDate": "2013-01-30T00:00:00.000Z"
+                        },
+                        \"Denatran": null,
+                        \"Dpvat": null,
+                        \"Ranking": 20220701,
+                        \"CreateDate": "2015-08-03T00:00:00.000Z",
+                        \"Status": 0,
+                        \"StatusDescription": "History"
+                    }
+                ],
+                \"Properties": null,
+                \"ProfessionalData": null,
+                \"PartnerShips": [
+                    {
+                        \"Size": 2,
+                        \"RelationType": 0,
+                        \"RelationTypeDescription": "Direct",
+                        \"Partners": [
+                            {
+                                \"EntryDate": "2024-10-25T00:00:00.000Z",
+                                \"Quote": null,
+                                \"Role": 1,
+                                \"LegalRepresentative": null,
+                                \"Name": "FERNANDO",
+                                \"Gender": 0,
+                                \"GenderDescription": "Unknown",
+                                \"Document": null,
+                                \"DocumentType": 0,
+                                \"DocumentFormatted": null,
+                                \"Ranking": 20241101,
+                                \"CreateDate": null,
+                                \"Status": 1,
+                                \"StatusDescription": "Active",
+                                \"PurchaseDate": null
+                            }
+                        ],
+                        \"Name": "CANOAS",
+                        \"Gender": 10,
+                        \"GenderDescription": "Private company",
+                        \"Document": 99888555000155,
+                        \"DocumentType": 1,
+                        \"DocumentFormatted": "99.888.555/0001-55",
+                        \"Ranking": 20241101,
+                        \"CreateDate": null,
+                        \"Status": 0,
+                        \"StatusDescription": "History"
+                    }
+                       ]
+                 },
+
+                \"Debits": [
+                    {
+                        \"CompanyId": null,
+                        \"CompanyName": "Empresa A",
+                        \"CurrentQuantity": 2,
+                        \"HistoryQuantity": 2,
+                        \"Ranking": 20230101,
+                        \"CreateDate": "2023-01-12T14:47:16.530Z",
+                        \"Status": 1,
+                        \"StatusDescription": "Active"
+                    },
+                    {
+                        \"CompanyId": null,
+                        \"CompanyName": "Empresa B",
+                        \"CurrentQuantity": null,
+                        \"HistoryQuantity": 1,
+                        \"Ranking": 20180501,
+                        \"CreateDate": "2019-01-09T16:58:34.153Z",
+                        \"Status": 1,
+                        \"StatusDescription": "Active"
+                    }
+                ],
+                \"BankChecks": null,
+                \"BankReferences": null,
+                \"Assistances": null,
+                \"Refunds": null,
+                \"Services": null,
+                \"Restrictions": null,
+                \"Protests": null,
+                \"LawProcessSummary": {
+                    \"Total": 1094,
+                    \"Passive": null,
+                    \"Active": null,
+                    \"Others": null,
+                    \"Ranking": 20241121,
+                    \"CreateDate": "2023-01-04T16:03:38.580Z",
+                    \"Status": 1,
+                    \"StatusDescription": "Active"
+                },
+                \"LawProcesses": [
+                    {
+                        \"Code": "54546464646565",
+                        \"Number": null,
+                        \"ControlNumber": null,
+                        \"Area": "TRABALHISTA",
+                        \"Type": "ACAO TRABALHISTA - RITO ORDINARIO",
+                        \"Subject": "INDENIZACAO POR DANO MORAL",
+                        \"Judge": null,
+                        \"DistributionDate": "2022-11-14T16:14:27.000Z",
+                        \"ArchiveDate": null,
+                        \"ArchiveDescription": null,
+                        \"Value": 75066,
+                        \"Parts": [
+                            {
+                                \"Type": "AUTOR",
+                                \"Name": "DA SILVA"
+                            },
+                            {
+                                \"Type": "REU",
+                                \"Name": "LTDA"
+                            }
+                        ],
+                        \"Ranking": 20221114,
+                        \"CreateDate": null,
+                        \"Status": 1,
+                        \"StatusDescription": "Active"
+                    }
+                ],
+                \"ArrestWarranties": null,
+                \"Queries": [
+                    {
+                        \"Quantity": 1,
+                        \"Cnae": 6437900,
+                        \"Description": "MICROEMPREENDEDOR",
+                        \"Name": null,
+                        \"Gender": 11,
+                        \"GenderDescription": "Private company limited",
+                        \"Document": null,
+                        \"DocumentType": 1,
+                        \"DocumentFormatted": null,
+                        \"Ranking": 20250601,
+                        \"CreateDate": null,
+                        \"Status": null,
+                        \"StatusDescription": null
+                    },
+                    {
+                        \"Quantity": 1,
+                        \"Cnae": 4753900,
+                        \"Description": "AUDIO E VIDEO",
+                        \"Name": null,
+                        \"Gender": 10,
+                        \"GenderDescription": "Private company",
+                        \"Document": null,
+                        \"DocumentType": 1,
+                        \"DocumentFormatted": null,
+                        \"Ranking": 20250601,
+                        \"CreateDate": null,
+                        \"Status": null,
+                        \"StatusDescription": null
+                    }
+                ],
+                \"WebSites": [
+                    {
+                        \"Url": null,
+                        \"CheckDate": "2017-03-06T12:53:06.210Z",
+                        \"WebTraffic": {
+                            \"GlobalRank": 2381774,
+                            \"TotalVisits": 0,
+                            \"AvgVisitDuration": 0,
+                            \"PagesPerVisit": 0,
+                            \"BounceRate": 0,
+                            \"Country": "Brazil",
+                            \"CountryRank": 148825,
+                            \"Category": [
+                                "Business and Consumer Services",
+                                "Online Marketing"
+                            ],
+                            \"CategoryRank": 6394,
+                            \"Audience": []
+                        },
+                        \"Ranking": 20170301,
+                        \"CreateDate": "2017-02-15T00:00:00.000Z",
+                        \"Status": 3,
+                        \"StatusDescription": "Hot"
+                    }
+                ],
+                \"PoliticalPartyDonations": null,
+                \"StatisticModels": null,
+                \"Name": "LTDA",
+                \"Gender": 10,
+                \"GenderDescription": "Private company",
+                \"Document": 115555666000110,
+                \"DocumentType": 1,
+                \"DocumentFormatted": "11.555.666/0001-10",
+                \"Ranking": 20120327,
+                \"CreateDate": "2012-03-27T00:00:00.000Z",
+                \"Status": 2,
+                \"StatusDescription": "Verified",
+                \"ActiveDebts": [
+                    {
+                        \"CategoryId": 2,
+                        \"CategoryName": "PREVIDENCIARIO",
+                        \"Description": "ATIVA EM COBRANCA",
+                        \"EntryNumber": "8674848",
+                        \"EntryDate": "2021-09-20T00:00:00.000Z",
+                        \"EntryValue": 349285.28,
+                        \"Ranking": 20221017,
+                        \"CreateDate": "2022-10-17T00:00:00.000Z",
+                        \"Status": 0
+                    }
+                ]
+            },
+            \"RequestId": "1eae1078-af85-4f90-8c84-3bc24f9419a5",
+            \"Timestamp": "2025-06-24T10:23:32.864Z",
+            \"Status": 200,
+            \"StatusDescription": "200",
+            \"Error": null,data
+            \"IsFromCache": false,
+            \"Duration": 2378
+        },
+        \"DtExecucao": "2025-06-24T10:23:35.42-03:00"
+    }
+}
+```
+
+</Expandable>

@@ -1,0 +1,26 @@
+---
+title: "2 - Consultar Detalhes"
+openapi: post /AgendaRecebivel/ConsultarDetalhes
+---
+
+Exibe as informações essenciais de um contrato para a proposta informada, bem como: parcelas, boletos, lançamentos realizados e situação do registro do boleto.
+
+<Note>Por padrão, o campo `dtExpiracao` presente no retorno dessa requisição vem com valor `null`. No entanto, ele vem preenchido com uma data caso o boleto tenha uma data limite para pagamento ou caso esse boleto já esteja pago.</Note>
+
+<Expandable title="Tabelas">
+
+<Expandable title="Retorno de Situação de Parcelas">
+
+Tabela de descrição do retorno do parâmetro `situacao`, do objeto `parcelas`:
+
+| Código | Descrição |
+|--------|-----------|
+| 0      | Em aberto |
+| 1      | Pago      |
+| 2      | Cancelado |
+| 10     | A vencer  |
+| 11     | Vencido   |
+
+</Expandable>
+
+</Expandable>

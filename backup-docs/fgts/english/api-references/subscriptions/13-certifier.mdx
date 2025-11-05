@@ -1,0 +1,34 @@
+---
+title: "13 - Certifier"
+openapi: post /Proposta/IncluirDocumento
+---
+
+Through this endpoint, the partner executes the signature of the proposal via a Certifier. Examples of Certifiers: Docusign, QCertifica, Clicksign, Finanblue, among others.
+The signature process begins when the partner downloads the CCB without the MODELO watermark found on our portal, then signs it via a Certifier and then attaches the CCB to the proposal again.
+
+### Messaging
+
+<Expandable title="Messaging">
+
+| Categoria | Operação | Ação | Código | Código Detalhado | Mensagem |
+|-----------|----------|------|--------|------------------|----------|
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0068 | V0001 | Informe o nome do arquivo |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0068 | V0002 | Falha ao enviar Documento |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0068 | V0003 | Documento não pode ser alterado pois está em processo de análise automática. |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0112 | V0001 | Proposta não encontrada |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0112 | V0002 | A Proposta não pertence à esta Integração |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0107 | V0001 | Extensão do arquivo é inválida. Permitido: [txt,bmp,jpg,jpeg,gif,png,pdf,doc,docx,xls,xlsx,zip] |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0107 | V0002 | Tipo de Documento inválido |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0107 | V0003 | Documento deve ser enviado |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0020 | V0001 | Extensão do arquivo é inválida. Permitido: [{GRANTTYPES}] |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0001 | Informe o Cliente |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0002 | Documento do Cliente é inválido |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0016 | EPCodigo não informado |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0017 | Vendedor não encontrado |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0018 | Promotor não encontrado |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0019 | Informe o Tipo de Operação |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0020 | Informe o Valor |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0021 | Informe a Quantidade de Parcelas |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0022 | Formato de cálculo inválido |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0023 | Cliente deve ser pessoa física |
+</Expandable>

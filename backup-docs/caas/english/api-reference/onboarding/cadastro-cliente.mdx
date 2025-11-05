@@ -1,0 +1,38 @@
+---
+title: "1 - Client Registration"
+openapi: post /Pessoa/Salvar
+version: 'English'
+---
+Through this endpoint, the partner registers and updates a record of an individual or legal entity for which payment will be made. The registered information can include general, contact, and financial details. This procedure must be executed before any other endpoint related to the Person API.
+
+<Expandable title="Messages">
+| Categoria | Operação                | Ação   | Código | Código Detalhado | Mensagem                                |
+|-----------|-------------------------|--------|--------|------------------|-----------------------------------------|
+| Pessoa    | CreateUpdatePessoa      | Salvar | C0041  | V0001            | Documento não é PF ou PJ                |
+| Pessoa    | CreateUpdatePessoa      | Salvar | C0041  | V0002            | Dados da PF devem ser enviados          |
+| Pessoa    | CreateUpdatePessoa      | Salvar | C0041  | V0003            | Dados da PJ devem ser enviados          |
+| Pessoa    | CreateUpdatePessoa      | Salvar | C0041  | V0004            | Dados de Contato devem ser enviados     |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0596  | D0001            | Tipo de Parceiro inválido               |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0596  | D0002            | CPF Inválido                            |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0596  | D0003            | CNPJ Inválido                           |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0596  | D0004            | Documento já cadastrado                 |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0596  | D0005            | Documento já cadastrado em outro registro |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0596  | D0006            | Nome deve ser informado                 |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0596  | D0007            | Origem de Cliente inválido              |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0596  | D0008            | Informe o campo [Cliente Desde]         |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0596  | D0009            | Atividade Profissional Inválida         |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0617  | D0001            | CPF do Cônjuge é inválido               |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0617  | D0002            | Cliente menor de 18 anos                |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0617  | D0003            | Cliente tem mais de 80 anos             |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0617  | D0004            | Gênero inválido                         |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0617  | D0005            | Estado Civil não localizado             |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0617  | D0006            | Escolaridade não localizada             |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0618  | D0001            | CPF do Responsável da Empresa é inválido|
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0604  | D0001            | E-mail inválido                         |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0604  | D0002            | Informe o Telefone Fixo 1 com DDD       |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0604  | D0003            | Informe o Telefone Fixo 2 com DDD       |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0604  | D0004            | Informe o Telefone Celular 1 com DDD    |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0604  | D0005            | Informe o Telefone Celular 2 com DDD    |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0604  | D0006            | Informe o Telefone Fax com DDD          |
+| Pessoa    | CreateUpdatePessoa      | Salvar | T0604  | D0007            | Deve existir pelo menos um telefone para contato |
+</Expandable>

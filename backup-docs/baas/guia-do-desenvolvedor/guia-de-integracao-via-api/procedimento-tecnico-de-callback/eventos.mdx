@@ -1,0 +1,2133 @@
+---
+title: "Eventos"
+version: 'Português'
+---
+
+## 1. Evento de notificação de Pagamento de Título de Concessionária
+
+Callback responsável por enviar informações detalhadas sobre o pagamento de um título de concessionária.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "PagamentoTituloConcessionaria",
+    "Detalhes": {
+      "Identificador": "27400018180007020290384000131",
+      "LinhaDigitavel": null,
+      "CodigoBarras": "846200000012357801622022409100030009004760326696",
+      "ValorTitulo": 135.78,
+      "CodOperacaoCli": "ec10b3be-6e98-4215-b293-bee6e3ed342b",
+      "DescCliente": null,
+      "CodigoTransacao": "c0a2aa71-62de-4668-aa65-816c5d789f30",
+      "NSU": 5701785,
+      "VlrTransacao": 135.78,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-17T17:24:52.52",
+      "TipoLancto": "D",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai** | **Atributo**      | **Tipo**         | **Descrição**                                                                                                                                                        |
+|------------------|-------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| root             | Ambiente          | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção                                                                         |
+| root             | Registro          | string           | Tipo de registro da mensagem do Callback. Valor informado = “PagamentoTituloConcessionaria”                                                                          |
+| root             | Detalhes          | object           | Objeto com os detalhes da mensagem do Callback                                                                                                                       |
+| Detalhes         | Identificador     | string           | Identificador do evento                                                                                                                                              |
+| Detalhes         | LinhaDigitavel    | string           | Sequência de números do código de barras com o dígito verificador de cada agrupamento de números do código (até 48 dígitos)                                          |
+| Detalhes         | CodigoBarras      | string           | Sequência de números do código de barras do título, excluídos os dígitos verificadores de cada agrupamento de números do código (total de 44 dígitos)                |
+| Detalhes         | ValorTitulo       | decimal          | Valor do título                                                                                                                                                      |
+| Detalhes         | CodOperacaoCli    | string           | Código interno para controle de operação do cliente enviado na geração da transação                                                                                  |
+| Detalhes         | DescCliente       | string           | Descrição livre fornecida pelo cliente para a operação                                                                                                               |
+| Detalhes         | CodigoTransacao   | guid             | Código utilizado para identificar o registro na entidade de transação que deu origem ao movimento realizado                                                          |
+| Detalhes         | NSU               | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes         | VlrTransacao      | decimal          | Valor do pagamento realizado                                                                                                                                         |
+| Detalhes         | VlrJuros          | decimal          | Valor dos juros pagos                                                                                                                                                |
+| Detalhes         | VlrMulta          | decimal          | Valor da multa paga                                                                                                                                                  |
+| Detalhes         | DtTransacao       | datetime         | Data e hora do pagamento do título                                                                                                                                   |
+| Detalhes         | TipoLancto        | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “D”                                                                            |
+| Detalhes         | Lancamentos       | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 2. Evento de notificação de Devolução de Título de Concessionária
+
+Callback responsável por enviar informações detalhadas sobre a devolução de um título de concessionária.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "DevolucaoPagamentoTituloConcessionaria",
+    "Detalhes": {
+      "Identificador": "27400018180007020290384000131",
+      "CodigoTransacao": "7f385b2a-a8d2-4b86-a3eb-07233d39b983",
+      "CodigoMovimento": "439df21a-ac0e-4ee7-a0f8-1288d311b2dd",
+      "CodigoTransacaoOrigem": "c0a2aa71-62de-4668-aa65-816c5d789f30",
+      "NSU": 5701786,
+      "VlrTransacao": 135.78,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-17T17:24:54.51",
+      "TipoLancto": "C",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai** | **Atributo**          | **Tipo**         | **Descrição**                                                                                                                                                               |
+|------------------|-----------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| root             | Ambiente              | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção                                                                                |
+| root             | Registro              | string           | Tipo de registro da mensagem do Callback. Valor informado = “DevolucaoPagamentoTituloConcessionaria”                                                                        |
+| root             | Detalhes              | object           | Objeto com os detalhes da mensagem do Callback                                                                                                                              |
+| Detalhes         | Identificador         | string           | Identificador do evento                                                                                                                                                     |
+| Detalhes         | CodigoTransacao       | guid             | Código utilizado para identificar o registro na entidade de transação que deu origem ao movimento realizado                                                                 |
+| Detalhes         | CodigoMovimento       | guid             | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária                                           |
+| Detalhes         | CodigoTransacaoOrigem | string           | Código que faz referência à transação original responsável por gerar outras transações correlacionadas. Em casos como devoluções ou rejeições, este campo aponta para a transação de envio que originou o movimento |
+| Detalhes         | NSU                   | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro dentro do contexto do sistema |
+| Detalhes         | VlrTransacao          | decimal          | Valor pago do título                                                                                                                                                        |
+| Detalhes         | VlrJuros              | decimal          | Valor dos juros pagos                                                                                                                                                       |
+| Detalhes         | VlrMulta              | decimal          | Valor da multa paga                                                                                                                                                         |
+| Detalhes         | DtTransacao           | datetime         | Data e hora da devolução do título                                                                                                                                          |
+| Detalhes         | TipoLancto            | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “C” |
+| Detalhes         | Lancamentos           | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 3. Evento de notificação de Envio de PIX
+
+Callback responsável por enviar informações detalhadas sobre o envio de um PIX.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "EnvioPix",
+    "Detalhes": {
+      "CodigoMovimento": "a1d2cc7f-a417-4367-92bf-f824c8ff52b6",
+      "ChaveDestino": "05901573021",
+      "ContaDestino": null,
+      "NomeDestino": "NOME DO DESTINATÁRIO",
+      "DocumentoFederalDestino": "Documento Federal do destinatário",
+      "AgenciaDestino": "0001",
+      "ISPBDestino": "11581339",
+      "InformacoesAdicionais": null,
+      "IdentificadorTransacao": null,
+      "CodOperacaoCli": null,
+      "DescCliente": "a;",
+      "IdentificOperador": "Nome do Operador",
+      "NumeroOperacao": "E11581339202409172032AF4467F4819",
+      "CodigoTransacao": "3ff208ba-50c9-4162-a18c-492c8fd34994",
+      "NSU": 5701789,
+      "VlrTransacao": 0.33,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-17T17:32:09.87",
+      "TipoLancto": "D",
+      "Identificador": "27400010208095049366957000145",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**             | **Tipo**         | **Descrição**                                                                                |
+|--------------------|--------------------------|------------------|----------------------------------------------------------------------------------------------|
+| root               | Ambiente                 | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro                 | string           | Tipo de registro da mensagem do Callback. Valor informado = “EnvioPix”                       |
+| root               | Detalhes                 | object           | Objeto com os detalhes da mensagem do Callback                                               |
+| Detalhes           | Identificador            | string           | Identificador do evento                                                                      |
+| Detalhes           | CodigoMovimento          | guid             | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária |
+| Detalhes           | ChaveDestino             | string           | Chave Pix de destino                                                                         |
+| Detalhes           | ContaDestino             | object           | Objeto com os dados da conta de destino para o envio do Pix                                  |
+| ContaDestino       | Agencia                  | string           | Nº da agência sem o dígito verificador                                                       |
+| ContaDestino       | AgenciaDigito            | string           | Nº do dígito verificador da agência                                                          |
+| ContaDestino       | Conta                    | string           | Nº da conta com o dígito verificador                                                         |
+| ContaDestino       | ContaDigito              | string           | Nº do dígito verificador da conta                                                            |
+| ContaDestino       | ContaPgto                | string           | Nº da conta pagamento                                                                        |
+| ContaDestino       | TipoConta                | integer          | Identificador do tipo da conta, onde: 1 = Corrente, 2 = Poupança, 3 = Pagamento, 4 = Salário |
+| ContaDestino       | ModeloConta              | integer          | Identificador do modelo da conta, onde: 1 = Movimento, 2 = Escrow, 3 = Vinculada             |
+| Detalhes           | NomeDestino              | string           | Nome do titular da conta                                                                     |
+| Detalhes           | DocumentoFederalDestino  | string           | Nº do CPF ou CNPJ do titular da conta                                                        |
+| Detalhes           | AgenciaDestino           | string           | Nº da agência de destino                                                                     |
+| Detalhes           | ISPBDestino              | string           | Código ISPB de destino                                                                       |
+| Detalhes           | InformacoesAdicionais    | string           | Descrição de informações adicionais do envio do Pix                                          |
+| Detalhes           | IdentificadorTransacao   | string           | Identificador TxId do QR Code para o envio do Pix                                            |
+| Detalhes           | CodOperacaoCli           | string           | Código interno para controle de operação do cliente enviado na geração da transação          |
+| Detalhes           | DescCliente              | string           | Descrição livre fornecida pelo cliente para a operação                                       |
+| Detalhes           | IdentificOperador        | string           | Nome do operador responsável pelo envio do Pix                                               |
+| Detalhes           | NumeroOperacao           | string           | Código utilizado na mensageria com a CCM para identificar / agrupar as transações            |
+| Detalhes           | CodigoTransacao          | guid             | Código utilizado para identificar o registro na entidade de transação que deu origem ao movimento realizado |
+| Detalhes           | NSU                      | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro dentro do contexto do sistema |
+| Detalhes           | VlrTransacao             | decimal          | Valor do Pix enviado                                                                         |
+| Detalhes           | VlrJuros                 | decimal          | Valor dos juros pagos                                                                        |
+| Detalhes           | VlrMulta                 | decimal          | Valor da multa paga                                                                          |
+| Detalhes           | DtTransacao              | datetime         | Data e hora do envio do Pix                                                                  |
+| Detalhes           | TipoLancto               | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “D”    |
+| Detalhes           | Lancamentos              | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada |
+
+## 4. Evento de notificação de Rejeição de Envio de PIX
+
+Callback responsável por enviar informações detalhadas sobre a rejeição de envio de um PIX.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "RejeicaoEnvioPix",
+    "Detalhes": {
+      "Identificador": "27400014923543549235430000181",
+      "ChaveDestino": null,
+      "ContaDestino": {
+        "Agencia": "0001",
+        "AgenciaDigito": null,
+        "Conta": "123451",
+        "ContaDigito": null,
+        "ContaPgto": null,
+        "TipoConta": 1,
+        "ModeloConta": null
+      },
+      "NomeRecebedor": "Nome do correntista",
+      "DocumentoFederalRecebedor": "595813",
+      "InformacoesAdicionais": null,
+      "IdentificadorTransacao": null,
+      "CodOperacaoCli": "e55f2463-c7bb-49e9-a7e0-866a111784ec",
+      "DescCliente": "7082 2337779",
+      "IdentificOperador": "BMP Digital Integração",
+      "VlrTransacao": 6114,
+      "MotivoRejeicaoPix": "CH11",
+      "DescMotivoRejeicaoPix": "CPF/CNPJ do usuário recebedor incorreto",
+      "CodigoTransacao": "2ae8cea5-e672-48b6-807d-9f77c58572e4",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**             | **Tipo**         | **Descrição**                                                                       |
+|--------------------|--------------------------|------------------|-------------------------------------------------------------------------------------|
+| root               | Ambiente                 | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro                 | string           | Tipo de registro da mensagem do Callback. Valor informado = “RejeicaoEnvioPix”      |
+| root               | Detalhes                 | object           | Objeto com os detalhes da mensagem do Callback                                      |
+| Detalhes           | Identificador            | string           | Identificador do evento                                                             |
+| Detalhes           | ChaveDestino             | string           | Chave Pix de destino                                                                |
+| Detalhes           | ContaDestino             | object           | Objeto com informações sobre a conta de destino do Pix enviado                      |
+| ContaDestino       | Agencia                  | string           | Nº da agência sem o dígito verificador                                              |
+| ContaDestino       | AgenciaDigito            | string           | Nº do dígito verificador da agência                                                 |
+| ContaDestino       | Conta                    | string           | Nº da conta com o dígito verificador                                                |
+| ContaDestino       | ContaDigito              | string           | Nº do dígito verificador da conta                                                   |
+| ContaDestino       | ContaPgto                | string           | Nº da conta pagamento                                                               |
+| ContaDestino       | TipoConta                | integer          | Identificador do tipo da conta, onde: 1 = Corrente, 2 = Poupança, 3 = Pagamento, 4 = Salário |
+| ContaDestino       | ModeloConta              | integer          | Identificador do modelo da conta, onde: 1 = Movimento, 2 = Escrow, 3 = Vinculada    |
+| Detalhes           | NomeRecebedor            | string           | Nome do destinatário do Pix enviado                                                 |
+| Detalhes           | DocumentoFederalRecebedor| string           | Nº ofuscado do CPF ou CNPJ do destinatário do Pix enviado                           |
+| Detalhes           | InformacoesAdicionais    | string           | Descrição de informações adicionais do Pix enviado                                  |
+| Detalhes           | IdentificadorTransacao   | string           | Identificador TxId do QR Code para o envio do Pix                                   |
+| Detalhes           | CodOperacaoCli           | string           | Código interno para controle de operação do cliente enviado na geração da transação |
+| Detalhes           | DescCliente              | string           | Descrição livre fornecida pelo cliente para a operação                              |
+| Detalhes           | IdentificOperador        | string           | Nome do operador responsável pelo envio do Pix                                      |
+| Detalhes           | VlrTransacao             | decimal          | Valor do Pix rejeitado                                                              |
+| Detalhes           | MotivoRejeicaoPix        | string           | Identificador do motivo da rejeição do Pix. Exemplos: CH11 = CPF/CNPJ do usuário recebedor incorreto, AM01 = Ordem de pagamento com valor zero, etc. |
+| Detalhes           | DescMotivoRejeicaoPix    | string           | Descrição do motivo da rejeição do Pix                                              |
+| Detalhes           | CodigoTransacao          | guid             | Código utilizado para identificar o registro na entidade de transação que deu origem ao movimento realizado |
+| Detalhes           | Lancamentos              | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 5. Evento de notificação de Estorno de PIX
+
+Callback responsável por enviar informações detalhadas sobre o estorno de um PIX.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "EstornoPix",
+    "Detalhes": {
+      "Identificador": "27400011314199959841190052",
+      "ContaRecebedor": {
+        "Agencia": "0001",
+        "AgenciaDigito": "8",
+        "Conta": "1314199",
+        "TipoConta": 3,
+        "TipoContaDesc": "Pagamento",
+        "ContaDigito": "9",
+        "ContaPgto": "13141999",
+        "CodigoBanco": "274",
+        "TpPessoa": 1,
+        "TpPessoaDesc": "Fisica",
+        "DocumentoFederal": "Documento Federal do recebedor",
+        "Nome": "NOME DO RECEBEDOR",
+        "CodigoConta": "00000000-0000-0000-0000-000000000000"
+      },
+      "CodigoMovimento": "1d926baa-7dda-47b7-870a-506f20374fa6",
+      "CodigoMovimentoOrigem": "05056ba9-5aef-4f96-a119-b3735157a4c2",
+      "CodigoOperacaoCliente": "b8132436-e129-4995-7b15-08d8be44bc94",
+      "DescricaoCliente": "125",
+      "InformacoesAdicionais": "125",
+      "MotivoEstorno": "MD06",
+      "MotivoEstornoDescricao": "Devolução solicitada pelo usuário recebedor do pagamento original",
+      "NumeroOperacao": "D11351086202409172046xhUt2msN7UM",
+      "CodigoTransacao": "000f4640-defa-4a2a-86c0-1f878d40975b",
+      "CodigoTransacaoOrigem": "437bd680-1765-46d8-9c1c-f92f92956ba2",
+      "NSU": 5701803,
+      "VlrTransacao": 1.25,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-17T17:46:27.697",
+      "TipoLancto": "C",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**             | **Tipo**         | **Descrição**                                                                                |
+|--------------------|--------------------------|------------------|----------------------------------------------------------------------------------------------|
+| root               | Ambiente                 | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro                 | string           | Tipo de registro da mensagem do Callback. Valor informado = “EstornoPix”                     |
+| root               | Detalhes                 | object           | Objeto com os detalhes da mensagem do Callback                                               |
+| Detalhes           | Identificador            | string           | Identificador do evento                                                                      |
+| Detalhes           | ContaRecebedor           | object           | Objeto com os dados da conta do recebedor do Pix estornado                                   |
+| ContaRecebedor     | Agencia                  | string           | Nº da agência sem o dígito verificador                                                       |
+| ContaRecebedor     | AgenciaDigito            | string           | Nº do dígito verificador da agência                                                          |
+| ContaRecebedor     | Conta                    | string           | Nº da conta sem o dígito verificador                                                         |
+| ContaRecebedor     | TipoConta                | integer          | Identificador do tipo da conta, onde: 1 = Corrente, 2 = Poupança, 3 = Pagamento, 4 = Salário |
+| ContaRecebedor     | TipoContaDesc            | string           | Descrição do tipo da conta                                                                   |
+| ContaRecebedor     | ContaDigito              | string           | Nº do dígito verificador da conta                                                            |
+| ContaRecebedor     | ContaPgto                | string           | Nº da conta pagamento                                                                        |
+| ContaRecebedor     | CodigoBanco              | string           | Código do banco                                                                              |
+| ContaRecebedor     | TpPessoa                 | integer          | Identificador do tipo de pessoa, onde: 1 = Física, 2 = Jurídica                              |
+| ContaRecebedor     | TpPessoaDesc             | string           | Descrição do tipo de pessoa                                                                  |
+| ContaRecebedor     | DocumentoFederal         | string           | Nº do CPF ou CNPJ do destinatário do estorno do Pix                                          |
+| ContaRecebedor     | Nome                     | string           | Nome do destinatário do estorno do Pix                                                       |
+| ContaRecebedor     | CodigoConta              | guid             | Código da conta do destinatário da transação quando a conta for da BMP                       |
+| Detalhes           | CodigoMovimento          | guid             | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária |
+| Detalhes           | VlrMulta                 | decimal          | Valor da multa paga                                                                          |
+| Detalhes           | DtTransacao              | datetime         | Data e hora do estorno do Pix                                                                |
+| Detalhes           | TipoLancto               | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “C”    |
+| Detalhes           | Lancamentos              | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 6. Evento de notificação de Recebimento de PIX
+
+Callback responsável por enviar informações detalhadas sobre o recebimento de um PIX.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "RecebePix",
+    "Detalhes": {
+      "PagadorNome": "NOME DO PAGADOR",
+      "PagadorDocumentoFederal": "Documento Federal do pagador",
+      "PagadorParticipante": "11581339",
+      "PagadorAgencia": "0001",
+      "RecebedorChave": "05901573021",
+      "RecebedorConta": {
+        "Agencia": "0001",
+        "AgenciaDigito": "8",
+        "Conta": "237005",
+        "TipoConta": 3,
+        "TipoContaDesc": "Pagamento",
+        "ContaDigito": "4",
+        "ContaPgto": "02370054",
+        "CodigoBanco": "274",
+        "TpPessoa": 1,
+        "TpPessoaDesc": "Fisica",
+        "DocumentoFederal": "Documento Federal do recebedor",
+        "Nome": "NOME DO RECEBEDOR",
+        "CodigoConta": "00000000-0000-0000-0000-000000000000"
+      },
+      "InformacoesAdicionais": null,
+      "IdentificadorTransacao": null,
+      "CodigoMovimento": "b23adc0e-365d-4b5e-b3ab-c70e57724026",
+      "NumeroOperacao": "E1158133920240917204974F2763A49E",
+      "CodigoTransacao": "e506c86f-8fc9-45b4-8211-b0cd26739b3c",
+      "NSU": 5701805,
+      "VlrTransacao": 2.22,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-17T17:49:26.32",
+      "TipoLancto": "C",
+      "Identificador": "27400010237005405901573021",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**      | **Atributo**             | **Tipo**         | **Descrição**                                                                                                    |
+|-----------------------|--------------------------|------------------|------------------------------------------------------------------------------------------------------------------|
+| root                  | Ambiente                 | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção                     |
+| root                  | Registro                 | string           | Tipo de registro da mensagem do Callback. Valor informado = “RecebePix”                                          |
+| root                  | Detalhes                 | object           | Objeto com os detalhes da mensagem do Callback                                                                   |
+| Detalhes              | Identificador            | string           | Identificador do evento                                                                                          |
+| Detalhes              | PagadorNome              | string           | Nome do pagador do Pix                                                                                           |
+| Detalhes              | PagadorDocumentoFederal  | string           | Nº do CPF ou CNPJ do pagador do Pix                                                                              |
+| Detalhes              | PagadorParticipante      | string           | Identificador do participante SPI do pagador do Pix                                                              |
+| Detalhes              | PagadorAgencia           | string           | Nº da agência do pagador do Pix                                                                                  |
+| Detalhes              | RecebedorChave           | string           | Chave Pix do recebedor do Pix                                                                                    |
+| Detalhes              | RecebedorConta           | object           | Objeto com os dados da conta do recebedor do Pix                                                                 |
+| RecebedorConta        | Agencia                  | string           | Nº da agência sem o dígito verificador                                                                           |
+| RecebedorConta        | AgenciaDigito            | string           | Nº do dígito verificador da agência                                                                              |
+| RecebedorConta        | Conta                    | string           | Nº da conta sem o dígito verificador                                                                             |
+| RecebedorConta        | TipoConta                | integer          | Identificador do tipo da conta do recebedor do Pix, onde: 1 = Corrente, 2 = Poupança, 3 = Pagamento, 4 = Salário |
+| RecebedorConta        | TipoContaDesc            | string           | Descrição do tipo da conta                                                                                       |
+| RecebedorConta        | ContaDigito              | string           | Nº do dígito verificador da conta                                                                                |
+| RecebedorConta        | ContaPgto                | string           | Nº da conta pagamento                                                                                            |
+| RecebedorConta        | CodigoBanco              | string           | Código do banco                                                                                                  |
+| RecebedorConta        | TpPessoa                 | integer          | Identificador do tipo de pessoa do recebedor do Pix, onde: 1 = Física, 2 = Jurídica |
+| RecebedorConta        | TpPessoaDesc             | string           | Descrição do tipo de pessoa                                                                                      |
+| RecebedorConta        | DocumentoFederal         | string           | Nº do CPF ou CNPJ do destinatário do Pix recebido                                                                |
+| RecebedorConta        | Nome                     | string           | Nome do destinatário do Pix recebido                                                                             |
+| RecebedorConta        | CodigoConta              | guid             | Código da conta                                                                                                  |
+| Detalhes              | InformacoesAdicionais    | string           | Descrição de informações adicionais do Pix recebido                                                              |
+| Detalhes              | IdentificadorTransacao   | string           | Identificador TxId do QR Code para o recebimento do Pix                                                          |
+| Detalhes              | CodigoMovimento          | guid             | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária |
+| Detalhes              | NumeroOperacao           | string           | Código utilizado na mensageria com a CCM para identificar / agrupar as transações |
+| Detalhes              | CodigoTransacao          | guid             | Código utilizado para identificar o registro na entidade de transação que deu origem ao movimento realizado |
+| Detalhes              | NSU                      | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro dentro do contexto do sistema |
+| Detalhes              | VlrTransacao             | decimal          | Valor do Pix recebido                                                                                            |
+| Detalhes              | VlrJuros                 | decimal          | Valor dos juros pagos                                                                                            |
+| Detalhes              | VlrMulta                 | decimal          | Valor da multa paga                                                                                              |
+| Detalhes              | DtTransacao              | datetime         | Data e hora do recebimento do Pix                                                                                |
+| Detalhes              | TipoLancto               | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “C”                        |
+| Detalhes              | Lancamentos              | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+| Lancamentos           | CodigoMovimento          | guid             | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária |
+| Lancamentos           | DescricaoOperacao        | string           | Descrição da operação realizada                                                                                  |
+| Lancamentos           | TipoLancto               | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito                                               |
+| Lancamentos           | DescCliente              | string           | Descrição livre fornecida pelo cliente para o lançamento gerado pelo recebimento do Pix                          |
+| Lancamentos           | CodOperacaoCli           | string           | Código interno para controle de operação do cliente enviado na geração da transação que originou o lançamento gerado pelo recebimento do Pix |
+| Lancamentos           | DtMovimento              | datetime         | Data e hora da realização do lançamento gerado pelo recebimento do Pix                                           |
+| Lancamentos           | VlrMovimento             | decimal          | Valor do lançamento gerado pelo recebimento do Pix                                                               |
+
+## 7. Evento de notificação de Devolução de PIX
+
+Callback responsável por enviar informações detalhadas sobre a devolução de um PIX.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "DevolucaoPix",
+    "Detalhes": {
+      "Identificador": "27400010232984526669170000157",
+      "ContaDestino": {
+        "Agencia": "0001",
+        "AgenciaDigito": null,
+        "Conta": "02240869",
+        "ContaDigito": null,
+        "ContaPgto": null,
+        "TipoConta": 3,
+        "ModeloConta": null
+      },
+      "NomeDestino": "Nome do Destinatário",
+      "DocumentoFederalDestino": "***446410**",
+      "InformacoesAdicionais": "",
+      "CodigoMovimentoOrigem": "0b4837d7-d0f0-4ef2-ad4c-26c4ef4540a9",
+      "MotivoDevolucao": "BE08",
+      "DescricaoCliente": "DEVOLUÇÃO PIX TOTAL/PARCIAL",
+      "CodigoMovimento": "737d32fc-5aef-4ddb-818c-fc78f7becd55",
+      "IdentificOperador": "Nome do parceiro",
+      "NumeroOperacao": "D11581339202409171903245EA4AD26D",
+      "CodigoTransacao": "da2ca3a8-0733-4e62-8dca-cd0545f1c0d6",
+      "CodigoTransacaoOrigem": "5c5fb951-8ff0-4dd1-8d34-8c17730a4cc2",
+      "NSU": 5701745,
+      "VlrTransacao": 182.17,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-17T16:03:28.263",
+      "TipoLancto": "D",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**             | **Tipo**         | **Descrição**                                                                                                                     |
+|--------------------|--------------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| root               | Ambiente                 | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção                                      |
+| root               | Registro                 | string           | Tipo de registro da mensagem do Callback. Valor informado = “DevolucaoPix”                                                        |
+| root               | Detalhes                 | object           | Objeto com os detalhes da mensagem do Callback                                                                                    |
+| Detalhes           | Identificador            | string           | Identificador do evento                                                                                                           |
+| Detalhes           | ContaDestino             | object           | Objeto com os dados da conta de destino para devolução do Pix                                                                     |
+| ContaDestino       | Agencia                  | string           | Nº da agência sem o dígito verificador                                                                                            |
+| ContaDestino       | AgenciaDigito            | string           | Nº do dígito verificador da agência                                                                                               |
+| ContaDestino       | Conta                    | string           | Nº da conta com o dígito verificador                                                                                              |
+| ContaDestino       | ContaDigito              | string           | Nº do dígito verificador da conta                                                                                                 |
+| ContaDestino       | ContaPgto                | string           | Nº da conta pagamento                                                                                                             |
+| ContaDestino       | TipoConta                | integer          | Identificador do tipo da conta de destino, onde: 1 = Corrente, 2 = Poupança, 3 = Pagamento, 4 = Salário                           |
+| ContaDestino       | ModeloConta              | integer          | Identificador do modelo da conta, onde: 1 = Movimento, 2 = Escrow, 3 = Vinculada                                                  |
+| Detalhes           | NomeDestino              | string           | Nome do titular da conta                                                                                                          |
+| Detalhes           | DocumentoFederalDestino  | string           | Nº ofuscado do CPF ou CNPJ do titular da conta                                                                                    |
+| Detalhes           | InformacoesAdicionais    | string           | Descrição de informações adicionais do Pix devolvido                                                                              |
+| Detalhes           | CodigoMovimentoOrigem    | guid             | Código utilizado pela BMP para identificar / agrupar transações                                                                   |
+| Detalhes           | MotivoDevolucao          | string           | Código do motivo da devolução do Pix. Exemplos: AM05 = Ordem de pagamento em duplicidade, BE08 = Falha operacional do PSP do pagador, etc. |
+| Detalhes           | DescricaoCliente         | string           | Descrição da mensagem da devolução do Pix para o cliente                                                                          |
+| Detalhes           | CodigoMovimento          | guid             | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária |
+| Detalhes           | IdentificOperador        | string           | Nome do operador que efetuou a transação                                                                                          |
+| Detalhes           | NumeroOperacao           | string           | Código utilizado na mensageria com a CCM para identificar / agrupar as transações                                                 |
+| Detalhes           | CodigoTransacao          | guid             | Código utilizado para identificar o registro na entidade de transação que deu origem ao movimento realizado                       |
+| Detalhes           | CodigoTransacaoOrigem    | guid             | Código refere-se à transação original responsável por gerar outras transações correlacionadas. Em casos como devoluções ou rejeições, este campo aponta para a transação de envio que originou o movimento |
+| Detalhes           | NSU                      | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro dentro do contexto do sistema |
+| Detalhes           | VlrTransacao             | decimal          | Valor do Pix devolvido                                                                                                            |
+| Detalhes           | VlrJuros                 | decimal          | Valor dos juros pagos                                                                                                             |
+| Detalhes           | VlrMulta                 | decimal          | Valor da multa paga                                                                                                               |
+| Detalhes           | DtTransacao              | datetime         | Data e hora da devolução do Pix                                                                                                   |
+| Detalhes           | TipoLancto               | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “D”                                         |
+| Detalhes           | Lancamentos              | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 8. Evento de notificação de Rejeição de Devolução de PIX
+
+Callback responsável por enviar informações detalhatas sobre a rejeição da devolução de um PIX.
+
+```json
+{
+  "Ambiente": "Staging",
+  "Registro": "RejeicaoDevolucaoPix",
+  "Detalhes": {
+    "Identificador": "00000000000000000000000000000",
+    "IdentificOperador": "null",
+    "ContaDestino": {
+      "Agencia": "1",
+      "AgenciaDigito": null,
+      "Conta": "00000",
+      "ContaDigito": null,
+      "ContaPgto": null,
+      "TipoConta": 1
+    },
+    "NomeDestino": "Teste",
+    "DocumentoFederalDestino": "00000000000000000",
+    "InformacoesAdicionais": "Devolucao a origem",
+    "MotivoDevolucao": "Erro no processamento do pagamento (erro genérico)",
+    "CodigoMovimentoOrigem": "a5cbf2e0-5509-44ee-04ac-08db1e69e422",
+    "CodOperacaoCli": null,
+    "DescCliente": "",
+    "VlrTransacao": 130,
+    "DtTransacao": "2023-03-07T15:07:12.5",
+    "CodigoTransacao": "b9915724-1cbe-4826-0751-08db1f0b90d1",
+    "CodigoTransacaoOrigem": "6c1cf0ee-cf28-44d1-9c32-08db1e69d24f",
+    "Lancamentos": []
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**             | **Tipo**         | **Descrição**                                                                                                                              |
+|--------------------|--------------------------|------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| root               | Ambiente                 | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção                                               |
+| root               | Registro                 | string           | Tipo de registro da mensagem do Callback. Valor informado = “RejeicaoDevolucaoPix”                                                         |
+| root               | Detalhes                 | object           | Objeto com os detalhes da mensagem do Callback                                                                                             |
+| Detalhes           | Identificador            | string           | Identificador do evento                                                                                                                    |
+| Detalhes           | IdentificOperador        | string           | Nome do operador responsável pela devolução do Pix                                                                                         |
+| Detalhes           | ContaDestino             | object           | Objeto com informações sobre a conta de destino da transação                                                                               |
+| ContaDestino       | Agencia                  | string           | Nº da agência sem o dígito verificador                                                                                                     |
+| ContaDestino       | AgenciaDigito            | string           | Nº do dígito verificador da agência                                                                                                        |
+| ContaDestino       | Conta                    | string           | Nº da conta com o dígito verificador                                                                                                       |
+| ContaDestino       | ContaDigito              | string           | Nº do dígito verificador da conta                                                                                                          |
+| ContaDestino       | ContaPgto                | string           | Nº da conta pagamento                                                                                                                      |
+| ContaDestino       | TipoConta                | integer          | Identificador do tipo da conta, onde: 1 = Corrente, 2 = Poupança, 3 = Pagamento, 4 = Salário                                               |
+| ContaDestino       | ModeloConta              | integer          | Identificador do modelo da conta, onde: 1 = Movimento, 2 = Escrow, 3 = Vinculada                                                           |
+| Detalhes           | NomeDestino              | string           | Nome do titular da conta                                                                                                                   |
+| Detalhes           | DocumentoFederalDestino  | string           | Nº ofuscado do CPF ou CNPJ do titular da conta                                                                                             |
+| Detalhes           | InformacoesAdicionais    | string           | Descrição de informações adicionais do Pix devolvido                                                                                       |
+| Detalhes           | MotivoDevolucao          | string           | Código do motivo da devolução do Pix. Exemplos: AM05 = Ordem de pagamento em duplicidade, BE08 = Falha operacional do PSP do pagador, etc. |
+| Detalhes           | CodigoMovimentoOrigem    | guid             | Código utilizado pela BMP para identificar / agrupar transações                                                                            |
+| Detalhes           | CodOperacaoCli           | string           | Código interno para controle de operação do cliente enviado na geração da transação                                                        |
+| Detalhes           | DescCliente              | string           | Descrição livre fornecida pelo cliente para a operação                                                                                     |
+| Detalhes           | VlrTransacao             | decimal          | Valor do Pix devolvido                                                                                                                     |
+| Detalhes           | DtTransacao              | datetime         | Data e hora da devolução do Pix                                                                                                            |
+| Detalhes           | CodigoTransacao          | guid             | Código utilizado para identificar o registro na entidade de transação que deu origem ao movimento realizado                                |
+| Detalhes           | CodigoTransacaoOrigem    | guid             | Código que faz referência à transação original responsável por gerar outras transações correlacionadas. Em casos como devoluções ou rejeições, este campo aponta para a transação de envio que originou o movimento |
+| Detalhes           | Lancamentos              | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 9. Evento de notificação de Registro de Boleto
+
+Callback responsável por enviar informações detalhadas sobre o registro de um boleto.
+
+Exemplo de corpo do callback com modelo hídrido `false`:
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "RegistroBoleto",
+    "Detalhes": {
+      "Identificador": "27400014598455645987005000198",
+      "CodigoBoleto": "71db275f-92d9-42f1-8418-408c20473878",
+      "CodigoBarras": "27499987100000157620001090000000017745984550",
+      "LinhaDigitavel": "27490001019000000001977459845507998710000015762",
+      "DtRegistroDDA": "2024-09-17T16:50:55",
+      "IdentificadorTransacao": null,
+      "Sucesso": true,
+      "ErroRegistro": null,
+      "Emv": null,
+      "Imagem": null,
+      "Hibrido": false,
+      "Operador": "NOME DO OPERADOR",
+      "OperadorEmail": "e-mail do operador",
+      "NossoNumero": "177",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+Exemplo de corpo do callback com modelo hídrido `true`:
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "RegistroBoleto",
+    "Detalhes": {
+      "Identificador": "27400018180007020290384000131",
+      "CodigoBoleto": "84cf6762-b009-46c3-84ac-8a2c18cb18a4",
+      "CodigoBarras": "27496984500004832000001010000015792281800070",
+      "LinhaDigitavel": "27490001011000001579122818000709698450000483200",
+      "DtRegistroDDA": "2024-09-17T16:35:58",
+      "IdentificadorTransacao": "BLHBDDA2024091702930008029300085",
+      "Sucesso": true,
+      "ErroRegistro": null,
+      "Emv": "00020101021226970014br.gov.bcb.pix2575qr-h.cornerpix.com.br/11581339/v2/cobv/7fb1187f-761d-4325-8475-02cc9cf7b38e5204000053039865802BR5914BMP MONEY PLUS6009SAO PAULO62070503***6304C70B",
+      "Imagem": "iVBORw0KGgoAAAANSUhEUgAAAhIAAAISAQAAAACxRhsSAAAE1klEQVR4nO2dUY6sOAxFrwek+gzSLKCWktpZq5c0O4Cl1AJags+WgjwfiRNTr6ffk14VwzA3H4gC6iiRLCe+dkAUv9umP34bAZBBBhlkkEEGGWSQQUZjSGm9nQ2rHewGgFXkBkBui12+PbkfZJDxLSOqquoMIM6d6rj0ANApEFQRNUFkAHTEKjqiU1VV3TKe0Q8yyPiWsZh3nIZV2m3Vew99z9c6pw2Yj312P8gg49cYIUHeVFXHRQTTsIq83YtNigyA3HbpBxlktNY//FYA",
+      "Hibrido": true,
+      "Operador": "Nome do operador",
+      "OperadorEmail": "e-mail do operador",
+      "NossoNumero": "157922",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**             | **Tipo**         | **Descrição**                                                                                                               |
+|--------------------|--------------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| root               | Ambiente                 | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção                                |
+| root               | Registro                 | string           | Tipo de registro da mensagem do Callback. Valor informado = “RegistroBoleto”                                                |
+| root               | Detalhes                 | object           | Objeto com os detalhes da mensagem do Callback                                                                              |
+| Detalhes           | Identificador            | string           | Identificador do evento                                                                                                     |
+| Detalhes           | CodigoBoleto             | guid             | Código do boleto                                                                                                            |
+| Detalhes           | CodigoBarras             | string           | Sequência de números do código de barras do título excluídos os dígitos verificadores de cada agrupamento de números do código (total de 44 dígitos) |
+| Detalhes           | LinhaDigitavel           | string           | Sequência de números do código de barras com o dígito verificador de cada agrupamento de números do código (até 48 dígitos) |
+| Detalhes           | DtRegistroDDA            | datetime         | Data e hora do registro no Débito Direto Autorizado                                                                         |
+| Detalhes           | IdentificadorTransacao   | string           | Identificador TxId do QR Code para pagamento do boleto                                                                      |
+| Detalhes           | Sucesso                  | bool             | Indicador de sucesso ou falha do registro do boleto                                                                         |
+| Detalhes           | ErroRegistro             | string           | Descrição do erro ocorrido no registro do boleto                                                                            |
+| Detalhes           | Emv                      | string           | Código Emv para pagamento via Pix                                                                                           |
+| Detalhes           | Imagem                   | string           | Imagem do QR Code em base 64                                                                                                |
+| Detalhes           | Hibrido                  | bool             | Indicador de boleto com possibilidade de pagamento através do código de barras ou através de QR Code Pix                    |
+| Detalhes           | Operador                 | string           | Nome do operador responsável pela alteração                                                                                 |
+| Detalhes           | OperadorEmail            | string           | Endereço de e-mail do operador responsável pela alteração                                                                   |
+| Detalhes           | NossoNumero              | string           | Identificador único do boleto no sistema do cedente                                                                         |
+| Detalhes           | Lancamentos              | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 10. Evento de notificação de Alteração de Boleto
+
+Callback responsável por enviar informações detalhadas sobre a alteração de um boleto.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "AlteracaoBoleto",
+    "Detalhes": {
+      "Identificador": "27400010111111185004006091",
+      "CodigoBoleto": "228dee66-2a89-4566-b48d-02c97dc223e7",
+      "CodigoAlteracaoBoleto": "61686244-2e25-4217-80b9-2ea1ed763a09",
+      "IdentificadorTransacao": null,
+      "Sucesso": true,
+      "Mensagem": null,
+      "DtTransacao": "2024-04-08T11:47:07.037",
+      "Híbrido": false,
+      "Emv": null,
+      "Imagem": null,
+      "Operador": "NOME DO OPERADOR",
+      "OperadorEmail": "e-mail do operador",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**             | **Tipo**         | **Descrição**                                                                                            |
+|--------------------|--------------------------|------------------|----------------------------------------------------------------------------------------------------------|
+| root               | Ambiente                 | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção             |
+| root               | Registro                 | string           | Tipo de registro da mensagem do Callback. Valor informado = “AlteracaoBoleto”                            |
+| root               | Detalhes                 | object           | Objeto com os detalhes da mensagem do Callback                                                           |
+| Detalhes           | Identificador            | string           | Identificador do evento                                                                                  |
+| Detalhes           | CodigoBoleto             | guid             | Código do boleto                                                                                         |
+| Detalhes           | CodigoAlteracaoBoleto    | guid             | Código do registro de alteração do boleto                                                                |
+| Detalhes           | IdentificadorTransacao   | string           | Identificador TxId do QR Code para pagamento do boleto                                                   |
+| Detalhes           | Sucesso                  | bool             | Indicador da situação da alteração                                                                       |
+| Detalhes           | Mensagem                 | string           | Descrição referente ao indicador da situação da alteração                                                |
+| Detalhes           | DtTransacao              | datetime         | Data e hora da alteração do boleto                                                                       |
+| Detalhes           | Hibrido                  | bool             | Indicador de boleto com possibilidade de pagamento através do código de barras ou através de QR Code Pix |
+| Detalhes           | Emv                      | string           | Código Emv para pagamento através de Pix                                                                 |
+| Detalhes           | Imagem                   | string           | Imagem do QR Code em base 64                                                                             |
+| Detalhes           | Operador                 | string           | Nome do operador responsável pela alteração                                                              |
+| Detalhes           | OperadorEmail            | string           | Endereço de e-mail do operador responsável pela alteração                                                |
+| Detalhes           | Lancamentos              | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 11. Evento de notificação de Pagamento de Boleto
+
+Callback responsável por enviar informações detalhadas sobre o pagamento de um boleto.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "PagamentoBoleto",
+    "Detalhes": {
+      "Identificador": "27400018124695126095465000167",
+      "LinhaDigitavel": "27490001011000001576797818000701798440000455300",
+      "CodigoBarras": "27497984400004553000001010000015769781800070",
+      "ValorTitulo": 4553,
+      "CodOperacaoCli": "b3b1d3b3-beda-48d3-aa62-d6315aaab968",
+      "DescCliente": null,
+      "ControleBancario": null,
+      "NSU": 5701634,
+      "VlrTransacao": 4553,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-17T14:27:00.98",
+      "TipoLancto": "D",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**             | **Tipo**         | **Descrição**                                                                                                                                        |
+|--------------------|--------------------------|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| root               | Ambiente                 | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção                                                         |
+| root               | Registro                 | string           | Tipo de registro da mensagem do Callback. Valor informado = “PagamentoBoleto”                                                                        |
+| root               | Detalhes                 | object           | Objeto com os detalhes da mensagem do Callback                                                                                                       |
+| Detalhes           | Identificador            | string           | Identificador do evento                                                                                                                              |
+| Detalhes           | LinhaDigitavel           | string           | Sequência de números do código de barras com o dígito verificador de cada agrupamento de números do código (até 48 dígitos)                          |
+| Detalhes           | CodigoBarras             | string           | Sequência de números do código de barras do título excluídos os dígitos verificadores de cada agrupamento de números do código (total de 44 dígitos) |
+| Detalhes           | ValorTitulo              | decimal          | Valor do título                                                                                                                                      |
+| Detalhes           | CodOperacaoCli           | string           | Código interno para controle de operação do cliente enviado na geração da transação                                                                  |
+| Detalhes           | DescCliente              | string           | Descrição livre fornecida pelo cliente para a operação                                                                                               |
+| Detalhes           | ControleBancario         | string           | Código utilizado pelo BACEN para identificar de forma única uma determinada transação. Ele é utilizado para conciliar o boleto emitido e o pagamento realizado, permitindo o rastreamento da operação. |
+| Detalhes           | NSU                      | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro dentro do contexto do sistema |
+| Detalhes           | VlrTransacao             | decimal          | Valor do pagamento realizado                                                                                                                         |
+| Detalhes           | VlrJuros                 | decimal          | Valor dos juros pagos                                                                                                                                |
+| Detalhes           | VlrMulta                 | decimal          | Valor da multa paga                                                                                                                                  |
+| Detalhes           | DtTransacao              | datetime         | Data e hora do pagamento do título                                                                                                                   |
+| Detalhes           | TipoLancto               | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “D”                                                            |
+| Detalhes           | Lancamentos              | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 12. Evento de notificação de Cancelamento de Boleto
+
+Callback responsável por enviar informações detalhadas sobre o cancelamento de um boleto.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "CancelamentoBoleto",
+    "Detalhes": {
+      "Identificador": "27400014598455645987005000198",
+      "CodigoBoleto": "1a6bb1c9-fc01-4ce2-af08-a61e24efc806",
+      "CodigoCancelamento": "649c31fa-b63e-4502-8771-08ede5294b49",
+      "Sucesso": true,
+      "Mensagens": [
+        "Registrado"
+      ],
+      "DtTransacao": "2024-09-17T16:54:08.263",
+      "Operador": "NOME DO OPERADOR",
+      "OperadorEmail": "e-mail do operador",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**             | **Tipo**         | **Descrição**                                                                                |
+|--------------------|--------------------------|------------------|----------------------------------------------------------------------------------------------|
+| root               | Ambiente                 | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro                 | string           | Tipo de registro da mensagem do Callback. Valor informado = “CancelamentoBoleto”             |
+| root               | Detalhes                 | object           | Objeto com os detalhes da mensagem do Callback                                               |
+| Detalhes           | Identificador            | string           | Identificador do evento                                                                      |
+| Detalhes           | CodigoBoleto             | guid             | Código do boleto                                                                             |
+| Detalhes           | CodigoCancelamento       | guid             | Código do registro de cancelamento do boleto                                                 |
+| Detalhes           | Sucesso                  | bool             | Indicador da situação do cancelamento do boleto                                              |
+| Detalhes           | Mensagens                | string array     | Mensagens da situação do cancelamento do boleto                                              |
+| Detalhes           | DtTransacao              | datetime         | Data e hora do cancelamento do boleto                                                        |
+| Detalhes           | Operador                 | string           | Identificador do operador responsável pelo cancelamento do boleto                            |
+| Detalhes           | OperadorEmail            | string           | Endereço de e-mail do operador responsável pelo cancelamento do boleto                       |
+| Detalhes           | Lancamentos              | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 13. Evento de notificação de Cessão de Boleto
+
+Callback responsável por enviar informações detalhadas sobre a cessão de um boleto.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "CessaoBoleto",
+    "Detalhes": {
+      "Identificador": "27400010241500748892506000189",
+      "CodigoBoleto": "1df1f36d-5b90-4d48-adf1-81050e471582",
+      "CodigoCessaoBoleto": "69da9b60-4285-4729-b9ac-6265ec39035e",
+      "SituacaoCessao": "Finalizada com crédito",
+      "DtTransacao": "2025-01-10T14:33:55.45",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**             | **Tipo**         | **Descrição**                                                                                |
+|--------------------|--------------------------|------------------|----------------------------------------------------------------------------------------------|
+| root               | Ambiente                 | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro                 | string           | Tipo de registro da mensagem do Callback. Valor informado = “CessaoBoleto”                   |
+| root               | Detalhes                 | object           | Objeto com os detalhes da mensagem do Callback                                               |
+| Detalhes           | Identificador            | string           | Identificador do evento                                                                      |
+| Detalhes           | CodigoBoleto             | guid             | Código do boleto                                                                             |
+| Detalhes           | CodigoCessaoBoleto       | guid             | Código do registro de cessão do boleto                                                       |
+| Detalhes           | SituacaoCessao           | string           | Descrição da situação da cessão do boleto                                                    |
+| Detalhes           | DtTransacao              | datetime         | Data e hora da cessão do boleto                                                              |
+| Detalhes           | Lancamentos              | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 14. Evento de notificação de Protesto de Boleto
+
+Callback responsável por enviar informações detalhadas sobre o protesto de um boleto.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "ProtestoBoleto",
+    "Detalhes": {
+      "Identificador": "<NumCodBarras>",
+      "CodigoBoleto": "<CodigoBoleto>",
+      "CodigoProtestoBoleto": "<CodigoProtestoBoleto>",
+      "MensagemSituacao": "Protesto Pago",
+      "Situacao": 12,
+      "DtProtesto": "2024-11-19T18:45:41.403",
+      "Operador": "<Operador Responsavel>",
+      "OperadorEmail": "<Email Operador>",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**             | **Tipo**         | **Descrição**                                                                 |
+|--------------------|--------------------------|------------------|-------------------------------------------------------------------------------|
+| root               | Ambiente                 | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro                 | string           | Tipo de registro da mensagem do Callback. Valor informado = “ProtestoBoleto”  |
+| root               | Detalhes                 | object           | Objeto com os detalhes da mensagem do Callback                                |
+| Detalhes           | Identificador            | string           | Identificador do evento                                                       |
+| Detalhes           | CodigoBoleto             | guid             | Código do boleto para protesto                                                |
+| Detalhes           | CodigoProtestoBoleto     | guid             | Código do registro de protesto do boleto                                      |
+| Detalhes           | MensagemSituacao         | string           | Descrição da situação do protesto do boleto                                   |
+| Detalhes           | Situacao                 | integer          | Identificador da situação do protesto do boleto, onde: 0 = Enviado Bloqueio Pagamento, 1 = Erro Bloqueio Pagamento, 2 = Pendente Envio Protesto, 3 = Processando Envio Protesto, 4 = Enviado Protesto, 5 = Erro Protesto, 6 = Protestado, 7 = Protesto Aguardando Conciliação de Valores, 8 = Protesto Cancelado, 9 = Protesto em Anuência, 10 = Pendente Cancelamento, 11 = Pendente Anuência, 12 = Protesto Pago |
+| Detalhes           | DtProtesto               | datetime         | Data e hora do protesto do boleto                                             |
+| Detalhes           | Operador                 | string           | Nome do operador responsável pelo protesto do boleto                          |
+| Detalhes           | OperadorEmail            | string           | Endereço de e-mail do operador responsável pelo protesto do boleto            |
+| Detalhes           | Lancamentos              | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 15. Evento de notificação de Recebimento de Boleto Unificado
+
+Callback responsável por enviar informações detalhadas sobre o recebimento de um boleto unificado.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "BoletoCreditoUnificado",
+    "Detalhes": {
+      "Identificador": null,
+      "Boletos": [
+        {
+          "CodigoBoleto": "31920546-1a42-4e08-8342-74d4c6e863e6",
+          "BancoOrigem": "070",
+          "AgenciaOrigem": "11",
+          "NomePortador": null,
+          "DocumentoPortador": null,
+          "NossoNumero": "204",
+          "DtHrDDA": "2024-09-12T00:00:00",
+          "VlrBaixa": 10,
+          "VlrJuros": 0,
+          "VlrMulta": 0,
+          "VlrDesconto": 0
+        }
+      ],
+      "NSU": 5701120,
+      "VlrTransacao": 10,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-13T04:20:51.493",
+      "TipoLancto": "C",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**             | **Tipo**         | **Descrição**                                                                 |
+|--------------------|--------------------------|------------------|-------------------------------------------------------------------------------|
+| root               | Ambiente                 | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro                 | string           | Tipo de registro da mensagem do Callback. Valor informado = “BoletoCreditoUnificado” |
+| root               | Detalhes                 | object           | Objeto com os detalhes da mensagem do Callback                                |
+| Detalhes           | Identificador            | string           | Identificador do evento                                                       |
+| Detalhes           | Boletos                  | object array     | Lista de boletos unificados                                                   |
+| Boletos            | CodigoBoleto             | guid             | Código do boleto                                                              |
+| Boletos            | BancoOrigem              | string           | Código do banco de origem do boleto                                           |
+| Boletos            | AgenciaOrigem            | string           | Nº da agência de origem do boleto                                             |
+| Boletos            | NomePortador             | string           | Nome do portador do boleto                                                    |
+| Boletos            | DocumentoPortador        | string           | Nº do documento do portador do boleto                                         |
+| Boletos            | NossoNumero              | string           | Identificador único do boleto no sistema do cedente                           |
+| Boletos            | DtHrDDA                  | datetime         | Data e hora do Débito Direto Autorizado                                       |
+| Boletos            | VlrBaixa                 | decimal          | Valor da baixa do boleto                                                      |
+| Boletos            | VlrJuros                 | decimal          | Valor dos juros cobrados na baixa do boleto                                   |
+| Boletos            | VlrMulta                 | decimal          | Valor da multa cobrada na baixa do boleto                                     |
+| Boletos            | VlrDesconto              | decimal          | Valor do desconto recebido na baixa do boleto                                 |
+| Detalhes           | NSU                      | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao             | decimal          | Valor do boleto unificado recebido                                            |
+| Detalhes           | VlrJuros                 | decimal          | Valor dos juros pagos                                                         |
+| Detalhes           | VlrMulta                 | decimal          | Valor da multa paga                                                           |
+| Detalhes           | DtTransacao              | datetime         | Data e hora do recebimento do boleto unificado                                |
+| Detalhes           | TipoLancto               | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “C” |
+| Detalhes           | Lancamentos              | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 16. Evento de notificação de Prévia de Crédito de Boleto
+
+Callback responsável por enviar informações detalhadas sobre a previsão de crédito de boleto.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "PreviaBoletoCredito",
+    "Detalhes": {
+      "TipoLancto": "C",
+      "CodigoBoleto": "00000000-0000-0000-0000-000000000000",
+      "VlrTransacao": 4553,
+      "DtTransacao": "2024-09-17T14:27:03.60",
+      "BancoOrigem": "274",
+      "AgenciaOrigem": "0001",
+      "NomePortador": null,
+      "DocumentoPortador": null,
+      "Identificador": "27400018180007020290384000131",
+      "Lancamentos": null
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**             | **Tipo**         | **Descrição**                                                                 |
+|--------------------|--------------------------|------------------|-------------------------------------------------------------------------------|
+| root               | Ambiente                 | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro                 | string           | Tipo de registro da mensagem do Callback. Valor informado = “PreviaBoletoCredito” |
+| root               | Detalhes                 | object           | Objeto com os detalhes da mensagem do Callback                                |
+| Detalhes           | TipoLancto               | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “C” |
+| Detalhes           | CodigoBoleto             | guid             | Código do boleto                                                              |
+| Detalhes           | VlrTransacao             | decimal          | Valor informado na baixa do título                                            |
+| Detalhes           | DtTransacao              | datetime         | Data e hora da baixa do título                                                |
+| Detalhes           | BancoOrigem              | string           | Código do banco do portador do título                                         |
+| Detalhes           | AgenciaOrigem            | string           | Nº da agência do portador do título sem o dígito verificador                  |
+| Detalhes           | NomePortador             | string           | Nome do portador do título                                                    |
+| Detalhes           | DocumentoPortador        | string           | Nº do CPF ou CNPJ do portador do título                                       |
+| Detalhes           | Identificador            | string           | Identificador do evento                                                       |
+| Detalhes           | Lancamentos              | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 17. Evento de notificação de Crédito de Boleto
+
+Callback responsável por enviar informações detalhadas sobre o crédito de um boleto.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "BoletoCredito",
+    "Detalhes": {
+      "Identificador": "27400018180007020290384000131",
+      "CodigoBoleto": "ab7c7300-d5be-45cd-9d0c-5f2f82654a62",
+      "BancoOrigem": "274",
+      "AgenciaOrigem": "0001",
+      "NomePortador": "NOME DO PORTADOR",
+      "DocumentoPortador": "DOCUMENTO DO PORTADOR",
+      "NossoNumero": "157697",
+      "DtHrDDA": "2024-09-17T14:27:03.6",
+      "NSU": 5701635,
+      "VlrTransacao": 4553,
+      "VlrJuros": 0,
+      "VlrMulta": 0,
+      "DtTransacao": "2024-09-17T14:27:04.57",
+      "TipoLancto": "C",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**       | **Tipo**         | **Descrição**                                                                                |
+|--------------------|------------------- |------------------|----------------------------------------------------------------------------------------------|
+| root               | Ambiente           | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro           | string           | Tipo de registro da mensagem do Callback. Valor informado = “BoletoCredito”                  |
+| root               | Detalhes           | object           | Objeto com os detalhes da mensagem do Callback                                               |
+| Detalhes           | Identificador      | string           | Identificador do evento                                                                      |
+| Detalhes           | CodigoBoleto       | guid             | Código do boleto creditado                                                                   |
+| Detalhes           | BancoOrigem        | string           | Código do banco do portador do título                                                        |
+| Detalhes           | AgenciaOrigem      | string           | Nº da agência do portador do título sem o dígito verificador                                 |
+| Detalhes           | NomePortador       | string           | Nome do portador do título                                                                   |
+| Detalhes           | DocumentoPortador  | string           | Nº do CPF ou CNPJ do portador do título                                                      |
+| Detalhes           | NossoNumero        | string           | Identificador único do boleto no sistema do cedente                                          |
+| Detalhes           | DtHrDDA            | datetime         | Data e hora do Débito Direto Autorizado                                                      |
+| Detalhes           | NSU                | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao       | decimal          | Valor do boleto creditado                                                                    |
+| Detalhes           | VlrJuros           | decimal          | Valor dos juros recebidos sobre o boleto creditado                                           |
+| Detalhes           | VlrMulta           | decimal          | Valor da multa recebida sobre o boleto creditado                                             |
+| Detalhes           | DtTransacao        | datetime         | Data e hora do crédito do boleto                                                             |
+| Detalhes           | TipoLancto         | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “C”    |
+| Detalhes           | Lancamentos        | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 18. Evento de notificação de Devolução de Título Recebido
+
+Callback responsável por enviar informações detalhadas sobre um título recebido.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "DevolucaoTitulo",
+    "Detalhes": {
+      "Identificador": "27400010015034208482456954",
+      "CodigoMovimento": "c59b3411-5060-425c-a1cd-a71d0f5ac7af",
+      "CodigoMovimentoEnvioTitulo": "74eac0f9-ddf7-41ef-8630-df9f5dc1721c",
+      "CodigoTransacaoEnvioTitulo": "952bf4d7-47f7-4662-b2c2-eb270b8af838",
+      "NSU": 5505936,
+      "VlrTransacao": 279000,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-04-04T15:32:59.527",
+      "TipoLancto": "C",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**                | **Tipo**         | **Descrição**                                                                                                     |
+|--------------------|-----------------------------|------------------|-------------------------------------------------------------------------------------------------------------------|
+| root               | Ambiente                    | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção                      |
+| root               | Registro                    | string           | Tipo de registro da mensagem do Callback. Valor informado = “DevolucaoTitulo”                                     |
+| root               | Detalhes                    | object           | Objeto com os detalhes da mensagem do Callback                                                                    |
+| Detalhes           | Identificador               | string           | Identificador do evento                                                                                           |
+| Detalhes           | CodigoMovimento             | string           | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária |
+| Detalhes           | CodigoMovimentoEnvioTitulo  | guid             | Código destinado a identificar o registro de um movimento associado à transação na tabela de pagamento de boletos |
+| Detalhes           | CodigoTransacaoEnvioTitulo  | guid             | Código utilizado para identificar o registro na tabela de pagamento de boletos que deu origem ao movimento realizado |
+| Detalhes           | NSU                         | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao                | decimal          | Valor da TED devolvida                                                                                            |
+| Detalhes           | VlrJuros                    | decimal          | Valor dos juros pagos                                                                                             |
+| Detalhes           | VlrMulta                    | decimal          | Valor da multa paga                                                                                               |
+| Detalhes           | DtTransacao                 | datetime         | Data e hora da devolução da TED                                                                                   |
+| Detalhes           | TipoLancto                  | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “C”                         |
+| Detalhes           | Lancamentos                 | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 19. Evento de notificação de Geração de Arquivo CNAB 400 de Boletos Cancelados
+
+Callback responsável por enviar informações detalhadas sobre a geração de um arquivo CNAB 400 de boletos cancelados.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "CNAB_CAN",
+    "Detalhes": {
+      "Identificador": "27400010868208047640619000124",
+      "Origem": 2004,
+      "TipoCNAB": 2,
+      "NomeArquivo": "CP0701000002.RET",
+      "Situacao": null,
+      "NSU": null,
+      "VlrTransacao": 0,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2025-01-07T06:05:44.293",
+      "TipoLancto": null,
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**      | **Tipo**         | **Descrição**                                                                  |
+|--------------------|-------------------|------------------|--------------------------------------------------------------------------------|
+| root               | Ambiente          | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro          | string           | Tipo de registro da mensagem do Callback. Valor informado = “CNAB_CAN”         |
+| root               | Detalhes          | object           | Objeto com os detalhes da mensagem do Callback                                 |
+| Detalhes           | Identificador     | string           | Identificador do evento                                                        |
+| Detalhes           | Origem            | integer          | Identificador da origem da transação para geração de arquivos CNAB 400 de boletos cancelados. Valor informado = 2004 |
+| Detalhes           | TipoCNAB          | integer          | Tipo de arquivo CNAB, onde: 1 = 240, 2 = 400. Valor informado = 2              |
+| Detalhes           | NomeArquivo       | string           | Nome do arquivo CNAB 400 de boletos cancelados gerado                          |
+| Detalhes           | Situacao          | string           | Indicador da situação da operação                                              |
+| Detalhes           | NSU               | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro dentro do contexto do sistema |
+| Detalhes           | VlrTransacao      | decimal          | Valor da operação                                                              |
+| Detalhes           | VlrJuros          | decimal          | Valor dos juros pagos                                                          |
+| Detalhes           | VlrMulta          | decimal          | Valor da multa paga                                                            |
+| Detalhes           | DtTransacao       | datetime         | Data e hora da geração do arquivo CNAB 400 de boletos cancelados               |
+| Detalhes           | TipoLancto        | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito             |
+| Detalhes           | Lancamentos       | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 20. Evento de notificação de Geração de Arquivo CNAB 400 de Boletos Pagos
+
+Callback responsável por enviar informações detalhadas sobre a geração de arquivo CNAB 400 de boletos pagos.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "CNAB_PGT",
+    "Detalhes": {
+      "Identificador": "27400018180007020290384000131",
+      "Origem": 2002,
+      "TipoCNAB": 2,
+      "NomeArquivo": "CP1709000095.RET",
+      "Situacao": null,
+      "NSU": null,
+      "VlrTransacao": 0,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-17T16:05:37.063",
+      "TipoLancto": null,
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**      | **Tipo**         | **Descrição**                                                                                |
+|--------------------|-------------------|------------------|----------------------------------------------------------------------------------------------|
+| root               | Ambiente          | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro          | string           | Tipo de registro da mensagem do Callback. Valor informado = “CNAB_PGT”                       |
+| root               | Detalhes          | object           | Objeto com os detalhes da mensagem do Callback                                               |
+| Detalhes           | Identificador     | string           | Identificador do evento                                                                      |
+| Detalhes           | Origem            | integer          | Identificador da origem da transação para geração de arquivos CNAB 400 de boletos pagos. Valor informado = 2002 |
+| Detalhes           | TipoCNAB          | integer          | Tipo de arquivo CNAB, onde: 1 = 240, 2 = 400. Valor informado = 2                            |
+| Detalhes           | NomeArquivo       | string           | Nome do arquivo CNAB 400 de boletos pagos gerado                                             |
+| Detalhes           | Situacao          | string           | Indicador da situação da operação                                                            |
+| Detalhes           | NSU               | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao      | decimal          | Valor da operação                                                                            |
+| Detalhes           | VlrJuros          | decimal          | Valor dos juros pagos                                                                        |
+| Detalhes           | VlrMulta          | decimal          | Valor da multa paga                                                                          |
+| Detalhes           | DtTransacao       | datetime         | Data e hora da geração do arquivo CNAB 400 de boletos pagos                                  |
+| Detalhes           | TipoLancto        | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito                           |
+| Detalhes           | Lancamentos       | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 21. Evento de notificação de Geração de Arquico CNAB 400 de Boletos Registrados
+
+Callback responsável por enviar informações detalhadas sobre a geração de arquivo CNAB 400 de boletos registrados.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "CNAB_REG",
+    "Detalhes": {
+      "Identificador": "27400010230905266770397064",
+      "CodigoImportaArquivo": "4d6ac438-15bf-4bb6-a70d-d98b00484481",
+      "Origem": 2001,
+      "TipoCNAB": 2,
+      "NomeArquivo": "CB17090005252.RET",
+      "Situacao": null,
+      "NSU": null,
+      "VlrTransacao": 0,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-17T11:40:14.077",
+      "TipoLancto": null,
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**      | **Tipo**         | **Descrição**                                                                                |
+|--------------------|-------------------|------------------|----------------------------------------------------------------------------------------------|
+| root               | Ambiente          | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro          | string           | Tipo de registro da mensagem do Callback. Valor informado = “CNAB_REG”                       |
+| root               | Detalhes          | object           | Objeto com os detalhes da mensagem do Callback                                               |
+| Detalhes           | Identificador     | string           | Identificador do evento                                                                      |
+| Detalhes           | Origem            | integer          | Identificador da origem da transação para geração de arquivos CNAB 400 de boletos registrados. Valor informado = 2001 |
+| Detalhes           | TipoCNAB          | integer          | Tipo de arquivo CNAB, onde: 1 = 240, 2 = 400. Valor informado = 2                            |
+| Detalhes           | NomeArquivo       | string           | Nome do arquivo CNAB 400 de boletos registrados gerado                                       |
+| Detalhes           | Situacao          | string           | Indicador da situação da operação                                                            |
+| Detalhes           | NSU               | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao      | decimal          | Valor da operação                                                                            |
+| Detalhes           | VlrJuros          | decimal          | Valor dos juros pagos                                                                        |
+| Detalhes           | VlrMulta          | decimal          | Valor da multa paga                                                                          |
+| Detalhes           | DtTransacao       | datetime         | Data e hora da geração do arquivo CNAB 400 de boletos registrados                            |
+| Detalhes           | TipoLancto        | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito                           |
+| Detalhes           | Lancamentos       | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 22. Evento de notificação de Importação de Arquivo CNAB 240 de Remessa
+
+Callback responsável por enviar informações detalhadas sobre a importação de um arquivo CNAB 240 de remessa.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "CNABRemessa",
+    "Detalhes": {
+      "Identificador": "27400011250000580354008005",
+      "NroVersaoLayout": "103",
+      "Origem": 2010,
+      "TipoCNAB": 1,
+      "NomeArquivo": "CP2112200262.REM",
+      "Situacao": "Arquivo importado com sucesso",
+      "NSU": null,
+      "VlrTransacao": 0,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2023-12-21T11:04:52.22",
+      "TipoLancto": null,
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**      | **Tipo**         | **Descrição**                                                                                |
+|--------------------|-------------------|------------------|----------------------------------------------------------------------------------------------|
+| root               | Ambiente          | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro          | string           | Tipo de registro da mensagem do Callback. Valor informado = “CNABRemessa”                    |
+| root               | Detalhes          | object           | Objeto com os detalhes da mensagem do Callback                                               |
+| Detalhes           | Identificador     | string           | Identificador do evento                                                                      |
+| Detalhes           | NroVersaoLayout   | string           | Nº da versão do layout do arquivo CNAB 240 de remessa                                        |
+| Detalhes           | Origem            | integer          | Identificador da origem da transação para importação de arquivos CNAB 240 de remessa. Valor informado = 2010 |
+| Detalhes           | TipoCNAB          | integer          | Tipo de arquivo CNAB, onde: 1 = 240, 2 = 400. Valor informado = 1                            |
+| Detalhes           | NomeArquivo       | string           | Nome do arquivo CNAB 240 de remessa importado                                                |
+| Detalhes           | Situacao          | string           | Descrição da situação da importação do arquivo CNAB 240 de remessa que poderá ser: - “Arquivo enviado para importação”; - “Arquivo importado com sucesso”. |
+| Detalhes           | NSU               | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao      | decimal          | Valor da operação                                                                            |
+| Detalhes           | VlrJuros          | decimal          | Valor dos juros pagos                                                                        |
+| Detalhes           | VlrMulta          | decimal          | Valor da multa paga                                                                          |
+| Detalhes           | DtTransacao       | datetime         | Data e hora da importação do arquivo CNAB 240 de remessa                                     |
+| Detalhes           | TipoLancto        | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito                           |
+| Detalhes           | Lancamentos       | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 23. Evento de notificação de Geração de Arquivo CNAB 240 de Retorno
+
+Callback responsável por enviar informações detalhadas sobre a gerção do arquivo CNAB 240 de retorno.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "CNABRetorno",
+    "Detalhes": {
+      "Identificador": "27400011250000580354008005",
+      "NroVersaoLayout": "103",
+      "NomeArquivoRemessa": "4bfeb6d8-302e-4490-ac3f-37a9164d2edf",
+      "LinkDownload": "CNAB/240/e77bdf49-ec89-4855-8018-08dbce7791c9/RetornoRemessa/2023/1/CP2112200262",
+      "Origem": 2012,
+      "TipoCNAB": 1,
+      "NomeArquivo": "CP2112200262.RET",
+      "Situacao": null,
+      "NSU": null,
+      "VlrTransacao": 0,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2023-12-21T11:04:52.24",
+      "TipoLancto": null,
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**      | **Tipo**         | **Descrição**                                                                                |
+|--------------------|-------------------|------------------|----------------------------------------------------------------------------------------------|
+| root               | Ambiente          | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro          | string           | Tipo de registro da mensagem do Callback. Valor informado = “CNABRemessa”                    |
+| root               | Detalhes          | object           | Objeto com os detalhes da mensagem do Callback                                               |
+| Detalhes           | Identificador     | string           | Identificador do evento                                                                      |
+| Detalhes           | NroVersaoLayout   | string           | Nº da versão do layout do arquivo CNAB 240 de remessa                                        |
+| Detalhes           | Origem            | integer          | Identificador da origem da transação para importação de arquivos CNAB 240 de remessa. Valor informado = 2010 |
+| Detalhes           | TipoCNAB          | integer          | Tipo de arquivo CNAB, onde: 1 = 240, 2 = 400. Valor informado = 1                            |
+| Detalhes           | NomeArquivo       | string           | Nome do arquivo CNAB 240 de remessa importado                                                |
+| Detalhes           | Situacao          | string           | Descrição da situação da importação do arquivo CNAB 240 de remessa que poderá ser: - “Arquivo enviado para importação”; - “Arquivo importado com sucesso”. |
+| Detalhes           | NSU               | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao      | decimal          | Valor da operação                                                                            |
+| Detalhes           | VlrJuros          | decimal          | Valor dos juros pagos                                                                        |
+| Detalhes           | VlrMulta          | decimal          | Valor da multa paga                                                                          |
+| Detalhes           | DtTransacao       | datetime         | Data e hora da importação do arquivo CNAB 240 de remessa                                     |
+| Detalhes           | TipoLancto        | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito                           |
+| Detalhes           | Lancamentos       | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+
+## 24. Evento de notificação de Compra por Meio de Cartão
+
+Callback responsável por enviar informações detalhadas sobre uma compra realizada via cartão.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Production",
+    "Registro": "CompraCartao",
+    "Detalhes": {
+      "Identificador": "27400010065882348713502824",
+      "NomeEstabelecimento": "Nome do estabelecimento",
+      "CidadeEstabelecimento": "SAO PAULO",
+      "PaisEstabelecimento": "BRA",
+      "CodigoMovimento": "98d44fbd-8f03-427f-8c25-560076b530bf",
+      "TipoTransacao": 2,
+      "TipoTransacaoDesc": "Compra",
+      "NSU": 111202466,
+      "VlrTransacao": 3.50,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-04-12T11:21:03.59",
+      "TipoLancto": "D",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**            | **Tipo**         | **Descrição**                                                                  |
+|--------------------|-------------------------|------------------|--------------------------------------------------------------------------------|
+| root               | Ambiente                | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro                | string           | Tipo de registro da mensagem do Callback. Valor informado = “CompraCartao”     |
+| root               | Detalhes                | object           | Objeto com os detalhes da mensagem do Callback                                 |
+| Detalhes           | Identificador           | string           | Identificador do evento                                                        |
+| Detalhes           | NomeEstabelecimento     | string           | Nome do estabelecimento em que a compra foi realizada                          |
+| Detalhes           | CidadeEstabelecimento   | string           | Nome da cidade onde se localiza o estabelecimento onde a compra foi realizada  |
+| Detalhes           | PaisEstabelecimento     | string           | Sigla do país onde se localiza o estabelecimento em que a compra foi realizada |
+| Detalhes           | CodigoMovimento         | string           | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária |
+| Detalhes           | TipoTransacao           | integer          | Identificador do tipo de transação para compra com cartão. Valor informado = 2 |
+| Detalhes           | TipoTransacaoDesc       | string           | Descrição do tipo de transação para compra com cartão. Valor informado = “Compra” |
+| Detalhes           | NSU                     | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao            | decimal          | Valor da compra realizada                                                      |
+| Detalhes           | VlrJuros                | decimal          | Valor dos juros pagos                                                          | 
+| Detalhes           | VlrMulta                | decimal          | Valor da multa paga                                                            |
+| Detalhes           | DtTransacao             | datetime         | Data e hora da realização da compra                                            |
+| Detalhes           | TipoLancto              | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “D” |
+| Detalhes           | Lancamentos             | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 25. Evento de notificação de Devolução de Compra por Meio de Cartões
+
+Callback responsável por enviar informações detalhadas sobre a devolução de uma compra realizada via cartão.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "DevolucaoCompraCartao",
+    "Detalhes": {
+      "Identificador": "27400010064553505246331857",
+      "NomeEstabelecimento": "Nome do estabelecimento",
+      "CidadeEstabelecimento": "CURITIBA",
+      "PaisEstabelecimento": "BRA",
+      "CodigoMovimento": "07a5dfcf-803f-4f24-b97c-1657cf0f12df",
+      "TipoTransacao": 1008,
+      "TipoTransacaoDesc": "DevolucaoCompraCartao",
+      "NSU": 160499774,
+      "VlrTransacao": 256.78,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-12-13T14:03:05.8",
+      "TipoLancto": "C",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**            | **Tipo**         | **Descrição**                                                                      |
+|--------------------|-------------------------|------------------|------------------------------------------------------------------------------------|
+| root               | Ambiente               | string           | Tipo de ambiente em que ocorreu o evento                                            |
+| root               | Registro               | string           | Tipo de registro da mensagem do Callback. Valor informado = “DevolucaoCompraCartao” |
+| root               | Detalhes               | object           | Objeto com os detalhes da mensagem do Callback                                      |
+| Detalhes           | Identificador          | string           | Identificador do evento                                                             |
+| Detalhes           | NomeEstabelecimento    | string           | Nome do estabelecimento onde a compra foi realizada                                 |
+| Detalhes           | CidadeEstabelecimento  | string           | Nome da cidade onde se localiza o estabelecimento em que a compra foi realizada     |
+| Detalhes           | PaisEstabelecimento    | string           | Sigla do país onde se localiza o estabelecimento em que a compra foi realizada      |
+| Detalhes           | CodigoMovimento        | string           | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária |
+| Detalhes           | TipoTransacao          | integer          | Identificador da origem da transação para devolução de compra com cartão. Valor informado = 1008 |
+| Detalhes           | TipoTransacaoDesc      | string           | Descrição do tipo de transação para compra com cartão. Valor informado = “DevolucaoCompraCartao” |
+| Detalhes           | NSU                    | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao           | decimal          | Valor da compra realizada                                                           |
+| Detalhes           | VlrJuros               | decimal          | Valor dos juros pagos                                                               |
+| Detalhes           | VlrMulta               | decimal          | Valor da multa paga                                                                 |
+| Detalhes           | DtTransacao            | datetime         | Data e hora da devolução da compra                                                  |
+| Detalhes           | TipoLancto             | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “C” |
+| Detalhes           | Lancamentos            | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 26. Evento de notificação de Saque por Meio de Cartão
+
+Callback responsável por enviar informações detalhadas sobre um saque realizado via cartão.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "SaqueCartao",
+    "Detalhes": {
+      "Identificador": "27400010569242529346835834",
+      "NomeEstabelecimento": "4029303",
+      "CidadeEstabelecimento": "GUARULHOS",
+      "PaisEstabelecimento": "BRA",
+      "CodigoMovimento": "55ee7714-ffec-41eb-9213-140fba52cddc",
+      "TipoTransacao": 1,
+      "TipoTransacaoDesc": "Saque",
+      "NSU": 164676114,
+      "VlrTransacao": 800,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2025-01-07T12:08:34.99",
+      "TipoLancto": "D",
+      "Lancamentos": []
+    }
+  }
+}
+```
+| **Atributo Pai**   | **Atributo**           | **Tipo**         | **Descrição**                                                                  |
+|--------------------|------------------------|------------------|--------------------------------------------------------------------------------|
+| root               | Ambiente               | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro               | string           | Tipo de registro da mensagem do Callback. Valor informado = “SaqueCartao”      |
+| root               | Detalhes               | object           | Objeto com os detalhes da mensagem do Callback                                 |
+| Detalhes           | Identificador          | string           | Identificador do evento                                                        |
+| Detalhes           | NomeEstabelecimento    | string           | Nome do estabelecimento onde o saque foi realizado                             |
+| Detalhes           | CidadeEstabelecimento  | string           | Nome da cidade onde se localiza o estabelecimento em que o saque foi realizado |
+| Detalhes           | PaisEstabelecimento    | string           | Sigla do país onde se localiza o estabelecimento em que o saque foi realizado  |
+| Detalhes           | CodigoMovimento        | string           | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária |
+| Detalhes           | TipoTransacao          | integer          | Identificador do tipo de transação para saque com cartão. Valor informado = 1  |
+| Detalhes           | TipoTransacaoDesc      | string           | Descrição do tipo de transação para compra com cartão. Valor informado = “Compra” |
+| Detalhes           | NSU                    | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao           | decimal          | Valor do saque realizado                                                       |
+| Detalhes           | VlrJuros               | decimal          | Valor dos juros pagos                                                          |
+| Detalhes           | VlrMulta               | decimal          | Valor da multa paga                                                            |
+| Detalhes           | DtTransacao            | datetime         | Data e hora da realização do saque                                             |
+| Detalhes           | TipoLancto             | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “D” |
+| Detalhes           | Lancamentos            | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 27. Evento de notificação de Devolução de Saque por Meio de Cartão
+
+Callback responsável por enviar informações detalhadas sobre a devolução de um saque realizado via cartão.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "DevolucaoSaqueCartao",
+    "Detalhes": {
+      "Identificador": "27400010063453505246331857",
+      "NomeEstabelecimento": "SAMPLE STORE",
+      "CidadeEstabelecimento": "JOINVILLE",
+      "PaisEstabelecimento": "BRA",
+      "CodigoMovimento": "cace8b0e-0db5-43a4-b084-0a1b108979e7",
+      "TipoTransacao": 1009,
+      "TipoTransacaoDesc": "DevolucaoSaqueCartao",
+      "NSU": 160793774,
+      "VlrTransacao": 277.6,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-12-13T12:03:05.8",
+      "TipoLancto": "C",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**           | **Tipo**         | **Descrição**                                                                  |
+|--------------------|------------------------|------------------|--------------------------------------------------------------------------------|
+| root               | Ambiente               | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro               | string           | Tipo de registro da mensagem do Callback. Valor informado = “SaqueCartao”      |
+| root               | Detalhes               | object           | Objeto com os detalhes da mensagem do Callback                                 |
+| Detalhes           | Identificador          | string           | Identificador do evento                                                        |
+| Detalhes           | NomeEstabelecimento    | string           | Nome do estabelecimento onde o saque foi realizado                             |
+| Detalhes           | CidadeEstabelecimento  | string           | Nome da cidade onde se localiza o estabelecimento em que o saque foi realizado |
+| Detalhes           | PaisEstabelecimento    | string           | Sigla do país onde se localiza o estabelecimento em que o saque foi realizado  |
+| Detalhes           | CodigoMovimento        | string           | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária |
+| Detalhes           | TipoTransacao          | integer          | Identificador do tipo de transação para saque com cartão. Valor informado = 1  |
+| Detalhes           | TipoTransacaoDesc      | string           | Descrição do tipo de transação para compra com cartão. Valor informado = “Compra” |
+| Detalhes           | NSU                    | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao           | decimal          | Valor do saque realizado                                                       |
+| Detalhes           | VlrJuros               | decimal          | Valor dos juros pagos                                                          |
+| Detalhes           | VlrMulta               | decimal          | Valor da multa paga                                                            |
+| Detalhes           | DtTransacao            | datetime         | Data e hora da realização do saque                                             |
+| Detalhes           | TipoLancto             | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “D” |
+| Detalhes           | Lancamentos            | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 28. Evento de notificação de Envio de TED
+
+Callback responsável por enviar informações detalhadas sobre o envio de um TED.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "EnvioTED",
+    "Detalhes": {
+      "CodigoMovimento": "fa837209-f13b-46b9-b377-aa2df7f3a2f1",
+      "FinlddIF": 10,
+      "FinlddIFDesc": "Repasses da Lei 8727",
+      "CodIdentdTransf": null,
+      "CodOperacaoCli": null,
+      "Destinatario": {
+        "Agencia": "0179",
+        "AgenciaDigito": null,
+        "Conta": "01062407",
+        "TipoConta": 1,
+        "TipoContaDesc": "Corrente",
+        "ContaDigito": "9",
+        "ContaPgto": "010624079",
+        "CodigoBanco": "033",
+        "TpPessoa": 1,
+        "TpPessoaDesc": "Fisica",
+        "DocumentoFederal": "38426340644",
+        "Nome": "NOME DO DESTINATÁRIO",
+        "CodigoConta": "00000000-0000-0000-0000-000000000000"
+      },
+      "NSU": 5701768,
+      "VlrTransacao": 1.11,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-17T16:27:41.13",
+      "TipoLancto": "D",
+      "Identificador": "27400018124695126095465000167",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**           | **Tipo**         | **Descrição**                                                                 |
+|--------------------|------------------------|------------------|-------------------------------------------------------------------------------|
+| root               | Ambiente               | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro               | string           | Tipo de registro da mensagem do Callback. Valor informado = “EnvioTED”        |
+| root               | Detalhes               | object           | Objeto com os detalhes da mensagem do Callback                                |
+| Detalhes           | Identificador          | string           | Identificador do evento                                                       |
+| Detalhes           | CodigoMovimento        | guid             | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária |
+| Detalhes           | FinlddIF               | integer          | Código do identificador da finalidade da I.F.                                 |
+| Detalhes           | FinlddIFDesc           | string           | Descrição do identificador da finalidade da I.F.                              |
+| Detalhes           | CodIdentdTransf        | guid             | Código de identificação da transferência                                      |
+| Detalhes           | CodOperacaoCli         | string           | Código interno para controle de operação do cliente enviado na geração da transação |
+| Detalhes           | Destinatario           | object           | Objeto com os dados do destinatário para o envio da TED                       |
+| Destinatario       | Agencia                | string           | Nº da agência sem o dígito verificador                                        |
+| Destinatario       | AgenciaDigito          | string           | Nº do dígito verificador da agência                                           |
+| Destinatario       | Conta                  | string           | Nº da conta sem o dígito verificador                                          |
+| Destinatario       | TipoConta              | integer          | Identificador do tipo da conta de destino, onde: 1 = Corrente, 2 = Poupança, 3 = Pagamento, 4 = Salário |
+| Destinatario       | TipoContaDesc          | string           | Descrição do tipo da conta de destino                                         |
+| Destinatario       | ContaDigito            | string           | Nº do dígito verificador da conta                                             |
+| Destinatario       | ContaPgto              | string           | Nº da conta pagamento                                                         |
+| Destinatario       | CodigoBanco            | string           | Código do banco                                                               |
+| Destinatario       | TpPessoa               | integer          | Identificador do tipo de pessoa, onde: 1 = Física, 2 = Jurídica               |
+| Destinatario       | TpPessoaDesc           | string           | Descrição do tipo de pessoa                                                   |
+| Destinatario       | DocumentoFederal       | string           | Nº do CPF ou CNPJ do destinatário da TED                                      |
+| Destinatario       | Nome                   | string           | Nome do destinatário da TED                                                   |
+| Destinatario       | CodigoConta            | guid             | Código da conta do destinatário da TED                                        |
+| Detalhes           | NSU                    | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao           | decimal          | Valor da TED                                                                  |
+| Detalhes           | VlrJuros               | decimal          | Valor dos juros pagos                                                         |
+| Detalhes           | VlrMulta               | decimal          | Valor da multa paga                                                           |
+| Detalhes           | DtTransacao            | datetime         | Data e hora do envio da TED                                                   |
+| Detalhes           | TipoLancto             | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “D” |
+| Detalhes           | Lancamentos            | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 29. Evento de notificação de Recebimento de TED
+
+Callback responsável por enviar informações detalhadas sobre o recebimento de um TED.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "RecebTED",
+    "Detalhes": {
+      "Identificador": "27400010000001911581339000145",
+      "CodigoMovimento": "caa42c35-f3d9-44e1-a929-42eb6fa44def",
+      "FinlddIF": 40,
+      "FinlddIFDesc": "Liberação de Operações de Crédito",
+      "CodIdentdTransf": null,
+      "Remetente": {
+        "Agencia": null,
+        "AgenciaDigito": null,
+        "Conta": null,
+        "TipoConta": null,
+        "TipoContaDesc": "",
+        "ContaDigito": null,
+        "ContaPgto": null,
+        "CodigoBanco": "632",
+        "TpPessoa": 1,
+        "TpPessoaDesc": "Fisica",
+        "DocumentoFederal": "44075615804",
+        "Nome": "Nome do Remetente",
+        "CodigoConta": "00000000-0000-0000-0000-000000000000"
+      },
+      "NSU": 5699274,
+      "VlrTransacao": 11.11,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-11T14:50:33.47",
+      "TipoLancto": "C",
+      "Lancamentos": [
+        {
+          "CodigoMovimento": "4fa8a8c7-3830-4048-8f17-d20672cb461e",
+          "DescricaoOperacao": "SPLIT VALOR",
+          "TipoLancto": "D",
+          "DescCliente": "NSU origem: 5699274",
+          "CodOperacaoCli": null,
+          "DtMovimento": "2024-09-11T14:50:33.867",
+          "VlrMovimento": 0.01
+        }
+      ]
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**           | **Tipo**         | **Descrição**                                                                 |
+|--------------------|------------------------|------------------|-------------------------------------------------------------------------------|
+| root               | Ambiente               | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro               | string           | Tipo de registro da mensagem do Callback. Valor informado = “RecebTED”        |
+| root               | Detalhes               | object           | Objeto com os detalhes da mensagem do Callback                                |
+| Detalhes           | Identificador          | string           | Identificador do evento                                                       |
+| Detalhes           | CodigoMovimento        | guid             | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária |
+| Detalhes           | FinlddIF               | integer          | Código do identificador da finalidade da I.F.                                 |
+| Detalhes           | FinlddIFDesc           | string           | Descrição do identificador da finalidade da I.F.                              |
+| Detalhes           | CodIdentdTransf        | guid             | Código de identificação da transferência                                      |
+| Detalhes           | Remetente              | object           | Objeto com os dados do remetente da TED recebida                              |
+| Remetente          | Agencia                | string           | Nº da agência sem o dígito verificador                                        |
+| Remetente          | AgenciaDigito          | string           | Nº do dígito verificador da agência                                           |
+| Remetente          | Conta                  | string           | Nº da conta sem o dígito verificador                                          |
+| Remetente          | TipoConta              | integer          | Identificador do tipo da conta de destino, onde: 1 = Corrente, 2 = Poupança, 3 = Pagamento, 4 = Salário |
+| Remetente          | TipoContaDesc          | string           | Descrição do tipo da conta                                                    |
+| Remetente          | ContaDigito            | string           | Nº do dígito verificador da conta                                             |
+| Remetente          | ContaPgto              | string           | Nº da conta pagamento                                                         |
+| Remetente          | CodigoBanco            | string           | Código do banco                                                               |
+| Remetente          | TpPessoa               | integer          | Identificador do tipo de pessoa, onde: 1 = Física, 2 = Jurídica               |
+| Remetente          | TpPessoaDesc           | string           | Descrição do tipo de pessoa                                                   |
+| Remetente          | DocumentoFederal       | string           | Nº do CPF ou CNPJ do remetente da TED                                         |
+| Remetente          | Nome                   | string           | Nome do remetente da TED                                                      |
+| Remetente          | CodigoConta            | guid             | Código da conta do remetente da TED                                           |
+| Detalhes           | NSU                    | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao           | decimal          | Valor da TED recebida                                                         |
+| Detalhes           | VlrJuros               | decimal          | Valor dos juros pagos                                                         |
+| Detalhes           | VlrMulta               | decimal          | Valor da multa paga                                                           |
+| Detalhes           | DtTransacao            | datetime         | Data e hora do recebimento da TED                                             |
+| Detalhes           | TipoLancto             | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “C” |
+| Detalhes           | Lancamentos            | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 30. Evento de notificação de Devolução de TED
+
+Callback responsável por enviar informações detalhadas sobre a TED realizada.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "DevolucaoTED",
+    "Detalhes": {
+      "Identificador": "27400010055556511581339000145",
+      "CodigoMovimento": "6e017230-1b9e-4565-bdec-444e2babcca3",
+      "CodigoMovimentoOrigem": "64620f38-876c-4650-a743-0dd149c145ab",
+      "Situacao": 2,
+      "SituacaoDesc": "Devolvido",
+      "ContaDestino": {
+        "Agencia": "0001",
+        "AgenciaDigito": "8",
+        "Conta": "55556",
+        "TipoConta": 3,
+        "TipoContaDesc": "Pagamento",
+        "ContaDigito": "5",
+        "ContaPgto": "00555565",
+        "CodigoBanco": "274",
+        "TpPessoa": 2,
+        "TpPessoaDesc": "Juridica",
+        "DocumentoFederal": "CPF/CNPJ do destinatário",
+        "Nome": "Nome do destinatário"
+      },
+      "DetalheDevolucao": "Agência ou Conta Destinatária do Crédito Inválida",
+      "CodOperacaoCli": "9f7e822f-b440-40ed-bd47-1845fe73c306",
+      "NSU": 5507111,
+      "VlrTransacao": 300,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-04-10T10:20:31.84",
+      "TipoLancto": "C",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**           | **Tipo**         | **Descrição**                                                                 |
+|--------------------|------------------------|------------------|-------------------------------------------------------------------------------|
+| root               | Ambiente               | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro               | string           | Tipo de registro da mensagem do Callback. Valor informado = “DevolucaoTED”    |
+| root               | Detalhes               | object           | Objeto com os detalhes da mensagem do Callback                                |
+| Detalhes           | Identificador          | string           | Identificador do evento                                                       |
+| Detalhes           | CodigoMovimento        | guid             | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária |
+| Detalhes           | CodigoMovimentoOrigem  | guid             | Código que faz referência à transação original responsável por gerar outras transações correlacionadas. Em casos como devoluções ou rejeições, este campo aponta para a transação de envio que originou o movimento |
+| Detalhes           | Situacao               | integer          | Indicador da situação da devolução da TED, onde: 0 = Recebido, 1 = Devolvendo, 2 = Devolvido, 99 = Erro |
+| Detalhes           | SituacaoDesc           | string           | Descrição da situação da devolução da TED                                     |
+| Detalhes           | ContaDestino           | object           | Objeto com os dados da conta de destino para devolução da TED                 |
+| ContaDestino       | Agencia                | string           | Nº da agência sem o dígito verificador                                        |
+| ContaDestino       | AgenciaDigito          | string           | Nº do dígito verificador da agência                                           |
+| ContaDestino       | Conta                  | string           | Nº da conta sem o dígito verificador                                          |
+| ContaDestino       | TipoConta              | integer          | Identificador do tipo da conta de destino, onde: 1 = Corrente, 2 = Poupança, 3 = Pagamento, 4 = Salário |
+| ContaDestino       | TipoContaDesc          | string           | Descrição do tipo da conta de destino                                         |
+| ContaDestino       | ContaDigito            | string           | Nº do dígito verificador da conta                                             |
+| ContaDestino       | ContaPgto              | string           | Nº da conta pagamento                                                         |
+| ContaDestino       | CodigoBanco            | string           | Código do banco                                                               |
+| ContaDestino       | TpPessoa               | integer          | Identificador do tipo de pessoa, onde: 1 = Física, 2 = Jurídica               |
+| ContaDestino       | TpPessoaDesc           | string           | Descrição do tipo de pessoa                                                   |
+| ContaDestino       | DocumentoFederal       | string           | Nº do CPF ou CNPJ do destinatário da devolução da TED                         |
+| ContaDestino       | Nome                   | string           | Nome do destinatário da devolução da TED                                      |
+| ContaDestino       | CodigoConta            | guid             | Código da conta do destinatário da transação quando a conta for da BMP        |
+| Detalhes           | DetalheDevolucao       | string           | Descrição detalhando o motivo da devolução da TED                             |
+| Detalhes           | CodOperacaoCli         | string           | Código interno para controle de operação do cliente enviado na geração da transação que originou o lançamento gerado pelo envio da TED |
+| Detalhes           | NSU                    | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao           | decimal          | Valor da TED devolvida                                                        |
+| Detalhes           | VlrJuros               | decimal          | Valor dos juros pagos                                                         |
+| Detalhes           | VlrMulta               | decimal          | Valor da multa paga                                                           |
+| Detalhes           | DtTransacao            | datetime         | Data e hora da devolução da TED                                               |
+| Detalhes           | TipoLancto             | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “C” |
+| Detalhes           | Lancamentos            | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+
+## 31. Evento de notificação de Transferência Entre Contas da BMP
+
+Callback responsável por enviar informações detalhadas sobre a realização de uma transferência entre contas BMP.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "EnvioTransf",
+    "Detalhes": {
+      "Identificador": "27400010230116637013705000153",
+      "CodigoMovimento": "73ae9901-6cf2-4bb4-8b67-65f2511bdc9c",
+      "FinlddCli": 99999,
+      "FinlddCliDesc": "Outros",
+      "CodIdentdTransf": null,
+      "TipoProcessamento": 3,
+      "TipoProcessamentoDesc": "TRA",
+      "CodigoAutenticacao": "0a92dcd5-4a6d-4f7b-b7a2-e4e3f910918b",
+      "NumControle": 1100844,
+      "DescCliente": "18100 3546564",
+      "CodOperacaoCli": "50a8b9da-a5e5-4766-a14f-4db01f192a2e",
+      "Destinatario": {
+        "Agencia": "0001",
+        "AgenciaDigito": "8",
+        "Conta": "105232",
+        "TipoConta": 3,
+        "TipoContaDesc": "Pagamento",
+        "ContaDigito": "3",
+        "ContaPgto": "01052323",
+        "CodigoBanco": "274",
+        "TpPessoa": 1,
+        "TpPessoaDesc": "Fisica",
+        "DocumentoFederal": "Documento Federal do destinatário",
+        "Nome": "NOME DO DESTINATÁRIO",
+        "CodigoConta": "00000000-0000-0000-0000-000000000000"
+      },
+      "NSU": 5701769,
+      "VlrTransacao": 250,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-17T16:46:09.223",
+      "TipoLancto": "D",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**           | **Tipo**         | **Descrição**                                                                 |
+|--------------------|------------------------|------------------|-------------------------------------------------------------------------------|
+| root               | Ambiente               | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro               | string           | Tipo de registro da mensagem do Callback. Valor informado = “EnvioTransf”     |
+| root               | Detalhes               | object           | Objeto com os detalhes da mensagem do Callback                                |
+| Detalhes           | Identificador          | string           | Identificador do evento                                                       |
+| Detalhes           | CodigoMovimento        | guid             | Código destinado a identificar o registro de um movimento associado à transação na tabela de movimentos através da chave primária |
+| Detalhes           | FinlddIF               | integer          | Código do identificador da finalidade da I.F.                                 |
+| Detalhes           | FinlddIFDesc           | string           | Descrição do identificador da finalidade da I.F.                              |
+| Detalhes           | CodIdentdTransf        | guid             | Código de identificação da transferência                                      |
+| Detalhes           | TipoProcessamento      | integer          | Identificador do tipo de processamento da transferência                       |
+| Detalhes           | TipoProcessamentoDesc  | string           | Descrição do tipo de processamento da transferência                           |
+| Detalhes           | CodigoAutenticacao     | guid             | Código de autenticação da transferência                                       |
+| Detalhes           | NumControle            | integer          | Nº de controle da transferência                                               |
+| Detalhes           | DescCliente            | string           | Descrição livre fornecida pelo cliente para a operação                        |
+| Detalhes           | CodOperacaoCli         | string           | Código interno para controle de operação do cliente enviado na geração da transação |
+| Detalhes           | Destinatario           | object           | Objeto com os dados do destinatário da transferência                          |
+| Destinatario       | Agencia                | string           | Nº da agência sem o dígito verificador                                        |
+| Destinatario       | AgenciaDigito          | string           | Nº do dígito verificador da agência                                           |
+| Destinatario       | Conta                  | string           | Nº da conta sem o dígito verificador                                          |
+| Destinatario       | TipoConta              | integer          | Identificador do tipo da conta de destino, onde: 1 = Corrente, 2 = Poupança, 3 = Pagamento, 4 = Salário |
+| Destinatario       | TipoContaDesc          | string           | Descrição do tipo da conta de destino                                         |
+| Destinatario       | ContaDigito            | string           | Nº do dígito verificador da conta                                             |
+| Destinatario       | ContaPgto              | string           | Nº da conta pagamento                                                         |
+| Destinatario       | CodigoBanco            | string           | Código do banco                                                               |
+| Destinatario       | TpPessoa               | integer          | Identificador do tipo de pessoa, onde: 1 = Física, 2 = Jurídica               |
+| Destinatario       | TpPessoaDesc           | string           | Descrição do tipo de pessoa                                                   |
+| Destinatario       | DocumentoFederal       | string           | Nº do CPF ou CNPJ do destinatário da transferência                            |
+| Destinatario       | Nome                   | string           | Nome do destinatário da transferência                                         |
+| Destinatario       | CodigoConta            | guid             | Código da conta do destinatário da transferência                              |
+| Detalhes           | NSU                    | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao           | decimal          | Valor da transferência                                                        |
+| Detalhes           | VlrJuros               | decimal          | Valor dos juros pagos                                                         |
+| Detalhes           | VlrMulta               | decimal          | Valor da multa paga                                                           |
+| Detalhes           | DtTransacao            | datetime         | Data e hora do envio da transferência                                         |
+| Detalhes           | TipoLancto             | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “D” |
+| Detalhes           | Lancamentos            | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 32. Evento de notificação de Recebimento de Transferências Entre Contas BMP
+
+Callback responsável por enviar informações detalhadas sobre o recebimento de uma transferência entre contas da BMP.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "RecebTransf",
+    "Detalhes": {
+      "Identificador": "27400010001263374251459000102",
+      "CodigoMovimento": "a4d90764-3b92-4bf1-a70d-4daf2d3fbfdf",
+      "FinlddCli": 0,
+      "FinlddCliDesc": null,
+      "CodIdentdTransf": null,
+      "CodigoAutenticacao": "2573ed6e-500d-40b7-876e-a88bc938bd67",
+      "NumControle": 1100847,
+      "DescCliente": "Cashback,wise-to-bmp,idTempCampaign: 21436",
+      "CodOperacaoCli": "201439,652",
+      "Remetente": {
+        "Agencia": "0001",
+        "AgenciaDigito": "8",
+        "Conta": "817",
+        "TipoConta": 3,
+        "TipoContaDesc": "Pagamento",
+        "ContaDigito": "7",
+        "ContaPgto": "00008177",
+        "CodigoBanco": "274",
+        "TpPessoa": 1,
+        "TpPessoaDesc": "Fisica",
+        "DocumentoFederal": "Documento Federal do remetente",
+        "Nome": "NOME DO REMETENTE",
+        "CodigoConta": "00000000-0000-0000-0000-000000000000"
+      },
+      "NSU": 5701792,
+      "VlrTransacao": 17.98,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-17T17:37:48.29",
+      "TipoLancto": "C",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+## 33. Evento de notificação de Outro Movimento
+
+Este callback é resposável por enviar informações detalhadas sobre a realização de um movimento manual executado por um operador da BMP em conta específica.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "OutrosMovimentos",
+    "Detalhes": {
+      "Identificador": "27400010000001911581339000145",
+      "ContaDestino": {
+        "Agencia": "0001",
+        "AgenciaDigito": "8",
+        "Conta": "1",
+        "TipoConta": 3,
+        "TipoContaDesc": "Pagamento",
+        "ContaDigito": "9",
+        "ContaPgto": "00000019",
+        "CodigoBanco": "274",
+        "TpPessoa": 2,
+        "TpPessoaDesc": "Juridica",
+        "DocumentoFederal": "Documento federal do destinatário",
+        "Nome": "NOME DO DESTINATÁRIO",
+        "CodigoConta": "00000000-0000-0000-0000-000000000000"
+      },
+      "DescricaoOperacao": "TRANSFERÊNCIA ENTRE CONTAS CRÉDITO",
+      "NSU": 5701369,
+      "VlrTransacao": 10,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-16T11:08:25.34",
+      "TipoLancto": "C",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**           | **Tipo**         | **Descrição**                                                                                |
+|--------------------|------------------------|------------------|----------------------------------------------------------------------------------------------|
+| root               | Ambiente               | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro               | string           | Tipo de registro da mensagem do Callback. Valor informado = “OutrosMovimentos”               |
+| root               | Detalhes               | object           | Objeto com os detalhes da mensagem do Callback                                               |
+| Detalhes           | Identificador          | string           | Identificador do evento                                                                      |
+| Detalhes           | ContaDestino           | object           | Objeto com os dados da conta de destino do movimento                                         |
+| ContaDestino       | Agencia                | string           | Nº da agência sem o dígito verificador                                                       |
+| ContaDestino       | AgenciaDigito          | string           | Nº do dígito verificador da agência                                                          |
+| ContaDestino       | Conta                  | string           | Nº da conta sem o dígito verificador                                                         |
+| ContaDestino       | TipoConta              | integer          | Identificador do tipo da conta de destino, onde: 1 = Corrente, 2 = Poupança, 3 = Pagamento, 4 = Salário |
+| ContaDestino       | TipoContaDesc          | string           | Descrição do tipo da conta de destino                                                        |
+| ContaDestino       | ContaDigito            | string           | Nº do dígito verificador da conta                                                            |
+| ContaDestino       | ContaPgto              | string           | Nº da conta pagamento                                                                        |
+| ContaDestino       | CodigoBanco            | string           | Código do banco                                                                              |
+| ContaDestino       | TpPessoa               | integer          | Identificador do tipo de pessoa, onde: 1 = Física, 2 = Jurídica                              |
+| ContaDestino       | TpPessoaDesc           | string           | Descrição do tipo de pessoa                                                                  |
+| ContaDestino       | DocumentoFederal       | string           | Nº do CPF ou CNPJ do destinatário                                                            |
+| ContaDestino       | Nome                   | string           | Nome do destinatário da conta movimentada                                                    |
+| ContaDestino       | CodigoConta            | guid             | Código da conta do destinatário da conta movimentada                                         |
+| Detalhes           | DescricaoOperacao      | string           | Descrição da operação realizada                                                              |
+| Detalhes           | NSU                    | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro dentro do contexto do sistema |
+| Detalhes           | VlrTransacao           | decimal          | Valor movimentado                                                                            |
+| Detalhes           | VlrJuros               | decimal          | Valor dos juros pagos                                                                        |
+| Detalhes           | VlrMulta               | decimal          | Valor da multa paga                                                                          |
+| Detalhes           | DtTransacao            | datetime         | Data e hora da realização do movimento                                                       |
+| Detalhes           | TipoLancto             | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito                           |
+| Detalhes           | Lancamentos            | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 34. Evento de notificação de Recebimento de Mensagens de Integração do SAFE
+
+Callback responsável por enviar informações detalhadas sobre uma mensagem recebida através da integração do SAFE.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "Safe",
+    "Detalhes": {
+      "Identificador": null,
+      "TipoMensagem": "LTR0001",
+      "DtMensagem": "2025-01-07T11:05:22.977",
+      "Mensagem": "PD94bWwgdmVyc2lvbj0iMS4wIj8+PERPQyB4bWxucz0iaHR0cDovL3d3dy5iY2IuZ292LmJyL1NQQi9MVFIwMDAxLnhzZCI+PEJDTVNHPjxJZGVudGRFbWlzc29yPjI4NzE5NjY0PC9JZGVudGRFbWlzc29yPjxJZGVudGREZXN0aW5hdGFyaW8+MTE1ODEzMzk8L0lkZW50ZERlc3RpbmF0YXJpbz48R3J1cG9fU2VxPjxOdW1TZXE+MTwvTnVtU2VxPjxJbmRyQ29udD5OPC9JbmRyQ29udD48L0dydXBvX1NlcT48RG9tU2lzdD5TUEIwMTwvRG9tU2lzdD48TlVPcD4yODcxOTY2NDIwMjUwMTA4ODI1MDA5NDwvTlVPcD48L0JDTVNHPjxTSVNNU0c+PExUUjAwMDE+PENvZE1zZz5MVFIwMDAxPC9Db2RNc2c+PE51bUN0cmxMVFI+MjAyNTAxMDc1NTI2MTM0NzwvTnVtQ3RybExUUj48SVNQQkxUUj4yODcxOTY2NDwvSVNQQkxUUj48SVNQQklGRGVidGQ+MTE1ODEzMzk8L0lTUEJJRkRlYnRkPjxJU1BCSUZDcmVkdGQ+NjA3MDExOTA8L0lTUEJDSkNyZWR0ZD48Q05QSk5MaXFkYW50PjM0MzM3NzA3MDAwMTAwPC9DTlBKTkxpcWRhbnQ+PElkZW50ZFBhcnRDYW1yPjMyMzI3NDA3PC9JZGVudGRQYXJ0Q2Ftcj48VmxyTGFuYz4yNDMuNzI8L1ZsckxhbmM+PFRwT3BMVFI+MDwvVHBPcExUUj48TnVtT3BMVFI+Q0VUSVAyMSMxMzEzNzM0ODwvTnVtT3BMVFI+PFN1YlRwQXR2PkNDSTwvU3ViVHBhdHY+PER0TW92dG8+MjAyNS0wMS0wODwvRHRNb3Z0bz48L0xUUjAwMDE+PC9TSVNNU0c+PC9ET0M+",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**           | **Tipo**         | **Descrição**                                                                 |
+|--------------------|------------------------|------------------|-------------------------------------------------------------------------------|
+| root               | Ambiente               | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro               | string           | Tipo de registro da mensagem do Callback. Valor informado = “Safe”            |
+| root               | Detalhes               | object           | Objeto com os detalhes da mensagem do Callback                                |
+| Detalhes           | Identificador          | string           | Identificador do evento                                                       |
+| Detalhes           | TipoMensagem           | string           | Código da mensagem recebida                                                   |
+| Detalhes           | DtMensagem             | datetime         | Data e hora do recebimento da mensagem                                        |
+| Detalhes           | Mensagem               | string           | Mensagem recebida convertida em base 64                                       |
+| Detalhes           | Lancamentos            | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+
+## 35. Evento de notificação de Movimento de Cobrança de Serviço
+
+Callback responsável por enviar informações detalhadas sobre um movimento de cobrança de um serviço realizado.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "movimentoServico",
+    "Detalhes": {
+      "Identificador": "27400011312199148226436000120",
+      "ContaDestino": {
+        "Agencia": "0001",
+        "AgenciaDigito": "8",
+        "Conta": "1312199",
+        "TipoConta": 3,
+        "TipoContaDesc": "Pagamento",
+        "ContaDigito": "1",
+        "ContaPgto": "13121991",
+        "CodigoBanco": "274",
+        "TpPessoa": 2,
+        "TpPessoaDesc": "Juridica",
+        "DocumentoFederal": "48226436000120",
+        "Nome": "NOME DO DESTINATÁRIO",
+        "CodigoConta": "00000000-0000-0000-0000-000000000000"
+      },
+      "DescricaoOperacao": "CUSTO RECEBIMENTO PIX",
+      "DescCliente": "NSU origem: 5701776",
+      "CodigoOrigem": "aaf5ff09-ddb3-4ed3-8f83-bffdc01c8d98",
+      "NSU": 5701777,
+      "VlrTransacao": 4,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-17T17:00:47.25",
+      "TipoLancto": "D",
+      "Lancamentos": []
+    }
+  }
+}
+```
+| **Atributo Pai**   | **Atributo**           | **Tipo**         | **Descrição**                                                                  |
+|--------------------|------------------------|------------------|--------------------------------------------------------------------------------|
+| root               | Ambiente               | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro               | string           | Tipo de registro da mensagem do Callback. Valor informado = “movimentoServico” |
+| root               | Detalhes               | object           | Objeto com os detalhes da mensagem do Callback                                 |
+| Detalhes           | Identificador          | string           | Identificador do evento                                                        |
+| Detalhes           | ContaDestino           | object           | Objeto com os dados da conta onde foi realizada a cobrança                     |
+| ContaDestino       | Agencia                | string           | Nº da agência sem o dígito verificador                                         |
+| ContaDestino       | AgenciaDigito          | string           | Nº do dígito verificador da agência                                            |
+| ContaDestino       | Conta                  | string           | Nº da conta sem o dígito verificador                                           |
+| ContaDestino       | TipoConta              | integer          | Identificador do tipo da conta, onde: 1 = Corrente, 2 = Poupança, 3 = Pagamento, 4 = Salário |
+| ContaDestino       | TipoContaDesc          | string           | Descrição do tipo da conta                                                     |
+| ContaDestino       | ContaDigito            | string           | Nº do dígito verificador da conta                                              |
+| ContaDestino       | ContaPgto              | string           | Nº da conta pagamento                                                          |
+| ContaDestino       | CodigoBanco            | string           | Código do banco                                                                |
+| ContaDestino       | TpPessoa               | integer          | Identificador do tipo de pessoa do titular da conta, onde: 1 = Física, 2 = Jurídica |
+| ContaDestino       | TpPessoaDesc           | string           | Descrição do tipo de pessoa do titular da conta                                |
+| ContaDestino       | DocumentoFederal       | string           | Nº do CPF ou CNPJ do titular da conta                                          |
+| ContaDestino       | Nome                   | string           | Nome do titular da conta                                                       |
+| ContaDestino       | CodigoConta            | guid             | Código da conta                                                                |
+| Detalhes           | DescricaoOperacao      | string           | Descrição da operação realizada                                                |
+| Detalhes           | DescCliente            | string           | Descrição livre fornecida pelo cliente para a operação                         |
+| Detalhes           | NSU                    | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao           | decimal          | Valor da cobrança realizada                                                    |
+| Detalhes           | VlrJuros               | decimal          | Valor dos juros pagos                                                          |
+| Detalhes           | VlrMulta               | decimal          | Valor da multa paga                                                            |
+| Detalhes           | DtTransacao            | datetime         | Data e hora da cobrança realizada                                              |
+| Detalhes           | TipoLancto             | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “D” |
+| Detalhes           | Lancamentos            | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 36. Evento de notificação de Movimento de Split de Valores Entre Contas
+
+Callback responsável por enviar informações detalhadas sobre um movimento de débito gerado na operação de split entre contas.
+
+```json
+{
+  "Mensagem": {
+    "Ambiente": "Staging",
+    "Registro": "MovimentoSplit",
+    "Detalhes": {
+      "Identificador": "27400012314199716622113092",
+      "ContaDestino": {
+        "Agencia": "0001",
+        "AgenciaDigito": "8",
+        "Conta": "2314199",
+        "TipoConta": 3,
+        "TipoContaDesc": "Pagamento",
+        "ContaDigito": "7",
+        "ContaPgto": "23141997",
+        "CodigoBanco": "274",
+        "TpPessoa": 1,
+        "TpPessoaDesc": "Fisica",
+        "DocumentoFederal": "Documento Federal do destinatário",
+        "Nome": "NOME DO DESTINATÁRIO",
+        "CodigoConta": "00000000-0000-0000-0000-000000000000"
+      },
+      "DescricaoOperacao": "SPLIT VALOR",
+      "DescCliente": "NSU origem: 5701763 | split conta BMP | Split total",
+      "NSU": 5701765,
+      "VlrTransacao": 0.01,
+      "VlrJuros": null,
+      "VlrMulta": null,
+      "DtTransacao": "2024-09-17T16:16:04.873",
+      "TipoLancto": "C",
+      "Lancamentos": []
+    }
+  }
+}
+```
+
+| **Atributo Pai**   | **Atributo**           | **Tipo**         | **Descrição**                                                                  |
+|--------------------|------------------------|------------------|--------------------------------------------------------------------------------|
+| root               | Ambiente               | string           | Tipo de ambiente em que ocorreu o evento, onde: Staging = Homologação, Production = Produção |
+| root               | Registro               | string           | Tipo de registro da mensagem do Callback. Valor informado = “movimentoServico” |
+| root               | Detalhes               | object           | Objeto com os detalhes da mensagem do Callback                                 |
+| Detalhes           | Identificador          | string           | Identificador do evento                                                        |
+| Detalhes           | ContaDestino           | object           | Objeto com os dados da conta onde foi realizada a cobrança                     |
+| ContaDestino       | Agencia                | string           | Nº da agência sem o dígito verificador                                         |
+| ContaDestino       | AgenciaDigito          | string           | Nº do dígito verificador da agência                                            |
+| ContaDestino       | Conta                  | string           | Nº da conta sem o dígito verificador                                           |
+| ContaDestino       | TipoConta              | integer          | Identificador do tipo da conta, onde: 1 = Corrente, 2 = Poupança, 3 = Pagamento, 4 = Salário |
+| ContaDestino       | TipoContaDesc          | string           | Descrição do tipo da conta                                                     |
+| ContaDestino       | ContaDigito            | string           | Nº do dígito verificador da conta                                              |
+| ContaDestino       | ContaPgto              | string           | Nº da conta pagamento                                                          |
+| ContaDestino       | CodigoBanco            | string           | Código do banco                                                                |
+| ContaDestino       | TpPessoa               | integer          | Identificador do tipo de pessoa do titular da conta, onde: 1 = Física, 2 = Jurídica |
+| ContaDestino       | TpPessoaDesc           | string           | Descrição do tipo de pessoa do titular da conta                                |
+| ContaDestino       | DocumentoFederal       | string           | Nº do CPF ou CNPJ do titular da conta                                          |
+| ContaDestino       | Nome                   | string           | Nome do titular da conta                                                       |
+| ContaDestino       | CodigoConta            | guid             | Código da conta                                                                |
+| Detalhes           | DescricaoOperacao      | string           | Descrição da operação realizada                                                |
+| Detalhes           | DescCliente            | string           | Descrição livre fornecida pelo cliente para a operação                         |
+| Detalhes           | NSU                    | integer          | Nº sequencial exclusivo utilizado para identificar de forma única um registro na tabela de movimentos, garantindo a singularidade do registro no contexto do sistema |
+| Detalhes           | VlrTransacao           | decimal          | Valor da cobrança realizada                                                    |
+| Detalhes           | VlrJuros               | decimal          | Valor dos juros pagos                                                          |
+| Detalhes           | VlrMulta               | decimal          | Valor da multa paga                                                            |
+| Detalhes           | DtTransacao            | datetime         | Data e hora da cobrança realizada                                              |
+| Detalhes           | TipoLancto             | char             | Identificador do tipo de lançamento, onde: C = Crédito, D = Débito. Valor informado = “D” |
+| Detalhes           | Lancamentos            | object array     | Lista de objetos com os movimentos referentes à cobrança de tarifas ou movimentos de split entre contas referentes ao evento gerado. Obs.: Esta informação será descontinuada em breve e não será mais enviada. |
+
+## 37. Evento de notificação de Validação Inicial Aprovada
+
+```json
+{
+  "Ambiente": "Homologação",
+  "Registro": "ValidacaoInicialAprovada",
+  "CodigoContaSolicitacaoCriacao": "e162e1eb-514a-4f53-86cf-49fdaa7ba37b",
+  "Observacao": "Seguir com o preenchimento das demais informações.",
+  "Código": 0 //Aprovado
+}
+```
+
+## 38. Evento de notificação de Validação Inicial Reprovada
+
+```json
+{
+  "Ambiente": "Homologação",
+  "Registro": "ValidacaoInicialReprovada",
+  "CodigoContaSolicitacaoCriacao": "e162e1eb-514a-4f53-86cf-49fdaa7ba37b",
+  "Observacao": "Informar o motivo da recusa.",
+  "Código": 1 //Reprovado
+}
+```
+
+Motivos da recusa:
+
+* A situação fiscal do documento federal não permite a abertura da conta;
+* Não será possível efetuar a abertura da conta;
+* O nome informado está divergente com o consultado na receita federal.
+
+## 39. Evento de notificação de Solicitação de Conta Pendenciada
+
+```json
+{
+  "Ambiente": "Homologação",
+  "Registro": "SolicitacaoContaPendenciada",
+  "CodigoContaSolicitacaoCriacao": "e162e1eb-514a-4f53-86cf-49fdaa7ba37b",
+  "Observacao": "Sua solicitação está em análise.",
+  "Código": 3 //Em análise
+}
+```
+
+## 40. Evento de notificação de Solicitação de Conta Aprovada
+
+```json
+{
+  "Ambiente": "Homologação",
+  "Registro": " SolicitacaoContaAprovada",
+  "CodigoContaSolicitacaoCriacao": "e162e1eb-514a-4f53-86cf-49fdaa7ba37b",
+  "Observacao": "Solicitação aprovada. Consulte as informações da conta.",
+  "Código": 4 //Dados da conta disponível
+}
+```
+
+## 41. Evento de notificação de Solicitação de Conta Reprovada
+
+```json
+{
+  "Ambiente": "Homologação",
+  "Registro": "SolicitacaoContaReprovada",
+  "CodigoContaSolicitacaoCriacao": "e162e1eb-514a-4f53-86cf-49fdaa7ba37b",
+  "Observacao": "Motivo da recusa",
+  "Codigo": 5 //Reprovado
+}
+```

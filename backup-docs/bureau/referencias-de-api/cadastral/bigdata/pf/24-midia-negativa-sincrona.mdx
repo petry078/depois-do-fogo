@@ -1,0 +1,40 @@
+---
+title: "24 - Mídia Negativa Síncrona"
+openapi: post /Bureau/MidiaNegativaPF
+---
+
+Este endpoint permite consultas sobre dados de mídia relacionados ao documento de uma pessoa física no formato de resposta rápida (Síncrono). A resposta é retornada como ‘String JSON’ serializada e inclui:
+
+* Total de páginas e notícias relacionadas ao documento;
+* Quantidade de ocorrências do documento em notícias no período entre 7 e 360 dias.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{
+    "Erro": Boolean,
+    "MensagemOperador": "String",
+    "ResultadoConsulta": {
+        "Identificador": "String",
+        "StatusConsulta": {
+            "Code": int,
+            "Message": "String"
+        },
+        "TotalPages": int,
+        "TotalNews": int,
+        "TotalNewsOnLast7Days": int,
+        "TotalNewsOnLast30Days": int,
+        "TotalNewsOnLast90Days": int,
+        "TotalNewsOnLast180Days": int,
+        "TotalNewsOnLast365Days": int,
+        "MediaExposureLevel": "String",
+        "CelebrityLevel": "String",
+        "UnpopularityLevel": "String",
+	"identificador": "String"
+    }
+}
+```
+
+</Expandable>

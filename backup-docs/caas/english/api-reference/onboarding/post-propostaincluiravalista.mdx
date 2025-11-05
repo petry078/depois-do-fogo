@@ -1,0 +1,28 @@
+---
+title: "11 - Include Guarantor"
+openapi: post /Proposta/IncluirAvalista
+version: 'English'
+---
+
+Through this endpoint, the partner includes the data of a guarantor for a proposal.
+The guarantor can be an individual or a legal entity, and the fields are not mandatory; simply fill out the DTO as needed.
+
+<Expandable title="Messages">
+| Categoria | Operação                        | Ação              | Código | Código Detalhado | Mensagem                                                                                                              |
+|-----------|---------------------------------|-------------------|--------|------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | C0112  | V0001            | Proposta não encontrada                                                                                              |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | C0112  | V0002            | A Proposta não pertence à esta Integração                                                                            |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | C0057  | V0001            | Não é possível incluir avalistas na proposta. Proposta encontra-se " + SituacaoPropostaEnum.GetDescricao(proposta.Situacao) |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | C0057  | V0002            | Dados do avalista PF devem ser enviados                                                                              |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | C0057  | V0003            | Dados do avalista PJ devem ser enviados                                                                              |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0669  | D0001            | CPF já cadastrado como Avalista.                                                                                    |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0669  | D0002            | Documento deve ser preenchido                                                                                         |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0669  | D0003            | Nome deve ser preenchido                                                                                            |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0669  | D0004            | Proposta não encontrada                                                                                              |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0669  | D0005            | CPF Inválido                                                                                                         |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0669  | D0006            | CNPJ Inválido                                                                                                        |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0670  | D0001            | Nome do cônjuge deve ser preenchido                                                                                  |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0670  | D0002            | CPF do cônjuge deve ser preenchido                                                                                   |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0670  | D0003            | CPF do cônjuge Inválido                                                                                               |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0671  | D0001            | A data de entrada do sócio não pode ser retroativa a data de abertura da empresa                                      |
+</Expandable>

@@ -1,0 +1,29 @@
+---
+title: 'Sobre o Fluxo de Contratação do Leilão'
+version: 'Português'
+---
+
+<Steps>
+
+<Step title="Aplicativo da CTPS">Trabalhador acessa o aplicativo da Carteira de Trabalho Digital e realiza uma simulação de crédito. As Instituições Financeiras tem até 24 horas para enviar suas propostas.</Step>
+<Step title="Abertura do Leilão Interno">Em cima dessa simulação, a BMP abre um leilão interno entre seus parceiros.</Step>
+<Step title="Consulta na Dataprev">A BMP consulta a Dataprev a cada 15 minutos para capturar novas simulações.</Step>
+<Step title="Notificação de Leilões Disponíveis">Parceiro recebe um callback via API caso tenham leilões disponíveis.</Step>
+<Step title="Envio da Proposta">Parceiro envia uma proposta para participar do leilão.</Step>
+<Step title="Recebimento da Proposta">BMP recebe a proposta e coloca o parceiro no leilão.</Step>
+<Step title="Posição no Leilão Interno">Parceiro recebe um callback via API sobre sua posição no leilão.</Step>
+<Step title="Notificação de Vencedor do Leilão">Parceiro recebe um callback via API caso sua proposta ganhe o leilão.</Step>
+<Step title="Envio da Proposta à Dataprev">BMP envia a proposta escolhida para a Dataprev.</Step>
+<Step title="Análise do Trabalhador">Trabalhador analisa as propostas recebidas durante 24h.</Step>
+<Step title="Trabalhador Escolhe Melhor Proposta">Caso a proposta de um parceiro seja escolhida pelo trabalhador, o parceiro recebe um callback via API.</Step>
+<Step title="Direcionamento para Canal do Parceiro">Trabalhador é direcionado para um canal do parceiro, onde informa seus dados.</Step>
+<Step title="Registro dos Dados do Trabalhador e do Empregador">BMP recebe e registra os dados do trabalhador e de seu empregador.</Step>
+<Step title="Geração do Contrato">Parceiro gera um contrato sem CCB.</Step>
+<Step title="Geração e Assinatura da CCB">BMP gera uma CCB não assinada e encaminha para o parceiro coletar a assinatuar com biometria facial do trabalhador.</Step>
+<Step title="Envio da CCB Assinada">Parceiro envia CCB assinada em Casas de Assinatura terceiras para BMP.</Step>
+<Step title="Envio do Contrato para Averbação">BMP encaminha contrato com CCB assinada para averbação na Dataprev.</Step>
+<Step title="Devolução do Contrato Averbado">Dataprev devolve contrato averbado.</Step>
+<Step title="Desembolso do Crédito">BMP realiza o desenbolso do crédito para o trabalhador.</Step>
+<Step title="Notificação de Contrato Finalizado">Parceiro recebe callback via API com as informações do contrato finalizado.</Step>
+
+</Steps>

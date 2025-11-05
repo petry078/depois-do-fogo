@@ -1,0 +1,12 @@
+---
+title: "9 - CCB Printing"
+openapi: get /api/
+---
+
+This endpoint is used to request the printing of a Bank Credit Certificate (CCB), using the proposal code and integration code parameters:
+
+```
+https://reports.moneyp.dev.br/ImprimirCCB?Code={{PROPOSAL_CODE}}&Integracao={{CODE_INTEGRATION}}
+```
+
+Make sure to replace `{{PROPOSAL_CODE}}` and `{{CODE_INTEGRATION}}` with the appropriate values when making the query request (GET).

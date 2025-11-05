@@ -1,0 +1,175 @@
+---
+title: 45 - POST - Create Account
+---
+
+Use this endpoint to open an account under the integrator's domain.
+
+## Request Example
+
+```json
+curl --request POST \
+  --url https://api.ext.dbs.moneyp.dev.br/api/v2/Conta \ // Endpoint to create an account
+  --header 'Authorization: <api-key>' \                  // API key for authentication
+  --header 'Content-Type: application/json' \            // Specifies that the request body is in JSON format
+  --header 'IdempotencyKey: <idempotencykey>' \          // Ensures the request is processed only once
+  --header 'IgnoraHandshake: <ignorahandshake>' \        // Optional header to bypass handshake validation
+  --data '{
+  "numeroBanco": "<string>",                             // Bank number
+  "numeroAgencia": "<string>",                           // Branch number
+  "numeroConta": "<string>",                             // Account number
+  "digitoConta": "<string>",                             // Account check digit
+  "descricao": "<string>",                               // Description of the account
+  "tipoGeracaoNumeroConta": 0,                           // Type of account number generation
+  "modCobrTaxa": 0,                                      // Fee charging mode
+  "tipoConta": 123,                                      // Account type
+  "dadosCorrentista": {
+    "documentoFederal": "<string>",                      // Federal document (CPF or CNPJ)
+    "nome": "<string>",                                  // Full name
+    "tipoPessoa": 123,                                   // Person type (individual or company)
+    "situacao": 1                                        // Status (e.g., active)
+  },
+  "dadosContato": {
+    "email": "<string>",                                 // Email address
+    "telefoneFixo1": "<string>",                         // Landline phone 1
+    "telefoneFixo2": "<string>",                         // Landline phone 2
+    "telefoneCelular1": "<string>",                      // Mobile phone 1
+    "telefoneCelular2": "<string>",                      // Mobile phone 2
+    "telefoneFax": "<string>",                           // Fax number
+    "paginaWeb": "<string>"                              // Website
+  },
+  "dadosEndereco": {
+    "cep": "<string>",                                   // Postal code
+    "logradouro": "<string>",                            // Street name
+    "nroLogradouro": "<string>",                         // Street number
+    "bairro": "<string>",                                // Neighborhood
+    "complemento": "<string>",                           // Address complement
+    "cidade": "<string>",                                // City
+    "uf": "<string>",                                    // State (UF)
+    "tipoEndereco": 1,                                   // Address type
+    "tipoResidencia": 1,                                 // Residence type
+    "enderecoDesde": "2023-11-07T05:31:56Z",             // Residence start date
+    "enderecoPrincipal": true,                           // Is main address
+    "enderecoCorrespondencia": true,                     // Is correspondence address
+    "verificadoInLoco": true                             // Verified on site
+  },
+  "dadosPF": {
+    "apelido": "<string>",                               // Nickname
+    "rg": "<string>",                                    // RG (ID number)
+    "rgOrgao": "<string>",                               // Issuing authority
+    "rguf": "<string>",                                  // State of RG
+    "rgData": "2023-11-07T05:31:56Z",                    // RG issue date
+    "dtNasc": "2023-11-07T05:31:56Z",                    // Date of birth
+    "sexo": "<string>",                                  // Gender
+    "nacionalidade": "<string>",                         // Nationality
+    "naturalDeCidade": "<string>",                       // City of birth
+    "naturalDeUF": "<string>",                           // State of birth
+    "estadoCivil": 1,                                    // Marital status
+    "escolaridade": 1,                                   // Education level
+    "nomePai": "<string>",                               // Father's name
+    "nomeMae": "<string>",                               // Mother's name
+    "nomeConjuge": "<string>",                           // Spouse's name
+    "dtNascConjuge": "2023-11-07T05:31:56Z",             // Spouse's date of birth
+    "cpfConjuge": "<string>",                            // Spouse's CPF
+    "rgConjuge": "<string>",                             // Spouse's RG
+    "rgOrgaoConjuge": "<string>",                        // Spouse's RG issuing authority
+    "rgufConjuge": "<string>",                           // Spouse's RG state
+    "rgDataConjuge": "2023-11-07T05:31:56Z",             // Spouse's RG issue date
+    "nomeArquivoIdentificacao": "<string>",              // File name of ID document
+    "arquivoIdentificacao": "<string>",                  // Base64 or file reference
+    "indicadorPEP": 1,                                   // Politically exposed person indicator
+    "renda": 123,                                        // Income
+    "profissao": "<string>"                              // Profession
+  },
+  "dadosPJ": {
+    "nomeFantasia": "<string>",                          // Trade name
+    "documentoEstadual": "<string>",                     // State registration
+    "documentoMunicipal": "<string>",                    // Municipal registration
+    "dtAberturaEmpresa": "2023-11-07T05:31:56Z",         // Company opening date
+    "nomeResponsavelEmpresa": "<string>",                // Responsible person's name
+    "cpfResponsavelEmpresa": "<string>",                 // Responsible person's CPF
+    "rgResponsavelEmpresa": "<string>",                  // Responsible person's RG
+    "nomeArquivoContratoSocial": "<string>",             // File name of articles of incorporation
+    "arquivoContratoSocial": "<string>",                 // Base64 or file reference
+    "capitalSocial": 123,                                // Share capital
+    "faturamentoAnual": 123,                             // Annual revenue
+    "tipoEmpresa": 1,                                    // Company type
+    "codigoCnae": "3c90c3cc-0d44-4b50-8888-8dd25736052a" // CNAE code
+  },
+  "modeloConta": 1                                       // Account model
+}'
+```
+
+| Field                       | Type        | Description                            |
+|-----------------------------|-------------|----------------------------------------|
+| "numeroBanco"               | string      | REQUIRED - Bank number - Max 3 characters |
+| "numeroAgencia"             | string      | Branch number - Max 3 characters - Default 0001 |
+| "numeroConta"               | string      | Account number - The 'account number' (numeroConta) is required when 'type of generation' (tipoGeracaoNumeroConta) = 0 (manual), must not be provided when tipoGeracaoNumeroConta = 1 (sequential), and can have a maximum of 12 characters |
+| "digitoConta"               | string      | Account check digit - The checker digit of the bank account number can be a maximum of 1 character |
+| "descricao"                 | string      | Additional information about the account             |
+| "tipoGeracaoNumeroConta"    | number      | REQUIRED - Type of account number generation - Can be 0 for manual and 1 for sequential |
+| "modCobrTaxa"               | number      | REQUIRED - Fee charging mode - 0-Deactivated; 1-Partner; 1-Customer                     |
+| "tipoConta"                 | number      | REQUIRED - Account type - 1-CACC; 2-SVGS; 3-TRAN; 4-SLRY.                           |
+| "documentoFederal"          | string      | REQUIRED - Federal document (CPF or CNPJ) - Only the numbers - Max 14 characters         |
+| "nome"                      | string      | REQUIRED - Full name - Max 100 characters                              |
+| "tipoPessoa"                | number      | Person type (individual or company) 1 for PF and 2 for PJ    |
+| "situacao"                  | number      | Status (e.g., active) - 1 for Enabled and 2 for Deactivated                 |
+| "email"                     | string      | REQUIRED - Email address - Max 60 characters                         |
+| "telefoneFixo1"             | string      | Landline phone 1 - Only the numbers - Max 20 characters                       |
+| "telefoneFixo2"             | string      | Landline phone 2 - Only the numbers - Max 20 characters                       |
+| "telefoneCelular1"          | string      | REQUIRED - Mobile phone 1 - Only the numbers - Max 20 characters                         |
+| "telefoneCelular2"          | string      | Mobile phone 2 - Only the numbers - Max 20 characters                        |
+| "telefoneFax"               | string      | Fax number - Only the numbers - Max 20 characters                            |
+| "paginaWeb"                 | string      | Website - Max 255 characters                               |
+| "cep"                       | string      | REQUIRED - Postal code - Only the numbers - Max 8 characters                           |
+| "logradouro"                | string      | Street name - Max 100 characters                          |
+| "nroLogradouro"             | string      | REQUIRED - Street number - Max 15 characters                          |
+| "bairro"                    | string      | Neighborhood - Max 50 characters                          |
+| "complemento"               | string      | Address complement - Max 50 characters                   |
+| "cidade"                    | string      | REQUIRED - City - Max 40 characters                                  |
+| "uf"                        | string      | REQUIRED - State (UF) - Max 2 characters                            |
+| "tipoEndereco"              | string      | REQUIRED - Address type - 1 for Residential and 2 for Commercial    |
+| "tipoResidencia"            | string      | Residence type - 1-Rented; 2-Propria; 3-Funded; 4-Functional House                        |
+| "enderecoDesde"             | string/date | Residence start date                   |
+| "enderecoPrincipal"         | boolean     | REQUIRED - Is main address                        |
+| "enderecoCorrespondencia"   | boolean     | REQUIRED - Is correspondence address              |
+| "verificadoInLoco"          | boolean     | Verified on site                         |
+| "apelido"                   | string      | Nickname - Max 50 characters                               |
+| "rg"                        | string      | RG (ID number) - Only the numbers - Max 20 characters                          | 
+| "rgOrgao"                   | string      | Issuing authority - Max 10 characters                      |
+| "rguf"                      | string      | State of RG - Max 2 characters               |
+| "rgData"                    | string/date | RG issue date                           |
+| "dtNasc"                    | string/date | Date of birth                           | 
+| "sexo"                      | string      | Gender - F for Female and M for Male           |
+| "nacionalidade"             | string      | Nationality - Max 40 characters                            |
+| "naturalDeCidade"           | string      | City of birth - Max 40 characters                         |
+| "naturalDeUF"               | string      | State of birth - Max 2 characters                         |
+| "estadoCivil"               | number      | Marital status - 1-Single; 2-Married; 3-Disquieted; 4-Divorced; 5-Separate; 6-I live; 7-Other; 8-Not Informed; 9-Conjugal Bond                         |
+| "escolaridade"              | number      | Education level - 1-Attending Early Childhood Education; 2-Complete Early Childhood Education; 3-Studying Elementary School; 4-Full Elementary School; 5-High School; 6-Full High School; 7-Studying Higher Education; 8-Full Higher Education; 9-Studying Specialization; 10-Full Specialization; 11-Studying Master; 12-Full Master; 13-Studying Doctorate; 14-Full Doctorate; 15-Studying The Doctorate; 16-Full Doctorate; 17-Illiterate; 18-No Instruction School                         |
+| "nomePai"                   | string      | Father's name - Max 60 characters                          |
+| "nomeMae"                   | string      | Mother's name - Max 60 characters                          |
+| "nomeConjuge"               | string      | Spouse's name - Max 60 characters       |
+| "dtNascConjuge"             | string/date | Spouse's date of birth                  |
+| "cpfConjuge"                | string      | Spouse's CPF - Only the numbers - Max 11 characters     |
+| "rgConjuge"                 | string      | Spouse's RG - Max 20 characters                            |
+| "rgOrgaoConjuge"            | string      | Spouse's RG issuing authority - Max 10 characters |
+| "rgufConjuge"               | string      | Spouse's RG state - Max 2 characters    |
+| "rgDataConjuge"             | string/date | Spouse's RG issue date                  |
+| "nomeArquivoIdentificacao"  | string      | File name of ID document - Max 60 characters     |
+| "arquivoIdentificacao"      | string      | Base64 or file reference                |
+| "indicadorPEP"              | number      | Politically exposed person indicator - 1 for Yes and 2 for No |
+| "renda"                     | number      | Income                                  |
+| "profissao"                 | string      | Profession                              |
+| "nomeFantasia"              | string      | Trade name - Max 60 characters          |
+| "documentoEstadual"         | string      | State registration - Max 20 characters  |
+| "documentoMunicipal"        | string      | Municipal registration - Max 20 characters |
+| "dtAberturaEmpresa"         | string/date | Company opening date                    |
+| "nomeResponsavelEmpresa"    | string      | Responsible person's name - Max 60 characters |
+| "cpfResponsavelEmpresa"     | string      | Responsible person's CPF - Provide only the document numbers without formatting characters (e.g., dots, dashes, slashes); the CPF of the company’s responsible person can have a maximum of 11 characters              |
+| "rgResponsavelEmpresa"      | string      | Responsible person's RG - Max 20 characters |
+| "nomeArquivoContratoSocial" | string      | File name of articles of incorporation |
+| "arquivoContratoSocial"     | string      | Base64 or file reference               |
+| "capitalSocial"             | number      | Share capital                          |
+| "faturamentoAnual"          | number      | Annual revenue                         |
+| "tipoEmpresa"               | number      | Company type - 1-MEI; 2-Individual Entrepreneur; 3-Unipersonal Limited Company; 4-Limited Entrepreneurial Society; 5-Simple Society; 6-Anonymous Company; 7-Cooperative Society; 8-Private Association Society; 9-Condominium Building |
+| "codigoCnae"                | string      | CNAE code                              |
+| "modeloConta"               | number      | Account model                          |

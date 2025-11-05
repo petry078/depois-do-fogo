@@ -1,0 +1,79 @@
+---
+title: "Eventos"
+version: 'Português'
+---
+
+Este documento descreve os eventos relacionados ao sistema de callbacks, detalhando como os dados são enviados e recebidos, bem como os possíveis status e suas respectivas finalidades. Funciona como um guia para integração, implementação e gerenciamento de callbacks.
+
+Os callbacks são utilizados para notificar o integrador sobre mudanças no status de propostas, permitindo que ações sejam tomadas de forma automatizada ou manual, conforme necessário. Para evitar problemas de comunicação, é essencial que o endpoint configurado para receber os callbacks seja otimizado para processar as mensagens de forma assíncrona, conforme descrito neste documento.
+
+Além disso, são apresentados exemplos práticos de URLs parametrizadas, uma tabela detalhada com os possíveis status das propostas e orientações sobre como interpretar os dados enviados no corpo das mensagens para determinados status específicos.
+
+<Warning>
+
+O endpoint configurado para receber os callbacks deve funcionar principalmente como um repositório, minimizando o processamento no momento da recepção para evitar atrasos. Implementar processos complexos durante o recebimento dos callbacks pode resultar em timeouts e falhas na comunicação, comprometendo a eficiência do sistema. Opte por processar as mensagens recebidas de forma assíncrona para melhorar a performance e confiabilidade do seu sistema de callbacks.
+
+</Warning>
+
+## Notificação de eventos da proposta
+
+Segue exemplo de URL de como parametrizamos para recebimento:
+
+```json
+www.exemplo-de-url.com.br?proposta={PROPOSTA}&situacao={SITUACAO}&identificador={IDENTIFICADOR}
+```
+
+> _ _ _ _ Comentário de desenvolvimento: Confirmar se teremos `&identificador={IDENTIFICADOR}` _ _ _ _
+
+| Parâmetro          | Descrição do parâmetro                                                                         |
+|--------------------|------------------------------------------------------------------------------------------------|
+| **Proposta**       | Guid único gerado no response durante a inclusão da proposta.                                  |
+| **Situação**       | ID da situação da proposta em nosso sistema.                                                   |
+| **Identificador**  | Caso seja enviado, esse campo representa o código da operação enviado na inclusão da proposta. |
+
+## Tabela de eventos da proposta
+
+> _ _ _ _ Comentário de desenvolvimento: Confirmar as descrições detalhadas da tabela abaixo. _ _ _ _
+
+| **ID** | **Descrição**      | **Descrição detalhada**                                                                                                                                      |
+|--------|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 0      | Em Digitação       | Proposta encontra-se em digitação.                                                                                                                           |
+| 1      | Em Análise         | Proposta foi enviada para fila de análise.                                                                                                                   |
+| 2      | Aprovada           | Proposta foi aprovada pela área de análise de crédito.                                                                                                       |
+| 3      | Recusada           | Proposta foi recusada pela área de análise de crédito.                                                                                                       |
+| 4      | Cancelada          | Proposta foi cancelada pela área de análise de crédito.                                                                                                      |
+| 5      | Pendente           | Proposta foi marcada como pendente pela área de análise de crédito, necessita de intervenção do integrador para retornar à fila de análise.                  |
+| 6      | Finalizada         | Proposta foi finalizada.                                                                                                                                     |
+| 7      | Conferida          | Proposta foi conferida pela área de formalização.                                                                                                            |
+| 8      | Liberada           | Proposta foi liberada pela área de formalização para pagamento.                                                                                              |
+| 9      | Paga               | Proposta foi paga pela área financeira.                                                                                                                      |
+| 10     | Cedida             | Proposta foi cedida ao fundo.                                                                                                                                |
+| 11     | Pendente Pagamento | Proposta pendente de pagamento por inconsistência em dados bancários, exigindo que o integrador informe os dados corretos para retornar à fila de pagamento. |
+
+<Warning>Caso ocorra algum problema durante o recebimento do callback de proposta, o sistema realizará até 3 tentativas de envio.</Warning>
+
+<Note>
+
+Além dos dados já enviados na consulta (*query*), como guid da Proposta, Status e Identificador, os callbacks de **Pago "9"** e **Pendente pagamento "11"** possuem um *body* com o campo **"Descrição da ocorrência"**, que informa o motivo da pendência do pagamento quando for um **status "11"** e quando for **status "9"** retorna com o texto **"Crédito ou débito efetivado"**. 
+
+</Note>
+
+> _ _ _ _ Comentário de desenvolvimento: confirmar se teremos Status 09 e 11 e se a descrição deles está correta. _ _ _ _
+
+Caso o callback seja enviado com o método POST, além dos dados enviados na Query, o parceiro receberá no corpo da requisição:
+
+**Status 09:**
+
+```json
+{
+    "descricaoOcorrencia": "09-Crédito ou Débito efetivado"
+}
+```
+
+**Status 11:**
+
+```json
+{
+    "descricaoOcorrencia": "AB-Conta de destistino não localizada ou inválida."
+}
+```

@@ -1,0 +1,97 @@
+---
+title: "14 - Proposal Finalization"
+openapi: post /Proposta/Finalizar
+---
+
+<Warning>It is mandatory to use the certification or regolon endpoint in advance and the use of this endpoint will only be enabled through prior parameterization in the system</Warning>
+
+Through this endpoint, the partner can finalize the proposal after the signature procedure is completed.
+
+### Messaging
+
+<Expandable title="Messaging">
+
+| Categoria | Operação | Ação | Código | Código Detalhado | Mensagem |
+|-----------|----------|------|--------|------------------|----------|
+| Proposta | PropostaFinalizar | Finalizar | C0064 | V0001 | O IP do usuário deve ser informado |
+| Proposta | PropostaFinalizar | Finalizar | C0064 | V0002 | Não é permitida a finalização da proposta por este parceiro |
+| Proposta | PropostaFinalizar | Finalizar | C0064 | V0003 | Todos os assinantes devem assinar a proposta |
+| Proposta | PropostaFinalizar | Finalizar | C0064 | V0004 | Situação da proposta não permite finalização |
+| Proposta | PropostaFinalizar | Finalizar | C0064 | V0005 | Proposta deve ter parcelas geradas antes de ser finalizada |
+| Proposta | PropostaFinalizar | Finalizar | C0064 | V0006 | Proposta deve possuir veículos cadastrados |
+| Proposta | PropostaFinalizar | Finalizar | C0064 | V0007 | Chassi do veículo não informado |
+| Proposta | PropostaFinalizar | Finalizar | C0064 | V0008 | Tipo de chassi incorreto ou não informado |
+| Proposta | PropostaFinalizar | Finalizar | C0064 | V0009 | Tipo de restrição gravame incorreto ou não informado |
+| Proposta | PropostaFinalizar | Finalizar | C0064 | V0010 | Proposta não pode ser aprovada, pois sua situação é `{SituacaoPropostaEnum.GetDescricao(proposta.Situacao)}` |
+| Proposta | PropostaFinalizar | Finalizar | C0112 | V0001 | Proposta não encontrada |
+| Proposta | PropostaFinalizar | Finalizar | C0112 | V0002 | A Proposta não pertence à esta Integração |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0001 | Empresa não cadastrada |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0002 | Produto x Rede não cadastrado |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0003 | Enviar a Foto da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0004 | Enviar RG ou CNH da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0005 | Enviar a CNH da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0006 | Enviar o CRLV na proposta |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0007 | Enviar o Orçamento na proposta |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0008 | Enviar o documento da CNH ou os documentos do RG e CPF |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0009 | Enviar o Comprovante de Residência da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0010 | Enviar o Comprovante de Renda da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0011 | Enviar a CNH da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0012 | Enviar o CPF da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0013 | Enviar o RG da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0014 | Enviar o documento da CNH da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0015 | Enviar o documento de RG ou CPF da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0016 | Enviar a foto da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0017 | Enviar o Comprovante de Residência da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0018 | Enviar o documento da CNH da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0019 | Enviar o comprovante de residência da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0020 | Para finalizar a proposta é necessário digitalizar e enviar a CCB. |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0021 | Para finalizar a proposta é necessário digitalizar e enviar a CCB e Protocolo. |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0022 | Para finalizar a proposta é necessário digitalizar e enviar a CCB e Nota Promissoria. |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0023 | Para finalizar a proposta é necessário digitalizar e enviar a CCB e Dossiê de Análise. |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0024 | Para finalizar a proposta é necessário digitalizar e enviar a CCB, Protocolo, CRLV e a Nota Fiscal do serviço executado. |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0025 | Para finalizar a proposta é necessário digitalizar e enviar a CCB e DUT. |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0026 | Enviar o CNH (Face A) da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0027 | Enviar o CNH (Face B) da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0028 | Enviar o comprovante de residência da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0029 | Enviar o RG (Face A) da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0030 | Enviar o RG (Face B) da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0031 | Enviar o comprovante de residência da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0032 | Enviar a CNH (Frente/Verso ou Digital) da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0033 | Enviar a CNH (Digital ou Face A/B) ou RG (Face A/B) da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0034 | Para finalizar a proposta é necessário digitalizar e enviar o DUT. |
+| Proposta | PropostaFinalizar | Finalizar | C0189 | V0035 | Para finalizar a proposta é necessário digitalizar e enviar o DUT ou Nota Fiscal do Veículo. |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0001 | Produto x Rede não possui documentos cadastrados para validação automática |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0002 | Necessário enviar o RG (Frente) da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0003 | Necessário enviar o RG (Verso) da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0004 | Proposta possui mais de um documento do tipo RG (Frente) |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0005 | Proposta possui mais de um documento do tipo RG (Verso) |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0006 | Necessário enviar a CNH (Face A) da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0007 | Necessário enviar a CNH (Face B) da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0008 | Proposta possui mais de um documento do tipo CNH (Face A) |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0009 | Proposta possui mais de um documento do tipo CNH (Face B) |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0010 | Para finalizar a proposta é necessário digitalizar e enviar o DUT |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0011 | Proposta possui mais de um documento do tipo DUT |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0012 | Necessário enviar o comprovante de residência da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0013 | Necessário enviar a CNH (Frente/Verso ou Digital) da pessoa |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0014 | Para finalizar a proposta é necessário digitalizar e enviar a Nota Fiscal (Veículo) |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0015 | Para finalizar a proposta é necessário digitalizar e enviar o DUT ou a Nota Fiscal (Veículo) |
+| Proposta | PropostaFinalizar | Finalizar | C0307 | V0016 | Para finalizar a proposta é necessário digitalizar e enviar a CNH ou o RG |
+| Proposta | PropostaFinalizar | Finalizar | C0190 | V0001 | Informar o campo [Chassi] do cliente |
+| Proposta | PropostaFinalizar | Finalizar | C0190 | V0002 | Informar o campo [Tipo do Chassi] do veículo |
+| Proposta | PropostaFinalizar | Finalizar | C0190 | V0003 | Informar o campo [Tipo de Restrição] do veículo |
+| Proposta | PropostaFinalizar | Finalizar | C0190 | V0004 | Informar o campo [Tipo de Placa] do veículo |
+| Proposta | PropostaFinalizar | Finalizar | C0144 | V0001 | SALDO|PRODUTO HOTMONEY |
+| Proposta | PropostaFinalizar | Finalizar | C0144 | V0002 | SALDO|PRODUTO ROTATIVO |
+| Proposta | PropostaFinalizar | Finalizar | C0144 | V0003 | SALDO|PRODUTO CRÉDITO |
+| Proposta | PropostaFinalizar | Finalizar | C0187 | V0001 | Informe o assunto do histórico |
+| Proposta | PropostaFinalizar | Finalizar | T0665 | D0001 | Informe o Cliente |
+| Proposta | PropostaFinalizar | Finalizar | T0665 | D0002 | Documento do Cliente é inválido |
+| Proposta | PropostaFinalizar | Finalizar | T0665 | D0016 | EPCodigo não informado |
+| Proposta | PropostaFinalizar | Finalizar | T0665 | D0017 | Vendedor não encontrado |
+| Proposta | PropostaFinalizar | Finalizar | T0665 | D0018 | Promotor não encontrado |
+| Proposta | PropostaFinalizar | Finalizar | T0665 | D0019 | Informe o Tipo de Operação |
+| Proposta | PropostaFinalizar | Finalizar | T0665 | D0020 | Informe o Valor |
+| Proposta | PropostaFinalizar | Finalizar | T0665 | D0021 | Informe a Quantidade de Parcelas |
+| Proposta | PropostaFinalizar | Finalizar | T0665 | D0022 | Formato de cálculo inválido |
+| Proposta | PropostaFinalizar | Finalizar | T0665 | D0023 | Cliente deve ser pessoa física |
+</Expandable>

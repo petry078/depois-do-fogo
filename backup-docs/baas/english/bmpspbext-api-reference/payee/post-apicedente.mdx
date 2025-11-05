@@ -1,0 +1,9 @@
+---
+title: "59 - Add Payer"
+openapi: post /api/Cedente
+version: 'English'
+---
+
+Through this endpoint, partners can register a **Payer** number, as this process is necessary to initiate the registration of bankslips.
+
+To use this endpoint, it is required to have an active account with BMP-274. The account creation can be done through the /api/v2/Conta endpoint. After creating the account and the payer, it is necessary to link the payer to a portfolio using the /api/Cedente/AdicionarCarteira endpoint.

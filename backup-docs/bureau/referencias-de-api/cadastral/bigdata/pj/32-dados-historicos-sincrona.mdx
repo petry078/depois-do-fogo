@@ -1,0 +1,64 @@
+---
+title: "32 - Dados Históricos Síncrona"
+openapi: post /Bureau/HistoricoCadastralPJ
+---
+
+Este endpoint realiza consultas síncronas e retorna, em formato de ‘String JSON’ serializada, os dados históricos de um documento jurídico. 
+
+A resposta contém as seguintes informações principais: 
+
+* Idade da empresa; 
+* Lista de CNAEs; 
+* Lista de nomes; 
+* Lista de regimes fiscais.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{
+    "Age": Numero,
+    "CnaeHistoryList": [
+        {
+            "Activity": "String",
+            "ChangeDate": "Data",
+            "Code": "String",
+            "DocNumber": "String",
+            "EconomicActivityDivision": "String",
+            "EconomicActivityGroup": "String",
+            "IsMainEconomicActivity": Boolean
+        }
+    ],
+    "CnaeTotalChanges": Numero,
+    "CurrentName": "String",
+    "HeadquarterTotalChanges": int,
+    "LastDateChanged": "Data",
+    "LastLegalNatureChanged": "Data",
+    "LastNameChanged": "Data",
+    "NameHistoryList": [
+        {
+            "ChangeDate": "Data",
+            "Name": "String",
+            "OfficialName": "String",
+            "TradeName": "String"
+        }
+    ],
+    "NameTotalChanges": Numero,
+    "TaxRegimeHistoryList": [
+        {
+            "ChangeDate": "Data",
+            "TaxRegime": "String"
+        }
+    ],
+    "TaxRegimeTotalChanges": Numero,
+    "TotalChanges": Numero,
+    "Identificador": "String",
+    "StatusConsulta": {
+        "Code": Numero,
+        "Message": "String"
+    }
+}
+```
+
+</Expandable>

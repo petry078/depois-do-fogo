@@ -1,0 +1,80 @@
+---
+title: "34 - Registro de Veículo"
+openapi: post  /Proposta/IncluirDadosVeiculo
+---
+
+Por meio deste endpoint o parceiro inclui os dados de veículo para uma proposta.
+O veículo obrigatoriamente deve ter uma placa informada, demais campos são opcionais. 
+Os dados de veículos são validados pelos nossos analistas de crédito e servem como base para aprovar ou rejeitar a proposta. O uso será de acordo com a necessidade da integração.
+
+**Regras e Validações:**
+
+* A mesma placa não pode ser incluída mais de uma vez na proposta;
+* Campos alfanuméricos serão truncados conforme o tamanho definido no manual;
+* O campo `documentoFederalProprietario` aceita strings com 11 caracteres para CPF e 14 caracteres para CNPJ (apenas números).
+
+## Mensagens de erro
+
+A tabela abaixo representa as mensagens de erro que podem ser retornadas ao tentar realizar uma requisição.
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+<Note>No exemplo de retorno ao lado, o campo `code` representa a coluna **Código** desta tabela; o campo `context` representa a coluna **Código Detalhado**; e o campo `message` representa a coluna **Mensagem**.</Note>
+
+| Categoria | Operação                     | Ação                | Código  | Código Detalhado | Mensagem                                                                                                               |
+|-----------|------------------------------|---------------------|---------|------------------|------------------------------------------------------------------------------------------------------------------------|
+| Proposta  | IncluirPropostaDadosVeiculo  | IncluirDadosVeiculo  | C0112  | V0001            | Proposta não encontrada                                                                                                |
+| Proposta  | IncluirPropostaDadosVeiculo  | IncluirDadosVeiculo  | C0112  | V0002            | A Proposta não pertence à esta Integração                                                                              |
+| Proposta  | IncluirPropostaDadosVeiculo  | IncluirDadosVeiculo  | T0680  | D0001            | Proposta não encontrada                                                                                                |
+| Proposta  | IncluirPropostaDadosVeiculo  | IncluirDadosVeiculo  | T0680  | D0002            | Chassi já cadastrada nessa proposta                                                                                    |
+| Proposta  | IncluirPropostaDadosVeiculo  | IncluirDadosVeiculo  | T0680  | D0003            | Codigo identificador já cadastrado nessa proposta                                                                      |
+</Expandable>
+
+## Tabela de códigos auxuliares
+
+<Expandable title= "Tabelas">
+<Expandable title=" TipoVeículo">
+  | ID | Descrição      |
+  |----|----------------|
+  | 1  | Particular     |
+  | 2  | Comercial      |
+  | 3  | Oficial        |
+  | 4  | Diplomático    |
+  | 5  | Especial       |
+  | 6  | Colecionador   |
+</Expandable>
+
+<Expandable title="Tabela TipoRestrição">
+  | ID | Descrição                       |
+  |----|---------------------------------|
+  | 1  | Arredondamento mercantil/leasing |
+  | 2  | Reserva e domínio/outros        |
+  | 3  | Alienação fiduciária            |
+  | 4  | Penhor                          |
+</Expandable>
+
+<Expandable title="Tabela TipoChassi">
+  | ID | Descrição   |
+  |----|-------------|
+  | 1  | Remarcado   |
+  | 2  | Normal      |
+</Expandable>
+
+<Expandable title="Tabela SituaçãoGravame">
+  | ID | Descrição                                  |
+  |----|-------------------------------------------|
+  | 2  | Significa que existe alguma pendência gravame |
+</Expandable>
+
+<Expandable title="Tabela OrigemGravame">
+  | ID | Descrição  |
+  |----|------------|
+  | 1  | Interno    |
+  | 2  | Externo    |
+  | 3  | Ambos      |
+</Expandable>
+---------------
+</Expandable>
+

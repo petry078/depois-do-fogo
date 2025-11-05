@@ -1,0 +1,18 @@
+---
+title: "37 - Liberação para Pagamento"
+openapi: post /Proposta/Liberar
+version: 'English'
+---
+
+Through this endpoint, our partner can release the proposal to the payment queue after receiving the “finalized” proposal status. In this case, the disbursement process will be our responsibility.
+
+<Expandable title="Messaging">
+| Category | Operation           | Action   | Code   | Detailed Code | Message                                                                                                      |
+|----------|---------------------|----------|--------|---------------|--------------------------------------------------------------------------------------------------------------|
+| Proposta | PropostaLiberar     | Liberar  | C0065  | V0001         | The proposal cannot be released by this partner                                                              |
+| Proposta | PropostaLiberar     | Liberar  | C0065  | V0002         | The proposal has already been released                                                                       |
+| Proposta | PropostaLiberar     | Liberar  | C0065  | V0003         | The proposal cannot be released because its status is `{SituacaoPropostaEnum.GetDescricao(proposta.Situacao)}`|
+| Proposta | PropostaLiberar     | Liberar  | C0112  | V0001         | Proposal not found                                                                                           |
+| Proposta | PropostaLiberar     | Liberar  | C0112  | V0002         | The Proposal does not belong to this Integration                                                             |
+| Proposta | PropostaLiberar     | Liberar  | C0187  | V0001         | Provide the subject of the history                                                                          |
+</Expandable>

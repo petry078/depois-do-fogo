@@ -1,0 +1,23 @@
+---
+title: "28 - Consultar"
+openapi: post /Proposta/Consultar
+---
+
+Por meio deste endpoint o parceiro consulta a proposta, obtendo o retorno dos campos principais
+
+## Mensagens de erro
+
+A tabela abaixo representa as mensagens de erro que podem ser retornadas ao tentar realizar uma requisição.
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+<Note>No exemplo de retorno ao lado, o campo `code` representa a coluna **Código** desta tabela; o campo `context` representa a coluna **Código Detalhado**; e o campo `message` representa a coluna **Mensagem**.</Note>
+
+| Categoria | Operação      | Ação      | Código | Código Detalhado | Mensagem                                                                                                      |
+|-----------|---------------|-----------|--------|------------------|---------------------------------------------------------------------------------------------------------------|
+| Proposta  | ConsultaProposta | Consultar | C0019  | V0001            | Produto não configurado para esta integração                                                               |
+| Proposta  | ConsultaProposta | Consultar | C0113  | V0001            | Proposta não encontrada                                                                                    |
+| Proposta  | ConsultaProposta | Consultar | C0113  | V0002            | A Proposta não pertence à esta Integração                                                                  |
+</Expandable>

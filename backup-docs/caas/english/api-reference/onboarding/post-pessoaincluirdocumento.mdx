@@ -1,0 +1,41 @@
+---
+title: "6 - Include Document"
+openapi: post /Pessoa/IncluirDocumento
+version: 'English'
+---
+
+Through this endpoint, the partner uploads a document and attaches it to the person's record.
+
+<Expandable title="Messages">
+| Categoria | Operação                  | Ação             | Código | Código Detalhado | Mensagem                                                        |
+|-----------|---------------------------|------------------|--------|------------------|-----------------------------------------------------------------|
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0049  | V0001            | Informe o nome do arquivo                                       |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0049  | V0002            | Falha ao enviar Documento                                       |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0049  | V0003            | Documento não pode ser alterado pois está em processo de análise automática. |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0108  | V0001            | Documento Federal deve ser informado                            |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0108  | V0002            | Cliente não encontrado com o documento `{documentoCliente}`       |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0108  | V0003            | Cliente não cadastrado pelo parceiro de integração              |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0107  | V0001            | Extensão do arquivo é inválida. Permitido: [txt,bmp,jpg,jpeg,gif,png,pdf,doc,docx,xls,xlsx,zip] |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0107  | V0002            | Tipo de Documento inválido                                     |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0107  | V0003            | Documento deve ser enviado                                     |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0020  | V0001            | Extensão do arquivo é inválida. Permitido: `[{GRANTTYPES}]`       |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0001            | Tipo de Parceiro inválido                                      |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0002            | CPF Inválido                                                   |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0003            | CNPJ Inválido                                                  |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0004            | Documento já cadastrado                                        |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0005            | Documento já cadastrado em outro registro                      |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0006            | Nome deve ser informado                                        |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0007            | Origem de Cliente inválido                                     |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0008            | Informe o campo [Cliente Desde]                                |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0009            | Atividade Profissional Inválida                                |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0001            | Informe o Cliente                                              |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0002            | Documento do Cliente é inválido                                |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0016            | EPCodigo não informado                                         |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0017            | Vendedor não encontrado                                        |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0018            | Promotor não encontrado                                        |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0019            | Informe o Tipo de Operação                                     |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0020            | Informe o Valor                                                |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0021            | Informe a Quantidade de Parcelas                               |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0022            | Formato de cálculo inválido                                    |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0023            | Cliente deve ser pessoa física                                 |
+</Expandable>

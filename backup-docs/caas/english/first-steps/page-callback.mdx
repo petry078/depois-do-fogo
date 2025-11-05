@@ -1,0 +1,73 @@
+---
+title: "Technical Callback Procedure"
+version: 'English'
+---
+
+For us, the connection between systems is essential to ensure that the performance of our applications delivers the intended results for our partners. The implementation of Callbacks becomes indispensable as it enables a range of significant advantages.
+
+Through callback calls, it is possible to promote effective communication among all areas involved in the process. This way, there is no need for incessant API polling; instead, we send information, updates, and notifications accurately through callbacks. This reduces the volume of requests, promoting a more efficient flow regarding the overall system performance.
+
+The callback for monitoring the status of proposals should be sent to both the homologation environment and the production environment, ideally using different URLs. This callback is sent via Query Parameter.
+
+## Accepted Authentication Methods for the Callback
+
+| **Authentication**            | **Key**                                          |
+|-------------------------------|--------------------------------------------------|
+| Bearer Token                  | Authorization    | Bearer `<token>`                |
+| API Key                       | API-Key          | `<your_api_key>`                |
+| Basic Authentication          | Authorization    | Basic `<base64_encoded_username:password>` |
+| X-API-Key                     | X-API-Key        | `<your_api_key>`                |
+| Digest Authentication         | Authorization    | Digest `<digest_hash>`          |
+| JWT (JSON Web Token)         | Authorization    | Bearer `<JWT_token>`            |
+| HMAC (Hash-based Message Authentication Code) | Authorization | HMAC `<hash_value>` |
+| OAuth Tokens                  | Authorization    | Bearer `<OAuth_token>`          |
+| AWS Signature                 | Authorization    | AWS `<signature>`               |
+| Client Certificates           | Certificate      | `<client_certificate>`          |
+
+## Example of Proposal Callback
+
+Here’s an example of a URL and how we parameterize it for reception:
+**xxxxxxxxxx.com.br?proposal={PROPOSAL}&status={STATUS}&identifier={IDENTIFIER}**
+
+Where: 
+
+**Proposal:** Unique GUID of the proposal generated in the response at the time of inclusion of the proposal.
+
+**Status:** ID of the status of the proposal in our system.
+
+**Identifier:** If sent, this field represents the operation code sent when including the proposal.
+
+## ID Table
+
+| **ID** | **Description**          | **Objective**                                                                                       |
+|-------|------------------------|---------------------------------------------------------------------------------------------------|
+| 0     | In Draft               | Proposal is in draft                                                                                |
+| 1     | Under Review           | Proposal has been sent to the review queue                                                          |
+| 2     | Approved               | Proposal has been approved by the credit analysis department                                          |
+| 3     | Rejected               | Proposal has been rejected by the credit analysis department                                          |
+| 4     | Canceled               | Proposal has been canceled by the credit analysis department                                         |
+| 5     | Pending                | Proposal has been marked as pending by the credit analysis department; requires integrator intervention to return to the review queue |
+| 6     | Finalized              | Proposal has been finalized                                                                          |
+| 7     | Verified               | Proposal has been verified by the formalization department                                           |
+| 8     | Released               | Proposal has been released by the formalization department for payment                               |
+| 9     | Paid                   | Proposal has been paid by the financial department                                                   |
+| 10    | Assigned               | Proposal has been assigned to the fund                                                               |
+| 11    | Payment Pending        | Proposal has been marked as pending payment due to inconsistencies in banking data; requires integrator intervention to provide the correct payment data and return to the payment queue |
+
+**Note:** In addition to the data already sent in the Query (Proposal GUID, Status, and Identifier), the callbacks for Paid "9" and Payment Pending "11" have a body with the field "Occurrence Description," which informs the reason for the payment pending when it is status "11," and when it is status "9," it returns with the text "Credit or debit executed." Below are examples of returns:
+
+**Status 09:**
+
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src="/caas/images/status9.jpg" alt="status image"  />
+</div>
+
+**Status 11:**
+
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src="/caas/images/status11.jpg" alt="status image"  />
+</div>
+
+## Final Considerations
+
+It is recommended that the endpoint configured to receive callbacks mainly functions as a repository, minimizing processing at the time of reception to avoid delays. Implementing complex processes during the reception of callbacks can result in timeouts and communication failures, compromising the efficiency of the system. Opt for processing the received messages asynchronously to improve the performance and reliability of your callback system.

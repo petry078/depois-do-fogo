@@ -1,0 +1,111 @@
+---
+title: "5 - Incluir Documento"
+openapi: post /Pessoa/IncluirDocumento
+version: 'Português'
+---
+
+Por meio deste endpoint o parceiro executa o upload de um documento e anexa junto ao cadastro da pessoa. 
+
+### Incluir Documento
+
+<Expandable title="Tabela Tipo Documento">
+
+| ID  | Descrição                         | Tipo Pessoa              |
+|-----|-----------------------------------|--------------------------|
+| 18  | Comprovante Utilização Equip.     | Pessoa Física e Jurídica |
+| 30  | CCB                               | Pessoa Física e Jurídica |
+| 35  | Nota Fiscal Garantia              | Pessoa Física e Jurídica |
+| 36  | Quitação de Garantia              | Pessoa Física e Jurídica |
+| 37  | Laudo Técnico                     | Pessoa Física e Jurídica |
+| 40  | Documento Veículo (DUT)           | Pessoa Física e Jurídica |
+| 41  | Orçamento                         | Pessoa Física e Jurídica |
+| 42  | Nota Fiscal Garantia Adicional    | Pessoa Física e Jurídica |
+| 43  | Documento Veículo (DUT-Verso)     | Pessoa Física e Jurídica |
+| 44  | Nota Fiscal (Veículo)             | Pessoa Física e Jurídica |
+| 50  | Nota Fiscal                       | Pessoa Jurídica          |
+| 51  | Apólice do Seguro                 | Pessoa Jurídica          | 
+| 52  | Nota Promissória                  | Pessoa Física e Jurídica |
+| 53  | CRV/CRLV                          | Pessoa Física e Jurídica |
+| 54  | Foto Veículo/Máquina              | Pessoa Física e Jurídica |
+| 56  | Frota                             | Pessoa Física e Jurídica |
+| 58  | Foto do Estabelecimento           | Pessoa Jurídica          |
+| 63  | Contrato                          | Pessoa Física e Jurídica |
+| 65  | Comprovante Despachante           | Pessoa Física e Jurídica |
+| 68  | Outros                            | Pessoa Física e Jurídica |
+| 69  | Gravame                           | Pessoa Física e Jurídica |
+| 70  | Quadro Societário (QSA)           | Pessoa Física e Jurídica |
+| 71  | Ata de Assembleia                 | Pessoa Física e Jurídica |
+| 72  | Conta de Terceiro (autorização)   | Pessoa Física e Jurídica |
+| 73  | Diagrama Unifilar                 | Pessoa Física e Jurídica |
+| 74  | Parecer de Acesso                 | Pessoa Física e Jurídica |
+| 75  | ART do Responsável                | Pessoa Física e Jurídica |
+| 76  | Comprovante de Averbação          | Pessoa Física e Jurídica |
+| 77  | Assinatura                        | Pessoa Física e Jurídica |
+| 78  | Comprovante Conta Bancária        | Pessoa Física e Jurídica |
+| 79  | Termo de Consentimento            | Pessoa Física e Jurídica |
+| 90  | FGTS - Comprovante Averbacao      | Pessoa Física e Jurídica |
+| 91  | FGTS - Comprovante Cancel.        | Pessoa Física e Jurídica |
+| 92  | FGTS - Comprovante Pagamento      | Pessoa Física e Jurídica |
+| 95  | Termo de Endosso                  | Pessoa Física e Jurídica |
+| 96  | Cupom Fiscal                      | Pessoa Física e Jurídica |
+| 97  | Proposta Comprovante Pagamento    | Pessoa Física e Jurídica |
+| 98  | Laudo de Avaliação do Veículo     | Pessoa Física e Jurídica |
+| 100 | Boletim Subscr. Nota Comercial    | Pessoa Física e Jurídica |
+| 101 | Termo Const. Nota Comercial       | Pessoa Física e Jurídica |
+| 102 | Termo de Garantia                 | Pessoa Física e Jurídica |
+| 104 | Matricula do Imóvel               | Pessoa Física e Jurídica |
+| 106 | Comprovante de Cancelamento       | Pessoa Física e Jurídica |
+| 107 | Termo Aditivo                     | Pessoa Física e Jurídica |
+| 108 | CPF - Representante Legal         | Pessoa Física e Jurídica |
+| 109 | RG - Avalista                     | Pessoa Física e Jurídica |
+| 110 | CNH - Avalista                    | Pessoa Física e Jurídica |
+| 111 | Comp. de resid. - Avalista        | Pessoa Física e Jurídica |
+| 112 | CPF - Avalista                    | Pessoa Física e Jurídica |
+| 115 | Certidao de casamento-Avalista    | Pessoa Física e Jurídica |
+| 116 | Comp. de renda - Avalista         | Pessoa Física e Jurídica |
+| 117 | RG - Rep. Legal                   | Pessoa Física e Jurídica |
+| 118 | CNH - Rep. Legal                  | Pessoa Física e Jurídica |
+| 119 | Comp. de resid. - Rep. Legal      | Pessoa Física e Jurídica |
+| 120 | CPF - Rep. Legal                  | Pessoa Física e Jurídica |
+| 122 | Certid de casamento-Rep.Legal     | Pessoa Física e Jurídica |
+| 123 | Comp. de renda - Rep. Legal       | Pessoa Física e Jurídica |
+  
+</Expandable>
+
+### Mensagens de erro
+
+<Expandable title="Mensageria">
+
+| Categoria | Operação                  | Ação             | Código | Código Detalhado | Mensagem                                                                                        |
+|-----------|---------------------------|------------------|--------|------------------|-------------------------------------------------------------------------------------------------|
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0049  | V0001            | Informe o nome do arquivo                                                                       |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0049  | V0002            | Falha ao enviar Documento                                                                       |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0049  | V0003            | Documento não pode ser alterado pois está em processo de análise automática.                    |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0108  | V0001            | Documento Federal deve ser informado                                                            |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0108  | V0002            | Cliente não encontrado com o documento `{documentoCliente}`                                     |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0108  | V0003            | Cliente não cadastrado pelo parceiro de integração                                              |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0107  | V0001            | Extensão do arquivo é inválida. Permitido: [txt,bmp,jpg,jpeg,gif,png,pdf,doc,docx,xls,xlsx,zip] |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0107  | V0002            | Tipo de Documento inválido                                                                      |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0107  | V0003            | Documento deve ser enviado                                                                      |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | C0020  | V0001            | Extensão do arquivo é inválida. Permitido: `[{GRANTTYPES}]`                                     |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0001            | Tipo de Parceiro inválido                                                                       |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0002            | CPF Inválido                                                                                    |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0003            | CNPJ Inválido                                                                                   |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0004            | Documento já cadastrado                                                                         |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0005            | Documento já cadastrado em outro registro                                                       |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0006            | Nome deve ser informado                                                                         |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0007            | Origem de Cliente inválido                                                                      |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0008            | Informe o campo [Cliente Desde]                                                                 |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0596  | D0009            | Atividade Profissional Inválida                                                                 |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0001            | Informe o Cliente                                                                               |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0002            | Documento do Cliente é inválido                                                                 |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0016            | EPCodigo não informado                                                                          |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0017            | Vendedor não encontrado                                                                         |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0018            | Promotor não encontrado                                                                         |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0019            | Informe o Tipo de Operação                                                                      |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0020            | Informe o Valor                                                                                 |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0021            | Informe a Quantidade de Parcelas                                                                |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0022            | Formato de cálculo inválido                                                                     |
+| Pessoa    | UploadDocumentoPessoa     | IncluirDocumento | T0665  | D0023            | Cliente deve ser pessoa física                                                                  |
+
+</Expandable>

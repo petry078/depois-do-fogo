@@ -1,0 +1,1358 @@
+---
+title: "Layout CNAB 240"
+version: 'Português'
+---
+
+## 1. Introdução
+
+Este manual apresenta um padrão para a troca de informações entre as empresas e a BMP, a ser adotado na prestação de serviços bancários que possibilitem esse intercâmbio. Baseado nas informações necessárioas para a implementação de cada tipo de serviço/produto, o padrão defgine um conjunto de registros/campos que devem compor o arquivo de troca de informações.
+
+O padrão abrange os seguintes tipos de serviços/produtos:
+
+* Pagamento através de crédito em conta;
+* Pagamento de títulos de cobrança.
+
+Cada tipo de serviço/produto tem um objetivo específico e a sua abrangência é detalhada através de um diagrama onde estão representados as entidades participantes e o fluxo de troca de informações entre elas.
+
+Para cada fluxo de informações são identificados os eventos que podem desencadear a troca de informações entre as entidades.
+
+Todas as informações manipuladas são conceituradas visando um entendimento claro e preciso de todo o processo.
+
+O documento está dividio nos seguintes tópicos:
+
+1. **Introdução**: apresenta uma visão geral dos tipos de serviços/produtos disponíveis e o contexto em que ocorrem, identificando as entidades origem e destino de cada fluxo de troca de informações.
+2. **Estrutura do Arquivo**: define a composição do arquivo (header, lotes de serviço/produto e trailer), conceituando cada tipo de registro existente e especificando a forma de utilização de cada um deles por tipo de serviço/produto, e apresenta o layout do header e do trailer de arquivo.
+3. **Serviço/Produto**: apresenta detalhadamente cada serviço/produto disponível e o contexto em que ocorrem, identificando as entidades origem e destino de cada fluxo de troca de informações.
+    * **Pagamentos**: conceitua o serviço/produto Pagamentos através da definição do objetivo, das entidades envolvidas e do fluxo de troca de informações, e apresenta o layout dos registros/segmentos a serem utilizados na sua implementação. Este tipo de serviço/produto possibilita a realização de transferência interna entre contas da BMP, TEDs ou pagamentos de títulos de cobrança.
+4. **Descrição dos Campos**: conceitua todos os campos componentes do layout dos registros utilizados em cada um dos tipos de serviço/produto. Para facilitar a compreensão, os campos estão classificados em genéricos, campos utilizados em mais que um tipo de serviço/produto e específicos, campos utilizados em um único tipo de serviço/produto e cada descrição é identificada através de um código composto da seguinte forma `Xnnn`, onde:
+    * **X** é a sigla atribuída para cada tipo de serviço/produto;
+    * **nnn** é o número sequencial, a partir de 001, dentro de uma sigla.
+
+Tabela de siglas atribuídas na descrição dos campos, de acordo com o serviço/produto.
+
+| Tipo do Campo | Sigla | Descrição da Sigla                     |
+|---------------|-------|----------------------------------------|
+| Genérico      | G     | Genérico                               |
+| Específico    | L     | Pagamento de títulos de cobrança.      |  
+| Específico    | P     | Pagamento através de crédito em conta. |
+
+Em cada layout de registro apresentado, é especificado o código da descrição de cada campo. Através deste código, deve-se acessar o tópico **Descrição dos Campos** e buscar a descrição do campo que se deseja consultar. As descrições de campos assinaladas com * antes do código, merecem uma atenção especial.
+
+### Manutenção das Versões do Manual
+
+A versão é identificada através de um código com a seguinte composição `VV.R`, onde:
+
+* `VV` (dois dígitos): número da versão;
+* `R` (um dígito): número do release.
+
+### Release
+
+Será alterado sempre que ocorrer alterações de campo **USO EXCLUSIVO CNAB** ou alteração na descrição de campos.
+
+### Versão do layout de lotes
+
+Será alterado quando ocorrer inclusão/exclusão de campos.
+
+### Versão de layout de arquivo
+
+Será alterado quando ocorrer inclusão/exclusão de serviços/produtos (lotes de serviços/produtos).
+
+### Entidades Participantes
+
+| Entidade              | Descrição                                                                                                           |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------| 
+| Pagador               | Pessoa Física ou Jurídica que irá efetuar o pagamento de um compromisso financeiro.                                 |
+| Banco do Pagador      | Banco detentor da conta corrente do Pagador, a qual será debitada para efetivação de um compromisso feinanceiro.    |
+| Beneficiário          | Pessoa Física ou Jurídica que irá receber os créditos de um compromisso financeiro.                                 |
+| Banco do Beneficiário | Banco detentor de conta corrente do Beneficiário, a qual será creditada na liquidação de um compromisso financeiro. |
+
+## 2. Estrutura do Arquivo
+
+### Nome do Arquivo
+
+Utilizar a seguinte regra para a formação do nome do arquivo CNAB 240:
+
+* **CP**: prefixo;
+* **DD**: dia da geração do arquivo;
+* **MM**: mês da geração do arquivo;
+* **SSSSSS**: número sequencial do arquivo preenchido com zeros à esquerda até o limite de seus dígitos, conforme a conta;
+* A extensão do arquivo deve ser:
+    * **.REM**: para arquivos de remessa;
+    * **.RET**: para arquivos de retorno.
+
+Exemplo de nome do arquivo:
+
+* Remessa: `CP1012000001.REM`;
+* Retorno: `CP1012000003.RET`.
+
+### Composição do Arquivo
+
+O arquivo de troca de informações entre a BMP e as empresas é composto de um registro header de arquivo, um ou mais lotes de serviço/produto e um registro de trailer de arquivo.
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-240/1.png)
+
+Com a estrutura apresentada, um único arquivo pode conter varios lotes de serviços/produtos distintos. Este procedimento permite que sejam consolidadas as informações que a BMP e as empresas desejam trocar entre si, em um único arquivo.
+
+### Serviço/Produto
+
+Um lote de Serviço/Produto típico é composto de um registro header de lote, ou um mais registros detalhe, e um registo trailer de lote. Alguns Serviços/Produtos usam registros adicionais de tipo 2 e 4 contendo informações sobre posições iniciais e finais de lote, como no caso de Extrato para Gestão de Caixa que disponibiliza Saldos iniciais e finais de diferentes Naturezas de uma Conta Corrente.
+
+**Um lote de Serviço/Produto** só pode conter um único **Tipo de Serviço/Produto**.
+
+Os registros header (1) e trailer (5) de lote e os de detalhe (3) são compostos de campos fixos, comuns a todos os tipos de Serviço/Produto, e campos específicos, padrôes para cada um dos tipos de Serviço/Produto.
+
+### Registro de detalhe
+
+Um registro de detalhe é composto de um ou mais segmentos, dependendo do tipo de Serviço/Produto associado ao lote de Serviço/Produto.
+
+Existem vários tipos de segmentos diferentes e cada um deles pode ser utilizado em um ou mais lotes de Serviço/Produto, tanto nos fluxos de Remessa (Cliente enviando informações para a BMP Money Plus) como nos fluxos de Remessa (Cliente enviando informações para a BMP Money Plus) como nos fluxos de Retorno (BMP Money Plus enviando informações para o Cliente), conforme discriminados a seguir:
+
+| Lote                                           | Serviço/Produto | Segmento Remessa e Retorno           |
+|------------------------------------------------|-----------------|--------------------------------------|
+| Pagamento através de crédito em conta Corrente | Pagamentos      | A (Obrigatório) e B (Obrigatório)    |
+| Pagamento de títulos de cobrança               | Pagamentos      | J (Obrigatório) e J-52 (Obrigatório) |
+
+### Tamanho do Registro
+
+O tamanho do registro deve ser de 240 bytes.
+
+### Alinhamento de Campos
+
+* Campos Numéricos (Num) = Sempre à direita e preenchidos com zeros à esquerda;
+* Campos Alfanuméricos (Alfa) = Sempre à esquerda e preenchidos com brancos à direita.
+
+### Header e Trailer do Arquivo
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-240/2.png)
+
+Legendas:
+
+* **Controle**: banco de origem ou destino do arquivo (BMP Money Plus);
+* **Empresa**: empresa que firmou o convênio de prestação de serviços com o Banco;
+* **Conta Corrente (Empresa)**: Número da conta corrente do convênio firmado entre a BMP Money Plus e Empresa para a prestação de um tipo de serviço. QUando o arquivo contiver mais que um tipo de serviço diferente, os dados da conta corrente a serem colocados aqui devem ser acordados entre a BMP Money Plus e a Empresa.
+
+### Registro Trailer de Arquivo
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-240/3.png)
+
+Legendas:
+
+* **Controle**: banco origem ou destino do arquivo (BMP Money Plus);
+* **Totais**: Totais de controle para checagem do arquivo. 
+
+## 3. Serviços/Produtos
+
+### Pagamentos
+
+O produto Pagamentos tem por objetivo fornecer, aos Clientes da BMP Money Plus, os meios para racionalizar o processo de Contas a Pagar. 
+
+Este processo envolve pagamentos de compromissos que podem ser efetuados através de crédito em conta por meio de transferências internas ou TEDs.
+
+Tabela de **Entidades Participantes**:
+
+| Entidade            | Descrição                                                                                      |
+|---------------------|------------------------------------------------------------------------------------------------|
+| Pagador             | Cliente que entrega os Pagamentos a Banco para serem efetuados.                                |
+| Banco do Pagador    | Banco que detém os Pagamentos a serem efetuados.                                               |
+| Favorecido          | Pessoa física ou jurídica que se destina o pagamento.                                          |
+| Banco do Favorecido | Banco que detém a conta corrente do Favorecido, a qual é creditada na efetivação do pagamento. |
+
+### Fluxo de Informações
+
+O Pagador agenda, junto com a BMP Money Plus, os Pagamentos a serem efetuados. A BMP Money Plus, na data prevista, efetua o débito na conta corrente do Pagador e executa a instruçãopara crédito do pagamento ao Favorecido.
+
+A BMP Money Plus, na data prevista, efetua o débito na conta corrente do Pagador e executa a instrução para crédito do pagamento ao Favorecido. Este crédito será efetuado ao Banco do Favorecido através de crédito em conta, quando o Banco do Pagador é o mesmo Banco do Favorecido, ou através de TED e títulos em cobrança, via compensação.
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-240/4.png)
+
+### Eventos
+
+#### Pagamento e Pagamento de Título - Remessa
+
+| Evento                                                              | Segmento Pagamento | Segmento Título |
+|---------------------------------------------------------------------|--------------------|-----------------|
+| Agendamento do Pagamento - Regitro de Pagamentos a serem realizados | A, B               | J               |
+
+#### Pagamentos - Retorno
+
+| Evento                                                              | Segmento Pagamento | Segmento Título |
+|---------------------------------------------------------------------|--------------------|-----------------|
+| Confirmação/Rejeição do Agendamento do Pagamento Resposta (positiva ou negativa) sobre a aceitação do agendamento do pagemento | A, B               | J               |
+
+### Pagamento Através de Crédito em Conta por Meio de Transferência, TED ou PIX
+
+#### Registro Header de Lote
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-240/5.png)
+
+Legendas:
+
+* **Controle**: banco origem ou destino do arquivo (BMP Money Plus);
+* **Empresa**: cliente (pagador que firmou o convênio de prestação de serviços com o banco).
+
+#### Registro Detalhe - Segmento A (Obrigatório - Remessa/Retorno)
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-240/6.png)
+
+Legendas: 
+
+* **Controle**: banco de origem ou destino do arquivo (BMP Money Plus);
+* **Favorecido**: beneficiário, recebedor do pagamento;
+* **Crédito**: dados sobre o pagamento a ser efetuado.
+
+#### Registro Detalhe - Segmento B (Obrigatório - Remessa/Retorno)
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-240/7.png)
+
+Legendas:
+
+* **Controle**: banco origem ou destino do arquivo (BMP Money Plus);
+* **Favorecido**: beneficiário, recebedor do pagamento;
+* **Pagto**: dados sobre o pagamento a ser efetuado.
+
+#### Registro Trailer de Lote
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-240/8.png)
+
+Legendas:
+
+* **Controle**: banco origem ou destino do arquivo (BMP Money Plus);
+* **Totais**: totai de controle para chegagem de lote.
+
+### Pagamento de Títulos de Cobrança
+
+#### Registro Header de Lote
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-240/9.png)
+
+Legendas:
+
+* **Controle**: banco origem ou destino do arquivo (BMP Money Plus);
+* **Empresa**: cliente (pagador) que firmou o convênio de prestação de serviços com o banco.
+
+#### Registro Detalhe - Segmento J (Obrigatório - Remessa/Retorno)
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-240/10.png)
+
+* **Controle**: banco de origem ou destino do arquivo (BMP Money Plus);
+* **Favorecido**: beneficiário, recebedor do pagamento;
+* **Crédito**: dados sobre o pagamento a ser efetuado.
+
+#### Registro Detalhe - Segmento J-52 (Obrigatório - Remessa/Retorno)
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-240/11.png)
+
+Legendas:
+
+* **Pagador**: dados sobre o beneficiário responsáveis pela emissão do título original.
+
+#### Registro Trailer de Lote
+
+![](https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/baas/cnab-240/12.png)
+
+Legendas:
+
+* **Controle**: banco origem ou destino do arquivo (BMP Money Plus);
+* **Totais**: totai de controle para chegagem de lote.
+
+## 4. Descrição de Campos
+
+### C - Títulos em Cobrança
+
+**C004 - Código de Movimento Remessa**
+
+Código adotado pela FEBRABAN, para identificar o tipo de movimentação enviado nos registros do arquivo de remessa.
+
+Cada Banco definirá os campos a serem alterados para o código de movimento `31`.
+
+| Domínio | Descrição                                             |
+|---------|-------------------------------------------------------|
+| 01      | Entrada de Títulos                                    |
+| 02      | Pedidos de Baixa                                      |
+| 03      | Protesto para Fins Falimentares                       |
+| 04      | Concessão de Abatimento                               |
+| 05      | Cancelamento de Abatimento                            |
+| 06      | Alteração de Vencimento                               |
+| 07      | Concessão de Desconto                                 |
+| 08      | Cancelamento de Desconto                              |
+| 09      | Protestar                                             |
+| 10      | Sustar Protesto e Baixar Título                       |
+| 11      | Sustar Protesto e Manter em Carteira                  |
+| 12      | Alteração de Juros de Mora                            |
+| 13      | Dispensar Cobrança de Juros de Mora                   |
+| 14      | Alteração de Valor/Percentual de Multa                |
+| 15      | Dispensar Cobrança de Multa                           |
+| 16      | Alteração de Valor/Data de Desconto                   |
+| 17      | Não conceder Desconto                                 |
+| 18      | Alteração do Valor de Abatimento                      |
+| 19      | Prazo Limite de Recebimento - Alterar                 |
+| 20      | Prazo Limite de Recebimento - Dispensar               |
+| 21      | Alterar número do título dado pelo Beneficiário       |
+| 22      | Alterar número controle do Participante               |
+| 23      | Alterar dados do Pagador                              |
+| 24      | Alterar dados do Sacador/Avalista                     |
+| 30      | Recusa de Alegação do Pagador                         |
+| 31      | Alteração de Outros Dados                             |
+| 33      | Alteração dos Dados do Rateio de Crédio               |
+| 34      | Pedido de Cancelamento dos Dados do Rateio de Crédito |
+| 35      | Pedido de Desagendamento do Débito Automático         |
+| 40      | Alteração de Carteira                                 |
+| 41      | Cancelar Protesto                                     |
+| 42      | Alteração de Especie de Título                        |
+| 43      | Transferência de carteira/modalidade de cobrança      |
+| 44      | Alteração de controle de cobrança                     |
+| 45      | Negativação Sem Protesto                              |
+| 46      | Solicitação de Baixa de Título Negativo Sem Protesto  |
+| 47      | Alteração do Valor Nominal do Título                  |
+| 48      | Alteração do Valor Mínimo/Percentual                  |
+| 49      | Alteração do Valor Máximo/Percentual                  |                  
+| 61      | Alteração para inclusão/manutenção de QR Code PIX     |
+
+### G - Campos Genéricos
+
+#### G001 - Código do Banco na Compensação
+
+Código fornecido pelo Banco Central para identificação do Banco que está recebendo ou enviando o arquivo, com o qual se firmou o contrato de prestação de serviços.
+
+Preencher `988` quando a transferência for efetuada para outra instituição financeira utilizando o código ISPB. Neste caso, deverá ser preenchido o código ISPB no campo 26.3B.
+
+#### G002 - Lote de Serviço
+
+Número sequencial para identificar univocamente um lote de serviço. Criado e controlado pelo responsável pela geração magnética dos dados contidos no arquivo.
+
+Preencher com `0001` para o primeiro lote do arquivo. Para os demais: número do lote anterior acrescido de 1. O número não poderá ser repetido dentro do arquivo.
+
+Se o registro for *Header do Arquivo*, preencher com `0000`.
+
+Se o registro do *Trailer do Arquivo*, preencher com `9999`.
+
+#### G003 - Tipo de Registro
+
+Código para identifiar o tipo de registro.
+
+| Domínio | Descrição                  |
+|---------|----------------------------|
+| 0       | Header de Arquivo          |  
+| 1       | Header de Lote             |
+| 2       | Registros Iniciais do Lote |
+| 3       | Detalhe                    |         
+| 4       | Registros Finais do Lote   |
+| 5       | Trailer de Lote            |
+| 9       | Trailer de Arquivo         |
+
+#### G004 - Uso Exclusivo CNAB
+
+Texto de observações destinado para uso exclusivo CNAB.
+
+Preencher com Brancos.
+
+#### G005 - Tipo de Inscrição da Empresa
+
+Código que identifica o tipo de inscrição da Empresa ou Pessoa Física perante uma instituição governamental.
+
+| Domínio | Descrição                  |
+|---------|----------------------------|
+| 0       | Isento/Não informado       | 
+| 1       | CPF                        |
+| 2       | CGC/CNPJ                   |
+| 3       | PIS/PASEP                  |
+| 9       | Outros                     |
+
+Preenchimento deste campo é obrigatório para DOC e TED (Forma de Lançamento = 03, 41 e 43).
+
+Para pagamento para o SIAPE com crédito e conta, o CPF deverá ser do primeiro titular.
+
+Para Produtos/Serviço Cobrança, considerar como obrigatório, a partir de 01/06/2015, somente CPF (código 1) ou CNPJ (código 2).
+
+Os demais códigos não deverão ser utilizados.
+
+#### G006 - Número de Inscrição da Empresa
+
+Número de inscrição da Empresa ou Pessoa Física perante uma Instituição governamental.
+
+Quando o Tipo de Inscrição for igual a zero (não informado), preencher com zeros.
+
+#### G007 - Código do Convênio no Banco
+
+Código adotado pelo Banco para identificar o Contrato entre este e a Empresa Cliente.
+
+#### G008 - Agência Mantenedora da Conta
+
+Código adotado pelo Banco responsável pela conta, para identificar a qual unidade está vinculada a conta corrente.
+
+#### G009 - Dígito Verificador da Agência
+
+Código adotado pelo Banco responsável pela conta corrente, para verificação da autenticidade do Código da Agência.
+
+#### G010 - Número da Conta Corrente
+
+Número adotado pelo Banco, para identificar univocamente a conta corrente utilizada pelo Cliente.
+
+#### G011 - Dígito Verificador da Conta
+
+Código adotado pelo responsável pela conta corrente, para verificação da autenticidade Número da Conta Corrente.
+
+Para os Bancos que se utilizam de duas posições para o Dígito Verificador do Número da Conta Corrente, preencher este campo com a primeira posição deste dígito.
+
+Exemplo:
+
+Número C/C = 45981-36
+Neste caso => Dígito Verificador da Conta = 3
+
+#### G012 - Dígito Verificador da Agência/Conta Corrente
+
+Código adotado pelo Banco responsável pela conta corrente, para verificação da autenticidade do par Código da Agência/Número da Conta Corrente.
+
+Para os Bancos que se utilizam de duas posições para o Dígito Verificador do Número da Conta Corrente, preencher este campo com a segunda posição deste dígito.
+
+Exemplo:
+
+Número C/C = 45981-36
+Neste caso => Dígito Verificador da Ag/Conta = 6
+
+#### G013 - Nome
+
+Nome que identifica a pessoa, física ou jurídica, a qual se quer fazer referência.
+
+#### G014 - Nome do Banco
+
+Nome que identifica o Banco que está recebendo ou enviando o arquivo.
+
+#### G015 - Código Remessa/Retorno
+
+Código para qualificar o envio ou devolução de arquivo entre a Empresa Cliente e o Banco prestador dos Serviços.
+
+| Domínio | Descrição                  |
+|---------|----------------------------|
+| 1       | Remessa (Cliente => Banco) |
+| 2       | Retorno (Banco => Cliente) |
+
+#### G016 - Data de Geração do Arquivo
+
+Data de criação do arquivo.
+
+Utilizar o formato DDMMAAAA (DIA MÊS ANO). 
+
+Exemplo: 06061992.
+
+#### G017 - Hora da Geração do Arquivo
+
+Hora da criação do arquivo.
+
+Utilizar o formado HHMMSS (HORAS MINUTOS SEGUNDOS).
+
+#### G018 - Número Sequencial do Arquivo
+
+Número sequencial adotado e controlado pelo responsável pela geração do arquivo para ordenar a disposição dos arquivos encaminhados.
+
+Evoluir um número sequencial a cada header de arquivo.
+
+#### G019 - Número da Versão do Layout do Arquivo
+
+Código para identificar qual a versão de layout do arquivo encaminhado.
+
+O código é composto de:
+
+* **Versão**: 2 dígitos;
+* **Release**: 1 dígito.
+
+#### G020 - Densidade de Gravação do Arquivo
+
+Densidade de gravação (BPI), do arquivo encaminhado.
+
+Domínio:
+
+* 1600 BPI;
+* 6250 BPI.
+
+#### G021 - Para Uso Reservado do Banco
+
+Texto de observações destinado para uso exclusivo do Banco.
+
+#### G022 - Para Uso Reservado da Empresa
+
+Texto de observações destinado para uso exclusivo da Empresa.
+
+#### G025 - Tipo de Serviço
+
+Código para indicar o tipo de serviço/produto (processo) contido no arquivo/lote.
+
+| Domínio | Descrição                  |
+|---------|----------------------------|
+| 51      | Transferência entre Contas |
+| 52      | TED                        |
+| 53      | Pagamento de Títulos       |
+| 54      | PIX                        |
+
+#### G028 - Tipo de Operação
+
+Código para identificar a transação que será realizada com os registros detalhe do lote.
+
+| Domínio | Descrição         |
+|---------|-------------------|
+| C       | Transação CNAB    |
+
+#### G029 - Forma de Lançamento
+
+Código para identificar a operação que está contida no lote.
+
+| Domínio | Descrição                                           |
+|---------|-----------------------------------------------------|
+| 11      | Pagamento de Contas e Tributos com Código de Barras |
+| 30      | Liquidação de Títulos do Próprio Banco              |
+| 31      | Pagamento de Títulos de Outros Bancos               |
+| 41      | TED - Outra Titularidade                            |
+| 43      | TED - Mesma Titularidade                            |
+| 45      | PIX Transferência                                   |
+
+#### G030 - Número da Versão do Layout do Lote
+
+Código para identificar qual a versão de layout do lote de arquivo encaminhado.
+
+O código é composto de Versão (2 dígitos) e Release (1 dígito).
+
+#### G031 - Mensagem 1/2
+
+Texto referente a mensagens que serão impressas nos documentos e/ou avisos a serem emitidos.
+
+* **Informação 1**: Genérica. Quando informada contará em todos os avisos e/ou documentos originados dos detalhes desse lote. **Informada no Header do Lote**.
+* **Informação 2**: Específica. Quando informada constará apenas naquele aviso ou documento identificado pelo detalhe. **Informada no Segmento A**.
+
+**Formatação para identificação para o SIAPE**: posição 178 a 197 (20 posições), onde: Órgão = 178 a 182 / UPAG = 183 a 191 / UG = 192 a 197.
+
+**Formatação para identificação de deposito judicial - Obrigatório para as Formas de Lançamentos = 71 e 7**: Posição 216 a 216 (1 posição).
+
+| Domínio | Descrição                                           |
+|---------|-----------------------------------------------------|
+| 1       | Ativo                                               |
+| 2       | Pensão Alimentícia Ativo                            |
+| 3       | Aposentado                                          |
+| 4       | Pensão Alimentícia Aposentado                       |
+| 5       | Pensionista                                         |
+| 6       | Pensão Alimentícia Pensionista                      |
+
+**Formatação para identificação Pagamento de Tributos Municipais ISS - LCP157**: `CCCCCCCCSSSSSSSMMAA`
+
+| Código | Descrição                                                                                                     |
+|--------|---------------------------------------------------------------------------------------------------------------|
+| C      | Número do Contribuinte no CNPJ (raiz), sem a indicação de filia e dígito verificador (CC.CCC.CCC - 8 dígitos) |
+| S      | Código do Serviço declarado ('Tipo de Registro' das Tabelas dos Leiautes do Sistema - 7 Dígitos)              |
+| M      | Mês de Competência (MM - 2 dígitos)                                                                           |
+| A      | Ano de Competência (AA - 2 dígitos)                                                                           |
+
+#### G032 - Endereço
+
+Texto referente a localização da rua/avenida, número, complemento e bairro utilizado para entrega de correspondência. Utilizado também para endereço de e-mail para entrega eletrônica da informação e para número de velular para envio de mensagens SMS.
+
+#### G033 - Cidade
+
+Texto referente ao nome do município componente do endereço utilizado para entrega de correspondência.
+ 
+#### G034 - CEP
+
+Código adotado pela Empresa Brasileira de Correios e Telégrafos (EBCT), para identificação de logradouros.
+
+#### G035 - Sufixo do CEP
+
+Código adotado Empresa Brasileira de Correios e Telégrafos (EBCT), para complementação do código de CEP.
+
+#### G036 - Estado/Unidade da Federação
+
+Código do estado, unidade da federação, componente do endereço utilizado para entrega de correspondências.
+
+#### G037 - Quantidade de Contas para Conciliação (Lotes)
+
+Número de indicativos de lotes de Conciliação Bancária enviados no arquivo. Somatória dos registros de tipo 1 e tipo de operação = E.
+
+Campo específico para o serviço de Conciliação Bancária.
+
+#### G038 - Número Sequencial do Registro no Lote
+
+Número adotado e controlado pelo responsável pela geração magnética dos dados contidos no arquivo, para identificar a sequência de registros encaminhados no lote.
+
+Deve ser inicializado sempre com `1`, em cada novo lote.
+
+#### G039 - Código de Segmento do Registro Detalhe
+
+Código para identificar o segmento do registro.
+
+#### G040 - Tipo de Moeda
+
+Código para identificar a moeda utilizada para expressar o valor do documento.
+
+Baseada em tabela padrão SWIFT, acrescida dos principais índices nacionais.
+
+| Domínio | Descrição       |
+|---------|-----------------|
+| BRL     | Real Brasileiro |
+
+#### G041 - Quantidade da Moeda
+
+Número de unidades do tipo de moeda identificada para cálculo do valor do documento.
+
+#### G042 - Data de Vencimento Nominal
+
+Data de vencimento nominal.
+
+Utilizar o formato DDMMAAAA.
+
+Exemplo: 06061992.
+
+#### G043 - Número do Documento Atribuído pelo Banco (Nosso Número)
+
+Número atribuído pelo Banco para identificar o lançamento, que será utilizado nas manutenções do mesmo.
+
+#### G044 - Data de Vencimento Nominal 
+
+Data de vencimento nominal.
+
+Utilizar o formato DDMMAAAA.
+
+Exemplo: 06061992.
+
+#### G045 - Valor do Abatimento
+
+Valor do abatimento (redução do valor do documento, devido a algum problema), expresso em moeda corrente.
+
+#### G046 - Valor do Desconto
+
+Valor do desconto (bonificação) sobre o valor nominal do documento, expresso em moeda corrente.
+
+#### G047 - Valor da Mora
+
+Valor do juros de mora, expresso em moeda corrente.
+
+#### G048 - Valor da Multa 
+
+Valor da multa, expresso em moeda corrente.
+
+#### G049 - Quantidade de Lotes do Arquivo
+
+Número obtido pela contagem dos lotes enviados no arquivo. Somatória dos registros de tipo 1.
+
+#### G050 - Valor do Imposto de Renda
+
+Valor do Imposto de Renda sobre o valor do documento, expresso em moeda corrente.
+
+#### G051 - Valor do Imposto sobre Serviços
+
+Valor do Imposto sobre Serviços sobre o valor do documento, expresso em moeda corrente.
+
+#### G052 - Valor do Imposto sobre Operações Financeiras
+
+Valor do Imposto sobre Operações Financeiras sobre o valor do documento, expresso em moeda corrente.
+
+#### G053 - Valor de Outras Deduções
+
+Valor descontado ao valor do documento, expresso em moeda corrrente.
+
+#### G054 - Valor de Outros Acréscimos
+
+Valor somado ao valor do documento, expresso em moeda corrente.
+
+#### G055 - Valor do INSS
+
+Valor de contribuição ao INSS sobre o valor do documento, expresso em moeda corrente.
+
+#### G056 - Quantidade de Registros do Arquivo
+
+Número obtido pela contagem dos registros enviados no arquivo. Somatória dos registros de tipo 0, 1, 3, 5 e 9.
+
+#### G057 - Quantidade de Registros do Lote
+
+Número obtido pela contagem dos registros enviados no lote do arquivo. Somatória dos registros de tipo 1, 2, 3, 4 e 5. Registros de tipo 2 e 4 são utilizados apenas em alguns produtos, como por exemplo Extrato para Geração de Caixa.
+
+#### G058 - Somatória de Quantidade de Moedas
+
+Valor obtido pela somatória das quantidades de moeda dos registros de detalhe.
+
+* Registro = 3;
+* Código de Segmento = {'A'/'J'}.
+
+#### G059 - Código das Ocorrências para Retorno/Remessa
+
+Código para identificar as ocorrências detectadas no processamento.
+
+Pode-se informar até 5 ocorrências simultaneamente, cada uma delas codificada com dois dígitos, conforme relação abaixo.
+
+| Domínio | Descrição                                                                                          |
+|---------|----------------------------------------------------------------------------------------------------|
+| 00      | Crédito ou Débito Efetivado - Este código indica que o pagamento foi confirmado                    |
+| 01      | Insuficiência de Fundos - Débito Não Efetuado                                                      |
+| 02      | Crédito ou Débito Cancelado pelo Pagador/Credor                                                    |
+| 03      | Débito Autorizado pela Agência - Efetuado                                                          |
+| AA      | Controle Inválido                                                                                  |
+| AB      | Tipo de Operação Inválido                                                                          |
+| AC      | Tipo de Serviço Inválido                                                                           |
+| AD      | Forma de Lançamento Inválida                                                                       |
+| AE      | Tipo/Número de Inscrição Inválido                                                                  |
+| AF      | Código de Convênio Inválido                                                                        |
+| AG      | Agência/Conta Corrente/DV Inválido                                                                 |
+| AH      | Nº Sequencial do Registro no Lote Inválido                                                         |
+| AI      | Código de Segmento de Detalhe Inválido                                                             |
+| AJ      | Tipo de Movimento Inválido                                                                         |
+| AK      | Código da Câmara de Compensação do Banco Favorecido/Depositário Inválido                           |
+| AL      | Código do Banco Favorecido, Instituição de Pagamento ou Depositário Inválido                       |
+| AM      | Agência Mantenedora da Conta Corrente do Favorecido Inválida                                       |
+| AN      | Conta Corrente/DV/Conta de Pagamento do Favorecido Inválido                                        |
+| AO      | Nome do Favorecido Não Informado                                                                   |
+| AP      | Data Lançamento Inválido                                                                           |
+| AQ      | Tipo/Quantidade da Moeda Inválido                                                                  |
+| AR      | Valor do Lançamento Inválido                                                                       |
+| AS      | Aviso ao Favorecido - Identificação Inválida                                                       |
+| AT      | Tipo/Número de Inscrição do Favorecido Inválido                                                    |
+| AU      | Logradouro do Favorecido Não Informado                                                             |
+| CA      | Código de Barras - Código do Banco Inválido                                                        |
+| CB      | Código de Barras - Código da Moeda Inválido                                                        |
+| CC      | Código de Barras - Dígito Verificador Geral Inválido                                               |
+| CD      | Código de Barras - Valor do Título Inválido                                                        |
+| CE      | Código de Barras - Campo Livre Inválido                                                            |
+| CF      | Valor do Documento Inválido                                                                        |
+| CG      | Valor do Abatimento Inválido                                                                       |
+| CH      | Valor do Desconto Inválido                                                                         |
+| CI      | Valor de Mora Inválido                                                                             |
+| CJ      | Valor da Multa Inválido                                                                            |
+| HG      | Lote de Serviço Fora de Sequência                                                                  |
+| HH      | Lote de Serviço Inválido                                                                           |
+| HI      | Arquivo não aceito                                                                                 |
+| HJ      | Tipo de Registro Inválido                                                                          |
+| HK      | Código Remessa / Retorno Inválido                                                                  |
+| HL      | Versão de layout inválida                                                                          |
+| H1      | Arquivo sem trailer                                                                                |
+| TA      | Lote Não Aceito - Totais do Lote com Diferença                                                     |
+| PA      | Pix não efetivado                                                                                  |
+| PJ      | Chave não cadastrada no DICT                                                                       |
+| PK      | QR Code inválido/vencido                                                                           |
+| PL      | Forma de iniciação inválida                                                                        |
+| PM      | Chave de pagamento inválida                                                                        |
+| PN      | Chave de pagamento não informada                                                                   |
+| 10      | Banco inválido                                                                                     |
+| 11      | Layout de lote inválido                                                                            |
+| 12      | Dígito verificador da agência inválido                                                             |
+| 13      | Dígito verificador da conta inválido                                                               |
+| 14      | Nome da empresa não bate com o nome da empresa do header do arquivo                                |
+| 15      | Forma de pagamento inválida                                                                        |
+| 16      | Quantidade de registros do lote não confere com a quantidade real                                  |
+| 17      | Número aviso de débito inválido                                                                    |
+| 18      | Código de instrução de movimento inválido                                                          |
+| 19      | Conta do segmento é igual a conta do header do lote                                                |
+| 20      | Código finalidade TED inválido                                                                     |
+| 21      | Aviso favorecido inválido                                                                          |
+| 22      | Uso exclusivo SIAPE inválido                                                                       |
+| 23      | Código ISPB inválido                                                                               |
+| 24      | Operação não autorizada                                                                            |
+| 25      | Não foi possível localizar a operação para registro da movimentação                                |
+| 26      | Serviço Indisponível                                                                               |
+| 27      | Documento Federal do Favorecido é inválido                                                         |
+| 28      | Conta de Origem não localizada                                                                     |
+| 29      | Transações TED são realizadas apenas em dias úteis                                                 |
+| 30      | Para Transferência entre o mesmo banco, utilize 'Transferência Interna'                            |
+| 31      | Tipo de Processamento da TED Inválido ou Inexistente                                               |
+| 32      | Horário não permitido para execução da TED                                                         |
+| 33      | Conta Inativa ou Fechada                                                                           |
+| 34      | Operador sem parceiro cadastrado                                                                   |
+| 35      | Parceiro não autorizado para a conta de Origem                                                     |
+| 36      | Operação não implementada                                                                          |
+| 37      | Erro ao importar o arquivo para o servidor                                                         |
+| 38      | Ocorreu um erro ao baixar o arquivo do servidor                                                    |
+| 39      | Não foi possível fazer o download do arquivo, pois ele ainda não foi gerado                        |
+| 40      | Ocorreu um erro ao gerar o arquivo                                                                 |
+| 41      | O arquivo deve estar comprimido para processamento (.zip)                                          |
+| 42      | O tamanho do arquivo (.zip) não pode exceder 500000 bytes                                          |
+| 43      | Não é possível processar mais de um arquivo por vez                                                |
+| 44      | Não foi possível encontrar detalhes na transação                                                   |
+| 45      | Operação agendada cancelada                                                                        |
+| 46      | Horário de processamento do CNAB 240 fora da grade horária para a operação de Pagamento de Títulos |
+| 47      | Duplicidade de código de barras encontrada no lote de Pagamento de Títulos                         |
+| 48      | Duplicidade de lote de Pagamento de Títulos com a mesma forma de lançamento                        |
+| 49      | Falha na execução da consulta de lote de Pagamento de Títulos                                      |
+| 50      | Consulta do título recusada                                                                        |
+| 51      | Quantidade de detalhes do lote insuficiente. Mínimo de 5 títulos para pagamento                    |
+| 52      | Valor da operação excede o valor disponível do limite configurado para a conta                     |
+| 53      | Valor da operação excede o valor disponível do limite configurado para o operador                  |
+| 54      | Conta de destino não localizada ou inválida                                                        |
+| 55      | Para envio de Pix através da chave, não informar os dados bancários                                |
+| 56      | Tipo de conta inválido                                                                             |
+| 98      | Erro desconhecido (negócio)                                                                        |
+| 99      | Erro genérico (sistema)                                                                            |
+
+#### G060 - Tipo de Movimento
+
+Código para identificar o tipo de movimentação enviada no arquivo.
+
+| Domínio | Descrição                    |
+|---------|------------------------------|
+| 00      | INCLUSÃO                     |
+
+#### G061 - Código da Instrução para Movimento
+
+Código para identificar a ação a ser realizada com o lançamento enviado no arquivo.
+
+| Domínio | Descrição                    |
+|---------|------------------------------|
+| 00      | Inclusão de Registro Detalhe |
+
+#### G062 - Código Padrão
+
+Código para identificar o formato do campo de ocorrência do pagador.
+
+| Domínio | Descrição                           |
+|---------|-------------------------------------|
+| 01      | Formato livre                       |
+| 02      | Formato Ocorrência (descrição A002) |
+
+#### G063 - Código de Barras
+
+Código para identificar o título.
+
+Especificações do Código de Barras do Boleto de Pagamento de Cobrança - Ficha de Comprensação (Modelo CADOC 24044-4,Carta-Circular Bacen Nº 2.926, de 25/07/2000).
+
+#### G064 - Número do Documento Atribuído pela Empresa (Seu número)
+
+Número atribuído pela Empresa (pagador) para identificar o documento de pagamento (nota fiscal, nota promissória...).
+
+#### G065 - Código da Moeda
+
+Código para identificar a moeda de transferência no título.
+
+| Domínio | Descrição                          |
+|---------|------------------------------------|
+| 01      | Reservado para Uso Futuro          |
+| 02      | Dólar Americano Comercial (Venda)  |
+| 03      | Dólar Americano Turismo (Venda)    |
+| 04      | ITRD                               |
+| 05      | IDTR                               |
+| 06      | UFIR Diária                        |
+| 07      | UFIR Mensal                        |
+| 08      | FAJ-TR                             |
+| 09      | Real                               |
+| 10      | TR                                 |
+| 11      | IGPM                               |
+| 12      | CDI                                |
+| 13      | Percentual do CDI                  |
+| 14      | Euro                               |
+| 15      | CDI – CETIP                        |
+| 16      | CHF                                |
+| 17      | CUB/RS (NOVO)                      |
+| 18      | CUB/RS (R8-N)                      |
+| 19      | CUB/SC (ANTIGO)                    |
+| 20      | CUBRS                              |
+| 21      | CUB-SC (NOVO)                      |
+| 22      | GBP                                |
+| 23      | ICC (SALVADOR)                     |
+| 24      | IGPM (A)                           |
+| 25      | IGPM (N)                           |
+| 26      | INCC                               |
+| 27      | INCC-M                             |
+| 28      | INPC                               |
+| 29      | JPY                                |
+| 30      | TJLP                               |
+
+#### G066 - Número de Aviso de Débito
+
+Número atribuído pelo Banco para identificar um Débito efetuado na Conta Corrente apartir dos pagamentos efetivados, visando facilitar a conciliação bancária.
+
+#### G067 - Identificação de Registro Opcional
+
+Código para identificação de registros opcionais.
+
+| Código | Descrição                                                   |
+|--------|-------------------------------------------------------------|
+| 01     | Informação de Dados do Sacador Avalista                     |
+| 02     | Alegação do Pagador                                         |
+| 03     | Informação de Dados do Pagador                              |
+| 04     | Informação de Dados de Cheques Utilizados                   |
+| 11     | Informações sobre dados de parcelas de compror              |
+| 50     | Informação de Dados para Rateio de Crédito                  |
+| 51     | Informações de Notas Fiscais                                |
+| 52     | Identificação dos entes envolvidos no processo de pagamento |
+
+#### G068 - Data de Gravação Remessa/Retorno
+
+Data da gravação do arquivo de remessa ou retorno.
+
+Utilizar o formato DDMMAAAA.
+
+Exemplo: 06061992.
+
+#### G069 - Identificação do Título no Banco
+
+Número adotado pelo Banco Beneficiário para identificar o título.
+
+Para o código de movimento igual a 01 (Entrada de Títulos), caso esteja preenchido com zeros, a numeração será feita pelo Banco.
+
+#### G070 - Valor Nominal do Título
+
+Valor original do Título
+
+Quando o valor for expresso em moeda corrente, utilizar 2 devimais.
+
+Quando o valor do expresso em moeda variável, utilizar 5 decimais.
+
+Obs.: Para o produto cobrança.
+
+#### G071 - Data da Emissão do Título
+
+Data da emissão do título.
+
+Utilizar o formato DDMMAAAA.
+
+Exemplo: 06061992.
+
+#### G072 - Identificação do Título na Empresa
+
+Campo destinado para o uso da Empresa Beneficiário para identificação do Título.
+
+| Domínio | Descrição  |
+|---------|------------|
+| 1       | Valor Fixo |
+| 2       | Percentual |
+
+#### G073 - Código da Multa
+
+Código para identificação do critério de pagamento de
+
+#### G074 - Data da Multa
+
+Data a partir da qual a multa deverá ser cobrada. Na ausência, será considerada a data de vencimento.
+
+Utilizar o formato DDMMAAAA.
+
+Exemplo: 06061992.
+
+#### G075 - Valor/Percentual a Ser Aplicado
+
+Valor ou percentual de multa a ser aplicado sobre o valor do Título, por atraso no pagamento.
+
+#### G076 - Valor da Tarifa/Custas
+
+Valor da tarifa cobrada pelo serviço prestado pelo Banco Beneficiário referentes ao Título, expresso em moeda corrente.
+
+#### G077 - Valor do IOD Recolhido
+
+Valor do Imposto Sobre Operações Financeiras (IOF), recolhido sobre o título, expresso em moeda corrente.
+
+#### G078 - Valor Líquido a ser Creditado
+
+Valor efetico a ser creditado referente ao título, expresso em moeda corrente.
+
+#### G079 - Número Remessa/Retorno
+
+Número adotado e controlado pelo responsável pela geração magnética dos dados contido no arquivo para identificar a sequência de envio ou devolução do arquivo entre o Beneficiário e o Banco Beneficiário.
+
+#### G080 - Data do Saldo inicializado
+
+Data considerada para determinar o saldo inicial.
+
+Utilizar o formato DDMMAAAA.
+
+Exemplo: 06061992.
+
+#### G081 - Situação do Saldo Inicial (D/C)
+
+Código para determinar a condição, credota ou devedora, da Conta Corrente no instante (data ou data e hora) inicial.
+
+| Domínio | Descrição  |
+|---------|------------|
+| D       | Devedor    |
+| C       | Credor     |
+
+#### G082 - Posição do Saldo Inicial
+
+Código para determinar a composição do saldo inicial da Conta Corrente, ou seja, se o saldo inicial está sujeito a estornos (Parcial) ou não (Final), ou se é ainda um saldo Intra-Dia.
+
+| Domínio | Descrição  |
+|---------|------------|
+| P       | Parcial    |
+| F       | Final      |
+| I       | Intra-Dia  |
+
+#### G083 - Número de Sequência do Extrato
+
+Número sequencial, adotado e controlado pelo Banco responsável pela emissão do Extrato, para identificar a série de extratos correspondentes da Conta Corrente do Cliente. A sequência é específica por tipo de Extrato (Conciliação Bancária ou Gestão de Caixa).
+
+#### G084 - Natureza do Lançamento
+
+Identifica se o lançamento incide sobre valores disponíveis ou bloqueados, possibilitando a recomposição das posições dos saldos.
+
+| Domínio | Tipo       | Descrição                                                                                                                                |
+|---------|------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| DPV     | Disponível | Lançamento ocorrido em Saldo Disponível                                                                                                  |
+| SCR     | Vinculado  | Lançamento ocorrido em Saldo Disponível ou Vinculado, a critério de cada banco, porém pendente de liberação por regras internas do banco |
+| SSR     | Bloqueado                     | Lançamento ocorrido em Saldos Bloqueados                                                                              |
+| CDS     | Composição de Diversos Saldos | Lançamento ocorrido em diversos saldos                                                                                |
+
+A condição de recurso Disponível, Vinculado ou Bloqueado para os códigos, SCR, SSR, CDS é critério de cada banco.
+
+#### G085 - Tipo do Complemento do Lançamento
+
+Código para identificar a padronização a ser utilizada no complemento.
+
+| Domínio | Descrição                                   |
+|---------|---------------------------------------------|
+| 00      | Sem Informação do Complemento do Lançamento |
+| 01      | Identificação da Origem do Lançamento       |
+
+#### G086 - Complemento do Lançamento
+
+Texto de informações complementarem ao Lançamento.
+
+Para Tipo do Complemento = 01, o campo complemento terá o seguinte formado:
+
+```
+Banco Origem Lançamento    114 116  3 Num
+Agência Origem Lançamento  117 121  5 Num
+Uso Exclusivo CNAB         122 133 21 Alfa (preencher com brancos)
+```
+
+#### G087 - Identificação de Isenção do CPMF
+
+Código para identificação de Lançamentos desobrigados de recolhimento do CPMF.
+
+| Domínio | Descrição  |
+|---------|------------|
+| S       | Isento     |
+| N       | Não isento |
+
+#### G088 - Data Contábil
+
+Data da efetivção do Lançamento.
+
+Utilizar o formato DDMMAAAA.
+
+Exemplo: 06061992.
+
+#### G089 - Data do Lançamento
+
+Data de ocorrência dos fatos, itens, componentes do extrato bancário.
+
+Utilizar o formato DDMMAAAA.
+
+Exemplo: 06061992.
+
+#### G090 - Valor do Lançamento
+
+Valor do Lançamento efetuado, expresso em moeda corrente.
+
+#### G091 - Tipo de Lançamento: Valor a Débito/Crédito
+
+Código para identificar a categoria padrão do Lançamento, para conciliação entre Bancos.
+
+| Domínio | Descrição  |
+|---------|------------|
+| D       | Débito     |
+| C       | Crédito    |
+
+#### G092 - Categoria do Lançamento
+
+Código para caracterizar o item que está sendo representado no extrato bancário.
+
+| Domínio | Descrição                                                                  |
+|---------|----------------------------------------------------------------------------|
+| 101     | Cheque Compensado                                                          |
+| 102     | Encargos                                                                   |
+| 103     | Estornos                                                                   |
+| 104     | Lançamento Avisado                                                         |
+| 105     | Tarifas                                                                    |
+| 106     | Aplicação                                                                  |
+| 107     | Empréstimo / Financiamento                                                 |
+| 108     | Câmbio                                                                     |
+| 109     | CPMF                                                                       |
+| 110     | IOF                                                                        |
+| 111     | Imposto de Renda                                                           |
+| 112     | Pagamento Fornecedores                                                     |
+| 113     | Pagamentos Salário                                                         |
+| 114     | Saque Eletrônico                                                           |
+| 115     | Ações                                                                      |
+| 117     | Transferência entre Contas                                                 |
+| 118     | Devolução da Compensação                                                   |
+| 119     | Devolução de Cheque Depositado                                             |
+| 120     | Transferência Interbancária (DOC, TED, Pix)                                |
+| 121     | Antecipação a Fornecedores                                                 |
+| 122     | OC / AEROPS                                                                |
+| 123     | Saque em Espécie                                                           |
+| 124     | Cheque Pago                                                                |
+| 125     | Pagamentos Diversos                                                        |
+| 126     | Pagamento de Tributos                                                      |
+| 127     | Cartão de crédito - Pagamento de fatura de cartão de crédito da própria IF |
+| 201     | Depósito em Cheque                                                         |
+| 202     | Crédito de Cobrança                                                        |
+| 203     | Devolução de Cheques                                                       |
+| 204     | Estornos                                                                   |
+| 205     | Lançamento Avisado                                                         |
+| 206     | Resgate de Aplicação                                                       |
+| 207     | Empréstimo / Financiamento                                                 |
+| 208     | Câmbio                                                                     |
+| 209     | Transferência Interbancária (DOC, TED, Pix)                                |
+| 210     | Ações                                                                      |
+| 211     | Dividendos                                                                 |
+| 212     | Seguro                                                                     |
+| 213     | Transferência entre Contas                                                 |
+| 214     | Depósitos Especiais                                                        |
+| 215     | Devolução da Compensação                                                   |
+| 216     | OCT                                                                        |
+| 217     | Pagamentos Fornecedores                                                    |
+| 218     | Pagamentos Diversos                                                        |
+| 219     | Recebimento de Salário                                                     |
+| 220     | Depósito em Espécie                                                        |
+| 221     | Pagamento de Tributos                                                      |
+| 222     | Cartão de Crédito - Recebíveis de cartão de crédito                        |
+| 223     | Crédito Pix via QR-Code                                                    |
+
+#### G093 - Código do Histórico do Lançamento no Banco
+
+Código adotado por cada Banco para identificar o descritivo do Lançamento. Observar que no extrado da conta corrente para conciliação bancária este campo possui 4 caracteres, enquanto no extrato para gestão de caixa ele possui 5 caracteres.
+ 
+#### G094 - Descrição do Histórico do Lançamento no Banco
+
+Texto descritivo do histórico do lançamento do extrato bancário.
+
+#### G095 - Número Documento/Complemento
+
+Número que identifica o documento que gerou o lançamento. Para uso na conciliação automática de Conta Corrente, o número do documento não pode ser maior que 6 posições numéricas. O complemento está limitado de acordo com as restrições de cada banco.
+
+#### G096 - Limite da Conta
+
+Valor do limite de crédito disponível para o correntista.
+
+#### G097 - Data do Saldo Final
+
+Data considerada para determinar o saldo final.
+
+Utilizar o formato DDMMAAAA.
+
+Exemplo: 06061992.
+
+#### G098 - Situação do Saldo Final (D/C)
+
+Código para determinar a condição, credora ou devedora, da conta corrente no instante (data ou data e hora) final.
+
+| Domínio | Descrição  |
+|---------|------------|
+| C       | Credor     |
+| D       | Devedor    |
+
+#### G099 - Posição do Saldo Final
+
+Código para determinar a composição do saldo final da ContaCorrente, ou se é ainda um saldo Intra-Dia.
+
+| Domínio | Descrição  |
+|---------|------------|
+| F       | Final      |
+| P       | Parcial    |
+| I       | Intra-Dia  |
+
+#### G100 - Forma de Iniciação
+
+Para o tipo de forma de lançamento igual ao PIX, usar o seguinte domínio:
+
+| Domínio | Descrição                          |
+|---------|------------------------------------|
+| 01      | Chave Pix - tipo Telefone          |
+| 02      | Chave Pix - tipo Email             |
+| 03      | Chave Pix - tipo CPF/CNPJ          |
+| 04      | Chave Aleatória                    |
+| 05      | Dados bancários                    |
+
+#### G101 - Informação 10, 11 e 12
+
+##### Informação 10
+
+Para o tipo 'forma de lançamento' igual ao PIX, usar campo como: 
+
+`TX ID (opcional) Posição (33 67) Alfa` 
+
+Para os demais, usar como: 
+
+`Logradouro do Favorecido: Nome da Rua, Av, Pça, Etc Posição (33 67) Alfa`
+
+##### Informação 11
+
+Para o tipo 'forma de lançamento' igual ao PIX, usar campo como:
+
+Se o campo forma de iniciação (06.3B - G100) for igual a 05 - Deve ser preenchido com a:
+
+O Tipo de Conta do recebedor conforme o seguinte domínio:
+
+| Domínio | Descrição       |
+|---------|-----------------|
+| 01      | Conta Corrente  |
+| 02      | Conta Pagamento |
+| 03      | Conta Poupança  |
+
+##### Informação 12
+
+Para o tipo 'forma de lançamento' igual ao PIX, usar campo como: 
+
+Identificação do favorecido - chave de endereçamento
+
+`Pix Email ou Telefone ou Chave Aleatória Posição (128 226) Alfa`
+
+Para os demais, usar como:
+
+| Campo             | Descrição                                 | Início | Fim  | Tipo |
+|-------------------| ------------------------------------------|--------|------|------|
+| Vencimento        | Data do Vencimento (Nominal)              | 128    | 135  | Num  |
+| Valor Docum.      | Valor do Documento (Nominal)              | 136    | 150  | Num  |
+| Abatimento        | Valor do Abatimento                       | 151    | 165  | Num  |
+| Desconto          | Valor do Desconto                         | 166    | 180  | Num  |
+| Mora              | Valor da Mora                             | 181    | 195  | Num  |
+| Multa             | Valor da Multa                            | 196    | 210  | Num  |
+| Cód/Doc. Favorec. | Código/Documento do Favorecido            | 211    | 225  | Alfa |
+| Aviso             | Aviso ao Favorecido                       | 226    | 226  | Num  |
+
+#### G102 - Chave de Pagamento
+
+Obrigatório, sendo:
+
+URL para QR-Code Dinâmico
+
+Chave de endereçamento para QR-Code Estático
+
+TXID (atenção: devido as 240 posições do layout CNAB o TXID possui o limitador de 30 posições)
+
+Opcional
+
+#### G103 - Tipo de Chave DICT
+
+| Domínio | Descrição             |
+|---------|-----------------------|
+| 01      | CPF                   |
+| 02      | CNPJ                  |
+| 03      | Celular               |
+| 04      | E-mail                |
+| 05      | EVP - Chave Aleatória |
+
+### L - Pagamento de Títulos de Cobrança
+
+#### L001 - Somatória dos Valores
+
+Valor obtido pela somatória dos valores de pagamento dos registros de detalhe (Registro = '3' / Código de Segmento = 'J').
+
+#### L003 - Valor do Desconto + Abatimento
+
+Valor de desconto (bonificação) sobre o valor nominal do documento, somado ao Valor do abatimento concedido pelo Beneficiário, expresso em moeda corrente
+
+#### L004 - Valor da Mora + Multa
+
+Valor do juros de mora somado ao Valor da multa, expresso em moeda corrente.
+
+### P - Pagamento Através de Crédito em Conta
+
+#### P001 - Código da Câmara Centralizadora
+
+Código para identificar qual Câmara de Centralizadora seráresponsável pelo processamento dos pagamentos. Preencher com o código da Câmara Centralizadora para envio do DOC.
+
+| Domínio | Descrição         |
+|---------|-------------------|
+| 018     | TED (STR, CIP)    |
+| 009     | PIX (SPI)         |
+
+#### P002 - Código do Banco do Favorecido
+
+Código fornecido pelo Banco Central para identificação na Câmera de Compensação, do Banco do Favorecido.
+
+#### P003 - Data Real da Efetivação do Lançamento
+
+Data da efetivação do pagamento. A ser preenchido quando o arquivo for de retorno (Código 2 no Header do Arquivo) e referir-se a uma confirmação de lançamento.
+
+Utilizar o formato DDMMAAAA.
+
+Exemplo: 06061992.
+
+#### P004 - Valor Real da Efetivação do Pagamento
+
+Valor de efetivação do Pagamento, expresso em moeda corrente. A ser preenchido quando arquivo for de retorno (Código 2 no Header de Arquivo) e referir-se a uma confirmação de lançamento.
+
+#### P005 - Complemento do Tipo de Serviço
+
+Código para identificação da finalidade do DOC (Documentode Ordem de Crédito).
+
+| Código | Descrição                                                       |
+|--------|-----------------------------------------------------------------|
+| 01     | Crédito em Conta                                                |
+| 02     | Pagamento de Aluguel/Condomínio                                 |
+| 03     | Pagamento de Duplicata/Títulos                                  |
+| 04     | Pagamento de Dividendos                                         |
+| 05     | Pagamento de Mensalidade Escolar                                |
+| 06     | Pagamento de Salários                                           |
+| 07     | Pagamento a Fornecedores                                        |
+| 08     | Operações de Câmbios/Fundos/Bolsa de Valores                    |
+| 09     | Repasse de Arrecadação/Pagamento de Tributos                    |
+| 10     | Transferência Internacional em Real                             |
+| 11     | DOC para Poupança                                               |
+| 12     | DOC para Depósito Judicial                                      |
+| 13     | Outros                                                          |
+| 16     | Pagamento de bolsa auxílio                                      |
+| 17     | Remuneração à cooperado                                         |
+| 18     | Pagamento de honorários                                         |
+| 19     | Pagamento de prebenda (Remuneração a padres e sacerdotes)       |
+
+#### P006 - Aviso ao Favorecido
+
+Código para identificar a necessidade de emissão de aviso de pagamento ao Favorecido.
+
+Domínio = 0: Não Emite Aviso.
+
+#### P007 - Somatória dos Valores
+
+Valor obtido pela somatória dos valores de crédito dos registros de detalhe (Registro = 3/Código de Segmento = A).
+
+Domínio = 0: Não Emite Aviso.
+
+#### P008 - Código / Documento do Favorecido
+
+Número ou Código de documento para identificar o Favorecido. O conteúdo deste campo não sofrerá nenhum tratamento por parte do Banco.
+
+#### P009 - Data do Pagamento
+
+Data do pagamento do compromisso. Obrigatório para o Pix.
+
+Utilizar o formato DDMMAAAA.
+
+Exemplo: 06061992.
+
+#### P010 - Valor do Pagamento
+
+Valor do pagamento, expresso em moeda corrente. Obrigatório para o Pix
+
+#### P011 - Código de Finalidade da TED
+
+Código adotado pelo Banco Central para identificar a finalidade da TED. Utilizar os códigos de finalidade cliente, disponíveis no site do Banco Central do Brasil (www.bcb.gov.br), Sistema de Pagamentos Brasileiro, Transferência de Arquivos, Dicionários de Domínios para o SPB.
+
+#### P012 - Código da UG Centralizadora
+
+Uso exclusivo para Pagamentos de Salários dos servidores, pelo SIAPE
+
+#### P013 - Código Finalidade Complementar
+
+Código adotado para complemento da finalidade pagamento. A forma de utilizaçãodeverá ser acordada entre banco e cliente.
+
+#### P014 - Indicativo de Forma de Pagamento
+
+Possibilitar ao Pagador, mediante acordo com o seu Banco de Relacionamento, a formade pagamento do compromisso.
+
+| Código | Descrição                          |
+|--------|------------------------------------|
+| 01     | Débito em Conta Corrente           |
+| 02     | Débito Empréstimo/Financiamento    |
+| 03     | Débito Cartão de Crédito           |
+
+#### P015 - Código ISPB da Instituição Financeira
+
+Código Adotado pelo Banco Central para identificação das instituições financeiras no Sistema de Pagamentos Brasileiro.
+
+A informação do Código ISPB é obrigatória quando:
+
+* For necessário o envio de TED parainstituição financeira que não possui código COMPE;
+* Para lotes de envio de Pix onde o registro da transação seja para envio através dos dados bancários (forma de iniciação igual à "05"). 
+
+Fora as condições de obrigatoriedade, o campo poderá estar preenchido com zeros ou com o código ISPB da BMP.
+
+A informação do código ISPB pode ser obtida por meio do seguinte site: 
+
+www.bacen.gov.br - Início - Sistema de Pagamentos Brasileiro - STR - Sistema de Transferência de Reservas - Relação de participantes do STR
+
+#### P016 - Número Conta Pagamento Creditada
+
+Número adotado para identificar contas em Instituições de Pagamento, permitindo a transferência de uma conta corrente para uma conta de pagamento.

@@ -1,0 +1,19 @@
+---
+title: "7 - Include Person Onboarding"
+openapi: post /Pessoa/IncluirPessoaOnBoarding
+version: 'English'
+---
+
+Through this endpoint, the integration between the BMP and BTG platforms occurs, where the onboarding process happens automatically.
+
+<Expandable title="Messages">
+| Categoria | Operação                    | Ação                      | Código | Código Detalhado | Mensagem                                                                                           |
+|-----------|-----------------------------|---------------------------|--------|------------------|----------------------------------------------------------------------------------------------------|
+| Pessoa    | RegistraPessoaOnBoarding    | IncluirPessoaOnBoarding   | C0042  | V0001            | Cliente não encontrado                                                                           |
+| Pessoa    | RegistraPessoaOnBoarding    | IncluirPessoaOnBoarding   | C0042  | V0002            | Configuração de Onboarding não cadastrada                                                        |
+| Pessoa    | RegistraPessoaOnBoarding    | IncluirPessoaOnBoarding   | C0042  | V0003            | Documento do cliente não encontrado                                                               |
+| Pessoa    | RegistraPessoaOnBoarding    | IncluirPessoaOnBoarding   | C0042  | V0004            | Onboarding já cadastrado para esta pessoa                                                         |
+| Pessoa    | RegistraPessoaOnBoarding    | IncluirPessoaOnBoarding   | C0108  | V0001            | Documento Federal deve ser informado                                                              |
+| Pessoa    | RegistraPessoaOnBoarding    | IncluirPessoaOnBoarding   | C0108  | V0002            | Cliente não encontrado com o documento `{documentoCliente}`                                       |
+| Pessoa    | RegistraPessoaOnBoarding    | IncluirPessoaOnBoarding   | C0108  | V0003            | Cliente não cadastrado pelo parceiro de integração                                                |
+</Expandable>

@@ -1,0 +1,39 @@
+---
+title: "11 - Eletrônica"
+openapi: post /Proposta/IncluirAssinaturaCCB
+---
+Por meio deste endpoint o parceiro será direcionado ao nosso ambiente para realizar a assinatura da proposta.
+
+- Nesse contexto é permitida a inclusão de assinantes da proposta.
+- O procedimento padrão determina que a proposta só pode ser finalizada se todos os assinantes cadastrados tenham realizado a assinatura da proposta. Sendo assim, de acordo com os proeminentes, o sistema auxiliar irá controlar as assinaturas de cada indivíduo. 
+- Os assinantes que receberem a notificação por e-mail terão acesso a proposta para assinar a mesma e também terão possibilidade de gerenciar as assinaturas pendentes, desde que parametrizados para isto, podendo notificar os assinantes.
+- O método exige os parâmetros de autenticação e de localização da proposta, assim como uma lista de assinantes.
+
+### Mensagens de erro
+
+<Expandable title="Mensageria - Proposta Assinatura CCB">
+| Categoria | Operação              | Ação                  | Código | Código Detalhado | Mensagem                                                                                                                |
+|-----------|-----------------------|-----------------------|--------|------------------|-------------------------------------------------------------------------------------------------------------------------|
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | C0060  | V0001            | Não foram enviados assinantes para esta proposta                                                                                                                             |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | C0060  | V0002            | Não é possível incluir assinantes na proposta. Proposta encontra-se " + SituacaoPropostaEnum.GetDescricao(proposta.Situacao)                                                |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | C0060  | V0003            | Não é possível incluir assinantes, proposta deve estar aprovada                                                                                                                |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | C0060  | V0004            | Notificação por E-mail não parametrizado                                                                                                                                      |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | C0060  | V0005            | Notificação por WhatsApp não parametrizado                                                                                                                                     |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | C0060  | V0006            | O telefone + Telefone + possui restrição de envio de mensagem através do WhatsApp                                                                                             |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | C0112  | V0001            | Proposta não encontrada                                                                                                                                                        |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | C0112  | V0002            | A Proposta não pertence à esta Integração                                                                                                                                      |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | T0668  | D0001            | E-mail {Email} inválido                                                                                                                                                        |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | T0668  | D0002            | Proposta não encontrada                                                                                                                                                        |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | T0668  | D0003            | Nome deve ser informado                                                                                                                                                        |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | T0668  | D0004            | Documento deve ser informado `[{Nome}]`, "Documento                                                                                                                             |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | T0668  | D0005            | E-mail deve ser informado `[{Nome}]`", "Email                                                                                                                                   |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | T0668  | D0006            | E-mail inválido `[{Nome}]`                                                                                                                                                       |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | T0668  | D0007            | Telefone Celular deve ser informado `[{Nome}]`", "TelefoneCelular                                                                                                                |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | T0668  | D0008            | Telefone Celular deve conter 11 dígitos. Exemplo: (11) 9 9999-9999", "TelefoneCelular                                                                                       |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | T0668  | D0009            | O celular deve ter 11 dígitos. Ex: (XX) XXXXX-XXXX", "TelefoneCelular                                                                                                          |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | T0668  | D0010            | O número do celular deve iniciar com os dígitos 6,7,8 ou 9", "TelefoneCelular                                                                                                 |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | T0668  | D0011            | O celular deve ter 11 dígitos. Ex: (XX) XXXXX-XXXX                                                                                                                             |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | T0668  | D0012            | ERR01 - Já existe assinante com este nome e papel                                                                                                                               |
+| Proposta  | PropostaAssinaturaCCB | IncluirAssinaturaCCB  | T0668  | D0013            | ERR02 - Já existe assinante com este e-mail ou telefone celular                                                                                                                 |
+</Expandable>
+

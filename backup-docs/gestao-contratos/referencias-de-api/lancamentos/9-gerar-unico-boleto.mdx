@@ -1,0 +1,59 @@
+---
+title: "9 - Gerar Único Boleto"
+openapi: post /AgendaRecebivel/GerarUnicoBoleto
+---
+
+Permite gerar um único boleto para as parcelas informadas definindo data de vencimento e valor de desconto, podendo ou não notificar o cliente.
+
+## Mensagens de erro
+
+A tabela abaixo representa as mensagens de erro que podem ser retornadas ao tentar realizar uma requisição.
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+<Note>No exemplo de retorno ao lado, o campo `code` representa a coluna **Código** desta tabela; o campo `context` representa a coluna **Contexto**; e o campo `description` representa a coluna **Erro**.</Note>
+
+| Contexto | Código | Erro                                                                                |
+|----------|--------|-------------------------------------------------------------------------------------|
+| C0159    | V0001  | Informe as parcelas                                                                 |
+| C0159    | V0002  | Para boleto parcial, deve ser informado apenas uma parcela                          |
+| C0159    | V0003  | Para boleto de liquidação, o valor do boleto não deve ser informado                 |
+| C0159    | V0004  | Para boleto parcial, o valor do boleto deve ser informado                           |
+| C0159    | V0005  | Informe a data de vencimento do boleto                                              |
+| C0159    | V0006  | A data de expiração não pode ser anterior à data de vencimento do boleto            |
+| C0156    | V0001  | Nenhuma parcela encontrada                                                          |
+| C0156    | V0002  | Informe o Valor da Liquidação                                                       |
+| C0156    | V0003  | A Descrição do boleto deve ser preenchida                                           |
+| C0156    | V0004  | Parcelas XXXX não localizadas                                                       |
+| C0156    | V0005  | Parcelas XXXX já pagas, não é possível gerar liquidação                             |
+| C0156    | V0006  | Já existe uma cobrança em aberto para a agenda e parcelas em questão: XXXX          |
+| C0156    | V0007  | Parcelas XXXX vencidas                                                              |
+| C0156    | V0008  | Valor de desconto não deve ser igual ou superior ao valor da cobrança gerada        |
+| C0150    | V0001  | Valor de desconto maior ou igual ao valor da parcela                                |
+| C0150    | V0004  | Parceiro não tem permissão para aplicar desconto em boletos na Agenda de Recebíveis |
+| C0150    | V0005  | Descapitalização desabilitada para esta agenda                                      |
+| C0150    | V0006  | Descapitalização desabilitada para esta agenda                                      |
+| C0165    | V0002  | Deve ser enviado pelo menos um boleto                                               |
+| C0165    | V0003  | Data de vencimento deve ser maior que a data atual                                  |
+| C0165    | V0004  | Valor do boleto deve ser informado                                                  |
+| C0165    | V0005  | Cliente não cadastrado                                                              |
+| C0168    | V0001  | Empresa não localizada                                                              |
+| C0168    | V0002  | Produto x Rede não configurado                                                      |
+| C0168    | V0003  | Para gerar Boleto deve existir um endereço cadastrado na empresa                    |
+| C0168    | V0004  | Produto x Rede não possui sequência de boleto avulso definida. Layout [XXXX]        |
+| C0168    | V0005  | Sequência de Boleto avulso não localizada. Layout [XXXX]                            |
+| C0168    | V0006  | Layout Bancário não configurado                                                     |
+| C0168    | V0007  | Sequência de Boleto Avulso não localizada                                           |
+| C0267    | V0001  | Sequência inválida                                                                  |
+| C0337    | V0002  | Não foi possível salvar os Boletos para registro automático                         |
+| C0337    | V0003  | Não foi possível salvar os Parâmetros dos Boletos para registro automático          |
+| C0527    | V0001  | Objeto parâmetros da liquidação deve ser informado                                  |
+| C0527    | V0002  | Valor deve ser superior a 0                                                         |
+| C0527    | V0003  | Código de usuário inválido                                                          |
+| C0527    | V0004  | Data de vencimento deve ser informada                                               |
+| C0527    | V0005  | Código da cobrança deve ser informado                                               |
+| C0527    | V0006  | Informe apenas o código do Pix Cobrança ou do Boleto                                |
+
+</Expandable>

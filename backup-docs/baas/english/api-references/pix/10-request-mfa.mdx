@@ -1,0 +1,12 @@
+---
+title: "10 - Request MFA"
+openapi: post /api/Mfa/Solicitar
+---
+
+Through this endpoint, the partner can request multi-factor authentication, or MFA.
+This is a double security validation for creating a PIX key in the "email" or "cell phone" format.
+After registration, a token will be sent to the channel to which the key was registered.
+
+***Requirements:***
+
+It is used according to the key, sent by SMS or email.

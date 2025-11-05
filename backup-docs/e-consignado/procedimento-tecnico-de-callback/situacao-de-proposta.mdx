@@ -1,0 +1,124 @@
+---
+title: "Situação de Proposta"
+version: 'Português'
+---
+
+Este documento descreve a **configuração** e os **status de notificação dos eventos de proposta** do **E-Consignado Trabalhador**.
+
+## Configuração
+
+Para implementar os serviços do E-Consignado Trabalhador, é necessário que o parceiro configure uma URL para o recebimento dos eventos de callback. 
+
+Nesta etapa, o parceiro precisa configurar:
+
+1. Uma URL para recebimento dos callbacks;
+2. Essa URL precisa ter um ambiente de homologação e um de produção;
+3. A URL precisa ser desenvolvida para receber requisições do tipo `GET` ou `POST`;
+4. Um método de autenticação aceito pela BMP.
+
+Após configurar a URL de callback (homologação e produção), escolher qual método HTTP e qual o método de autenticação devem ser utilizados, o parceiro deve informar o time de integração da BMP, para que essa configuração seja parametrizada na BMP.
+
+Acompanhe, abaixo, os detalhes técnicos de cada uma dessas configurações.
+
+## 1. URL
+
+O parceiro precisa desenvolver uma URL de callback e enviá-la para a BMP.
+
+Essa URL será utilizada para a comunicação entre o parceiro e a BMP, atavés de eventos de callback.
+
+<Info>Veja os exemplos de URL no próximo passo, abaixo.</Info>
+
+## 2. Ambientes
+
+O callback para acompanhamento dos status das propostas deve ser enviado tanto para o ambiente de homologação quanto para o ambiente de produção. 
+
+Recomenda-se que sejam utilizadas URLs diferentes para cada ambiente.
+
+### 2.1 Exemplos de URL de homologação
+
+```json
+www.exemplo-de-url-de-homologacao.com.br
+```
+
+### 2.2 Exemplos de URL de produção
+
+```json
+www.exemplo-de-url.com.br
+```
+
+## 3. Métodos de chamada
+
+O parceiro deve escolher um método HTTP que gostaria de utilizar para recebimento dos callbacks. 
+
+Opções disponíveis incluem: 
+
+* `POST`
+* `GET`
+
+## 4. Autenticação
+
+É recomendado, também, que o parceiro defina um método de autenticação para recebimentos dos callbacks.
+
+Opções disponíveis incluem: 
+
+| Método de autenticação                        | Tipo da chave    | Exemplo de token                     |
+|-----------------------------------------------|------------------|--------------------------------------|
+| Bearer Token                                  | Authorization    | `Bearer eyJhbGciOiJIUzI1CI6IkpXVCJ9` |
+| API Key                                       | API-Key          | `1234567890abcdef1234567890abcdef`   |
+| Basic Authentication                          | Authorization    | `Basic dXNlcm5hbWU6cGFzc3dvcmQ`      |
+| X-API-Key                                     | X-API-Key        | `0987654321fedcba0987654321fedcba`   |
+| JWT (JSON Web Token)                          | Authorization    | `Bearer eyJhbGciOiJIUzI1NiIs`        |
+| HMAC (Hash-based Message Authentication Code) | Authorization    | `HMAC 5d41402abc4b19d911017c592`     |
+
+<Warning>Em todos os métodos de autenticação aceitamos chaves com até 255 caracteres.</Warning>
+
+## Notificação de eventos da proposta
+
+Segue exemplo de URL de como parametrizamos para recebimento:
+
+```json
+www.exemplo-de-url.com.br?proposta={PROPOSTA}&situacao={SITUACAO}
+```
+
+| Parâmetro          | Descrição do parâmetro                                                                         |
+|--------------------|------------------------------------------------------------------------------------------------|
+| **Proposta**       | Guid único gerado no response durante a inclusão da proposta.                                  |
+| **Situação**       | ID da situação da proposta em nosso sistema.                                                   |
+
+## Tabela de eventos da proposta
+
+| **ID** | **Descrição**      | **Descrição detalhada**                                                                                                                                      |
+|--------|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2      | Aprovada           | Proposta foi aprovada pela área de análise de crédito.                                                                                                       |
+| 4      | Cancelada          | Proposta foi cancelada pela área de análise de crédito.                                                                                                      |
+| 6      | Finalizada         | Proposta foi finalizada.                                                                                                                                     |
+| 8      | Liberada           | Proposta foi liberada pela área de formalização para pagamento.                                                                                              |
+| 9      | Paga               | Proposta foi paga pela área financeira.                                                                                                                      |
+| 10     | Cedida             | Proposta foi cedida ao fundo.                                                                                                                                |
+| 11     | Pendente Pagamento | Proposta pendente de pagamento por inconsistência em dados bancários, exigindo que o integrador informe os dados corretos para retornar à fila de pagamento. |
+
+<Warning>Caso ocorra algum problema durante o recebimento do callback de proposta, o sistema realizará até 3 tentativas de envio.</Warning>
+
+<Note>
+
+Além dos dados já enviados na consulta (*query*), como guid da Proposta, Status e Identificador, os callbacks de **Pago "9"** e **Pendente pagamento "11"** possuem um *body* com o campo **"Descrição da ocorrência"**, que informa o motivo da pendência do pagamento quando for um **status "11"** e quando for **status "9"** retorna com o texto **"Crédito ou débito efetivado"**. 
+
+</Note>
+
+Caso o callback seja enviado com o método POST, além dos dados enviados na Query, o parceiro receberá no corpo da requisição:
+
+**Status 09:**
+
+```json
+{
+    "descricaoOcorrencia": "09-Crédito ou Débito efetivado"
+}
+```
+
+**Status 11:**
+
+```json
+{
+    "descricaoOcorrencia": "AB-Conta de destistino não localizada ou inválida."
+}
+```

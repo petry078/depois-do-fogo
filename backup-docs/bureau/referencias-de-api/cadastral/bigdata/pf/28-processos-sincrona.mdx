@@ -1,0 +1,121 @@
+---
+title: "28 - Processos Síncrona"
+openapi: post /Bureau/ProcessosPenaisPF
+---
+
+Este endpoint permite consultar os dados de um processo de pessoa física, no formato de resposta rápida (Síncrono). A resposta é uma ‘String JSON’ serializada que inclui as seguintes informações:
+
+* Ações judiciais: registros das ações em que a pessoa é parte;
+* Histórico de atualizações: cronologia das atualizações do processo;
+* Petições: petições protocoladas no processo;
+* Decisões: decisões judiciais proferidas;
+* Ações relacionadas: processos ou feitos conexos vinculados ao mesmo assunto.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{
+    "Erro": Boolean,
+    "MensagemOperador": "String",
+    "ResultadoConsulta": {
+        "Lawsuits": [
+            {
+                "Number": "String",
+                "Type": "String",
+                "MainSubject": "String",
+                "CourtName": "String",
+                "CourtLevel": "String",
+                "CourtType": "String",
+                "CourtDistrict": "String",
+                "Judge": null,
+                "JudgingBody": "",
+                "State": "String",
+                "Status": "String",
+                "LawsuitHostService": "String",
+                "InferredCnjSubjectName": "String",
+                "InferredCnjSubjectNumber": Numero,
+                "InferredCnjProcedureTypeName": null,
+                "InferredBroadCnjSubjectName": null,
+                "InferredBroadCnjSubjectNumber": Numero,
+                "OtherSubjects": [
+                    "String"
+                ],
+                "NumberOfVolumes": 0,
+                "NumberOfPages": Numero,
+                "Value": Numero,
+                "ResJudicataDate": "Data",
+                "CloseDate": "Data",
+                "RedistributionDate": "Data",
+                "PublicationDate": "Data",
+                "NoticeDate": "Data",
+                "LastMovementDate": "Data",
+                "CaptureDate": "Data",
+                "LastUpdate": "Data",
+                "NumberOfParties": Numero,
+                "NumberOfUpdates": Numero,
+                "LawSuitAge": Numero,
+                "AverageNumberOfUpdatesPerMonth": Numero,
+                "ReasonForConcealedData": Numero,
+                "Parties": [
+                    {
+                        "Doc": "String",
+                        "IsPartyActive": Boolean,
+                        "Name": "String",
+                        "Polarity": "String",
+                        "Type": "String",
+                        "PartyDetails": {
+                            "SpecificType": "String"
+                        },
+                        "LastCaptureDate": "Data"
+                    }
+                ],
+                "Updates": [
+                    {
+                        "Content": "String",
+                        "PublishDate": "Data",
+                        "CaptureDate": "Data"
+                    }
+                ],
+                "Petitions": [
+                    {
+                        "Type": "String",
+                        "Author": "String",
+                        "CreationDate": "Data",
+                        "JoinedDate": "String"
+                    }
+                ],
+                "Decisions": [
+                    {
+                        "DecisionContent": "String",
+                        "DecisionDate": "Data"
+                    }
+                ],
+                "RelatedLawsuits": [
+                        "String"
+
+                ],
+            }
+        ],
+        "TotalLawsuits": Numero,
+        "TotalLawsuitsAsAuthor": Numero,
+        "TotalLawsuitsAsDefendant": Numero,
+        "TotalLawsuitsAsOther": Numero,
+        "FirstLawsuitDate": "Data",
+        "LastLawsuitDate": "Data",
+        "Last30DaysLawsuits": Numero,
+        "Last90DaysLawsuits": Numero,
+        "Last180DaysLawsuits": Numero,
+        "Last365DaysLawsuits": Numero,
+        "Identificador": "String",
+        "StatusConsulta": {
+            "Code": Numero,
+            "Message": "String"
+        },
+        "identificador": "String"
+    }
+}
+```
+
+</Expandable>

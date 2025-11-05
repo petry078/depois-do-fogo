@@ -1,0 +1,901 @@
+---
+title: Birthday Withdrawal
+version: 'English'
+---
+
+<Warning>Before using this service, you must configure authentication. See the [authentication instructions](https://bmpdocs.moneyp.com.br/fgts/primeiros-passos/page-2) for detailed instructions.</Warning>
+
+The Anniversary Withdrawal allows workers to withdraw part of their FGTS balance annually in the month of their birthday.
+
+When using this option, the customer can choose to advance the available amount, using the FGTS balance as collateral for the advance.
+
+Therefore, the Anniversary Withdrawal allows workers to access part of their FGTS balance in advance to meet their financial needs.
+
+To understand the calculation performed by CEF, please visit the [website](https://www.caixa.gov.br/beneficios-trabalhador/fgts/saque-FGTS/Paginas/default.aspx) of Caixa Econômica Federal.
+
+<Info>Please note that it is not possible to keep the Anniversary Withdrawal and Termination Withdrawal activated simultaneously.</Info>
+
+To check the FGTS balance with Caixa Econômica Federal, you must inform your client that they must authorize the BMP in the FGTS application, selecting the following financial institutions:
+
+* **BMP SOCIEDADE DE CRÉDITO DIRETO S.A**;
+
+* **MONEY PLUS SOCIEDADE DE CRÉDITO AO MICROEMPREENDEDOR E A EMPRESA DE PEQUENO PORTE LTDA**.
+
+If you have any questions about authorization, we have a page with step-by-step instructions for your client to [register](https://bmpmoneyplus-sandbox.mintlify.app/fgts/english/initial-guide/about-the-fgts/how-to-sign-up).
+
+<Warning>The CEF prevents the consultation and registration of a client's balance in the period of 16 business days before the employee's birthday month.</Warning>
+
+Below is the step-by-step guide to using the use case:
+
+## 1 - Simulations
+
+At this stage, you can check the amounts available for withdrawal from the FGTS and run simulations. After that, you can take out loans with FGTS collateral and the amounts will be included in a proposal.
+
+Below, we will detail the simulation options available. Check which one best fits the needs of your operation:
+
+<Expandable title= "1.1 - /FGTS/BuscarSimulacao">
+
+This endpoint is used when the withdrawal period has already been previously defined by your client. In this case, the amount available for advance payment will refer to the requested period and will be calculated according to the [table](https://www.caixa.gov.br/beneficios-trabalhador/fgts/saque-FGTS/Paginas/default.aspx) FGTS withdrawals of Caixa Econômica Federal (CEF) rates.
+
+The query will be performed based on this specific period, and the return will refer to the information requested via request:
+
+**Search parameters:** the CPF, TAC value or percentage, monthly rate, the specified periods or the number of desired periods.
+
+**Return:** the balance available for withdrawal in the period informed and the simulation of the installments, which will be advanced considering the annual withdrawal amount.
+
+<Tip> If the requested period is, for example, number 2, the system will return the balance available for the next 2 transfers and the simulation will be in accordance with these values.</Tip>
+
+<Expandable title="Simulation with the BMP Calculator (without consulting the CEF)">
+
+The partner enters the amount of available balance at Caixa Econômica Federal (CEF) into the BMP Calculator, according to the information provided by the client. Based on this amount, we will demonstrate the loan option according to the requested period, without consulting the CEF.
+
+<Warning> The calculation is based on an estimate, since the BMP calculator only simulates the calculation performed by the CEF.</Warning>
+
+<Expandable title="Simulation with number of periods">
+
+The partner can define up to how many periods he/she wants to perform the simulation. To do this, use the "Period" field instead of the "Periods" field.
+
+<Tip>When entering the "Period" field, we consider 100% of the first transfers, until reaching the requested amount.</Tip>
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/FGTS/BuscarSimulacao' \
+--header 'Idempotencykey: identificador Unico' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer token' \
+--data '
+{
+    "dto": {
+        "Saldo": 0, // Valor que o seu cliente tem disponível para saque na CEF | NÃO OBRIGATÓRIO
+        "VlrEmprestimo": 0, // Valor desejado pelo seu cliente | NÃO OBRIGATÓRIO
+        "Periodo": 0, // Quantidade de períodos que deseja consultar | NÃO OBRIGATÓRIO
+        "TaxaMensal": 1.79, // Taxa parametrizada no sistema (deixar padrão) | NÃO OBRIGATÓRIO
+        "VlrTAC": "150", // Informar ou VlrTAC ou PercTAC | NÃO OBRIGATÓRIO
+        "PercTAC": "5", // Informar ou VlrTAC ou PercTAC | NÃO OBRIIGATÓRIO 
+        "DtAniversario": "2024-09-30T18:30:50.905Z" // Data de nascimento do cliente | NÃO OBRIGATÓRIO
+    }
+}'  
+```
+
+</Expandable>
+
+<Expandable title="Simulation with predefined periods by date and value">
+
+The partner can choose specific periods for their customers to make advance payments. To do this, use the "Periods" field instead of the "Period" field.
+
+<Tip>When entering the "Periods" field, we consider the years and values ​​that the partner provides.</Tip>
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/FGTS/BuscarSimulacao' \
+--header 'Idempotencykey: identificador Unico' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer token' \
+--data '
+{
+    "dto": {
+        "Saldo": 0, // Valor que o seu cliente tem disponível para saque na CEF | NÃO OBRIGATÓRIO
+        "VlrEmprestimo": 0, // Valor desejado pelo seu cliente | NÃO OBRIGATÓRIO
+        "Periodos": [ // Datas e valores dos repasses | NÃO OBRIGATÓRIO
+            {
+                "DataRepasse": "2026-04-01", // Data que a Caixa realizará o repasse ao cliente | OBRIGATÓRIO
+                "VlrRepasse": 1500 // Valor do repasse do cliente na data do repasse | OBRIGATÓRIO
+            },
+            {
+                "DataRepasse": "2027-04-01", // Data que a Caixa realizará o repasse ao cliente | OBRIGATÓRIO
+                "VlrRepasse": 1000 // Valor do repasse do cliente na data do repasse | OBRIGATÓRIO
+            }
+        ],
+        "TaxaMensal": 1.79, // Taxa parametrizada no sistema (deixar padrão) | NÃO OBRIGATÓRIO
+        "VlrTAC": "150", // Informar ou VlrTAC ou PercTAC | NÃO OBRIGATÓRIO
+        "PercTAC": "5", // Informar ou VlrTAC ou PercTAC | NÃO OBRIIGATÓRIO 
+        "DtAniversario": "2024-09-30T18:30:50.905Z" // Data de nascimento do cliente | NÃO OBRIGATÓRIO
+    }
+}'  
+```
+
+</Expandable>
+
+<br/>
+
+</Expandable>
+
+<Expandable title="Balance Check by CPF (with CEF check)">
+
+The partner informs the customer's CPF and we will check the CEF directly to find out the available balance according to the period informed.
+
+Note: If a CPF has already been checked in the last 24 hours, the next checks will be made in the cache instead of the CEF, reducing the cost and time for the check, remembering that the balance may be out of date.
+    
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/FGTS/BuscarSimulacao' \
+--header 'Idempotencykey: identificador Unico' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer token' \
+--data '
+{
+    "dto": {
+        "CpfTrabalhador": "string", // CPF do cliente que deseja realizar a consulta de saldo | NÃO OBRIGATÓRIO
+    }
+}'  
+``` 
+
+</Expandable>
+
+<Expandable title="Balance simulation by CPF (with CEF consultation)">
+
+The partner informs the customer's CPF and BMP makes the consultation directly with the CEF. Based on the balance returned, BMP presents the advance payment option that the partner can offer to the customer, based on the parameters informed.
+
+<Expandable title="Balance simulation by CPF with number of periods">
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/FGTS/BuscarSimulacao' \
+--header 'Idempotencykey: identificador Unico' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer token' \
+--data '
+{
+    "dto": {
+        "VlrEmprestimo": 0, // Valor desejado pelo seu cliente | NÃO OBRIGATÓRIO
+        "Periodo": 0, // Quantidade de períodos deseja consultar | NÃO OBRIGATÓRIO
+        "TaxaMensal": 1.79, // Taxa parametrizada no sistema (deixar padrão) | NÃO OBRIGATÓRIO
+        "VlrTAC": "150", // Informar ou VlrTAC ou PercTAC | NÃO OBRIGATÓRIO
+        "PercTAC": "5", // Informar ou VlrTAC ou PercTAC | NÃO OBRIIGATÓRIO 
+        "DtAniversario": "2024-09-30T18:30:50.905Z" , // Data de nascimento do cliente | NÃO OBRIGATÓRIO
+        "CpfTrabalhador": "string", // CPF do cliente que deseja realizar a consulta de saldo | NÃO OBRIGATÓRIO
+    }
+}'  
+    ``` 
+</Expandable>
+
+<Expandable title= "Balance simulation by CPF with predefined periods">
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/FGTS/BuscarSimulacao' \
+--header 'Idempotencykey: identificador Unico' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer token' \
+--data '
+{
+    "dto": {
+        "VlrEmprestimo": 0, // Valor desejado pelo seu cliente | NÃO OBRIGATÓRIO
+        "Periodos": [ // Datas e valores dos repasses | NÃO OBRIGATÓRIO
+        {
+                "DataRepasse": "2026-04-01", // Data que a Caixa realizará o repasse ao cliente | OBRIGATÓRIO
+                "VlrRepasse": 1500 // Valor do repasse do cliente na data do repasse | OBRIGATÓRIO
+            },
+            {
+                "DataRepasse": "2027-04-01", // Data que a Caixa realizará o repasse ao cliente | OBRIGATÓRIO
+                "VlrRepasse": 1000 // Valor do repasse do cliente na data do repasse | OBRIGATÓRIO
+            }
+        ],
+        "TaxaMensal": 1.79, // Taxa parametrizada no sistema (deixar padrão) | NÃO OBRIGATÓRIO
+        "VlrTAC": "150", // Informar ou VlrTAC ou PercTAC | NÃO OBRIGATÓRIO
+        "PercTAC": "5", // Informar ou VlrTAC ou PercTAC | NÃO OBRIIGATÓRIO 
+        "DtAniversario": "2024-09-30T18:30:50.905Z" , // Data de nascimento do cliente | NÃO OBRIGATÓRIO
+        "CpfTrabalhador": "string", // CPF do cliente que deseja realizar a consulta de saldo | NÃO OBRIGATÓRIO
+    }
+}'  
+    ``` 
+</Expandable>
+
+<br/>
+
+</Expandable>
+
+---
+</Expandable>
+
+<Expandable title= "1.2 - /FGTS/BuscarSimulacaoMultiPeriodo">
+
+This endpoint provides a more comprehensive query, returning all possible withdrawal simulations in several future periods.
+
+It is used when the client does not specify an exact period, but wants to view all simulation possibilities over the years.
+
+* **Search parameters:** CPF, TAC value or percentage and monthly rate (the period field is not filled in).
+
+* **Return:** simulation for several periods (years).
+* The system will bring up a list of all possible years for withdrawal, informing:
+1. The balance available in each period.
+2. The possible amounts and installment values ​​for each period.
+3. This allows the client to see the maximum possibility of installments and the total amount available for withdrawal in each year.
+
+<Expandable title="Multi-Period Loan Simulation with the BMP Calculator (without consulting the CEF)">
+
+The partner enters the available balance at Caixa Econômica Federal (CEF) provided by the customer into the BMP Calculator. Based on this value, we show the loan options according to the requested period without consulting the CEF.
+
+Note: The calculation is based on an estimate, according to the values returned by the CEF, and may be subject to change.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/FGTS/BuscarSimulacao' \
+--header 'Idempotencykey: identificador Unico' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer token' \
+--data '
+{
+    "dto": {
+        "Saldo": 0, // Valor que o seu cliente tem disponível para saque na CEF | NÃO OBRIGATÓRIO
+        "VlrEmprestimo": 0, // Valor desejado pelo seu cliente | NÃO OBRIGATÓRIO
+        "Periodo": 0, // Quantidade de períodos deseja consultar | NÃO OBRIGATÓRIO
+        "TaxaMensal": 1.79, // Taxa parametrizada no sistema (deixar padrão) | NÃO OBRIGATÓRIO
+        "VlrTAC": "150", // Informar ou VlrTAC ou PercTAC | NÃO OBRIGATÓRIO
+        "PercTAC": "5", // Informar ou VlrTAC ou PercTAC | NÃO OBRIIGATÓRIO 
+        "DtAniversario": "2024-09-30T18:30:50.905Z" , // Data de nascimento do cliente | NÃO OBRIGATÓRIO
+    }
+}'  
+```
+
+</Expandable>
+
+<Expandable title="Multi-Period Balance Query by CPF (with CEF query)">
+
+The partner informs the customer's CPF and the query is performed directly at the CEF to check the available balance.
+
+Note: If a CPF has already been queried in the last 24 hours, the next queries will be based on the information stored in the cache, instead of requesting a new query at the CEF (reducing cost and time for the query), remembering that the balance may be out of date.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/FGTS/BuscarSimulacao' \
+--header 'Idempotencykey: identificador Unico' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer token' \
+--data '
+{
+    "dto": {
+        "CpfTrabalhador": "string", // CPF do cliente que deseja realizar a consulta de saldo | NÃO OBRIGATÓRIO
+    }
+}'  
+```
+
+</Expandable>
+
+<Expandable title="Multi-Period Balance Simulation by CPF (with CEF consultation)">
+
+The partner informs the customer's CPF and BMP makes the consultation directly with the CEF. With the balance informed, BMP presents the loan options that the partner can offer to the customer, based on the parameters informed.
+
+Note: If a CPF has already been consulted in the last 24 hours, the next consultations will be made in the cache instead of the CEF, reducing cost and time for the consultation, remembering that the balance may be out of date.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/FGTS/BuscarSimulacao' \
+--header 'Idempotencykey: identificador Unico' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer token' \
+--data '
+{
+    "dto": {
+        "VlrEmprestimo": 0, // Valor desejado pelo seu cliente | NÃO OBRIGATÓRIO
+        "Periodo": 0, // Quantidade de períodos deseja consultar | NÃO OBRIGATÓRIO
+        "TaxaMensal": 1.79, // Taxa parametrizada no sistema (deixar padrão) | NÃO OBRIGATÓRIO
+        "VlrTAC": "150", // Informar ou VlrTAC ou PercTAC | NÃO OBRIGATÓRIO
+        "PercTAC": "5", // Informar ou VlrTAC ou PercTAC | NÃO OBRIIGATÓRIO 
+        "DtAniversario": "2024-09-30T18:30:50.905Z" , // Data de nascimento do cliente | NÃO OBRIGATÓRIO 
+        "CpfTrabalhador": "string", // CPF do cliente que deseja realizar a consulta de saldo | NÃO OBRIGATÓRIO
+    }
+}'  
+``` 
+
+<Warning>We emphasize that this is a process conducted in partnership with Caixa Econômica Federal, and the response time is subject to the institution's response time.</Warning>
+
+</Expandable>
+
+-----
+
+</Expandable>
+
+<Warning>
+
+When the value of the `ConsultaCache` field is `false`, the request will query the updated FGTS balance directly at **Caixa Econômica Federal (CEF)**; when it is `true`, the balance will be obtained from the BMP cache. This field is not mandatory; if it is not provided, the system assumes the `true` value as default.
+
+</Warning>
+
+## 2 - Onboarding
+
+In this step, the customer is registered via request, where the loan with FGTS guarantee will be requested. To do this, it will be necessary to:
+
+<Steps>
+
+<Step title="Registration of the customer's personal data">
+
+In this step, it will be necessary to register the customer's data (name, documents (CPF and RG) and contact information (email and telephone) through integration with our [Customer Registration](https://bmpmoneyplus-sandbox.mintlify.app/fgts/english/api-references/onboarding/3-customer-registration) API.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Pessoa/Salvar' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer token gerado no 1º passo' \
+--data-raw '{
+    "dto": {
+        "Codigo": "1", // Código para identificar o cliente em seu sistema | NÃO OBRIGATÓRIO
+        "Nome": "CLIENTE TESTE", // Nome do seu cliente | OBRIGATÓRIO
+        "DocumentoFederal": "75000000000", // Documento federal (CPF: 11 dígitos | CNPJ: 14 dígitos | temos um validador, então precisa ser um documento válido) | OBRIGATÓRIO
+        "PF": {
+            "rg": "string", // RG do seu cliente | OBRIGATÓRIO
+            "dtNasc": "2024-02-26T16:33:57.775Z" // Data de nascimento do seu cliente | OBRIGATÓRIO
+        },
+        "PessoaDadosContato": {
+            "Email": "teste@email.com.br", // E-mail do seu cliente | OBRIGATÓRIO
+            "TelefoneCelular1": "11923456781" // Celular do seu cliente | OBRIGATÓRIO
+        }
+    }
+}'
+```
+
+</Step>
+
+<Step title="Registering or updating the customer's full address">
+
+In this step, you will need to register or update the address through integration with our [Address Registration](https://bmpmoneyplus-sandbox.mintlify.app/fgts/english/api-references/onboarding/4-address-registration) API.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Pessoa/SalvarEndereco' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer token gerado no 1º passo' \
+--data '{
+  "dto": {
+    "codigo": "string", // Código para identificar o endereço em seu sistema | NÃO OBRIGATÓRIO
+    "cep": "string" // CEP do endereço | OBRIGATÓRIO
+  },
+  "param": {
+    "documentoCliente": "string" // Documento federal CPF: 11 dígitos |  temos um validador, então precisa ser um documento válido | OBRIGATÓRIO
+  }
+}'
+```
+
+</Step>
+
+</Steps>
+
+## 3 - Hiring
+
+At this stage, the proposal is sent, inserting the requested data:
+
+* Loan amount;
+* Amount or percentage of the TAC (if applicable);
+* Anniversary date;
+* CPF;
+* Interest rate applied;
+* Destination account for payment;
+* Number of periods desired.
+
+<Steps>
+
+<Step title="Inclusion of Proposal">
+
+At this stage, you will need to send the proposal through integration with our [Inclusion of Proposal](https://bmpmoneyplus-sandbox.mintlify.app/fgts/english/api-references/contracts/8-include-proposal) API
+
+<Expandable title="Contracting with number of periods">
+
+The partner can define up to how many periods they want to perform the simulation. To do this, use the "Period" field instead of the "Periods" field.
+
+<Tip>When entering the "Period" field, we consider 100% of the first transfers, until reaching the requested amount.</Tip>
+
+```json
+curl --request POST \
+--url https://api.bmpdigital.moneyp.dev.br/FGTS/IncluirProposta \
+--header 'Authorization: <api-key>' \
+--header 'Content-Type: application/json' \
+--header 'IdempotencyKey: <idempotencykey>' \
+--data '{
+  "dto": {
+        "CodigoOperacao": "string", // Identificador Unico Por proposta | OBRIGATÓRIO
+        "VlrEmprestimo": 0, // Valor solicitado | OBRIGATÓRIO
+        "TipoContrato": "string", // Tipo de contrato informado pelo time de implantação | OBRIGATÓRIO
+        "Periodo": 0, // Prazo (de 1 a 10) | OBRIGATÓRIO
+        "DtAniversario": "2023-08-10T18:04:36.349Z", // Data de aniversário do seu cliente | OBRIGATÓRIO
+        "TaxaMensal": 1.79, // Taxa parametrizada no sistema | OBRIGATÓRIO
+        "CpfTrabalhador": "string", // CPF do seu cliente | OBRIGATÓRIO
+        "VlrTAC": "150", // Informar ou VlrTAC ou PercTAC | NÃO OBRIGATÓRIO
+        "PercTAC": "10", // Informar ou VlrTAC ou PercTAC | NÃO OBRIIGATÓRIO
+        "propostaContaPagamento": { // Nesse objeto voce informa os dados bancários do desembolso | OBRIGATÓRIO
+            "tipoConta": 0, // 1 = Conta poupança 2 = Conta Corrente | OBRIGATÓRIO
+            "agencia": "string", // Agência bancária do emitente | OBRIGATÓRIO
+            "agenciaDig": "string", // Digíto da conta bancária do emitente | OBRIGATÓRIO
+            "conta": "string", // Conta bancária do emitente | OBRIGATÓRIO
+            "contaDig": "string", // Digito bancário da conta do emitente | OBRIGATÓRIO
+            "NumeroBanco": "string" // Código bancário de acordo com a tabela do BACEN | OBRIGATÓRIO
+        }
+    }
+}'
+```
+
+</Expandable>
+
+<Expandable title="Contracting with predefined periods">
+
+The partner can define specific periods for their clients to make advance payments. To do this, use the "Periods" field instead of the "Period" field.
+
+<Tip>When entering the "Periods" field, we consider the years and values that the partner informs.</Tip>
+
+```json
+curl --request POST \
+--url https://api.bmpdigital.moneyp.dev.br/FGTS/IncluirProposta \
+--header 'Authorization: <api-key>' \
+--header 'Content-Type: application/json' \
+--header 'IdempotencyKey: <idempotencykey>' \
+--data '{
+  "dto": {
+        "CodigoOperacao": "string", // Identificador Unico Por proposta | OBRIGATÓRIO
+        "VlrEmprestimo": 0, // Valor solicitado | OBRIGATÓRIO
+        "TipoContrato": "string", // Tipo de contrato informado pelo time de implantação | OBRIGATÓRIO
+        "Periodos": [ // Datas e valores dos repasses | OBRIGATÓRIO
+            {
+                "DataRepasse": "2026-04-01", // Data que a Caixa realizará o repasse ao cliente | OBRIGATÓRIO
+                "VlrRepasse": 1500 // Valor do repasse do cliente na data do repasse | OBRIGATÓRIO
+            },
+            {
+                "DataRepasse": "2027-04-01", // Data que a Caixa realizará o repasse ao cliente | OBRIGATÓRIO
+                "VlrRepasse": 1000 // Valor do repasse do cliente na data do repasse | OBRIGATÓRIO
+            }
+        ],
+        "DtAniversario": "2023-08-10T18:04:36.349Z", // Data de aniversário do seu cliente | OBRIGATÓRIO
+        "TaxaMensal": 1.79, // Taxa parametrizada no sistema | OBRIGATÓRIO
+        "CpfTrabalhador": "string", // CPF do seu cliente | OBRIGATÓRIO
+        "VlrTAC": "150", // Informar ou VlrTAC ou PercTAC | NÃO OBRIGATÓRIO
+        "PercTAC": "10", // Informar ou VlrTAC ou PercTAC | NÃO OBRIIGATÓRIO
+        "propostaContaPagamento": { // Nesse objeto voce informa os dados bancários do desembolso | OBRIGATÓRIO
+            "tipoConta": 0, // 1 = Conta poupança 2 = Conta Corrente | OBRIGATÓRIO
+            "agencia": "string", // Agência bancária do emitente | OBRIGATÓRIO
+            "agenciaDig": "string", // Digíto da conta bancária do emitente | OBRIGATÓRIO
+            "conta": "string", // Conta bancária do emitente | OBRIGATÓRIO
+            "contaDig": "string", // Digito bancário da conta do emitente | OBRIGATÓRIO
+            "NumeroBanco": "string" // Código bancário de acordo com a tabela do BACEN | OBRIGATÓRIO
+        }
+    }
+}'
+```
+
+</Expandable>
+
+To use a contract with ***TED*** split, add the object below to the previous request within the `dto` array:
+
+<Expandable title="TED Split">
+
+```json
+ "propostaLancamentos": [ 
+            {
+                "campoID": "string", 
+                "vlrTransacao": 0, 
+                "tipoConta": 0,  
+                "agencia": "string", 
+                "agenciaDig": "string", 
+                "conta": "string", 
+                "contaDig": "string", 
+                "numeroBanco": "string" 
+            }
+        ]
+```
+</Expandable>
+
+To use a contract with a ***BOLETO*** split, add the object below to the previous request within the `dto` array:
+
+<Expandable title="Bank slip split">
+
+```json
+ "propostaLancamentos": [ 
+            {
+                "campoID": "string", 
+                "vlrTransacao": 0, 
+                "dtPagamento": "2024-02-21T17:48:40.110Z", 
+                "linhaDigitavel": "string", 
+                "documentoFederalCedente": "string", 
+                "nomeCedente": "string" 
+            }
+        ]
+```
+</Expandable>
+
+After sending the data, we will consult the CEF. If the customer has a balance available for withdrawal, the response to the request will be the proposal code, and a callback informing the approval status of the proposal ID=2.
+
+If the customer does not have a balance available or an error occurs when calling the endpoint, [see the table](https://bmpmoneyplus-sandbox.mintlify.app/fgts/english/api-references/contracts/8-include-proposal) of messages with the error codes, present in the endpoint.
+
+</Step>
+
+</Steps>
+
+## 4 - Collecting Signatures
+
+After completing the proposal inclusion, it is necessary to sign the CCB, as this is the formalization of a loan and proves responsibility for due payment.
+
+<Info>To learn more about our signatures, their particularities and which one to use in your project [read our explanatory material on signatures](https://bmpdocs.moneyp.com.br/fgts/assinaturas).</Info>
+
+With the signature defined during the project scope planning with the sales executive, select the option below that you will use to proceed with the use case:
+
+<Expandable title="4.1 Electronic Signature">
+
+Method that uses authenticity validation tokens sent by BMP via SMS or WhatsApp.
+
+<Steps>
+
+<Step title="Electronic Signature">
+
+In this step, you will need to perform the electronic signature through integration with our [Electronic Signature](https://bmpdocs.moneyp.com.br/fgts/api-reference/assinaturas/eletronica) API.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirAssinaturaCCB' \
+--header 'accept: text/plain' \
+--header 'Authorization: Bearer qXdZot13a6EbJkAbjpZ5ep_eTKH2F5ZHOwZrYZVN1lw' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": { // Apenas um dos campos abaixo deve ser informado
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Colocar GUID da proposta gerado no response da inclusão da proposta
+        "codigoOperacao": "string" // Colocar codigo da operação utilizado na inclusão da proposta
+    },
+    "assinantes": [
+        {
+            "nome": "string", // Informe o nome do assinante | OBRIGATÓRIO
+            "email": "string", // Informe o email do assinante | OBRIGATÓRIO
+            "documento": "string", // Informe o documento federal do assinante | OBRIGATÓRIO
+            "descricao": "string", // Informe o papel desse assinante na operação | OBRIGATÓRIO
+            "telefoneCelular": "string", // Informe o telefone celular do assinante | OBRIGATÓRIO
+            "notificarPorEmail": true, // Esse campo controle se o cliente receberá a CCB por email para a assinatura | OBRIGATÓRIO
+            "notificarPorWhatsApp": true, // Se o cliente for receber o token de assinatura via WhatsApp, deixar esse campo como true. Se não, colocar false | NÃO OBRIGATÓRIO
+            "notificarPorSMS": true, // Se o cliente for receber o token de assinatura via SMS, deixar esse campo como true. Se não, colocar false | NÃO OBRIGATÓRIO
+            "codigoIdentificador": "string", // Código identificador do assinante dentro da proposta (caso queira realizar alguma alteração nesse assinante, informe esse código na outra chamada da API) | NÃO OBRIGATÓRIO
+            "dtLimiteAssinatura": "2024-02-21T19:47:38.567Z" // Data limite para que o assnante realize a assinatura | OBRIGATÓRIO
+        }
+    ]
+}'
+```
+</Step>
+
+</Steps>
+
+</Expandable>
+
+<Expandable title="4.2 Relogon Signature">
+
+Authentication and digital signature method that requires double authentication, used in electronic signature systems. This can occur in an authenticated environment of our partner.
+
+<Steps>
+
+<Step title="Collection of Signature Model">
+
+In this step, it will be necessary to query the CCB through integration with our [CCB Printing](https://bmpdocs.moneyp.com.br/fgts/api-reference/impressao-documentos/get-ccb) URL to validate the model before signing.
+
+```json
+curl --location 'https://reports.moneyp.dev.br/imprimir?impressao=S&tipo=ccb&code=GUIDPROPOSTA&integracao=CODPARAMETRO&copias=1&versao=' \
+```
+</Step>
+
+<Step title="Relogon Subscription">
+
+At this stage, you will need to sign up for Relogon through integration with our [Relogon Subscription](https://bmpdocs.moneyp.com.br/fgts/api-reference/assinaturas/relogon) API.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirAssinaturaCCBFinalizada' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": { 
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", 
+        "codigoOperacao": "string" 
+  },
+  "assinantes": [
+    {
+      "nome": "string", 
+      "email": "string",  
+      "documento": "string", 
+      "descricao": "string", 
+      "notificarPorEmail": true,  
+      "dtAssinatura": "2024-01-15T14:21:57.250Z",  
+      "ipAssinatura": "string" 
+    }
+  ]
+}'
+```
+
+</Step>
+
+<Step title = "Proposal completion">
+
+After sending the Relogon subscription request, it will be necessary to complete the proposal through integration with the [Proposal completion](https://bmpdocs.moneyp.com.br/fgts/api-reference/assinaturas/finalizacao-proposta) endpoint.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/Finalizar' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer g3Lmb6cowHidKJwwu8J-5xAVAViSysAZAajzeeeTXq4' \
+--data '{
+    "dto": { 
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", 
+        "codigoOperacao": "string" 
+    },
+    "parametros": [ 
+        {
+            "Nome": "FINALIZACAO_VALIDARPARCELAS",
+            "Valor": "FALSE"
+        },
+        {
+            "Nome": "IP_ADDRESS",
+            "Valor": "00.000.000.00"
+        }
+    ]
+}'
+```
+
+</Step>
+
+<Step title="Signed CCB Printing">
+
+At this stage, it will be necessary to query the CCB through integration with our [CCB Printing](https://bmpdocs.moneyp.com.br/fgts/api-reference/impressao-documentos/get-ccb) URL to validate the model before signing.
+
+```json
+curl --location 'https://reports.moneyp.dev.br/imprimir?impressao=S&tipo=ccb&code=GUIDPROPOSTA&integracao=CODPARAMETRO&copias=1&versao=' \
+```
+
+</Step>
+
+</Steps>
+
+</Expandable>
+
+<Expandable title="4.3 Certifying Signature">
+
+A method that uses cryptography to confirm the identity of the signer, associated with a digital certificate provided by a Certifying Authority (CA).
+
+<Steps>
+
+<Step title="Collecting the Signature Model">
+
+In this step, it will be necessary to query the CCB through integration with our [CCB Printing](https://bmpdocs.moneyp.com.br/fgts/api-reference/impressao-documentos/get-ccb) URL to validate the model before signing.
+
+```json
+curl --location 'https://reports.moneyp.dev.br/imprimir?impressao=S&tipo=ccb&code=GUIDPROPOSTA&integracao=CODPARAMETRO&copias=1&versao=' \
+```
+</Step>
+
+<Step title="Sending to Certifying Body">
+
+At this stage, it will be necessary to send the CCB model to the certifying body, so that it can be signed.
+
+</Step>
+
+<Step title="Certificate Signature">
+
+After collecting the signatures, it will be necessary to upload the signed CCB, through integration with our [Certificate Signature](https://bmpdocs.moneyp.com.br/fgts/api-reference/assinaturas/certificadora) API.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirDocumento' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer token gerado no 1º passo' \
+--data '{
+  "dto": { 
+    "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", 
+    "codigoOperacao": "string" 
+  },
+  "documento": {
+    "codigo": "3fa85f64-5717-4562-b3fc-2c963f66afa6", 
+    "tipoDocumento": 30, 
+    "nomeArquivo": "string", 
+    "extensao": "string", 
+    "dtValidade": "2023-05-23T20:57:08.922Z", 
+    "arquivo": "string" 
+  }
+}'
+```
+
+</Step>
+
+<Step title = "Proposal completion">
+
+After sending the Relogon subscription request, it will be necessary to complete the proposal through integration with the [Proposal completion](https://bmpmoneyplus-sandbox.mintlify.app/fgts/english/api-references/subscriptions/14-proposal-finalization) endpoint.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/Finalizar' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer g3Lmb6cowHidKJwwu8J-5xAVAViSysAZAajzeeeTXq4' \
+--data '{
+    "dto": { 
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", 
+        "codigoOperacao": "string" 
+    },
+    "parametros": [ 
+        {
+            "Nome": "FINALIZACAO_VALIDARPARCELAS",
+            "Valor": "FALSE"
+        },
+        {
+            "Nome": "IP_ADDRESS",
+            "Valor": "00.000.000.00"
+        }
+    ]
+}'
+```
+</Step>
+
+</Steps>
+
+</Expandable>
+
+## 5 - Request for Balance Endorsement
+
+After signing the transaction **(ID=6)**, BMP will request CEF to reserve the balance of the CPF in question. While the reservation is in progress, CEF keeps the amount blocked, ensuring that there will be no new requests to endorse that balance.
+
+<Warning>In case of system unavailability on the part of CEF, it will return with the protocol status “in process”</Warning>
+
+The request will be automatically reprocessed by CEF on the evening of the next business day. Subsequently, the protocol status will be changed to 'accepted' or 'not accepted'.
+
+Possible callback scenarios according to the protocol return by CEF:
+
+<Expandable title = "Endorsement performed successfully">
+
+After the balance Endorsement has been successfully performed, the proposal will be released for payment and you will receive the callback with **ID=08**.
+
+<Expandable title=" Paid Proposal">
+
+After the payment is successfully completed and the bank details are correct, we will make the payment to the bank account provided when the proposal was included. You will then receive the callback with **ID=9.**
+
+</Expandable>
+
+<Expandable title="Pending Payment Operation">
+
+<Steps>
+
+<Step title="Updating bank details">
+
+If the bank details are incorrect, you will receive a callback with **ID=11**. In this case, you will need to update the bank details using this endpoint:
+
+```json
+curl --request POST \
+--url https://api.bmpdigital.moneyp.dev.br/Proposta/AtualizarContaPagamento \
+--header 'Authorization: <api-key>' \
+--header 'Content-Type: application/json' \
+--header 'IdempotencyKey: <idempotencykey>' \
+--data '{
+  "dto": {
+    "codigoProposta": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
+    "codigoOperacao": "<string>",
+    "numeroProposta": 123
+  },
+  "dtoPagto": {
+    "tipoConta": 123,
+    "agencia": "<string>",
+    "agenciaDig": "<string>",
+    "conta": "<string>",
+    "contaDig": "<string>",
+    "numeroBanco": "<string>",
+    "documentoFederalPagamento": "<string>",
+    "nomePagamento": "<string>"
+  }
+}'
+```
+After executing this endpoint, the proposal will return to the payment queue, and you will receive a callback with ID=8, informing you that the proposal is ready for payment.
+
+</Step>
+
+<Step title = "Disbursed Proposal">
+
+If the bank account has the correct data, it will be disbursed and the system will return the callback with ID=9, for disbursed proposal.
+
+</Step>
+
+</Steps>
+
+<Warning>If there is a new discrepancy in the bank account data, the operation must be performed again, returning to the first step. </Warning>
+
+</Expandable>
+
+-------------------
+
+</Expandable>
+
+<Expandable title= "Endorsement not performed">
+
+Lock not performed due to pending issues:
+
+<Expandable title= "Pending">
+
+If BMP is not authorized to perform the balance lock, that is, your client only authorized **MONEY PLUS SOCIEDADE DE CRÉDITO AO MICROEMPREENDEDOR E A EMPRESA DE PEQUENO PORTE LTDA**, the callback will return with **ID=5.**
+
+<Steps>
+
+<Step title= "Check the reason for the pending issue">
+
+Check the reason for the pending issue by consulting the proposal through the "PendingMotive" field in the return of the following endpoint: 
+
+```json
+curl --request POST \
+--url https://api.bmpdigital.moneyp.dev.br/FGTS/ConsultaProposta \
+--header 'Authorization: <api-key>' \
+--header 'Content-Type: application/json' \
+--header 'IdempotencyKey: <idempotencykey>' \
+--data '{
+  "dto": {
+    "CodigoProposta": "<string>",
+    "CodigoOperacao": "<string>"
+  }
+}'
+```
+</Step>
+
+<Step title="Balance Reservation">
+
+After identifying the reason, use the endpoint below to request the balance reservation again:
+
+```json
+curl --request POST \
+--url https://api.bmpdigital.moneyp.dev.br/Proposta/Finalizar \
+--header 'Authorization: <api-key>' \
+--header 'Content-Type: application/json' \
+--header 'IdempotencyKey: <idempotencykey>' \
+--data '{
+  "dto": {
+    "codigoProposta": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
+    "codigoOperacao": "<string>",
+    "numeroProposta": 123
+  },
+  "parametros": [
+    {
+      "nome": "<string>",
+      "valor": "<string>"
+    }
+  ]
+}'
+```
+
+</Step>
+
+</Steps>
+
+<Tip>Please note that, depending on the reason, it may be necessary to contact your client.</Tip>
+
+</Expandable
+>
+<Expandable title = "Canceled">
+
+If there is no balance available in the FGTS to make the advance payment, the callback will return **ID=4**.
+
+</Expandable>
+
+-----
+
+</Expandable>
+
+## 6 - Cancellation (Optional)
+
+Using this endpoint, you will be asked to cancel the advance payment contract with CEF:
+
+```json
+curl --request POST \
+--url https://api.bmpdigital.moneyp.dev.br/FGTS/CancelarProposta \
+--header 'Authorization: Bearer ' \
+--header 'Content-Type: application/json' \
+--header 'IdempotencyKey: GUID UNICO POR CHAMADA \
+--data '{
+  "dto": {
+    "CodigoProposta": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
+    "CodigoOperacao": "<string>",
+    "TextoMotivoCancelamento": "<string>"
+  }
+}'
+```
+ 
+<Warning> The partner can request the cancellation of the proposal via API only in the following statuses: “Approved”, “Finalized”, “Released” and “Paid”.</Warning>
+
+After requesting the cancellation, check the possible callback returns that we make available through the [cancellation callback](https://bmpmoneyplus-sandbox.mintlify.app/fgts/english/developers-guide/technical-callback-procedure/events).
+
+## 7 - APIs Auxiliares
+
+* [Callback Technical Procedure](https://bmpmoneyplus-sandbox.mintlify.app/fgts/english/developers-guide/technical-callback-procedure/introduction) will be used throughout the process in the stages of changing the status of the proposal and requesting cancellation of the proposal.
+* [Consult Proposal Endpoint](https://bmpmoneyplus-sandbox.mintlify.app/fgts/english/api-references/contracts/7-consult-proposal) will be used throughout the process to access and check all the detailed information of the proposal.
+* [Cancel Proposal Endpoint](https://bmpmoneyplus-sandbox.mintlify.app/fgts/english/api-references/contracts/6-cancel-proposal) will be used in this journey to cancel the contract.

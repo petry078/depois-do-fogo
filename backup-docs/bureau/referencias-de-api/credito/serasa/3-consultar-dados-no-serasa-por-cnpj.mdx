@@ -1,0 +1,271 @@
+---
+title: 3 - Consultar Dados no Serasa por CNPJ
+openapi: post /Bureau/ConsultaSerasaCnpj
+---
+
+Por meio deste endpoint, o parceiro pode consultar documentos de Pessoa Física e Jurídica e obter um relatório detalhado em formato JSON. 
+
+O relatório apresenta uma visão da saúde financeira do documento consultado, incluindo informações como pendências financeiras, restrições, dívidas vencidas, cheques sem fundo e protestos, auxiliando na tomada de decisões seguras e informadas.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. No linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{
+    \"Erro": false,
+    \"MensagemOperador": "OK",
+    \"ResultadoConsulta": {
+        \"reports": [
+            {
+                \"reportName": "RELATORIO_PJ",
+                \"registration": {
+                    \"companyDocument": "011234560001l10",
+                    \"companyName": "Empresa LTDA",
+                    \"foundationDate": "2012-03-27T00:00:00",
+                    \"statusRegistration": "SITUACAO DO CNPJ EM 14/06/2025: ATIVA",
+                    \"statusDate": null,
+                    \"address": {
+                        \"city": "SAO PAULO",
+                        \"state": "SP"
+                    }
+                },
+                \"negativeData": null,
+                \"facts": {
+                    \"inquiryCompanyResponse": {
+                        \"results": [
+                            {
+                                \"occurrenceDate": "2025-06-23T00:00:00",
+                                \"companyName": "PROPERTIES LTDA",
+                                \"companyDocumentId": "01123123000125",
+                                \"companyAlias": "",
+                                \"daysQuantity": 2
+                            },
+                            {
+                                \"occurrenceDate": "2025-06-23T00:00:00",
+                                \"companyName": "VALORES LTDA",
+                                \"companyDocumentId": "01123123000130",
+                                \"companyAlias": "",
+                                \"daysQuantity": 1
+                            }
+                        ],
+                        \"quantity": {
+                            \"actual": 2,
+                            \"bankActual": 2,
+                            \"historical": [
+                                {
+                                    \"inquiryDate": "2025-05",
+                                    \"occurrences": 24,
+                                    \"bankOccurrences": 4
+                                }
+                            ]
+                        }
+                    },
+                    \"judgementFilings": null,
+                    \"bankrupts": null
+                },
+                \"score": null,
+                \"negativeSummary": {
+                    \"ValueKind": []
+                }
+            }
+        ],
+        \"optionalFeatures": {
+            \"negativeData": {
+                \"pefin": {
+                    \"pefinResponse": [
+                        {
+                            \"occurrenceDate": "2025-04-23T00:00:00",
+                            \"legalNatureId": "DP",
+                            \"legalNature": "DUPLICATA",
+                            \"contractId": "REV75ABOL",
+                            \"creditorName": "ABC",
+                            \"amount": 988.92,
+                            \"federalUnit": null,
+                            \"principal": true,
+                            \"dispute": {
+                                \"disputeIndicativeFlag": false
+                            },
+                            \"cadus": "C465367"
+                        },
+                        {
+                            \"occurrenceDate": "2025-03-22T00:00:00",
+                            \"legalNatureId": "DP",
+                            \"legalNature": "DUPLICATA",
+                            \"contractId": "FA521ABOL",
+                            \"creditorName": "ABC",
+                            \"amount": 123.49,
+                            \"federalUnit": null,
+                            \"principal": true,
+                            \"dispute": {
+                                \"disputeIndicativeFlag": false
+                            },
+                            \"cadus": "C413523"
+                        }
+                    ],
+                    \"summary": {
+                        \"firstOccurrence": "2023-01-03T00:00:00",
+                        \"lastOccurrence": "2025-04-23T00:00:00",
+                        \"count": 2,
+                        \"balance": 1112.41
+                    }
+                },
+                \"refin": {
+                    \"refinResponse": null,
+                    \"summary": {
+                        \"firstOccurrence": null,
+                        \"lastOccurrence": null,
+                        \"count": 0,
+                        \"balance": 0
+                    }
+                },
+                \"collectionRecords": {
+                    \"collectionRecordsResponse": [
+                        {
+                            \"occurrenceDate": "2025-06-06T00:00:00",
+                            \"legalNatureId": "BS",
+                            \"legalNature": "COBRANCA",
+                            \"contractId": "0000001825",
+                            \"creditorName": "SECRETARIA",
+                            \"amount": 3418.64,
+                            \"city": "Sao Paulo",
+                            \"federalUnit": "SP",
+                            \"principal": true,
+                            \"dispute": {
+                                \"disputeIndicativeFlag": false
+                            },
+                            \"cadus": "C507310",
+                            \"debtMode": null
+                        },
+                        {
+                            \"occurrenceDate": "2025-05-01T00:00:00",
+                            \"legalNatureId": "BS",
+                            \"legalNature": "COBRANCA ",
+                            \"contractId": "0000042025000882",
+                            \"creditorName": "SECRETARIA",
+                            \"amount": 8885.52,
+                            \"city": "Sao Paulo",
+                            \"federalUnit": "SP",
+                            \"principal": true,
+                            \"dispute": {
+                                \"disputeIndicativeFlag": false
+                            },
+                            \"cadus": "C4731761",
+                            \"debtMode": null
+                        }
+                    ],
+                    \"summary": {
+                        \"firstOccurrence": "2025-05-01T00:00:00",
+                        \"lastOccurrence": "2025-06-06T00:00:00",
+                        \"count": 2,
+                        \"balance": 12304.16
+                    }
+                },
+                \"check": {
+                    \"checkResponse": null,
+                    \"summary": {
+                        \"firstOccurrence": null,
+                        \"lastOccurrence": null,
+                        \"count": 0,
+                        \"balance": 0
+                    }
+                },
+                \"notary": {
+                    \"notaryResponse": [
+                        {
+                            \"occurrenceDate": "2025-01-22T00:00:00",
+                            \"amount": 20812.69,
+                            \"officeNumber": "07",
+                            \"city": "SAO PAULO",
+                            \"federalUnit": "SP",
+                            \"dispute": {
+                                \"disputeIndicativeFlag": false
+                            },
+                            \"cadus": "A43117"
+                        },
+                        {
+                            \"occurrenceDate": "2024-12-05T00:00:00",
+                            \"amount": 20812.69,
+                            \"officeNumber": "08",
+                            \"city": "SAO PAULO",
+                            \"federalUnit": "SP",
+                            \"dispute": {
+                                \"disputeIndicativeFlag": false
+                            },
+                            \"cadus": "A43256"
+                        },
+                        {
+                            \"occurrenceDate": "2024-11-07T00:00:00",
+                            \"amount": 20812.69,
+                            \"officeNumber": "01",
+                            \"city": "SAO PAULO",
+                            \"federalUnit": "SP",
+                            \"dispute": {
+                                \"disputeIndicativeFlag": false
+                            },
+                            \"cadus": "A429797"
+                        },
+                        {
+                            \"occurrenceDate": "2024-08-26T00:00:00",
+                            \"amount": 20812.69,
+                            \"officeNumber": "05",
+                            \"city": "SAO PAULO",
+                            \"federalUnit": "SP",
+                            \"dispute": {
+                                \"disputeIndicativeFlag": false
+                            },
+                            \"cadus": "A037211"
+                        },
+                        {
+                            \"occurrenceDate": "2024-08-01T00:00:00",
+                            \"amount": 20812.69,
+                            \"officeNumber": "06",
+                            \"city": "SAO PAULO",
+                            \"federalUnit": "SP",
+                            \"dispute": {
+                                \"disputeIndicativeFlag": false
+                            },
+                            \"cadus": "A483157"
+                        }
+                    ],
+                    \"summary": {
+                        \"firstOccurrence": "2023-04-14T00:00:00",
+                        \"lastOccurrence": "2025-01-22T00:00:00",
+                        \"count": 12,
+                        \"balance": 1121041.86
+                    }
+                }
+            },
+            \"scores": null,
+            \"qsaCompleteReport": null,
+            \"companyParticipationsReport": null,
+            \"spcAnnotations": null,
+            \"spcMarketInquiries": null,
+            \"spcMarketInquirySummary": null,
+            \"financialProfile": null,
+            \"facts": {
+                \"inquiryCompanyResponse": null,
+                \"judgementFilings": {
+                    \"judgementFilingsResponse": null,
+                    \"summary": {
+                        \"firstOccurrence": null,
+                        \"lastOccurrence": null,
+                        \"count": 0,
+                        \"balance": 0
+                    }
+                },
+                \"bankrupts": {
+                    \"bankruptsResponse": null,
+                    \"summary": {
+                        \"firstOccurrence": null,
+                        \"lastOccurrence": null,
+                        \"count": 0,
+                        \"balance": 0
+                    }
+                }
+            }
+        }
+    }
+}
+```
+</Expandable>

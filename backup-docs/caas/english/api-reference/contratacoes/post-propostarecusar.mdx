@@ -1,0 +1,60 @@
+---
+title: "27 - Reject"
+openapi: post /Proposta/Recusar
+version: 'English'
+---
+
+Through this endpoint, the partner rejects the proposal, provided the partner has permission to perform this action.
+
+<Expandable title="Mensageria - Proposal Reject">
+| Category | Operation       | Action   | Code   | Detailed Code | Message                                                                                                      |
+|----------|-----------------|----------|--------|---------------|--------------------------------------------------------------------------------------------------------------|
+| Proposta | PropostaRecusar | Recusar  | C0056  | V0001         | Este parceiro não tem permissão para recusar a proposta                                                      |
+| Proposta | PropostaRecusar | Recusar  | C0056  | V0002         | Esta proposta já está recusada                                                                               |
+| Proposta | PropostaRecusar | Recusar  | C0056  | V0003         | A situação `{descricaoSituacao}` não permite marcar como Recusada a Proposta                                 |
+| Proposta | PropostaRecusar | Recusar  | C0056  | V0004         | Proposta não pode ser recusada, pois sua situação é `{SituacaoPropostaEnum.GetDescricao(proposta.Situacao)}` |
+| Proposta | PropostaRecusar | Recusar  | C0112  | V0001         | Proposta não encontrada                                                                                      |
+| Proposta | PropostaRecusar | Recusar  | C0112  | V0002         | A Proposta não pertence à esta Integração                                                                    |
+| Proposta | PropostaRecusar | Recusar  | C0185  | V0001         | Informe o valor aprovado e a quantidade de parcelas                                                          |
+| Proposta | PropostaRecusar | Recusar  | C0185  | V0002         | Valor aprovado não pode ser superior ao valor solicitado                                                     |
+| Proposta | PropostaRecusar | Recusar  | C0185  | V0003         | Valor/Prazo aprovado não pode ser diferente do Valor/Prazo solicitado                                        |
+| Proposta | PropostaRecusar | Recusar  | C0185  | V0004         | A Proposta deve ter pelo menos 1(um) Assinante cadastrado                                                    |
+| Proposta | PropostaRecusar | Recusar  | C0185  | V0005         | É necessário informar o E-mail e Celular de todos os Assinantes                                              |
+| Proposta | PropostaRecusar | Recusar  | C0185  | V0006         | Proposta não deve ter boletos.                                                                               |
+| Proposta | PropostaRecusar | Recusar  | C0185  | V0007         | Motivo de Rejeição deve ser informado                                                                        |
+| Proposta | PropostaRecusar | Recusar  | C0185  | V0008         | Valor e Prazo não podem ser alterados quando o cálculo da parcela é sem juros                                |
+| Proposta | PropostaRecusar | Recusar  | C0185  | V0009         | Percentual de Juros deve ser informado                                                                       |
+| Proposta | PropostaRecusar | Recusar  | C0185  | V0010         | Valor da Parcela deve ser informado                                                                          |
+| Proposta | PropostaRecusar | Recusar  | C0185  | V0011         | Proposta deve ter parcelas geradas antes de ser finalizada.                                                  |
+| Proposta | PropostaRecusar | Recusar  | C0185  | V0012         | Os documentos do cliente devem estar conferidos                                                              |
+| Proposta | PropostaRecusar | Recusar  | C0185  | V0013         | Os documentos da proposta devem estar conferidos                                                             |
+| Proposta | PropostaRecusar | Recusar  | C0186  | V0001         | Proposta ainda não foi aprovada pelo analista de crédito                                                     |
+| Proposta | PropostaRecusar | Recusar  | C0198  | V0001         | Proposta não pode ser HotMoney ou Rotativo                                                                   |
+| Proposta | PropostaRecusar | Recusar  | C0198  | V0002         | Taxa deve ser de `{percJuros}`                                                                               |
+| Proposta | PropostaRecusar | Recusar  | C0198  | V0003         | TAC deve ser de `{VlrTAC}`                                                                                   |
+| Proposta | PropostaRecusar | Recusar  | C0196  | V0001         | O valor solicitado não é válido                                                                              |
+| Proposta | PropostaRecusar | Recusar  | C0196  | V0002         | Formato de cálculo inválido                                                                                  |
+| Proposta | PropostaRecusar | Recusar  | C0196  | V0003         | É necessário o produto                                                                                       |
+| Proposta | PropostaRecusar | Recusar  | C0196  | V0004         | Prazo inválido ou não localizado para este Produto x Rede                                                    |
+| Proposta | PropostaRecusar | Recusar  | C0196  | V0005         | Não é possível aprovar a proposta. Produto x Rede x Parcela não possui juros configurado                    |
+| Proposta | PropostaRecusar | Recusar  | C0196  | V0006         | Configuração deve ser enviada para proposta HotMoney                                                         |
+| Proposta | PropostaRecusar | Recusar  | C0196  | V0007         | Produto Rotativo e HotMoney aceitam apenas formato de cálculo com juros                                      |
+| Proposta | PropostaRecusar | Recusar  | C0196  | V0008         | Formato de Cálculo não informado                                                                             |
+| Proposta | PropostaRecusar | Recusar  | T0665  | D0001         | Informe o Cliente                                                                                            |
+| Proposta | PropostaRecusar | Recusar  | T0665  | D0002         | Documento do Cliente é inválido                                                                              |
+| Proposta | PropostaRecusar | Recusar  | T0665  | D0016         | EPCodigo não informado                                                                                       |
+| Proposta | PropostaRecusar | Recusar  | T0665  | D0017         | Vendedor não encontrado                                                                                      |
+| Proposta | PropostaRecusar | Recusar  | T0665  | D0018         | Promotor não encontrado                                                                                      |
+| Proposta | PropostaRecusar | Recusar  | T0665  | D0019         | Informe o Tipo de Operação                                                                                   |
+| Proposta | PropostaRecusar | Recusar  | T0665  | D0020         | Informe o Valor                                                                                              |
+| Proposta | PropostaRecusar | Recusar  | T0665  | D0021         | Informe a Quantidade de Parcelas                                                                             |
+| Proposta | PropostaRecusar | Recusar  | T0665  | D0022         | Formato de cálculo inválido                                                                                  |
+| Proposta | PropostaRecusar | Recusar  | T0665  | D0023         | Cliente deve ser pessoa física                                                                               |
+| Proposta | PropostaRecusar | Recusar  | C0204  | V0001         | Erro ao extrair os dados do histórico da proposta                                                            |
+| Proposta | PropostaRecusar | Recusar  | C0203  | V0001         | Erro ao gerar o objeto de histórico da proposta                                                              |
+| Proposta | PropostaRecusar | Recusar  | C0205  | V0001         | Erro ao confrontar as alterações da proposta                                                                 |
+| Proposta | PropostaRecusar | Recusar  | C0206  | V0001         | Erro ao comparar listas da proposta                                                                          |
+| Proposta | PropostaRecusar | Recusar  | C0207  | V0001         | Erro ao selecionar label do campo histórico                                                                  |
+| Proposta | PropostaRecusar | Recusar  | C0208  | V0001         | nan                                                                                                          |
+| Proposta  | PropostaRecusar | Recusar  | C0201  | V0001            | Erro ao gerar histórico da proposta.                                                                                                                                 |
+</Expandable>

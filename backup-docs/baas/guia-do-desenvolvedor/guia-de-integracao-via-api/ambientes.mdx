@@ -1,0 +1,114 @@
+---
+title: "Ambientes"
+version: 'Português'
+---
+
+Esta página fornece uma visão geral das conexões com nossas APIs em homologação e produção. 
+
+Aqui, você encontrará as URLs específicas para cada conexão que permitem o acesso seguro e adequado às funcionalidades das nossas APIs, seja para testes durante a fase de desenvolvimento ou para operações em escala real após o lançamento. 
+
+Cada URL está categorizada por sua finalidade específica, facilitando a integração e o uso correto das APIs.
+
+## SCD e SCM
+
+A implantação de novos parceiros é realizada em dois ambientes diferentes:
+
+* **SCD (531)**;
+* **SCM (274)**;
+
+Parceiros implantados no ambiente **SCD (531)** devem relizar requisições de API para os domínios `bmpdigital.dev.br` (homologação) e `bmpdigital.com.br` (produção). Já parceiros implantados no ambiente **SCM (274)**, devem realizar as requisições para os domínios `moneyp.dev.br` (homologação) e `moneyp.com.br` (produção).
+
+<Note>Abaixo estão as URLs das APIs completas, separadas pelos ambientes SCM, SCD, homologação e produção.</Note>
+
+## Ambiente de Homologação
+
+Abaixo estão as URLs base para conexão às diferentes APIs na fase de homologação, que devem ser utilizadas durante o desenvolvimento e testes:
+
+### APIs de homologação (conectando o serviço):
+
+* Para se conectar com as API de PIX é necessário utiliza a URL:
+
+SCD:
+
+```bash
+https://api.ext.pix.dbs.bmpdigital.dev.br/
+```
+
+SCM:
+
+```bash
+https://api.ext.pix.dbs.moneyp.dev.br/
+```
+
+* Para se conectar com as API de Transferências, CNAB, Contas, Boletos e Protestos é necessário utiliza a URL:
+
+SCD:
+
+```bash
+https://api.ext.dbs.bmpdigital.dev.br/
+```
+
+SCM:
+
+```bash
+https://api.ext.dbs.moneyp.dev.br/
+```
+* Para API de Impressão de Boleto deverá se conectar utilizando a URL:
+
+SCD:
+
+```bash
+https://api.ext.dbs.bmpdigital.dev.br/
+```
+
+SCM:
+
+```bash
+https://api.ext.reports.dbs.moneyp.dev.br/
+```
+
+## Ambiente de Produção
+
+Quando os aplicativos estão prontos para serem lançados ao público, as seguintes URLs devem ser utilizadas para acessar as APIs no ambiente de produção:
+
+### APIs de produção (conectando o serviço):
+
+* Para se conectar com as API de PIX é necessário utiliza a URL:
+
+SCD:
+
+```bash
+https://api.ext.pix.dbs.bmpdigital.com.br/
+```
+
+SCM:
+
+```bash
+https://api.ext.pix.dbs.moneyp.com.br/
+```
+* Para se conectar com as API de Transferências, CNAB, Contas, Boletos e Protestos é necessário utiliza a URL:
+
+SCD:
+
+```bash
+https://api.ext.dbs.bmpdigital.com.br/
+```
+
+SCM:
+
+```bash
+https://api.ext.dbs.moneyp.com.br/
+```
+* Para API de Impressão de Boleto deverá se conectar utilizando a URL:
+
+SCD:
+
+```bash
+https://api.ext.reports.dbs.bmpdigital.com.br/
+```
+
+SCM:
+
+```bash
+https://api.ext.reports.dbs.moneyp.com.br/
+```

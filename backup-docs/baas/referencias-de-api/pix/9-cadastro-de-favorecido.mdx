@@ -1,0 +1,41 @@
+---
+title: "9 - Cadastro de Favorecido"
+openapi: post /api/Favorecido
+---
+
+Por meio deste endpoint, o parceiro pode solicitar o cadastro do favorecido, ou seja, quem receberá os valores transferidos através de chave PIX ou dados bancários.
+
+<Warning>
+
+Após realizar a solicitação, o time do Banco Digital realizará a análise do favorecido e seguir com a aprovação ou rejeição caso tenha algum apontamento.
+
+Caso o parceiro queira optar por aprovação automática do favorecido precisa ser solicitado via chamado na plataforma Heflo ao time do Banco Digital, lembrando que isso não isenta a possibilidade de reprovação caso ocorra algum apontamento no favorecido.
+
+</Warning>
+
+<Expandable title="Descrição dos campos da requisição">
+
+| Campo                 | Tipo    | Descrição                                                                                                                        |
+|-----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------|
+| contaDto              | object  | Objeto detalhado da conta bancária.                                                                                              |
+| agencia               | string  | Número da agência bancária.                                                                                                      |
+| agenciadígito         | string  | Dígito verificador da agência bancária.                                                                                          |
+| conta                 | string  | Número da conta bancária.                                                                                                        |
+| contadígito           | string  | Dígito verificador do número da conta bancária.                                                                                  |
+| contaPgto             | string  | Número da conta bancária seguido do dígito verificador.                                                                          |
+| tipoConta             | integer | Tipo da conta bancária. 1 para Corrente, 2 para Poupança, 3 para Pagamento e 4 para Salário.                                     |
+| modeloConta           | integer | Modelo da conta bancária. 1 para Movimento, 2 para Escrow, 3 para Pagamento e 4 para Salário.                                    |
+| nome                  | string  | Nome completo do favorecido.                                                                                                     |
+| documentoFederal      | string  | Número do CPF ou CNPJ do favorecido.                                                                                             |
+| tipoChave             | integer | 0 para CPF, 1 para CNPJ, 2 para Telefone, 3 para Email e 4 para EVP.                                                             |
+| chave                 | string  | Chave PIX para identificação do favorecido.                                                                                      |
+| numeroParticipanteSpi | string  | Número do participante no Sistema de Pagamentos Instantâneos (SPI) do favorecido, usado para identificar a instituição bancária. |
+| agencia               | string  | Número da agência bancária do favorecido.                                                                                        |
+| agenciaDigito         | string  | Dígito verificador da agência bancária do favorecido.                                                                            |
+| conta                 | string  | Número da conta bancária do favorecido.                                                                                          |
+| contaDigito           | string  | dígito verificador do número da conta bancária do favorecido.                                                                    |
+| contaPagamento        | string  | Número da conta bancária do favorecido seguido do dígito verificador.                                                            |
+| tipoConta             | integer | Tipo da conta bancária do favorecido. 1 para Corrente, 2 para Poupança, 3 para Pagamento e 4 para Salário.                       |
+| tipoCadastroPix       | integer | 1 para chave e 2 para dados bancários.                                                                                           
+
+</Expandable>

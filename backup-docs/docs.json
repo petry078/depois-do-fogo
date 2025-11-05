@@ -1,0 +1,1473 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "BMP",
+  "colors": {
+    "primary": "#1A1883",
+    "light": "#4A48A8",
+    "dark": "#1A1883"
+  },
+  "favicon": "https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/favicon.png",
+  "navigation": {
+    "languages": [
+      {
+        "language": "pt-BR",
+        "anchors": [
+          {
+            "anchor": "Documentação",
+            "icon": "book-open",
+            "tabs": [
+              {
+                "tab": "Página Inicial",
+                "groups": [
+                  {
+                    "group": "Visão Geral",
+                    "pages": [
+                      "homepage/quem-somos",
+                      "homepage/produtos-ofertados",
+                      {
+                        "group": "Nossa Tecnologia",
+                        "pages": [
+                          "homepage/nossa-tecnologia/tecnologias-arquitetura"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "BaaS",
+                "groups": [
+                  {
+                    "group": "Guia Inicial",
+                    "pages": [
+                      "baas/guia-inicial/sobre-o-digital-banking-as-a-service"
+                    ]
+                  },
+                  {
+                    "group": "Guia do Desenvolvedor",
+                    "pages": [
+                      {
+                        "group": "Guia de Integração Via API",
+                        "pages": [
+                          "baas/guia-do-desenvolvedor/guia-de-integracao-via-api/introducao",
+                          "baas/guia-do-desenvolvedor/guia-de-integracao-via-api/ambientes",
+                          "baas/guia-do-desenvolvedor/guia-de-integracao-via-api/autenticacao",
+                          "baas/guia-do-desenvolvedor/guia-de-integracao-via-api/procedimento-tecnico-de-handshake",
+                          "baas/guia-do-desenvolvedor/guia-de-integracao-via-api/checklist-de-testes",
+                          {
+                            "group": "Procedimento Técnico de Callback",
+                            "pages": [
+                              "baas/guia-do-desenvolvedor/guia-de-integracao-via-api/procedimento-tecnico-de-callback/introducao",
+                              "baas/guia-do-desenvolvedor/guia-de-integracao-via-api/procedimento-tecnico-de-callback/configuracao",
+                              "baas/guia-do-desenvolvedor/guia-de-integracao-via-api/procedimento-tecnico-de-callback/eventos"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "group": "Guia de Integração Via Plataforma Customizada",
+                        "pages": [
+                          "baas/guia-do-desenvolvedor/guia-de-integracao-via-api/guia-de-integracao-via-plataforma-customizada/checklist-de-producao",
+                          "baas/guia-do-desenvolvedor/guia-de-integracao-via-api/guia-de-integracao-via-plataforma-customizada/customizacoes",
+                          "baas/guia-do-desenvolvedor/guia-de-integracao-via-api/guia-de-integracao-via-plataforma-customizada/ambientes",
+                          "baas/guia-do-desenvolvedor/guia-de-integracao-via-api/guia-de-integracao-via-plataforma-customizada/perfis-de-operadores",
+                          "baas/guia-do-desenvolvedor/guia-de-integracao-via-api/guia-de-integracao-via-plataforma-customizada/cartoes"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Referências de API",
+                    "pages": [
+                      {
+                        "group": "PIX",
+                        "pages": [
+                          "baas/referencias-de-api/pix/1-criar-chave-pix",
+                          "baas/referencias-de-api/pix/2-consultar-chave-pix",
+                          "baas/referencias-de-api/pix/3-excluir-chave-pix",
+                          "baas/referencias-de-api/pix/4-listar-chaves-pix",
+                          "baas/referencias-de-api/pix/5-listar-doacoes",
+                          "baas/referencias-de-api/pix/6-consultar-portabilidade",
+                          "baas/referencias-de-api/pix/7-aceitar-portabilidade",
+                          "baas/referencias-de-api/pix/8-reprovar-portabilidade",
+                          "baas/referencias-de-api/pix/9-cadastro-de-favorecido",
+                          "baas/referencias-de-api/pix/10-solicitar-mfa",
+                          "baas/referencias-de-api/pix/11-criar-qr-code-estatico",
+                          "baas/referencias-de-api/pix/12-cria-qr-code-dinamico-de-pagamento-imediato",
+                          "baas/referencias-de-api/pix/13-qr-code-cobranca",
+                          "baas/referencias-de-api/pix/14-ler-qr-code",
+                          "baas/referencias-de-api/pix/15-consultar-qr-code-em-boleto-hibrido",
+                          "baas/referencias-de-api/pix/16-transferir-recurso",
+                          "baas/referencias-de-api/pix/17-devolver-recurso",
+                          "baas/referencias-de-api/pix/18-status-de-transferencia",
+                          "baas/referencias-de-api/pix/19-consultar-devolucao-de-recurso",
+                          "baas/referencias-de-api/pix/20-solicitar-mfa-para-reivindicacao",
+                          "baas/referencias-de-api/pix/21-solicitar-reivindicacao",
+                          "baas/referencias-de-api/pix/22-listar-reivindicacoes",
+                          "baas/referencias-de-api/pix/23-consultar-reivindicacao-de-chave",
+                          "baas/referencias-de-api/pix/24-cancelar-reivindicacoes",
+                          "baas/referencias-de-api/pix/25-solicitar-contestacao",
+                          "baas/referencias-de-api/pix/26-listar-contestacoes",
+                          "baas/referencias-de-api/pix/27-detalhes-de-contestacao",
+                          "baas/referencias-de-api/pix/28-cancelar-contestacao",
+                          "baas/referencias-de-api/pix/29-transacoes-aptas-contestacao",
+                          "baas/referencias-de-api/pix/30-detalhes-de-transacoes-aptas"
+                        ]
+                      },
+                      {
+                        "group": "Transferências",
+                        "pages": [
+                          "baas/referencias-de-api/transferencias/30-consulta-de-lancamento-futuro",
+                          "baas/referencias-de-api/transferencias/31-cancelar-lancamentos-futuros",
+                          "baas/referencias-de-api/transferencias/32-transferencia-entre-contas",
+                          "baas/referencias-de-api/transferencias/33-transferencia-tipo-ted"
+                        ]
+                      },
+                      {
+                        "group": "CNAB",
+                        "pages": [
+                          "baas/referencias-de-api/cnab/34-registro-boleto-cnab",
+                          "baas/referencias-de-api/cnab/35-consulta-de-pagamento-e-registro-de-boleto",
+                          "baas/referencias-de-api/cnab/36-download-arquivos-200",
+                          "baas/referencias-de-api/cnab/37-cnab-240",
+                          "baas/referencias-de-api/cnab/38-importar-arquivo-cnab-240",
+                          "baas/referencias-de-api/cnab/39-download-de-arquivo-cnab-240",
+                          "baas/referencias-de-api/cnab/40-logs-de-arquivos"
+                        ]
+                      },
+                      {
+                        "group": "Conta",
+                        "pages": [
+                          "baas/referencias-de-api/conta/41-consultar-comprovante",
+                          "baas/referencias-de-api/conta/42-consultar-saldo",
+                          "baas/referencias-de-api/conta/43-consultar-extrato",
+                          "baas/referencias-de-api/conta/44-consultar-tarifas",
+                          "baas/referencias-de-api/conta/45-consultar-conta-por-documento",
+                          "baas/referencias-de-api/conta/46-cancelar-pedido-de-encerramento-de-conta",
+                          "baas/referencias-de-api/conta/47-consulta-encerramento-de-conta",
+                          "baas/referencias-de-api/conta/48-pedido-de-encerramento-de-conta",
+                          "baas/referencias-de-api/conta/49-movimentacao-de-conta",
+                          "baas/referencias-de-api/conta/50-criar-conta",
+                          "baas/referencias-de-api/conta/51-atualizar-cadastro-de-correntista",
+                          "baas/referencias-de-api/conta/52-atualizar-favorecido",
+                          "baas/referencias-de-api/conta/53-cadastro-de-favorecido"
+                        ]
+                      },
+                      {
+                        "group": "Boletos",
+                        "pages": [
+                          "baas/referencias-de-api/boletos/54-pagar-boleto",
+                          "baas/referencias-de-api/boletos/55-registrar-boleto",
+                          "baas/referencias-de-api/boletos/56-consultar-registro-de-boleto",
+                          "baas/referencias-de-api/boletos/57-consultar-boletos-registrados",
+                          "baas/referencias-de-api/boletos/58-cancelar-registro",
+                          "baas/referencias-de-api/boletos/59-consultar-cancelamento-de-boleto",
+                          "baas/referencias-de-api/boletos/60-atualizar-boleto",
+                          "baas/referencias-de-api/boletos/61-consultar-alteracoes-realizadas",
+                          "baas/referencias-de-api/boletos/62-consultar-a-ultima-alteracao-de-boleto",
+                          "baas/referencias-de-api/boletos/63-boletos-outros-bancos",
+                          "baas/referencias-de-api/boletos/64-consultar-cedente",
+                          "baas/referencias-de-api/boletos/65-incluir-cedente",
+                          "baas/referencias-de-api/boletos/66-vincular-carteira",
+                          "baas/referencias-de-api/boletos/67-imprimir-boleto"
+                        ]
+                      },
+                      {
+                        "group": "Protesto",
+                        "pages": [
+                          "baas/referencias-de-api/protesto/68-consultar-boletos-protestaveis",
+                          "baas/referencias-de-api/protesto/69-solicitar-protesto",
+                          "baas/referencias-de-api/protesto/70-cancelar-protesto",
+                          "baas/referencias-de-api/protesto/71-solicitar-anuencia",
+                          "baas/referencias-de-api/protesto/72-consultar-boletos-protestados",
+                          "baas/referencias-de-api/protesto/73-solicitar-desistencia",
+                          "baas/referencias-de-api/protesto/74-historico-de-boletos-protestados",
+                          "baas/referencias-de-api/protesto/75-download-do-instrumento-de-protesto"
+                        ]
+                      },
+                      {
+                        "group": "Onboarding",
+                        "pages": [
+                          "baas/referencias-de-api/onboarding/76-criar-conta",
+                          "baas/referencias-de-api/onboarding/77-atualizar-conta",
+                          "baas/referencias-de-api/onboarding/78-finalizar-criacao-de-conta",
+                          "baas/referencias-de-api/onboarding/79-cancelar-criacao-de-conta",
+                          "baas/referencias-de-api/onboarding/80-definir-responsavel-pelos-documentos",
+                          "baas/referencias-de-api/onboarding/81-listar-cnaes"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Layouts de CNAB",
+                    "pages": [
+                      "baas/layouts-de-cnab/cnab-240",
+                      "baas/layouts-de-cnab/cnab-400"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "CaaS",
+                "groups": [
+                  {
+                    "group": "Guia Inicial",
+                    "pages": [
+                      "caas/sobre-o-caas",
+                      {
+                        "group": "Operações de crédito",
+                        "pages": [
+                          "caas/pessoa-fisica",
+                          "caas/pessoa-juridica"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Métodos de Assinaturas",
+                    "pages": [
+                      "caas/assinaturas"
+                    ]
+                  },
+                  {
+                    "group": "Guia do Desenvolvedor",
+                    "pages": [
+                      {
+                        "group": "Guia de Integração Via API",
+                        "pages": [
+                          "caas/primeiros-passos/introducao",
+                          "caas/primeiros-passos/autenticacao",
+                          "caas/primeiros-passos/ambiente",
+                          {
+                            "group": "Procedimento Técnico de Callback",
+                            "pages": [
+                              "caas/procedimento-tecnico-de-callback/introducao",
+                              "caas/procedimento-tecnico-de-callback/configuracao",
+                              "caas/procedimento-tecnico-de-callback/eventos"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Referencias de API",
+                    "pages": [
+                      {
+                        "group": "Solicitação de Limite de Crédito",
+                        "pages": [
+                          "caas/referencias-de-api/solicitacao-de-limite-de-credito/1-consultar-saldo",
+                          "caas/referencias-de-api/solicitacao-de-limite-de-credito/2-consultar-situacao",
+                          "caas/referencias-de-api/solicitacao-de-limite-de-credito/3-consultar-solicitacoes",
+                          "caas/referencias-de-api/solicitacao-de-limite-de-credito/4-incluir-solicitacao-de-analise-de-credito"
+                        ]
+                      },
+                      {
+                        "group": "Simulações",
+                        "pages": [
+                          "caas/referencias-de-api/simulacoes/5-simulacao-multiparcelamento",
+                          "caas/referencias-de-api/simulacoes/6-simulacao-detalhada",
+                          "caas/referencias-de-api/simulacoes/7-calcular",
+                          "caas/referencias-de-api/simulacoes/9-calcular-valores-proposta"
+                        ]
+                      },
+                      {
+                        "group": "Onboarding",
+                        "pages": [
+                          "caas/referencias-de-api/onboarding/10-cadastro-do-cliente",
+                          "caas/referencias-de-api/onboarding/11-cadastro-do-endereco",
+                          "caas/referencias-de-api/onboarding/12-consultar-documento",
+                          "caas/referencias-de-api/onboarding/13-consultar-pessoa",
+                          "caas/referencias-de-api/onboarding/14-consultar-situacao-onboarding",
+                          "caas/referencias-de-api/onboarding/15-incluir-documento",
+                          "caas/referencias-de-api/onboarding/16-incluir-pessoa-onboarding",
+                          "caas/referencias-de-api/onboarding/17-salvar-enderecos",
+                          "caas/referencias-de-api/onboarding/18-salvar-socio",
+                          "caas/referencias-de-api/onboarding/19-salvar-socios",
+                          "caas/referencias-de-api/onboarding/20-incluir-avalista",
+                          "caas/referencias-de-api/onboarding/21-incluir-avalistas"
+                        ]
+                      },
+                      {
+                        "group": "Contratação",
+                        "pages": [
+                          "caas/referencias-de-api/contratacao/22-inclusao-com-analise-bmp",
+                          "caas/referencias-de-api/contratacao/23-inclusao-com-calculo-externo",
+                          "caas/referencias-de-api/contratacao/24-incluir-manual-simplificado-price",
+                          "caas/referencias-de-api/contratacao/25-reservar-numero-contrato"
+                        ]
+                      },
+                      {
+                        "group": "Gestão de Propostas",
+                        "pages": [
+                          "caas/referencias-de-api/gestao-de-propostas/26-aprovar",
+                          "caas/referencias-de-api/gestao-de-propostas/27-conferir",
+                          "caas/referencias-de-api/gestao-de-propostas/28-consultar",
+                          "caas/referencias-de-api/gestao-de-propostas/29-consultar-estendida",
+                          "caas/referencias-de-api/gestao-de-propostas/30-consultar-parcelas",
+                          "caas/referencias-de-api/gestao-de-propostas/31-incluir-campo-extra",
+                          "caas/referencias-de-api/gestao-de-propostas/32-recusar",
+                          "caas/referencias-de-api/gestao-de-propostas/33-cancelamento-de-contrato"
+                        ]
+                      },
+                      {
+                        "group": "Garantias",
+                        "pages": [
+                          "caas/referencias-de-api/garantias/34-registro-de-veiculo",
+                          "caas/referencias-de-api/garantias/35-salvar-proposta-garantia-bem-documento",
+                          "caas/referencias-de-api/garantias/36-salvar-proposta-garantia-bem"
+                        ]
+                      },
+                      {
+                        "group": "Impressão de Documentos",
+                        "pages": [
+                          "caas/referencias-de-api/impressao-documentos/37-impressao-ccb",
+                          "caas/referencias-de-api/impressao-documentos/38-comprovante-de-pagamento"
+                        ]
+                      },
+                      {
+                        "group": "Assinaturas",
+                        "pages": [
+                          "caas/referencias-de-api/assinaturas/39-eletronica",
+                          "caas/referencias-de-api/assinaturas/40-relogon",
+                          "caas/referencias-de-api/assinaturas/41-certificadora",
+                          "caas/referencias-de-api/assinaturas/42-finalizacao-de-proposta"
+                        ]
+                      },
+                      {
+                        "group": "Desembolso",
+                        "pages": [
+                          "caas/referencias-de-api/desembolso/43-liberacao-de-proposta",
+                          "caas/referencias-de-api/desembolso/44-atualizacao-de-conta-bancaria",
+                          "caas/referencias-de-api/desembolso/45-pagar",
+                          "caas/referencias-de-api/desembolso/46-atualizacao-de-split"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Guias e Casos de Uso",
+                    "pages": [
+                      "caas/casos-uso/capital-de-giro",
+                      "caas/casos-uso/capital-de-giro-btg",
+                      "caas/casos-uso/cdc",
+                      "caas/casos-uso/home-equity",
+                      "caas/casos-uso/emprestimo-pessoal",
+                      "caas/casos-uso/financiamento-veiculo",
+                      "caas/casos-uso/consignado-legacy"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "Bureaus",
+                "groups": [
+                  {
+                    "group": "Guia Inicial",
+                    "pages": [
+                      "bureau/sobre-o-Bureau"
+                    ]
+                  },
+                  {
+                    "group": "Guia do Desenvolvedor",
+                    "pages": [
+                      {
+                        "group": "Guia de Integração Via API",
+                        "pages": [
+                          "bureau/primeiros-passos/introducao",
+                          "bureau/primeiros-passos/autenticacao",
+                          "bureau/primeiros-passos/ambiente",
+                          {
+                            "group": "Procedimento Técnico de Callback",
+                            "pages": [
+                              "bureau/procedimento-tecnico-de-callback/introducao",
+                              "bureau/procedimento-tecnico-de-callback/configuracao",
+                              "bureau/procedimento-tecnico-de-callback/eventos"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Referências de API",
+                    "pages": [
+                      {
+                        "group": "Crédito",
+                        "pages": [
+                          {
+                            "group": "SCR",
+                            "pages": [
+                              "bureau/referencias-de-api/credito/scr/1-relatorio-de-emprestimos-e-financiamentos-scr"
+                            ]
+                          },
+                          {
+                            "group": "Serasa",
+                            "pages": [
+                              "bureau/referencias-de-api/credito/serasa/2-consultar-dados-no-serasa-por-cpf",
+                              "bureau/referencias-de-api/credito/serasa/3-consultar-dados-no-serasa-por-cnpj"
+                            ]
+                          },
+                          {
+                            "group": "Receita",
+                            "pages": [
+                              "bureau/referencias-de-api/credito/receita/4-consulta-por-cpf",
+                              "bureau/referencias-de-api/credito/receita/5-consulta-por-lote-de-cpf",
+                              "bureau/referencias-de-api/credito/receita/6-consulta-basic-por-cnpj",
+                              "bureau/referencias-de-api/credito/receita/7-consulta-basic-por-lote-de-cnpjs",
+                              "bureau/referencias-de-api/credito/receita/8-consulta-qsa-por-cnpj",
+                              "bureau/referencias-de-api/credito/receita/9-consulta-qsa-por-lote-de-cnpjs",
+                              "bureau/referencias-de-api/credito/receita/10-consulta-empresa-por-cnpj",
+                              "bureau/referencias-de-api/credito/receita/11-consulta-empresa-por-lote-de-cnpjs"
+                            ]
+                          },
+                          {
+                            "group": "SPC",
+                            "pages": [
+                              "bureau/referencias-de-api/credito/spc/14-consultar-dados-no-spc",
+                              "bureau/referencias-de-api/credito/spc/15-consultar-dados-no-spc-sem-receita"
+                            ]
+                          },
+                          {
+                            "group": "QUOD",
+                            "pages": [
+                              "bureau/referencias-de-api/credito/quod/16-consultar-dados-no-quod"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "group": "Cadastral",
+                        "pages": [
+                          {
+                            "group": "DataBusca",
+                            "pages": [
+                              "bureau/referencias-de-api/cadastral/databusca/17-consultar-dados-no-databusca"
+                            ]
+                          },
+                          {
+                            "group": "Emailage",
+                            "pages": [
+                              "bureau/referencias-de-api/cadastral/emailage/18-consultar-dados-de-e-mail",
+                              "bureau/referencias-de-api/cadastral/emailage/19-consultar-dados-de-lote-de-e-mails"
+                            ]
+                          },
+                          {
+                            "group": "Autodata",
+                            "pages": [
+                              "bureau/referencias-de-api/cadastral/autodata/20-consultar-autodata"
+                            ]
+                          },
+                          {
+                            "group": "Allcheck",
+                            "pages": [
+                              "bureau/referencias-de-api/cadastral/allcheck/21-consultar-dados-no-allcheck"
+                            ]
+                          },
+                          {
+                            "group": "Bigdata",
+                            "pages": [
+                              {
+                                "group": "Pessoa Física",
+                                "pages": [
+                                  "bureau/referencias-de-api/cadastral/bigdata/pf/22-consulta-basica-sincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pf/23-consulta-basica-assincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pf/24-midia-negativa-sincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pf/25-midia-negativa-assincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pf/26-kyc-sincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pf/27-kyc-assincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pf/28-processos-sincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pf/29-processos-assincrona"
+                                ]
+                              },
+                              {
+                                "group": "Pessoa Jurídica",
+                                "pages": [
+                                  "bureau/referencias-de-api/cadastral/bigdata/pj/30-dados-cadastrais-sincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pj/31-dados-cadastrais-assincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pj/32-dados-historicos-sincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pj/33-dados-historicos-assincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pj/34-midia-negativa-sincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pj/35-midia-negativa-assincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pj/36-processos-sincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pj/37-processos-assincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pj/38-kyc-sincrona",
+                                  "bureau/referencias-de-api/cadastral/bigdata/pj/39-kyc-assincrona"
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "group": "Motor de Crédito",
+                        "pages": [
+                          {
+                            "group": "Consulta",
+                            "pages": [
+                              "bureau/referencias-de-api/motor-de-credito/40-consultar-proposta"
+                            ]
+                          },
+                          {
+                            "group": "Proposta",
+                            "pages": [
+                              "bureau/referencias-de-api/motor-de-credito/41-enviar-proposta-pf",
+                              "bureau/referencias-de-api/motor-de-credito/42-enviar-proposta-pj"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "FGTS",
+                "groups": [
+                  {
+                    "group": "Guia Inicial",
+                    "pages": [
+                      
+                          "fgts/sobre-o-fgts",
+                          "fgts/adesao",
+                          "fgts/novas-regras"
+                    ]
+                  },
+                  {
+                    "group": "Monitoramento Serviços Caixa",
+                    "pages": [
+                      "fgts/healthcheck"
+                    ]
+                  },
+                  {
+                    "group": "Métodos de Assinaturas",
+                    "pages": [
+                      "fgts/assinaturas"
+                    ]
+                  },
+                  {
+                    "group": "Guia do Desenvolvedor",
+                    "pages": [
+                      {
+                        "group": "Guia de Integração Via API",
+                        "pages": [
+                          "fgts/primeiros-passos/page-check",
+                          "fgts/primeiros-passos/autenticacao",
+                          "fgts/primeiros-passos/ambiente",
+                          {
+                            "group": "Procedimento Técnico de Callback",
+                            "pages": [
+                              "fgts/procedimento-tecnico-de-callback/introducao",
+                              "fgts/procedimento-tecnico-de-callback/configuracao",
+                              "fgts/procedimento-tecnico-de-callback/eventos"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Referências de API",
+                    "pages": [
+                      {
+                        "group": "Simulações",
+                        "pages": [
+                          "fgts/api-reference/simulacoes/1-buscar-simulacao",
+                          "fgts/api-reference/simulacoes/2-buscar-simulacao-multiperiodo"
+                        ]
+                      },
+                      {
+                        "group": "Onboarding",
+                        "pages": [
+                          "fgts/api-reference/onboarding/3-cadastro-do-cliente",
+                          "fgts/api-reference/onboarding/4-cadastro-do-endereco",
+                          "fgts/api-reference/onboarding/5-incluir-documento"
+                        ]
+                      },
+                      {
+                        "group": "Contratação",
+                        "pages": [
+                          "fgts/api-reference/contratacoes/6-cancelar-proposta",
+                          "fgts/api-reference/contratacoes/7-consultar-proposta",
+                          "fgts/api-reference/contratacoes/8-incluir-proposta"
+                        ]
+                      },
+                      {
+                        "group": "Impressão de Documentos",
+                        "pages": [
+                          "fgts/api-reference/impressao-documentos/9-impressao-de-ccb",
+                          "fgts/api-reference/impressao-documentos/10-comprovante-de-pagamento"
+                        ]
+                      },
+                      {
+                        "group": "Assinaturas",
+                        "pages": [
+                          "fgts/api-reference/assinaturas/11-eletronica",
+                          "fgts/api-reference/assinaturas/12-relogon",
+                          "fgts/api-reference/assinaturas/13-certificadora",
+                          "fgts/api-reference/assinaturas/14-finalizacao-de-proposta"
+                        ]
+                      },
+                      {
+                        "group": "Desembolso",
+                        "pages": [
+                          "fgts/api-reference/desembolso/15-atualizacao-de-conta-bancaria",
+                          "fgts/api-reference/desembolso/16-atualizacao-de-split"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Guias e Casos de Uso",
+                    "pages": [
+                      "fgts/saque-aniversario"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "Gestão de Contratos",
+                "groups": [
+                  {
+                    "group": "Guia Inicial",
+                    "pages": [
+                      "gestao-contratos/sobre-gestao-contratos"
+                    ]
+                  },
+                  {
+                    "group": "Guia do Desenvolvedor",
+                    "pages": [
+                      {
+                        "group": "Guia de Integração Via API",
+                        "pages": [
+                          "gestao-contratos/primeiros-passos/introducao",
+                          "gestao-contratos/primeiros-passos/autenticacao",
+                          "gestao-contratos/primeiros-passos/ambiente",
+                          {
+                            "group": "Procedimento Técnico de Callback",
+                            "pages": [
+                              "gestao-contratos/procedimento-tecnico-de-callback/introducao",
+                              "gestao-contratos/procedimento-tecnico-de-callback/configuracao",
+                              "gestao-contratos/procedimento-tecnico-de-callback/eventos"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Referêcias de API",
+                    "pages": [
+                      {
+                        "group": "Consultar",
+                        "pages": [
+                          "gestao-contratos/referencias-de-api/consultar/1-consultar-boletos",
+                          "gestao-contratos/referencias-de-api/consultar/2-consultar-detalhes",
+                          "gestao-contratos/referencias-de-api/consultar/3-consultar-parcelas"
+                        ]
+                      },
+                      {
+                        "group": "Cobranças",
+                        "pages": [
+                          "gestao-contratos/referencias-de-api/cobrancas/4-gerar-uma-cobranca-de-parcela",
+                          "gestao-contratos/referencias-de-api/cobrancas/5-gerar-multiplas-cobrancas-de-parcela",
+                          "gestao-contratos/referencias-de-api/cobrancas/6-cancelar-cobrancas-de-parcela"
+                        ]
+                      },
+                      {
+                        "group": "Lançamentos",
+                        "pages": [
+                          "gestao-contratos/referencias-de-api/lancamentos/7-cancelar-boletos",
+                          "gestao-contratos/referencias-de-api/lancamentos/8-gerar-multiplos-boletos",
+                          "gestao-contratos/referencias-de-api/lancamentos/9-gerar-unico-boleto",
+                          "gestao-contratos/referencias-de-api/lancamentos/10-incluir-lancamento-multiplas-parcelas",
+                          "gestao-contratos/referencias-de-api/lancamentos/11-incluir-lancamento-parcela",
+                          "gestao-contratos/referencias-de-api/lancamentos/12-prorrogar-vencimento-parcela"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "E-Consignado",
+                "groups": [
+                  {
+                    "group": "Guia Inicial",
+                    "pages": [
+                      "e-consignado/sobre-o-e-consignado-trabalhador"
+                    ]
+                  },
+                  {
+                    "group": "Métodos de Assinatura",
+                    "pages": [
+                      "e-consignado/metodos-de-assinatura/conheca-nossas-assinaturas"
+                    ]
+                  },
+                  {
+                    "group": "Guia do Desenvolvedor",
+                    "pages": [
+                      {
+                        "group": "Guia de Integração via API",
+                        "pages": [
+                          "e-consignado/guia-de-integracao-via-api/introducao",
+                          "e-consignado/guia-de-integracao-via-api/autenticacao",
+                          "e-consignado/guia-de-integracao-via-api/ambientes",
+                          {
+                            "group": "Procedimento Técnico de Callback",
+                            "pages": [
+                              "e-consignado/procedimento-tecnico-de-callback/introducao",
+                              "e-consignado/procedimento-tecnico-de-callback/eventos-da-dataprev",
+                              "e-consignado/procedimento-tecnico-de-callback/situacao-de-proposta"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Referências de API",
+                    "pages": [
+                      {
+                        "group": "Trabalhador",
+                        "pages": [
+                          "e-consignado/referencias-de-api/trabalhador/1-cadastrar-empregador",
+                          "e-consignado/referencias-de-api/trabalhador/2-cadastrar-vinculo",
+                          "e-consignado/referencias-de-api/trabalhador/3-consultar-dados-de-vinculo",
+                          "e-consignado/referencias-de-api/trabalhador/4-listar-autorizados"
+                        ]
+                      },
+                      {
+                        "group": "Contrato",
+                        "pages": [
+                          "e-consignado/referencias-de-api/contrato/5-atualizar-dados-bancarios",
+                          "e-consignado/referencias-de-api/contrato/6-cancelar-contrato",
+                          "e-consignado/referencias-de-api/contrato/7-consultar-escrituracoes",
+                          "e-consignado/referencias-de-api/contrato/8-consultar-repasses",
+                          {
+                            "group": "Oferta Ativa",
+                            "pages": [
+                              "e-consignado/referencias-de-api/contrato/oferta-ativa/9-gerar-contrato",
+                              "e-consignado/referencias-de-api/contrato/oferta-ativa/10-simular-consignado"
+                            ]
+                          },
+                          {
+                            "group": "Oferta Leilão",
+                            "pages": [
+                              "e-consignado/referencias-de-api/contrato/oferta-leilao/11-gerar-contrato"
+                            ]
+                          },
+                          {
+                            "group": "Parcela",
+                            "pages": [
+                              "e-consignado/referencias-de-api/contrato/parcela/12-cancelar-cobranca",
+                              "e-consignado/referencias-de-api/contrato/parcela/13-consultar-detalhes",
+                              "e-consignado/referencias-de-api/contrato/parcela/14-consultar-parcela",
+                              "e-consignado/referencias-de-api/contrato/parcela/15-gerar-cobranca"
+                            ]
+                          }
+                         ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Guias e Casos de Uso",
+                    "pages": [
+                      "e-consignado/casos-de-uso/leilao",
+                      "e-consignado/casos-de-uso/contratacao-ativa",
+                      "e-consignado/casos-de-uso/consulta-de-escrituracao-e-repasse"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "Banco do Futuro",
+                "groups": [
+                  {
+                    "group": "Banco do Futuro",
+                    "pages": [
+                      "banco-do-futuro/sobre-o-banco-do-futuro"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "Portais BMP",
+                "groups": [
+                  {
+                    "group": "Portais BMP",
+                    "pages": [
+                      "portais-bmp/sobre-os-portais-bmp"
+                    ]
+                  },
+                  {
+                    "group": "Partner",
+                    "pages": [
+                      "portais-bmp/partner/sobre-o-partner",
+                      "portais-bmp/partner/primeiro-acesso",
+                      {
+                        "group": "Guia de Utilização",
+                        "pages": [
+                          "portais-bmp/partner/guia-de-utilizacao/1-importacao",
+                          "portais-bmp/partner/guia-de-utilizacao/2-propostas",
+                          "portais-bmp/partner/guia-de-utilizacao/3-gestao-de-callback",
+                          "portais-bmp/partner/guia-de-utilizacao/4-gestao-de-contratos",
+                          "portais-bmp/partner/guia-de-utilizacao/5-formalizacao-de-garantias",
+                          "portais-bmp/partner/guia-de-utilizacao/6-gestao-de-acessos",
+                          "portais-bmp/partner/guia-de-utilizacao/7-outros-servicos",
+                          "portais-bmp/partner/guia-de-utilizacao/8-mensageria"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Segunda Via",
+                    "pages": [
+                      "portais-bmp/segunda-via/sobre-o-segunda-via"
+                    ]
+                  },
+                  {
+                    "group": "Suporte",
+                    "pages": [
+                      "portais-bmp/suporte/sobre-o-heflo"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "Materiais Complementares",
+                "groups": [
+                  {
+                    "group": "Guia Inicial",
+                    "pages": [
+                      "materiais-complementares/materiais-complementares"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "Atualizações",
+                "groups": [
+                  {
+                    "group": "Guia Inicial",
+                    "pages": [
+                      "atualizacoes/comunicados"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "anchor": "Entre em contato",
+            "href": "https://moneyp.com.br/contato",
+            "icon": "envelope"
+          },
+          {
+            "anchor": "Coleção do Postman",
+            "href": "https://www.postman.com/bmp-docs/bmp-docs",
+            "icon": "code"
+          }
+        ]
+      },
+      {
+        "language": "en",
+        "anchors": [
+          {
+            "anchor": "Documentation",
+            "icon": "book-open",
+            "tabs": [
+              {
+                "tab": "Home Page",
+                "groups": [
+                  {
+                    "group": "Overview",
+                    "pages": [
+                      "homepage/english-homepage/about-us",
+                      "homepage/english-homepage/offered-products",
+                      {
+                        "group": "Our Technology",
+                        "pages": [
+                          "homepage/english-homepage/our-technologies/technologies-architecture"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "BaaS",
+                "groups": [
+                  {
+                    "group": "Initial Guide",
+                    "pages": [
+                      "baas/english/about-dbs"
+                    ]
+                  },
+                  {
+                    "group": "Developer's Guide",
+                    "pages": [
+                      {
+                        "group": "Integration Methods",
+                        "pages": [
+                          {
+                            "group": "API Integration Guide",
+                            "pages": [
+                              "baas/english/first-steps/introduction",
+                              "baas/english/first-steps/enviroment",
+                              "baas/english/first-steps/authentication",
+                              "baas/english/first-steps/page-hand",
+                              "baas/english/first-steps/page-callback",
+                              "baas/english/first-steps/page-check"
+                            ]
+                          },
+                          {
+                            "group": "Customized platform",
+                            "pages": [
+                              "baas/english/white-label/plataforma-customizada",
+                              "baas/english/white-label/ambiente",
+                              "baas/english/white-label/perfis",
+                              "baas/english/white-label/custom",
+                              "baas/english/white-label/list"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "API References",
+                    "pages": [
+                      {
+                        "group": "Pix",
+                        "pages": [
+                          "baas/english/api-references/pix/1-create-pix-key",
+                          "baas/english/api-references/pix/2-query-pix-key",
+                          "baas/english/api-references/pix/3-delete-pix-key",
+                          "baas/english/api-references/pix/4-list-pix-keys",
+                          "baas/english/api-references/pix/5-list-donations",
+                          "baas/english/api-references/pix/6-check-portability",
+                          "baas/english/api-references/pix/7-accept-portability",
+                          "baas/english/api-references/pix/8-reject-portability",
+                          "baas/english/api-references/pix/9-beneficiary-registration",
+                          "baas/english/api-references/pix/10-request-mfa",
+                          "baas/english/api-references/pix/11-create-static-qr-code",
+                          "baas/english/api-references/pix/12-create-dynamic-qr-code",
+                          "baas/english/api-references/pix/13-qr-code-billing",
+                          "baas/english/api-references/pix/14-read-qr-code",
+                          "baas/english/api-references/pix/15-consult-qr-code-on-hybrid-bill",
+                          "baas/english/api-references/pix/16-transfer-resource",
+                          "baas/english/api-references/pix/17-return-resource",
+                          "baas/english/api-references/pix/18-transfer-status",
+                          "baas/english/api-references/pix/19-consult-return-of-resource",
+                          "baas/english/api-references/pix/20-request-mfa-for-claim",
+                          "baas/english/api-references/pix/21-request-claim",
+                          "baas/english/api-references/pix/22-list-claims",
+                          "baas/english/api-references/pix/23-consult-key-claim",
+                          "baas/english/api-references/pix/24-cancel-claims"
+                        ]
+                      },
+                      {
+                        "group": "Transfers",
+                        "pages": [
+                          "baas/english/api-references/transfers/25-future-entry-query",
+                          "baas/english/api-references/transfers/26-cancel-future-entries",
+                          "baas/english/api-references/transfers/27-transfer-between-accounts",
+                          "baas/english/api-references/transfers/28-transfer-via-ted"
+                        ]
+                      },
+                      {
+                        "group": "CNAB",
+                        "pages": [
+                          "baas/english/api-references/cnab/29-cnab-bill-registration",
+                          "baas/english/api-references/cnab/30-payment-query-and-bill-registration",
+                          "baas/english/api-references/cnab/31-download-200-files",
+                          "baas/english/api-references/cnab/32-cnab-240",
+                          "baas/english/api-references/cnab/33-cnab-240-file-import",
+                          "baas/english/api-references/cnab/34-cnab-240-file-download",
+                          "baas/english/api-references/cnab/35-file-logs"
+                        ]
+                      },
+                      {
+                        "group": "Account",
+                        "pages": [
+                          "baas/english/api-references/account/36-consult-proof",
+                          "baas/english/api-references/account/37-check-balance",
+                          "baas/english/api-references/account/38-consult-extract",
+                          "baas/english/api-references/account/39-consult-rates",
+                          "baas/english/api-references/account/40-account-consult-by-document",
+                          "baas/english/api-references/account/41-cancel-account-lockdown-order",
+                          "baas/english/api-references/account/42-account-closure-query",
+                          "baas/english/api-references/account/43-account-closure-request",
+                          "baas/english/api-references/account/44-account-movimentation",
+                          "baas/english/api-references/account/45-create-account",
+                          "baas/english/api-references/account/46-update-account-owner",
+                          "baas/english/api-references/account/47-update-favored",
+                          "baas/english/api-references/account/48-favored-registration"
+                        ]
+                      },
+                      {
+                        "group": "Bills",
+                        "pages": [
+                          "baas/english/api-references/bills/49-pay-bill",
+                          "baas/english/api-references/bills/50-register-bill",
+                          "baas/english/api-references/bills/51-check-bill-registration",
+                          "baas/english/api-references/bills/52-check-registered-bills",
+                          "baas/english/api-references/bills/53-cancel-registration",
+                          "baas/english/api-references/bills/54-check-bill-registration",
+                          "baas/english/api-references/bills/55-update-bill",
+                          "baas/english/api-references/bills/56-check-changes-made",
+                          "baas/english/api-references/bills/57-check-the-last-bill-change",
+                          "baas/english/api-references/bills/58-bills-other-banks",
+                          "baas/english/api-references/bills/59-check-assignor",
+                          "baas/english/api-references/bills/60-include-assignor",
+                          "baas/english/api-references/bills/61-link-wallet",
+                          "baas/english/api-references/bills/62-print-bill"
+                        ]
+                      },
+                      {
+                        "group": "Protests",
+                        "pages": [
+                          "baas/english/api-references/protests/63-check-protestable-invoices",
+                          "baas/english/api-references/protests/64-request-protest",
+                          "baas/english/api-references/protests/65-cancel-protest",
+                          "baas/english/api-references/protests/66-request-consent",
+                          "baas/english/api-references/protests/67-check-protested-invoices",
+                          "baas/english/api-references/protests/68-request-withdrawal",
+                          "baas/english/api-references/protests/69-history-of-protested-invoices",
+                          "baas/english/api-references/protests/70-download-of-protest-instrument"
+                        ]
+                      },
+                      {
+                        "group": "Onboarding",
+                        "pages": [
+                          "baas/english/api-references/onboarding/71-create-account",
+                          "baas/english/api-references/onboarding/72-update-account",
+                          "baas/english/api-references/onboarding/73-finish-account-creation",
+                          "baas/english/api-references/onboarding/74-cancel-account-creation",
+                          "baas/english/api-references/onboarding/75-send-documents",
+                          "baas/english/api-references/onboarding/76-list-cnaes"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              
+              {
+                "tab": "CaaS",
+                "groups": [
+                  {
+                    "group": "Initial Guide",
+                    "pages": [
+                      "caas/english/about-caas",
+                      {
+                        "group": "Credit Operations",
+                        "pages": [
+                          "caas/english/individual",
+                          "caas/english/legal-entity"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Signature Methods",
+                    "pages": [
+                      "caas/english/signature-methods/ccb-signature-methods"
+                    ]
+                  },
+                  {
+                    "group": "Developer's Guide",
+                    "pages": [
+                      {
+                        "group": "API Integration Guide",
+                        "pages": [
+                          "caas/english/first-steps/introduction",
+                          "caas/english/first-steps/authentication",
+                          "caas/english/first-steps/enviroment",
+                          "caas/english/first-steps/page-callback"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "APIs Reference",
+                    "pages": [
+                      {
+                        "group": "Simulations",
+                        "pages": [
+                          "caas/english/api-reference/simulacoes/calculo-price",
+                          "caas/english/api-reference/simulacoes/calculo-price2",
+                          "caas/english/api-reference/simulacoes/post-propostacalcular",
+                          "caas/english/api-reference/simulacoes/post-propostacalculargridparcelas",
+                          "caas/english/api-reference/simulacoes/post-propostacalcularvaloresproposta"
+                        ]
+                      },
+                      {
+                        "group": "Onboarding",
+                        "pages": [
+                          "caas/english/api-reference/onboarding/cadastro-cliente",
+                          "caas/english/api-reference/onboarding/cadastro-endereco",
+                          "caas/english/api-reference/onboarding/post-pessoaconsultardocumento",
+                          "caas/english/api-reference/onboarding/post-pessoaconsultarpessoa",
+                          "caas/english/api-reference/onboarding/post-pessoaconsultarsituacaoonboarding",
+                          "caas/english/api-reference/onboarding/post-pessoaincluirdocumento",
+                          "caas/english/api-reference/onboarding/post-pessoaincluirpessoaonboarding",
+                          "caas/english/api-reference/onboarding/post-pessoasalvarenderecos",
+                          "caas/english/api-reference/onboarding/post-pessoasalvarsocio",
+                          "caas/english/api-reference/onboarding/post-pessoasalvarsocios",
+                          "caas/english/api-reference/onboarding/post-propostaincluiravalista",
+                          "caas/english/api-reference/onboarding/post-propostaincluiravalistas"
+                        ]
+                      },
+                      {
+                        "group": "Hiring",
+                        "pages": [
+                          "caas/english/api-reference/contratacoes/geracao-contrato",
+                          "caas/english/api-reference/contratacoes/cancelamento-contrato",
+                          "caas/english/api-reference/contratacoes/post-propostaaprovar",
+                          "caas/english/api-reference/contratacoes/post-propostaconferir",
+                          "caas/english/api-reference/contratacoes/post-propostaconsultar",
+                          "caas/english/api-reference/contratacoes/post-propostaconsultarestendida",
+                          "caas/english/api-reference/contratacoes/post-propostaconsultarparcelas",
+                          "caas/english/api-reference/contratacoes/post-propostaincluir",
+                          "caas/english/api-reference/contratacoes/post-propostaincluircampoextra",
+                          "caas/english/api-reference/contratacoes/post-propostarecusar"
+                        ]
+                      },
+                      {
+                        "group": "Guarantees",
+                        "pages": [
+                          "caas/english/api-reference/garantias/registro-veiculo",
+                          "caas/english/api-reference/garantias/post-propostasalvarpropostagarantiabem",
+                          "caas/english/api-reference/garantias/post-propostasalvarpropostagarantiabemdocumento"
+                        ]
+                      },
+                      {
+                        "group": "Document Printing",
+                        "pages": [
+                          "caas/english/api-reference/impressao-documentos/get-ccb",
+                          "caas/english/api-reference/impressao-documentos/get-comprovante-pagamento"
+                        ]
+                      },
+                      {
+                        "group": "Signatures",
+                        "pages": [
+                          "caas/english/api-reference/assinaturas/eletronica",
+                          "caas/english/api-reference/assinaturas/relogon",
+                          "caas/english/api-reference/assinaturas/certificadora",
+                          "caas/english/api-reference/assinaturas/finalizacao-proposta"
+                        ]
+                      },
+                      {
+                        "group": "Disbursement",
+                        "pages": [
+                          "caas/english/api-reference/desembolso/liberacao-pagamento",
+                          "caas/english/api-reference/desembolso/atualizacao-conta-bancaria",
+                          "caas/english/api-reference/desembolso/post-propostapagar",
+                          "caas/english/api-reference/desembolso/post-propostasalvarlancamento"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Use Cases",
+                    "pages": [
+                      "caas/english/use-cases/working-capital",
+                      "caas/english/use-cases/working-capital-btg",
+                      "caas/english/use-cases/direct-consumer-credit-dcc",
+                      "caas/english/use-cases/home-equity",
+                      "caas/english/use-cases/personal-loans",
+                      "caas/english/use-cases/vehicle-financing"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "FGTS",
+                "groups": [
+                  {
+                    "group": "Initial Guide",
+                    "pages": [
+                      {
+                        "group": "About the FGTS",
+                        "pages": [
+                          "fgts/english/initial-guide/about-the-fgts/fgts-anniversary-withdrawal",
+                          "fgts/english/initial-guide/about-the-fgts/how-to-sign-up"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Monitoring Caixa Services",
+                    "pages": [
+                      {
+                        "group": "Monitoring Caixa Econômica Federal",
+                        "pages": [
+                          "fgts/english/monitoring-caixa-services/monitoring-caixa-economica-federal"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Signature Methods",
+                    "pages": [
+                      {
+                        "group": "Discover our Subscriptions",
+                        "pages": [
+                          "fgts/english/signature-methods/discover-our-subscriptions"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Developer's Guide",
+                    "pages": [
+                      {
+                        "group": "API Integration Guide",
+                        "pages": [
+                          "fgts/english/developers-guide/api-integration-guide/introduction",
+                          "fgts/english/developers-guide/api-integration-guide/authentication",
+                          "fgts/english/developers-guide/api-integration-guide/environment",
+                          {
+                            "group": "Technical Callback Procedure",
+                            "pages": [
+                              "fgts/english/developers-guide/technical-callback-procedure/introduction",
+                              "fgts/english/developers-guide/technical-callback-procedure/configuration",
+                              "fgts/english/developers-guide/technical-callback-procedure/events"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "APIs Reference",
+                    "pages": [
+                      {
+                        "group": "Simulations",
+                        "pages": [
+                          "fgts/english/api-references/simulations/1-search-simulation",
+                          "fgts/english/api-references/simulations/2-search-multiperiod-simulation"
+                        ]
+                      },
+                      {
+                        "group": "Onboarding",
+                        "pages": [
+                          "fgts/english/api-references/onboarding/3-customer-registration",
+                          "fgts/english/api-references/onboarding/5-include-document",
+                          "fgts/english/api-references/onboarding/4-address-registration"
+                        ]
+                      },
+                      {
+                        "group": "Contracts",
+                        "pages": [
+                          "fgts/english/api-references/contracts/6-cancel-proposal",
+                          "fgts/english/api-references/contracts/7-consult-proposal",
+                          "fgts/english/api-references/contracts/8-include-proposal"
+                        ]
+                      },
+                      {
+                        "group": "Document Printing",
+                        "pages": [
+                          "fgts/english/api-references/document-printing/9-ccb-printing",
+                          "fgts/english/api-references/document printing/10-payment-receipt"
+                        ]
+                      },
+                      {
+                        "group": "Subscriptions",
+                        "pages": [
+                          "fgts/english/api-references/subscriptions/11-electronic",
+                          "fgts/english/api-references/subscriptions/12-relogon",
+                          "fgts/english/api-references/subscriptions/13-certifier",
+                          "fgts/english/api-references/subscriptions/14-proposal-finalization"
+                        ]
+                      },
+                      {
+                        "group": "Disburcement",
+                        "pages": [
+                          "fgts/english/api-references/disburcement/15-bank-account-update",
+                          "fgts/english/api-references/disburcement/16-split-update"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Use Cases",
+                    "pages": [
+                      "fgts/english/use-cases/birthday-withdrawal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "Contract Management",
+                "groups": [
+                  {
+                    "group": "Initial Guide",
+                    "pages": [
+                      "gestao-contratos/english/about-contract-management"
+                    ]
+                  },
+                  {
+                    "group": "Developers Guide",
+                    "pages": [
+                      "gestao-contratos/english/developers-guide/technical-callback-procedure"
+                    ]
+                  },
+                  {
+                    "group": "API Reference",
+                    "pages": [
+                      {
+                        "group": "Consult",
+                        "pages": [
+                          "gestao-contratos/english/api-references/post-agendarecebivelconsultarboletos",
+                          "gestao-contratos/english/api-references/post-agendarecebivelconsultardetalhes",
+                          "gestao-contratos/english/api-references/post-agendarecebivelconsultarparcelas"
+                        ]
+                      },
+                      {
+                        "group": "Charges",
+                        "pages": [
+                          "gestao-contratos/english/api-references/post-agendarecebivelgerarunicacobranca",
+                          "gestao-contratos/english/api-references/post-agendarecebivelgerarmultiplascobrancas",
+                          "gestao-contratos/english/api-references/post-agendarecebivelcancelarcobrancas"
+                        ]
+                      },
+                      {
+                        "group": "Entries",
+                        "pages": [
+                          "gestao-contratos/english/api-references/post-agendarecebivelcancelarboletos",
+                          "gestao-contratos/english/api-references/post-agendarecebivelgerarmultiplosboletos",
+                          "gestao-contratos/english/api-references/post-agendarecebivelgerarunicoboleto",
+                          "gestao-contratos/english/api-references/post-agendarecebivelincluirlancamentomultiplasparcelas",
+                          "gestao-contratos/english/api-references/post-agendarecebivelincluirlancamentoparcela",
+                          "gestao-contratos/english/api-references/post-agendarecebivelprorrogarvencimentoparcela"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "E-Consignado",
+                "groups": [
+                  {
+                    "group": "Initial Guide",
+                    "pages": [
+                      "e-consignado/english/about-the-e-consignado-trabalhador"
+                    ]
+                  },
+                  {
+                    "group": "Developers Guide",
+                    "pages": [
+                      {
+                        "group": "API Integration Guide",
+                        "pages": [
+                          "e-consignado/english/api-integration-guide/introduction",
+                          "e-consignado/english/api-integration-guide/authentication",
+                          "e-consignado/english/api-integration-guide/environments",
+                          {
+                            "group": "Technical Callback Procedure",
+                            "pages": [
+                              "e-consignado/english/technical-callback-procedure/introduction",
+                              "e-consignado/english/technical-callback-procedure/configuration",
+                              "e-consignado/english/technical-callback-procedure/events"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Use Cases",
+                    "pages": [
+                      "e-consignado/english/use-cases/auction",
+                      "e-consignado/english/use-cases/active-hiring"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "Bureau",
+                "groups": [
+                  {
+                    "group": "Initial Guide",
+                    "pages": [
+                      "bureau/english/about-the-bureau"
+                    ]
+                  },
+                  {
+                    "group": "Developers Guide",
+                    "pages": [
+                      "bureau/english/first-steps/introduction",
+                      "bureau/english/first-steps/authentication",
+                      "bureau/english/first-steps/environment",
+                      "bureau/english/first-steps/production-journey"
+                    ]
+                  },
+                  {
+                    "group": "API References",
+                    "pages": [
+                      "bureau/english/api-reference/post-bureauconsultarscr",
+                      "bureau/english/api-reference/post-bureauconsultardatabusca",
+                      "bureau/english/api-reference/post-bureauconsultarserasa-cpf",
+                      "bureau/english/api-reference/post-bureauconsultarserasa-cnpj",
+                      "bureau/english/api-reference/post-bureauconsultarspc",
+                      "bureau/english/api-reference/post-consultar-dados-no-quod"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "Updates",
+                "groups": [
+                  {
+                    "group": "Initial Guide",
+                    "pages": [
+                      "updates/announcements"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "anchor": "Contact Us",
+            "href": "https://moneyp.com.br/contato",
+            "icon": "envelope"
+          },
+          {
+            "anchor": "Postman Collection",
+            "href": "https://www.postman.com/bmp-docs/bmp-docs",
+            "icon": "code"
+          }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/light.png",
+    "dark": "https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/dark.png"
+  },
+  "api": {
+    "playground": {
+      "display": "none"
+    }
+  },
+  "appearance": {
+    "default": "light",
+    "strict": false
+  },
+  "navbar": {
+    "primary": {
+      "type": "button",
+      "label": "Suporte",
+      "href": "https://bmp.heflo.com/"
+    }
+  },
+  "search": {
+    "prompt": " "
+  }
+}

@@ -1,0 +1,58 @@
+---
+title: "Configuração"
+version: 'Português'
+---
+
+Para implementar os serviços do **Credit as a Service (CaaS)**, é necessário que o parceiro configure uma URL para o recebimento dos eventos de callback. 
+
+Nesta etapa, o parceiro precisa configurar:
+
+1. Uma URL para recebimento dos callbacks;
+2. Essa URL precisa ter um ambiente de homologação e um de produção;
+3. A URL precisa ser desenvolvida para receber requisições do tipo `POST`;
+4. Um método de autenticação aceito pela BMP.
+
+Após configurar a URL de callback (homologação e produção), escolher qual método HTTP e qual o método de autenticação devem ser utilizados, o parceiro deve informar o time de integração da BMP, para que essa configuração seja parametrizada na BMP.
+
+Acompanhe, abaixo, os detalhes técnicos de cada uma dessas configurações.
+
+## 1. URL
+
+O parceiro precisa desenvolver uma URL de callback e enviá-la para a BMP.
+
+Essa URL será utilizada para a comunicação entre o parceiro e a BMP, atavés de eventos de callback.
+
+## 2. Ambientes
+
+O callback para acompanhamento dos status das propostas deve ser enviado tanto para o ambiente de homologação quanto para o ambiente de produção. 
+
+Recomenda-se que sejam utilizadas URLs diferentes para cada ambiente.
+
+### 2.1 Exemplos de URL de homologação
+
+```json
+www.exemplo-de-url-de-homologacao.com.br
+```
+
+### 2.2 Exemplos de URL de produção
+
+```json
+www.exemplo-de-url.com.br
+```
+
+## 3. Autenticação
+
+Quando existir um método de autenticação para o callback, utilize os modelos abaixo.
+
+Caso haja bloqueio por IP, envie o endereço IP de saída, para que a equipe responsável possa cadastrá-lo e assim evitar o erro `Forbidden` e repassaremos o nosso para o cadastro.
+
+Opções disponíveis incluem: 
+
+| Método de autenticação                        | Tipo da chave    | Exemplo de token                     |
+|-----------------------------------------------|------------------|--------------------------------------|
+| Bearer Token                                  | Authorization    | `Bearer eyJhbGciOiJIUzI1CI6IkpXVCJ9` |
+| API Key                                       | API-Key          | `1234567890abcdef1234567890abcdef`   |
+| Basic Authentication                          | Authorization    | `Basic dXNlcm5hbWU6cGFzc3dvcmQ`      |
+| X-API-Key                                     | X-API-Key        | `0987654321fedcba0987654321fedcba`   |
+
+<Warning>Em todos os métodos de autenticação aceitamos chaves com até 255 caracteres.</Warning>

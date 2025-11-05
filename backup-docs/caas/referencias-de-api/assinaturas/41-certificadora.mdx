@@ -1,0 +1,87 @@
+---
+title: "41 - Certificadora"
+openapi: post /Proposta/IncluirDocumento
+---
+
+Por meio deste endpoint o parceiro executa a assinatura da proposta via Certificadora. Exemplos de certificadoras: Docusign, QCertifica, Clicksign, Finanblue, dentre outras.
+O processo de assinatura inicia quando o parceiro faz o download da CCB sem a marca d’agua MODELO que se encontra no nosso portal, em seguida efetua a assinatura por meio de uma certificadora e depois anexa a CCB na proposta novamente.
+
+Para mais informações sobre a implementação e requisitos deste endpoint, acesse o documento [Guia Completo dos Métodos de Assinatura de Cédulas de Crédito Bancário](https://bmpmoneyplus-sandbox.mintlify.app/caas/assinaturas#como-utilizar%3F-2).
+
+<Expandable title=" Tabela TipoDocumento">
+
+| ID | Descrição                     | Tipo Pessoa              |
+|----|-------------------------------|--------------------------|
+| 1  | Foto Identificação Pessoa     | Pessoa Física            |
+| 2  | Foto Identificação Veículo    | Pessoa Física e Jurídica |
+| 3  | Foto Identificação Maquinário | Pessoa Física e Jurídica |
+| 4  | RG                            | Pessoa Física            |
+| 5  | CPF                           | Pessoa Física            |
+| 6  | Comprovante Endereço          | Pessoa Física e Jurídica |
+| 7  | Comprovante Renda             | Pessoa Física            |
+| 8  | CNH                           | Pessoa Física            |
+| 9  | Carteira Reservista           | Pessoa Física            |
+| 10 | Título de Eleitor             | Pessoa Física            |
+| 11 | Passaporte                    | Pessoa Física            |
+| 12 | Carteira de Trabalho          | Pessoa Física            |
+| 13 | RG - Frente                   | Pessoa Física            |
+| 14 | RG - Verso                    | Pessoa Física            |
+| 15 | CNH - Frente                  | Pessoa Física            |
+| 16 | CNH - Verso                   | Pessoa Física            |
+| 17 | CNH Digital                   | Pessoa Física            |
+| 20 | Contrato Social               | Pessoa Jurídica          |
+| 21 | CNPJ                          | Pessoa Jurídica          |
+| 22 | Balanço                       | Pessoa Jurídica          |
+| 23 | Extrato Bancário              | Pessoa Física e Jurídica |
+| 24 | Certidão de Casamento         | Pessoa Física            |
+| 25 | Certidão de Divórcio          | Pessoa Física            |
+| 26 | Certidão de Óbito             | Pessoa Física            |
+| 27 | Ata de Eleição                | Pessoa Jurídica          |
+| 28 | Procurações Públicas          | Pessoa Física e Jurídica |
+| 29 | Balanço Patrimonial com DRE   | Pessoa Jurídica          |
+| 31 | Protocolo                     | Pessoa Física e Jurídica |
+| 32 | Balancete com DRE             | Pessoa Jurídica          |
+| 33 | Faturamento                   | Pessoa Jurídica          |
+| 34 | Declaração de IR              | Pessoa Física e Jurídica |
+| 38 | Certidão de Nascimento        | Pessoa Física            |
+| 39 | Averbação de Divórcio         | Pessoa Física            |
+| 55 | Ficha Cadastral               | Pessoa Física e Jurídica |
+| 57 | Consulta Bureau               | Pessoa Física e Jurídica |
+| 59 | Formulário de Cadastro        | Pessoa Jurídica          |
+| 60 | Contrato Prestação de Serviço | Pessoa Jurídica          |
+| 61 | Documento Sócio               | Pessoa Jurídica          |
+| 62 | Dossiê de Análise             | Pessoa Física e Jurídica |
+| 64 | Comprovante de Débito         | Pessoa Física e Jurídica | 
+| 66 | Comprovante Crédito Cliente   | Pessoa Física e Jurídica |
+| 67 | Estatuto Social               | Pessoa Física e Jurídica |
+| 93 | Doc. Titularidade do Imóvel   | Pessoa Física e Jurídica |
+| 94 | Doc. Compl. Vínculo Família   | Pessoa Física e Jurídica |
+
+</Expandable>
+
+
+<Expandable title="Mensageria">
+
+| Categoria | Operação | Ação | Código | Código Detalhado | Mensagem |
+|-----------|----------|------|--------|------------------|----------|
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0068 | V0001 | Informe o nome do arquivo |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0068 | V0002 | Falha ao enviar Documento |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0068 | V0003 | Documento não pode ser alterado pois está em processo de análise automática. |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0112 | V0001 | Proposta não encontrada |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0112 | V0002 | A Proposta não pertence à esta Integração |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0107 | V0001 | Extensão do arquivo é inválida. Permitido: [txt,bmp,jpg,jpeg,gif,png,pdf,doc,docx,xls,xlsx,zip] |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0107 | V0002 | Tipo de Documento inválido |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0107 | V0003 | Documento deve ser enviado |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | C0020 | V0001 | Extensão do arquivo é inválida. Permitido: [{GRANTTYPES}] |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0001 | Informe o Cliente |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0002 | Documento do Cliente é inválido |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0016 | EPCodigo não informado |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0017 | Vendedor não encontrado |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0018 | Promotor não encontrado |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0019 | Informe o Tipo de Operação |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0020 | Informe o Valor |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0021 | Informe a Quantidade de Parcelas |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0022 | Formato de cálculo inválido |
+| Proposta | UploadDocumentoProposta | IncluirDocumento | T0665 | D0023 | Cliente deve ser pessoa física |
+
+</Expandable>

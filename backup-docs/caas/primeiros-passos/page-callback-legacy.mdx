@@ -1,0 +1,52 @@
+---
+title: "Procedimento Técnico de Callback"
+version: 'Português'
+---
+
+## Exemplo de callback de proposta
+
+Segue exemplo de URL e como parametrizamos para recebimento:
+
+```xxxxxxxxxx.com.br?proposta={PROPOSTA}&situacao={SITUACAO}&identificador={IDENTIFICADOR}```
+
+Sendo: 
+
+* **Proposta:** GUID único da proposta gerado no response no momento da inclusão da proposta.
+* **Situação:** ID da situação da proposta em nosso sistema.
+* **Identificador:** Caso seja enviado, esse campo representa o código da operação enviado na inclusão da proposta.
+
+## Tabela de Ids
+
+| **ID** | **Descrição**          | **Objetivo**                                                                                       |
+|-------|------------------------|---------------------------------------------------------------------------------------------------|
+| 0     | Em Digitação           | Proposta encontra-se em digitação                                                                  |
+| 1     | Em Análise             | Proposta foi enviada para fila de análise                                                          |
+| 2     | Aprovada               | Proposta foi aprovada pela área de análise de crédito                                              |
+| 3     | Recusada               | Proposta foi recusada pela área de análise de crédito                                              |
+| 4     | Cancelada              | Proposta foi cancelada pela área de análise de crédito                                             |
+| 5     | Pendente               | Proposta foi marcada como pendente pela área de análise de crédito, necessita de intervenção do integrador para retornar à fila de análise |
+| 6     | Finalizada             | Proposta foi finalizada                                                                            |
+| 7     | Conferida              | Proposta foi conferida pela área de formalização                                                   |
+| 8     | Liberada               | Proposta foi liberada pela área de formalização para pagamento                                     |
+| 9     | Paga                   | Proposta foi paga pela área financeira                                                             |
+| 10    | Cedida                 | Proposta foi cedida ao fundo                                                                       |
+| 11    | Pendente Pagamento     | Proposta foi marcada como pendente de pagamento devido à inconsistência em dados bancários, necessita intervenção do integrador para informar os dados corretos de pagamento e retornar para a fila de pagamento |
+
+**Observação:** Além dos dados já enviados na Query (Guid da Proposta, Status e Identificador), os call-backs de Pago "9" e Pendente pagamento "11" possuem um body com o campo "Descrição da ocorrência", que informa o motivo da pendência do pagamento quando for um status "11" e quando for status "9" retorna com o texto "Crédito ou débito efetivado". Segue abaixo exemplos de retorno:
+
+**Status 09:**
+
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src="/caas/images/status9.jpg" alt="kickoff image"  />
+</div>
+
+**Status 11:**
+
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src="/caas/images/status11.jpg" alt="kickoff image"  />
+</div>
+
+
+## Considerações Finais
+
+Recomenda-se que o endpoint configurado para receber os callbacks funcione principalmente como um repositório, minimizando o processamento no momento da recepção para evitar atrasos. Implementar processos complexos durante o recebimento dos callbacks pode resultar em timeouts e falhas na comunicação, comprometendo a eficiência do sistema. Opte por processar as mensagens recebidas de forma assíncrona para melhorar a performance e confiabilidade do seu sistema de callbacks.

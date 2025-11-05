@@ -1,0 +1,435 @@
+---
+title: "Technical Callback Procedure"
+version: 'English'
+---
+
+## Introduction
+
+**Callbacks**, or **webhooks**, are mechanisms that allows a function to be executed in response to a specific event.
+
+In the context of the **BMP** APIs, a callback is sent automatically whenever specific events occur in the system.
+
+This allows efficient communication between different parts of an application.
+
+This mechanism is used to notify updates to the status of proposals, eliminating the need for constant checks.
+
+In this context, information is received automatically and in real time, without the need for the partner to execute a command to update itself with a response.
+
+In this document, we present how this procedure works, its importance in integrations and how to use it in the development of your application when using BMP APIs.
+
+<Warning>Our callbacks should not be mapped in a restricted way. Additional fields can be included in the payloads of the returned callbacks. Please check the [Updates and Announcements](https://bmpmoneyplus-sandbox.mintlify.app/updates/announcements) page.</Warning>
+
+## Settings
+
+<Steps>
+
+<Step title = "Partner Configuration">
+
+Partners can configure how they want to receive the callback notifications, defining the following characteristics:
+
+<Step stepNumber = "1.1" title = "URL">
+
+The partner must specify the URL of the callback that will be called to send the information.
+
+Example:
+
+```
+www.example-url.com
+```
+
+</Step>
+
+<Step stepNumber = "1.2" title = "Environments">
+
+The callback for monitoring the status of proposals must be sent to both the approval environment and the production environment. It is recommended that different URLs be used for each environment.
+
+</Step>
+
+<Step stepNumber = "1.3" title = "Call methods">
+
+The partner can select the HTTP method for sending the callback.
+
+Available options include: `GET`, `POST` and `PUT`.
+
+</Step>
+
+</Step>
+
+<Step stepNumber = "2" title = "Authentication">
+
+To ensure the security of the callback sent, we recommend that the partner define an authentication method.
+
+The following are the available authentication methods:
+
+Available options include:
+
+#### Accepted authentication methods
+
+| Authentication                                | Key           | Example Token                        |
+|-----------------------------------------------|---------------|--------------------------------------|
+| Bearer Token                                  | Authorization | `Bearer eyJhbGciOiJIUzI1CI6IkpXVCJ9` |
+| API Key                                       | API-Key       | `1234567890abcdef1234567890abcdef`   |
+| Basic Authentication                          | Authorization | `Basic dXNlcm5hbWU6cGFzc3dvcmQ`      |
+| X-API-Key                                     | X-API-Key     | `0987654321fedcba0987654321fedcba`   |
+| JWT (JSON Web Token)                          | Authorization | `Bearer eyJhbGciOiJIUzI1NiIs`        |
+| HMAC (Hash-based Message Authentication Code) | Authorization | `HMAC 5d41402abc4b19d911017c592`     |
+
+<Warning>All authentication methods accept up to 255 characters.</Warning>
+
+</Step>
+
+<Step title = "Proposal callback example">
+
+Here is an example of a URL and how we parameterize it for reception:
+
+```
+www.example-url.com.br?proposta={PROPOSTA}&situacao={SITUACAO}&identificador={IDENTIFICADOR}
+```
+
+#### Proposal callback parameters table
+
+| Parameter  | Parameter description                                                                  |
+|------------|----------------------------------------------------------------------------------------|
+| Proposal   | Unique GUID generated in the response during proposal inclusion.                       |
+| Status     | Proposal status ID in our system.                                                      |
+| Identifier | If sent, this field represents the operation code sent when the proposal was included. |
+
+#### Proposal status identification table
+
+| ID | Description     | Purpose                                                                                                                                        |
+|----|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2  | Approved        | Proposal was created and is awaiting signature.                                                                                                |
+| 4  | Canceled        | Proposal was canceled automatically or by the integrator.                                                                                      |
+| 5  | Pending         | Proposal was marked as pending and requires intervention by the integrator to request endorsement again.                                       |
+| 6  | Completed       | Endorsement was requested at CEF (Caixa Econômica Federal).                                                                                    |
+| 8  | Released        | Proposal successfully endorsed and released for disbursement.                                                                                  |
+| 9  | Paid            | Proposal disbursement was made.                                                                                                                |
+| 10 | Assigned        | Proposal was added to an assignment shipment and assigned to the fund.                                                                         |
+| 11 | Pending Payment | The proposal is pending payment due to inconsistent bank details, requiring the integrator to correct them and return it to the payment queue. |
+
+<Note>
+
+If the callback is sent with the `POST` method, in addition to the data sent in the Query, the partner will receive in the body of the request:
+
+* Status 9: `00 - Credit or debit made`;
+* Status 10: `AB - Description of the occurrence`.
+
+</Note>
+
+<Warning>If a problem occurs while receiving the proposal callback, the system will make up to 3 attempts to send it.</Warning>
+
+</Step>
+
+## Contract Management Events
+
+### 1. Creation of Contract Management
+
+This callback is used to communicate the creation of an installment schedule, detailing information about installments, amounts, and relevant dates.
+
+Example of return:
+
+```json
+{
+  "QtdeParcelas": 8,
+  "VlrTotalDivida": 11.2,
+  "DtFinanciado": "06-09-2024",
+  "Credito": {
+    "DtCredito": null,
+    "Conta": {
+      "CodigoBanco": null,
+      "NomeBanco": null,
+      "Agencia": null,
+      "Conta": null,
+      "ContaDigito": null
+    }
+  },
+  "Parcelas": [
+    {
+      "NroParcela": 1,
+      "VlrParcela": 1.4,
+      "VlrPrincipal": 1.25,
+      "VlrDespesas": 0.15,
+      "VlrSaldoDevedor": 9.8,
+      "DtVencimento": "16-09-2024"
+    },
+    {
+      "NroParcela": 2,
+      "VlrParcela": 1.4,
+      "VlrPrincipal": 1.25,
+      "VlrDespesas": 0.15,
+      "VlrSaldoDevedor": 8.4,
+      "DtVencimento": "16-10-2024"
+    }
+  ]
+}
+```
+
+| **Field**           | **Type**  | **Description**                                                                 |
+|---------------------|-----------|---------------------------------------------------------------------------------|
+| QtdeParcelas        | Int       | Describes the number of installments                                           |
+| VlrTotalDivida      | Float     | Total debt amount, including taxes and fees                                    |
+| DtFinanciado        | Date      | Date of financing agreement                                                    |
+| DtCredito           | Date      | Date when the credit was granted, disbursement of the amount                   |
+| CodigoBanco         | Int       | Bank identification code                                                       |
+| NomeBanco           | String    | Bank name                                                                      |
+| Agência             | Int       | Agency identification number                                                   |
+| Conta               | Int       | Account identification number                                                  |
+| ContaDigito         | Int       | Account digit                                                                  |
+| NroParcela          | Int       | Installment number                                                             |
+| VlrParcela          | Float     | Total installment amount                                                       |
+| VlrPrincipal        | Float     | Amount excluding taxes, interest, and fees                                     |
+| VlrDespesas         | Float     | Additional expenses included in the installment (taxes and interest)           |
+| VlrSaldoDevedor     | Float     | Outstanding balance after the installment payment                              |
+| DtVencimento        | Date      | Installment due date                                                           |
+
+### 2. Cancellation of Contract Management
+
+Callback used to notify the cancellation of a previously created schedule, including event details and the associated proposal number.
+
+Example of return:
+
+```json
+ {
+  "TipoEvento": 1,
+  "NomeEvento": "Cancelamento de Agenda",
+  "NroProposta": 3543743,
+  "DtEvento": "2024-09-05",
+  "AcrescimoAbatimento": null,
+  "LancamentoParcela": null,
+  "ProrrogacaoVencimento": null,
+  "GeracaoBoleto": null,
+  "CancelamentoBoleto": null
+}
+```
+
+| **Campo**              | **Type**     | **Description**                                                                |
+|-------------------------|--------------|-------------------------------------------------------------------------------|
+| TipoEvento             | Int          | Numeric identifier of the event type                                         |
+| NomeEvento             | String       | Name of the event                                                            |
+| NroProposta            | Int          | Number of the associated proposal                                            |
+| DtEvento               | String       | Date when the event occurred                                                 |
+| AcrescimoAbatimento    | Object       | Object containing information about increases or reductions related to the event |
+| LancamentoParcela      | Object       | Object containing information about the installment entry                    |
+| GeracaoBoleto          | Object       | Object containing information about the invoice generation                   |
+| ProrrogacaoVencimento  | Datetime     | Date and time of the due date extension                                      |
+| CancelamentoBoleto     | Object       | Object containing information about the invoice cancellation                 |
+
+### 4. Increases/Reductions
+
+Callback that informs financial changes in proposal installments, whether due to increases or reductions applied.
+
+Example of return:
+
+```json
+ {
+  "TipoEvento": 2,
+  "NomeEvento": "Acréscimo/Abatimento",
+  "NroProposta": 3543753,
+  "DtEvento": "2024-09-05",
+  "AcrescimoAbatimento": {
+    "NroParcela": 2,
+    "VlrSaldo": 0,
+    "VlrAcrescimo": 10,
+    "VlrAbatimento": 0,
+    "VlrSaldoAtual": 10
+  },
+  "LancamentoParcela": null,
+  "ProrrogacaoVencimento": null,
+  "GeracaoBoleto": null,
+  "CancelamentoBoleto": null
+}
+```
+
+| **Field**              | **Type**     | **Description**                                                                |
+|-------------------------|--------------|--------------------------------------------------------------------------------|
+| TipoEvento             | Int          | Numeric identifier of the event type                                          |
+| NomeEvento             | String       | Name of the event                                                             |
+| NroProposta            | Int          | Number of the associated proposal                                             |
+| DtEvento               | String       | Date when the event occurred                                                  |
+| AcrescimoAbatimento    | Object       | Object containing information about increases or reductions related to the event |
+| NroParcela             | Int          | Number of the installment affected by the increase/reduction                  |
+| LancamentoParcela      | Object       | Object containing information about the installment entry                    |
+| GeracaoBoleto          | Object       | Object containing information about the invoice generation                    |
+| ProrrogacaoVencimento  | Datetime     | Date and time of the due date extension                                       |
+| CancelamentoBoleto     | Object       | Object containing information about the invoice cancellation                  |
+| VlrAcrescimo           | Float        | Value of the increase applied to the installment                              |
+| VlrAbatimento          | Float        | Value of the reduction applied to the installment                             |
+
+### 5. Entry of Installment
+
+Callback that communicates events related to installment entries, such as payment, reductions, charges, or settlement.
+
+Example of return:
+
+```json
+{
+  "TipoEvento": 3,
+  "NomeEvento": "Lançamento na Parcela",
+  "NroProposta": 3543603,
+  "DtEvento": "2024-09-05",
+  "AcrescimoAbatimento": null,
+  "LancamentoParcela": {
+    "NroParcela": 1,
+    "VlrOriginalParcela": 72.24,
+    "VlrSaldo": 0,
+    "ParcelaLiquidada": true,
+    "VlrEncargos": 0,
+    "VlrAbatimento": 0,
+    "VlrPagamento": 72.24,
+    "VlrDesconto": 0,
+    "VlrSaldoAtual": 0,
+    "VlrExcedente": 0,
+    "DtVencimento": "2024-09-15",
+    "DtVencimentoAtual": "2024-10-30",
+    "Boleto": {
+      "NroBoleto": null,
+      "Liquidacao": null
+    }
+  },
+  "ProrrogacaoVencimento": null,
+  "GeracaoBoleto": null,
+  "CancelamentoBoleto": null
+}
+```
+
+| **Field**             | **Type**   | **Description**                                                                 |
+|------------------------|------------|-------------------------------------------------------------------------------|
+| DtEvento              | Date       | Date when the event occurred                                                 |
+| AcrescimoAbatimento   | Object     | Increase or reduction applied (not applicable)                               |
+| NroParcela            | Int        | Installment number                                                           |
+| VlrOriginalParcela    | Float      | Original value of the installment                                            |
+| VlrSaldo              | Float      | Remaining balance after payment (initially 0)                                |
+| ParcelaLiquidada      | Boolean    | Indicates whether the installment was fully settled                          |
+| VlrEncargos           | Float      | Value of charges applied (if any)                                            |
+| VlrAbatimento         | Float      | Value of reduction applied (if any)                                          |
+| VlrPagamento          | Float      | Amount effectively paid                                                      |
+| VlrDesconto           | Float      | Value of discount granted (if any)                                           |
+| VlrSaldoAtual         | Float      | Current balance after payment                                                |
+| VlrExcedente          | Float      | Excess amount paid (if any)                                                  |
+| DtVencimento          | Date       | Original due date of the installment                                         |
+| DtVencimentoAtual     | Date       | Updated due date of the installment                                          |
+| NroBoleto             | Int        | Associated invoice number (not applicable)                                   |
+| Liquidacao            | Boolean    | Indicates whether settlement occurred (not applicable)                       |
+
+### 6. Extension of Due Date
+
+Callback used to notify extensions of installment due dates, providing the new date and the reasons for the change.
+
+Example of return:
+
+```json
+{
+  "TipoEvento": 4,
+  "NomeEvento": "Prorrogação de Vencimento",
+  "NroProposta": 3543603,
+  "DtEvento": "2024-09-05",
+  "AcrescimoAbatimento": null,
+  "LancamentoParcela": null,
+  "ProrrogacaoVencimento": {
+    "NroParcela": 1,
+    "DtVencimentoAnterior": "2024-09-15",
+    "DtVencimentoAtual": "2024-10-30"
+  },
+  "GeracaoBoleto": null,
+  "CancelamentoBoleto": null
+}
+```
+
+| **Field**               | **Type**     | **Description**                                                                |
+|--------------------------|--------------|-------------------------------------------------------------------------------|
+| CodigoProposta          | String       | UID of the proposal returned in the inclusion response                       |
+| codigoOperacao          | String       | Unique identifier of the operation                                           |
+| nroParcela              | Int          | Installment number affected by the extension                                 |
+| NovoVencimento          | String       | New due date of the installment                                              |
+| MotivoAlteracao         | String       | Description of the reason for the due date extension                         |
+| TipoEvento              | Int          | Numeric identifier of the event type                                         |
+| NomeEvento              | String       | Name of the extension event                                                  |
+| NroProposta             | Int          | Number of the proposal associated with the event                             |
+| DtEvento                | String       | Date when the extension event occurred                                       |
+| ProrrogacaoVencimento   | Object       | Details of the due date extension                                            |
+| - NroParcela            | Int          | Number of the extended installment                                           |
+| - DtVencimentoAnterior  | String       | Original due date before the extension                                       |
+| - DtVencimentoAtual     | String       | New due date after the extension                                             |
+
+### 7. Generation of Invoice
+
+Callback that informs the generation of an invoice related to a proposal, including the amount, number, and due date.
+
+Example of return:
+
+```json
+{
+  "TipoEvento": 5,
+  "NomeEvento": "Geração de Boleto",
+  "NroProposta": 3544197,
+  "DtEvento": "2024-09-06",
+  "AcrescimoAbatimento": null,
+  "LancamentoParcela": null,
+  "ProrrogacaoVencimento": null,
+  "GeracaoBoleto": {
+    "CodigoBoleto": "8a72e6a3-cf73-46cb-99ee-b698335f1e12",
+    "NroBoleto": 48924,
+    "VlrBoleto": 1.4,
+    "DtVencimento": "2024-09-25",
+    "Liquidacao": true
+  },
+  "CancelamentoBoleto": null
+}
+```
+
+| **Field**              | **Type**     | **Description**                                                                |
+|-------------------------|--------------|-------------------------------------------------------------------------------|
+| TipoEvento             | Int          | Numeric identifier of the event type                                         |
+| NomeEvento             | String       | Name of the event                                                            |
+| NroProposta            | Int          | Number of the associated proposal                                            |
+| DtEvento               | String       | Date when the event occurred                                                 |
+| AcrescimoAbatimento    | Object       | Object containing information about increases or reductions related to the event |
+| LancamentoParcela      | Object       | Object containing information about the installment entry                    |
+| GeracaoBoleto          | Object       | Object containing information about the invoice generation                   |
+| CodigoBoleto           | String       | Invoice identification code                                                  |
+| Liquidação             | Boolean      | Indicates whether the settlement status is true or false                     |
+| VlrBoleto              | Float        | Invoice amount                                                               |
+| DtVencimento           | Date         | Invoice due date                                                             |
+| NroBoleto              | Int          | Invoice identification number                                                |
+| ProrrogacaoVencimento  | Datetime     | Date and time of the due date extension                                      |
+| CancelamentoBoleto     | Object       | Object containing information about the cancellation                         |
+
+### 8. Cancellation of Invoice
+
+Callback used to notify the cancellation of an invoice, including the canceled invoice code and the associated installments.
+
+Example of return:
+
+```json
+{
+  "TipoEvento": 6,
+  "NomeEvento": "Cancelamento de Boleto",
+  "NroProposta": 3541909,
+  "DtEvento": "2024-08-30",
+  "AcrescimoAbatimento": //Object
+  "LancamentoParcela": //Object
+  "ProrrogacaoVencimento": null, //Datetime
+  "GeracaoBoleto": null, //Object
+  "CancelamentoBoleto": {
+    "CodigoBoleto": "8f3898e2-c99b-40f2-9d13-6a23e5b7e082",
+    "NroBoleto": 48681,
+    "Parcelas": [
+      3
+    ]
+  }
+}
+```
+
+| **Field**              | **Type**     | **Description**                                                                |
+|-------------------------|--------------|-------------------------------------------------------------------------------|
+| TipoEvento             | Int          | Numeric identifier of the event type                                         |
+| NomeEvento             | String       | Name of the event                                                            |
+| NroProposta            | Int          | Number of the associated proposal                                            |
+| DtEvento               | String       | Date when the event occurred                                                 |
+| AcrescimoAbatimento    | Object       | Object containing information about increases or reductions related to the event |
+| LancamentoParcela      | Object       | Object containing information about the installment entry                    |
+| GeracaoBoleto          | Object       | Object containing information about the invoice generation                   |
+| ProrrogacaoVencimento  | Datetime     | Date and time of the due date extension                                      |
+| CancelamentoBoleto     | Object       | Object containing information about the cancellation                         |
+
+</Steps>

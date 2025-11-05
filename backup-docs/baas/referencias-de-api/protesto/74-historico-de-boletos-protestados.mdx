@@ -1,0 +1,22 @@
+---
+title: "74 - Histórico de Boletos Protestados"
+openapi: get /api/ProtestoBoleto/HistoricoBoletoProtestado
+---
+
+Por meio deste endpoint, é possível realizar o download do Histórico do boleto protestado.
+
+Este documento possui o detalhamento dos dados do cartório onde o boleto foi apontado para protesto, além do histórico dos comandos realizados, como “envio a protesto”, “cancelamento”, “anuência”, entre outros.
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+| Endpoint                      | Mensagem de erro                                        |
+|-------------------------------|---------------------------------------------------------|
+| /api/ProtestoBoleto/HistoricoBoletoProtestado | Número do código de barras inválido |
+| /api/ProtestoBoleto/HistoricoBoletoProtestado | Protesto boleto não encontrado para o código de barras informado |
+| /api/ProtestoBoleto/HistoricoBoletoProtestado | Boleto relacionado ao protesto não encontrado |
+| /api/ProtestoBoleto/HistoricoBoletoProtestado | Parceiro do protesto não encontrado |
+| /api/ProtestoBoleto/HistoricoBoletoProtestado | Histórico do título não encontrado |
+
+</Expandable>

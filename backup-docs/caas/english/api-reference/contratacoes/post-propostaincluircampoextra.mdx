@@ -1,0 +1,15 @@
+---
+title: "26 - Include Extra Field"
+openapi: post /Proposta/IncluirCampoExtra
+---
+
+Through this endpoint, the partner inserts unlimited extra fields for use in the printing of CCB. 
+These fields should not be used by our analysts for interpreting business rules.
+With each submission, previous values are deleted. The process for utilization is:
+•	Define field names in conjunction with our integration technical team.
+•	Define the usage location for each of the extra fields.
+•	Submit the proposal through one of the available methods.
+•	Send the extra fields; the method allows for receiving a list containing "FieldName" and "FieldValue".
+•	When updating one of the extra fields, the entire batch of fields must be resent.
+•	FieldName is limited to 30 alphanumeric characters.
+•	FieldValue has an unlimited size.

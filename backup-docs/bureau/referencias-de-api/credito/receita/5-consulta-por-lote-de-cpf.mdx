@@ -1,0 +1,66 @@
+---
+title: 5 - Consulta por Lote de CPFs
+openapi: post /Bureau/ConsultarReceitaLoteCPF
+---
+
+Utilize este endpoint para realizar consultas em lote que verificam a situação fiscal de cidadãos em um relatório centralizado.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. O retorno do Bureau é enviado de forma serializada, sendo necessário deserializá-lo para uma melhor visualização. O campo `TipoCallback` deve ser enviado com o valor `2` em todas as chamadas.
+
+```json
+[
+{
+    \"Erro": false,
+    \"MensagemOperador": "OK",
+    \"ResultadoConsulta": {
+        \"Ni": "11122233344",
+        \"Nome": "TONY VALADÃO",
+        \"Situacao": {
+            \"Codigo": "0",
+            \"Descricao": "Regular"
+        },
+        \"Nascimento": "1985-09-03"
+    }
+},
+{
+    \"Erro": false,
+    \"MensagemOperador": "OK",
+    \"ResultadoConsulta": {
+        \"Ni": "11122233344",
+        \"Nome": "TONY VALADÃO",
+        \"Situacao": {
+            \"Codigo": "0",
+            \"Descricao": "Regular"
+        },
+        \"Nascimento": "1985-09-03"
+    }
+}
+]
+```
+
+</Expandable>
+
+<Expandable title="Tabela de dados fictícios para testes">
+
+| CPF          | Situação Cadastral            |
+|--------------|-------------------------------|
+| 40442820135  | CPF Regular                   |
+| 63017285995  | CPF Regular                   |
+| 91708635203  | CPF Regular                   |
+| 58136053391  | CPF Regular                   |
+| 40532176871  | Suspensa                      |
+| 47123586964  | Suspensa                      |
+| 07691852312  | Pendente de Regularização     |
+| 10975384600  | Pendente de Regularização     |
+| 01648527949  | Cancelada por Multiplicidade  |
+| 47893062592  | Cancelada por Multiplicidade  |
+| 98302514705  | Nula                          |
+| 18025346790  | Nula                          |
+| 64913872591  | Cancelada de Ofício           |
+| 52389071686  | Cancelada de Ofício           |
+| 05137518743  | Titular Falecido              |
+| 08849979878  | Titular Falecido              |
+
+</Expandable>

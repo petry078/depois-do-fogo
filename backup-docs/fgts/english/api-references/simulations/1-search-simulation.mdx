@@ -1,0 +1,22 @@
+---
+title: "1 - Search Simulation"
+openapi: post /FGTS/BuscarSimulacao
+---
+
+Through this endpoint, the partner performs the simulation and searches for data regarding the FGTS amounts available to the worker.
+
+After the amounts are returned, the borrower can take out loans with the Anniversary Withdrawal guarantee, which will later be included in a proposal.
+
+This action precedes the inclusion and implementation of the proposal in the system.
+
+Rules:
+
+- If the “Balance” field is entered, we do not use the customer's real balance at Caixa Econômica Federal and the calculation will be based on the values from our calculator.
+- If the birthday month is incorrect, the system returns an error at the time of the simulation.
+- If the CPF field is filled in, the query is performed at Caixa Econômica Federal
+
+<Warning>
+
+When the value of the `ConsultaCache` field is `false`, the request will query the updated FGTS balance directly at **Caixa Econômica Federal (CEF)**; when it is `true`, the balance will be obtained from the BMP cache. This field is not mandatory. If it is not provided, the system assumes the value `true` as default.
+
+</Warning>

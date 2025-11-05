@@ -1,0 +1,11 @@
+---
+title: "12 - Cria Qr Code Dinâmico de Pagamento Imediato"
+openapi: post /api/v2/QRCode/Dinamico
+---
+
+Diferentemente do QR Code estático, que não possui validade, o QR Code dinâmico de pagamento imediato apresenta um tempo de vida útil.
+
+Dessa forma, o QR Code poderá expirar nos seguintes cenários:
+
+* Logo após seu pagamento (QR Code de pagamento único);
+* Na data e hora configuradas no momento de sua emissão.

@@ -1,0 +1,33 @@
+---
+title: "35 - Certification Authority"
+openapi: post /Proposta/IncluirDocumento
+version: 'English'
+---
+<Warning>Using the proposal finalization endpoint is mandatory before proceeding.</Warning>
+
+Through this endpoint, the partner executes the proposal signature via Certification Authority. Examples of certification authorities include Docusign, QCertifica, Clicksign, Finanblue, among others.
+The signing process begins when the partner downloads the CCB without the "MODEL" watermark from our portal, then signs it through a certification authority, and finally attaches the signed CCB back to the proposal.
+
+<Expandable title="Messaging">
+| Category | Operation               | Action               | Code   | Detailed Code | Message |
+|----------|-------------------------|----------------------|--------|---------------|---------|
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | C0068  | V0001         | Informe o nome do arquivo |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | C0068  | V0002         | Falha ao enviar Documento |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | C0068  | V0003         | Documento não pode ser alterado pois está em processo de análise automática. |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | C0112  | V0001         | Proposta não encontrada |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | C0112  | V0002         | A Proposta não pertence à esta Integração |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | C0107  | V0001         | Extensão do arquivo é inválida. Permitido: [txt,bmp,jpg,jpeg,gif,png,pdf,doc,docx,xls,xlsx,zip] |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | C0107  | V0002         | Tipo de Documento inválido |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | C0107  | V0003         | Documento deve ser enviado |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | C0020  | V0001         | Extensão do arquivo é inválida. Permitido: [{GRANTTYPES}] |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | T0665  | D0001         | Informe o Cliente |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | T0665  | D0002         | Documento do Cliente é inválido |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | T0665  | D0016         | EPCodigo não informado |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | T0665  | D0017         | Vendedor não encontrado |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | T0665  | D0018         | Promotor não encontrado |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | T0665  | D0019         | Informe o Tipo de Operação |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | T0665  | D0020         | Informe o Valor |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | T0665  | D0021         | Informe a Quantidade de Parcelas |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | T0665  | D0022         | Formato de cálculo inválido |
+| Proposta | UploadDocumentoProposta | IncluirDocumento     | T0665  | D0023         | Cliente deve ser pessoa física |
+</Expandable>

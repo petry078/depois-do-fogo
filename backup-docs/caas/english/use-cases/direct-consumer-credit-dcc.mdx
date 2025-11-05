@@ -1,0 +1,586 @@
+---
+title: "Direct Consumer Credit (DCC)"
+version: 'English'
+---
+
+The **Direct Consumer Credit (DCC)** is a financial modality in which institutions grant credit directly to consumers, usually for the acquisition of durable consumer goods, such as automobiles and appliances.
+
+This type of credit offers convenience and accessibility to consumers, who can pay for their purchases in installments directly with the supplier of the goods, facilitating access to higher-value products.
+
+Below is the step-by-step guide for using this use case:
+
+## 1 - Simulations
+
+The first step for contracting credit in the Working Capital modality is the simulation.
+
+The simulation can be performed in two ways:
+
+<Expandable title= "Detailed Simulation">
+
+In the **Detailed Simulation**, the partner provides all the necessary data for the simulation and receives the available credit conditions.
+<br />
+<br />
+To request the Detailed Simulation, it is necessary to inform:
+
+* Credit amount requested by the customer;
+* Number of days added to the due date of the first installment;
+* Interest rate;
+* Type of person (individual or legal entity);
+* Term in months for payment (number of installments);
+* Deadline interval (irregular or regular flow).
+
+For more information about this endpoint, access the reference document [14 - Detailed simulation](https://bmpdocs.moneyp.com.br/caas/english/api-reference/simulacoes/calculo-price2).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/CalcularGridParcelasSimplificadoPrice' \
+--header 'accept: text/plain' \
+--header 'IdempotencyKey: UNIQUE GUID FOR EACH CALL' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": {
+        "vlrSolicitado": 0, // Amount requested by your client | REQUIRED
+        "nroDiasAcrescimo": 0, // This field adjusts the due date of the 1st installment, adding or subtracting days from the default date (always on the same day of the simulation, in the following month) 
+        "percJurosNegociado": 0, // Interest percentage negotiated with your client | REQUIRED
+        "tipoPessoa": 0, // For individuals, enter 1 and for legal entities, enter 2 | REQUIRED
+        "vlrTAC": 0, // If you have a TAC, please fill in this field. If you don't have one, you can delete it | NOT REQUIRED
+        "prazo": 0, // Inform the number of installments
+        "fluxoIrregular": false // Enter false for a 30-month term interval or true for other intervals
+    }
+}'  
+```
+
+</Expandable>
+
+<Expandable title = "Multi-Installment Simulation">
+
+In the **Multi-Installment Simulation**, the partner only informs the requested amount and receives the available credit conditions for different terms.
+<br />
+<br />
+In the request for the Multi-Installment Simulation, it is necessary to inform:
+
+* Credit amount requested by the customer;
+* Number of days added to the due date of the first installment;
+* Interest rate;
+* Type of person (individual or legal entity).
+
+For more information about this endpoint, access the reference document [13 - Simulation of multiple installments](https://bmpdocs.moneyp.com.br/caas/english/api-reference/simulacoes/calculo-price).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/CalcularGridParcelasSimplificado' \
+--header 'accept: text/plain' \
+--header 'IdempotencyKey: UNIQUE GUID FOR EACH CALL' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer 2ec83da4-ddba-4b01-9c6a-5b5e718f5793' \
+--data '{
+    "dto": {
+        "vlrSolicitado": 0, // Amount requested by your client | REQUIRED
+        "nroDiasAcrescimo": 0, // This field adjusts the due date of the 1st installment, adding or subtracting days from the default date (always on the same day of the simulation, in the following month) 
+        "percJurosNegociado": 0, // Interest percentage negotiated with your client | REQUIRED
+        "tipoPessoa": 0, // For individuals, enter 1 and for legal entities, enter 2 | REQUIRED
+        "vlrTAC": 0 // If you have a TAC, please enter this field. If you don't have one, you can delete it.
+  }
+}
+```
+
+</Expandable>
+
+<Note>In both simulations, the `nroDiasAcrescimo` field defines how many days will be added or subtracted from the default due date of the first installment. By default, the due date occurs on the same day as the simulation, but in the following month. For example: if the simulation is on 27/05, the default due date will be 27/06. If you fill in "20", the due date will be 20 days after that default date (e.g.: 17/07). If the simulation is done on the 30th or 31st and the following month does not have those dates, the due date will be adjusted to the last day of the month (for example, a simulation on 31/01 will have a due date on 28/02).</Note>
+
+## 2 - Onboarding
+
+After the simulation, you must register the customer.
+
+Onboarding is carried out in two steps:
+
+<Expandable title="Customer Registration">
+
+To register the customer's personal data, you must provide:
+
+* Customer name;
+* Federal ID (CPF or CNPJ);
+* Contact information (email and cell phone);
+* If the Federal ID is a CPF, you must also provide the ID number, issuing agency, ID state, ID date of issue, date of birth, gender, nationality, hometown, and home state;
+* If the Federal ID is a CNPJ, you must provide the business name, state ID number, municipal ID number, company opening date, name of the company manager, CPF number of the company manager, and ID number of the company manager.
+
+For more information about this endpoint, access the reference document [1 - Client Registration](https://bmpdocs.moneyp.com.br/caas/english/api-reference/onboarding/cadastro-cliente).
+
+<Steps>
+
+<Step title="Request for Client Registration">
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Pessoa/Salvar' \
+--header 'IdempotencyKey: UNIQUE GUID FOR EACH CALL' \
+--header 'Authorization: Bearer qXdZot13a6EbJkAbjpZ5ep_eTKH2F5ZHOwZrYZVN1lw' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "dto": {
+        "Codigo": "1", // Filled only by the SelectPessoa method. Must be sent empty for Inclusion/Update.
+        "Nome": "CLIENTE TESTE", // Required - Person's name
+        "DocumentoFederal": "75000000000", // Required – Federal Taxpayer Registry (CPF) or National Registry of Legal Entities (CNPJ) number, with or without formatting
+        "PF": { // Individual
+            "rg": "string", // General Registry (RG) of the person
+            "rgOrgao": "string", // RG issuing agency
+            "rguf": "string", // RG issuing state
+            "rgData": "2023-07-10T20:01:07.689Z", // RG issue date
+            "dtNasc": "2023-07-10T20:01:07.689Z", // Date of birth
+            "sexo": "string", // “M” – Male and “F” – Female
+            "nacionalidade": "string", // Country of birth
+            "naturalDeCidade": "string", // City of birth
+            "naturalDeUF": "string", // State of birth (UF)
+            "estadoCivil": 0, // Check marital status table in the endpoints. If “Married”, spouse must be informed
+            "escolaridade": 0 // Check education level table in the endpoint
+        },
+        "PessoaDadosContato": {
+            "Email": "teste@email.com.br", // Contact email
+            "TelefoneCelular1": "11923456781" // Mobile phone
+        }
+    }
+}'
+```
+
+</Step>
+
+<Step title="Store/Partner/Correspondent Registration">
+
+Store Registration uses the same endpoint as Customer Registration. However, use only the `PJ` object to register a legal entity, providing the store, partner, or correspondent information.
+
+For more information about this endpoint, access the reference document [1 - Client Registration](https://bmpdocs.moneyp.com.br/caas/english/api-reference/onboarding/cadastro-cliente).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Pessoa/Salvar' \
+--header 'IdempotencyKey: UNIQUE GUID FOR EACH CALL' \
+--header 'Authorization: Bearer qXdZot13a6EbJkAbjpZ5ep_eTKH2F5ZHOwZrYZVN1lw' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "dto": {
+        "Codigo": "1", // Filled only by the SelectPessoa method
+        "Nome": "CLIENTE TESTE", // Required - Person's name
+        "DocumentoFederal": "75000000000", // Federal Taxpayer Registry (CPF) or National Registry of Legal Entities (CNPJ) number of the Customer/Supplier. If provided, it must be valid.
+        "PJ": { // Legal Entity
+            "nomeFantasia": "string", // Company trade name
+            "documentoEstadual": "string", // State registration
+            "documentoMunicipal": "string", // Municipal registration
+            "dtAberturaEmpresa": "2024-06-06T19:49:59.553Z", // Company opening date
+            "nomeResponsavelEmpresa": "string", // Company manager's name
+            "cpfResponsavelEmpresa": "string", // Manager's CPF number. If provided, it must be valid
+            "rgResponsavelEmpresa": "string" // Manager's General Registry (RG)
+        },
+        "PessoaDadosContato": {
+            "Email": "teste@email.com.br", // Contact email
+            "TelefoneCelular1": "11923456781" // Mobile phone
+        }
+    }
+}'
+```
+
+</Step>
+
+<Step title="Address Registration (customer and store)">
+
+In this step, you must make two requests: one to register the customer's address and another to register the store's address, whether partnered with a store or a corresponding store.
+<br />
+<br />
+To register the customer's address, you must provide:
+
+* Customer's Federal ID (CPF or CNPJ);
+* Address ZIP code (required);
+* In addition to other optional data.
+
+For more information about this endpoint, access the reference document [2 - Address Registration](https://bmpdocs.moneyp.com.br/caas/english/api-reference/onboarding/cadastro-endereco).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Pessoa/SalvarEndereco' \
+--header 'Authorization: Bearer qXdZot13a6EbJkAbjpZ5ep_eTKH2F5ZHOwZrYZVN1lw' \
+--header 'IdempotencyKey: UNIQUE GUID FOR EACH CALL' \
+--header 'Content-Type: application/json' \
+--data '{
+  "dto": {
+    "codigo": "string", // Filled only by the SelectPessoa method
+    "cep": "string", // Required – Postal code
+    "logradouro": "string", // Required - Street
+    "nroLogradouro": "string", // Street number
+    "bairro": "string", // Neighborhood
+    "complemento": "string", // Complement
+    "cidade": "string", // Required - City
+    "uf": "string", // Required – State (UF). Example: SC (Santa Catarina abbreviation)
+    "tipoEndereco": 0, // Check Address Type table in the endpoint
+    "tipoResidencia": 0, // Check Residence Type table in the endpoint
+    "enderecoDesde": "2024-04-04T12:19:46.116Z", // Start date at the address
+    "enderecoPrincipal": true, // Indicates if it is the main address
+    "enderecoCorrespondencia": true // Indicates if it is the correspondence address
+  },
+  "param": {
+    "documentoCliente": "string" // Customer's federal document
+  }
+}'
+```
+
+</Step>
+
+</Steps>
+
+</Expandable>
+
+## 3 - Hiring
+
+After the simulation and onboarding, it is necessary to apply for credit.
+
+<Expandable title="Request for Proposal Inclusion">
+
+To include the proposal, it is necessary to inform:
+
+* Operation code;
+* Amount requested in the proposal;
+* Requested term (in months);
+* Negotiated interest percentage;
+* Total amount of the Tax on Financial Transactions (IOF);
+* Percentage of the Tax on Financial Transactions (IOF);
+* Installment amount;
+* Registration Fee (TAC);
+* Estimated date of the first due date;
+* Account type (checking, savings, etc.);
+* Bank branch;
+* Branch digit;
+* Bank account number;
+* Account digit;
+* Bank number.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirManualSimplificado' \
+--header 'Authorization: Bearer qXdZot13a6EbJkAbjpZ5ep_eTKH2F5ZHOwZrYZVN1lw' \
+--header 'IdempotencyKey: UNIQUE GUID FOR EACH CALL' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": {
+        "documentoCliente": "string", // Customer document
+        "documentoParceiroCorrespondente": "string",  // Correspondent Partner document
+        "codigoOperacao": "string", // Required - Used by the Integrator. It is the operation code in the partner's system. This information is exclusive and can be used to update the proposal without needing to store the BMP proposal code. However, the BMP proposal code is important to store for printing slips/CCB/Promissory Note or Protocol.
+        "codigoVersaoCCB": 0, // Bank Credit Certificate (CCB) version code
+        "vlrSolicitado": 0, // Required - Amount requested in the proposal
+        "prazo": 0, // Required - Requested term. Will be validated according to integration parameters.
+        "percJurosNegociado": 0, // Required - Interest rate of the proposal
+        "vlrIOF": 0, // Required - Total amount of Tax on Financial Transactions (IOF)
+        "percIOF": 0, // Required - Percentage of Tax on Financial Transactions (IOF)
+        "vlrParcela": 0, // Required - Installment amount
+        "vlrTAC": 0, // Required - Registration Fee amount. Can be R$ 0.00 when not applicable.
+        "dtPrimeiroVencto": "2024-02-21T17:48:40.110Z", // Required - Estimated date of the first due date.
+        "tipoContrato": "string", // string(5) - Acronym indicating the type of contract for the proposal. Example: CSG -> Working Capital; CCG -> Working Capital with Guarantee
+        "propostaContaPagamentoDTO": { 
+            "tipoConta": 0, // Required - Account type
+            "agencia": "string", // string(10) Required - Bank branch
+            "agenciaDig": "string", // string(1) Required - Branch digit
+            "conta": "string", // string(20) Required - Bank account
+            "contaDig": "string", // string(1) Required - Account digit
+            "numeroBanco": "string" // string(5) Required - Bank number
+        },
+    },
+}'
+```
+</Expandable>
+
+To use a contract with a **TED** split, add the object below to the previous request within the `dto` array:
+
+<Expandable title="TED Split">
+
+```json
+"propostaLancamentos": [ 
+    {
+        "campoID": "string", // Name of the field responsible for the split | REQUIRED
+        "vlrTransacao": 0, // Transaction amount (must be less than or equal to the requested amount) | REQUIRED
+        "tipoConta": 0, // 1 = Individual, 2 = Legal Entity | REQUIRED
+        "agencia": "string", // Bank branch of the account | REQUIRED
+        "agenciaDig": "string", // Account branch digit of the issuer | REQUIRED
+        "conta": "string", // Issuer's bank account | REQUIRED
+        "contaDig": "string", // Issuer's bank account digit | REQUIRED
+        "numeroBanco": "string", // Bank code according to BACEN table | REQUIRED
+        "documentoFederal": "string", // Federal document number | REQUIRED
+        "nomePagamento": "string" // Name for payment | REQUIRED
+    }
+]
+```
+</Expandable>
+
+To use a contract with a **payment slip** split, add the object below to the previous request within the `dto` array:
+
+<Expandable title="Payment Slip Split">
+
+```json
+"propostaLancamentos": [ 
+    {
+        "campoID": "string", // Name of the field responsible for the split | REQUIRED 
+        "vlrTransacao": 0, // Transaction amount (must be less than or equal to the requested amount) | REQUIRED 
+        "dtPagamento": "2024-02-21T17:48:40.110Z", // Expected payment date of the proposal.
+        "linhaDigitavel": "string", // string(60)  string containing payment slip information, such as bank data, recipient, etc.
+        "documentoFederalCedente": "string", // string(20)   Federal document of the payer
+        "nomeCedente": "string", // string(60)   Name of the payer
+        "documentoFederal": "string", // Federal document number | REQUIRED
+        "nomePagamento": "string" // Name for payment | REQUIRED
+    }
+]
+```
+</Expandable>
+
+<Tip>The `documentoParceiroCorrespondente` field must be filled in with the CNPJ of the partner store or company.</Tip>
+
+## 4 - Signature Collection
+
+The signature can be performed in three ways:
+
+* Electronic Signature, where the client signs electronically via a link sent by email or WhatsApp;
+* Relogon Signature, where the client signs via a link sent by email or WhatsApp, but the signature is performed in the backend;
+* Certifying Signature, where the client signs via a digital certificate.
+
+<Expandable title="Electronic Signature">
+
+<Steps>
+
+<Step title="Electronic Signature">
+
+To use the electronic signature, it is necessary to inform:
+
+* Subscriber's name, email address, document number, description, cell phone number, and subscription deadline;
+* Indicate whether the subscriber will receive the CCB via email, WhatsApp, or SMS;
+* Subscription deadline.
+
+To learn more about this endpoint, access the reference document [33 - Electronic](https://bmpdocs.moneyp.com.br/caas/english/api-reference/assinaturas/eletronica).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirAssinaturaCCB' \
+--header 'accept: text/plain' \
+--header 'Authorization: Bearer qXdZot13a6EbJkAbjpZ5ep_eTKH2F5ZHOwZrYZVN1lw' \
+--header 'IdempotencyKey: UNIQUE GUID FOR EACH CALL' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": { // Only one of the fields below must be provided
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Enter the proposal GUID generated in the response of the proposal inclusion
+        "codigoOperacao": "string" // Enter the operation code used in the proposal inclusion
+    },
+    "assinantes": [
+        {
+            "nome": "string", // Enter the subscriber's name | REQUIRED
+            "email": "string", // Enter the subscriber's email | REQUIRED
+            "documento": "string", // Enter the subscriber's federal document | REQUIRED
+            "descricao": "string", // Enter the subscriber's role in the operation | REQUIRED
+            "telefoneCelular": "string", // Enter the subscriber's mobile phone | REQUIRED
+            "notificarPorEmail": true, // This field controls whether the customer will receive the CCB by email for signature | REQUIRED
+            "notificarPorWhatsApp": true, // If the customer will receive the signature token via WhatsApp, set this field to true. If not, set to false | OPTIONAL
+            "notificarPorSMS": true, // If the customer will receive the signature token via SMS, set this field to true. If not, set to false | OPTIONAL
+            "codigoIdentificador": "string", // Subscriber identifier code within the proposal (if you want to make any changes to this subscriber, provide this code in another API call) | OPTIONAL
+            "dtLimiteAssinatura": "2024-02-21T19:47:38.567Z" // Deadline for the subscriber to sign | REQUIRED
+        }
+    ]
+}'
+```
+</Step>
+
+</Steps>
+
+</Expandable>
+
+<Expandable title="Relogon Signature">
+
+To use the Relogon signature, it is necessary to follow the steps below:
+
+<Steps>
+
+<Step title="Signature Model Collection">
+
+To collect the signature model, make a request to the [31 - CCB Printing](https://bmpdocs.moneyp.com.br/caas/english/api-reference/impressao-documentos/get-ccb) endpoint, using the proposal code and integration code parameters.
+
+```json
+curl --location 'https://reports.moneyp.dev.br/imprimir?impressao=S&tipo=ccb&code=GUIDPROPOSTA&integracao=CODPARAMETRO&copias=1&versao=' \
+```
+</Step>
+
+<Step title= "Relogon Signature">
+
+Through this [endpoint](https://bmpdocs.moneyp.com.br/caas/english/api-reference/assinaturas/relogon), the partner can sign the proposal, allowing the inclusion of subscribers who have already signed in the integrator's backend; the proposal is only finalized after all registered subscribers have signed. This method does not send notification emails and requires authentication parameters, proposal location, and a list of subscribers who have already signed with date, time, and source IP address, through integration with our Relogon Signature API.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirAssinaturaCCBFinalizada' \
+--header 'IdempotencyKey: UNIQUE GUID FOR EACH CALL' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": { 
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Sequential proposal number
+        "codigoOperacao": "string" // string(50) Partner's operation code
+  },
+  "assinantes": [
+    {
+      "nome": "string", // string(60)   Required - Subscriber's name
+      "email": "string",  // string(60)   Required - Subscriber's email
+      "documento": "string", // string(20)  Required – Subscriber's Federal Taxpayer Registry (CPF) or National Registry of Legal Entities (CNPJ) number
+      "descricao": "string", // string(100)    Subscriber's description
+      "notificarPorEmail": true, // Required - The subscriber marked to receive the notification will have control over all signatures and can request pending signatures. The email will be sent by BMP.
+      "dtAssinatura": "2024-01-15T14:21:57.250Z", // Required - Date and time of the signature performed in the integrator's backend
+      "ipAssinatura": "string" // string(255) Required - IP number where the signature was collected
+    }
+  ]
+}'
+```
+</Step>
+
+<Step title = "Proposal finalization">
+
+Through this [endpoint](https://bmpdocs.moneyp.com.br/caas/english/api-reference/assinaturas/finalizacao-proposta), the partner can finalize the proposal after the signing procedure is completed. After sending the Relogon signature request, it will be necessary to finalize the proposal through integration with the Proposal Finalization endpoint.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/Finalizar' \
+--header 'IdempotencyKey: UNIQUE GUID FOR EACH CALL' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer g3Lmb6cowHidKJwwu8J-5xAVAViSysAZAajzeeeTXq4' \
+--data '{
+    "dto": { 
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Sequential proposal number
+        "codigoOperacao": "string" // string(50) Operation code
+    },
+    "parametros": [ 
+        {
+            "Nome": "FINALIZACAO_VALIDARPARCELAS",
+            "Valor": "FALSE"
+        },
+        {
+            "Nome": "IP_ADDRESS",
+            "Valor": "00.000.000.00"
+        }
+    ]
+}'
+```
+</Step>
+
+<Step title="Signed CCB Printing">
+
+This [endpoint](https://bmpdocs.moneyp.com.br/caas/english/api-reference/impressao-documentos/get-ccb) is used to request the printing of a Bank Credit Certificate (CCB), through the proposal code and integration code parameters. At this stage, it is necessary to query the CCB through integration with our CCB Printing URL for model validation before signing.
+
+```json
+curl --location 'https://reports.moneyp.dev.br/imprimir?impressao=S&tipo=ccb&code=GUIDPROPOSTA&integracao=CODPARAMETRO&copias=1&versao=' \
+```
+</Step>
+
+</Steps>
+
+</Expandable>
+
+<Expandable title="Certification Signature">
+
+<Steps>
+
+<Step title="Signature Model Collection">
+
+This [endpoint](https://bmpdocs.moneyp.com.br/caas/english/api-reference/impressao-documentos/get-ccb) is used to request the printing of a Bank Credit Certificate (CCB), through the proposal code and integration code parameters. At this stage, it is necessary to query the CCB through integration with our CCB Printing URL for model validation before signing.
+
+```json
+curl --location 'https://reports.moneyp.dev.br/imprimir?impressao=S&tipo=ccb&code=GUIDPROPOSTA&integracao=CODPARAMETRO&copias=1&versao=' \
+```
+</Step>
+
+<Step title="Sending to Certification Authority">
+
+At this stage, it will be necessary to send the CCB model to the certification authority for signing.
+
+</Step>
+
+<Step title="Certification Signature">
+
+Through this [endpoint](https://bmpdocs.moneyp.com.br/caas/english/api-reference/assinaturas/certificadora), the partner signs the proposal via a Certifier, such as Docusign, QCertifica, Clicksign, Finanblue, among others. The process begins with downloading the CCB (Contracting Agreement) without the MODELO watermark available on our portal, followed by signature by a certifying agency and subsequent attachment of the signed CCB to the proposal. After collecting the signatures, the signed CCB must be uploaded through integration with our Certifying Signature API.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirDocumento' \
+--header 'IdempotencyKey: UNIQUE GUID FOR EACH CALL' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer token generated in the 1st step' \
+--data '{
+  "dto": { 
+    "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Sequential proposal number
+    "codigoOperacao": "string" // string(50)  Partner's operation code
+  },
+  "documento": {
+    "codigo": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Filled with the file code in the BMP database
+    "tipoDocumento": 30, // Required - Check document type table
+    "nomeArquivo": "string", // string(500)   Required - File name
+    "extensao": "string", // string(20)  Required - File extension
+    "dtValidade": "2023-05-23T20:57:08.922Z", // File expiration date
+    "arquivo": "string" // Required - Byte array containing the file
+  }
+}'
+```
+</Step>
+
+<Step title="Proposal Finalization">
+
+Through this [endpoint](https://bmpdocs.moneyp.com.br/caas/english/api-reference/assinaturas/finalizacao-proposta), the partner can finalize the proposal after the signing procedure is completed. After sending the Relogon signature request, it will be necessary to finalize the proposal through integration with the Proposal Finalization endpoint.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/Finalizar' \
+--header 'IdempotencyKey: UNIQUE GUID FOR EACH CALL' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer g3Lmb6cowHidKJwwu8J-5xAVAViSysAZAajzeeeTXq4' \
+--data '{
+    "dto": { 
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Sequential proposal number
+        "codigoOperacao": "string" // string(50)  Partner's operation code
+    },
+    "parametros": [ 
+        {
+            "Nome": "FINALIZACAO_VALIDARPARCELAS",
+            "Valor": "FALSE"
+        },
+        {
+            "Nome": "IP_ADDRESS",
+            "Valor": "00.000.000.00"
+        }
+    ]
+}'
+```
+</Step>
+
+</Steps>
+
+</Expandable>
+
+## 5 - Proposal release
+
+This is the final step in the credit hiring process for Working Capital.
+
+The partner can release the proposal to the payment queue after receiving the "finalized" proposal status, with the disbursement process being the responsibility of BMP.
+
+In this step, it is necessary to release the proposal through integration with our Proposal Release URL for payment to validate the model after signing.
+
+To release the proposal, it is necessary to inform:
+
+* Proposal code;
+* Operation code;
+* Proposal parameters (if necessary).
+
+For more information about this endpoint, see the reference document [43 - Proposal Release](https://bmpdocs.moneyp.com.br/caas/english/api-reference/desembolso/liberacao-pagamento).
+
+<Expandable title="Request to Release Proposal">
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/Liberar' \
+--header 'IdempotencyKey: UNIQUE GUID FOR EACH CALL' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": { // Only one of the fields below must be provided
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Sequential proposal number 
+        "codigoOperacao": "string" // string(50)  Partner's operation code
+    },
+    "parametros": [
+        {}
+    ]
+}'
+```
+
+</Expandable>
+
+## Endpoints and auxiliary documents
+
+For this journey, it is very important that the partner knows the [Technical Procedure for CaaS Callback](https://bmpdocs.moneyp.com.br/caas/procedimento-tecnico-de-callback/introducao).
+
+The following endpoints may also be useful:
+
+* [22 - Consult](https://bmpdocs.moneyp.com.br/caas/english/api-reference/contratacoes/post-propostaconsultar): used to consult proposal data;
+* [19 - Contract Cancellation](https://bmpdocs.moneyp.com.br/caas/english/api-reference/contratacoes/cancelamento-contrato): used to cancel active contracts;
+* [32 - Payment Receipt](https://bmpdocs.moneyp.com.br/caas/english/api-reference/impressao-documentos/get-comprovante-pagamento): used to consult the payment receipt of the proposal;
+* [38 - Bank Account Update](https://bmpdocs.moneyp.com.br/caas/english/api-reference/desembolso/atualizacao-conta-bancaria): used to update the registered payment account.

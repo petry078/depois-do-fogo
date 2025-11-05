@@ -1,0 +1,31 @@
+---
+title: "6 - Cancelar Proposta"
+openapi: post /FGTS/CancelarProposta
+---
+
+<Warning>***Não é possível realizar a chamada do endpoint de cancelamento com 7 dias do desembolso da proposta ou se ela se encontrar com o status de cedida (ID = 10).***</Warning>
+
+Por meio desta endpoint o parceiro cancela uma operação de FGTS.
+Regras:
+- A operação não pode ultrapassar o prazo de 7 dias do momento do desembolso
+- Caso ocorra desembolso da operação, será necessária a devolução do valor para nós.
+
+## Mensagens de erro
+
+A tabela abaixo representa as mensagens de erro que podem ser retornadas ao tentar realizar uma requisição.
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+| Código | Mensagem Técnica                                                                       | Mensagem ao Usuário                                                                    | Tipo de Erro      |
+|--------|----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|-------------------|
+| 400    | 4. Número de CPF inválido                                                              | O número do CPF informado é inválido                                                   | Erro de validação |
+| 400    | 5. Existe uma Operação Fiduciária em andamento. Tente mais tarde                       | Existe uma Operação Fiduciária em andamento. Tente mais tarde                          | Erro de negócio   |
+| 400    | 10. Operação não permitida antes de determinada data                                   | A operação não é permitida antes de determinada data                                   | Erro de negócio   |
+| 400    | 13. Operação não permitida por pendência no processo de pagamento de saque-aniversário | A operação não é permitida por pendência no processo de pagamento de saque-aniversário | Erro de negócio   |
+| 400    | 27. Operação já cancelada                                                              | A operação já foi cancelada                                                            | Erro de negócio   |
+| 400    | 28. Cancelamento não permitido                                                         | O cancelamento não é permitido                                                         | Erro de negócio   |
+| 400    | 38. Identificador da Solicitação inválido                                              | O identificador da solicitação é inválido                                              | Erro de negócio   |
+
+</Expandable> 

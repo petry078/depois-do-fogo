@@ -1,0 +1,27 @@
+---
+title: "48 - Favored Registration"
+openapi: post /api/Favorecido
+---
+
+The API is responsible for creating favored ones for accounts and payments. 
+
+<Expandable title="Request fields description">
+
+| Field               | Type    | Description                                                                         |
+|---------------------|---------|-------------------------------------------------------------------------------------|
+| agenciaDigito       | string  | Bank branch check digit.                                                            |
+| conta               | string  | Bank account number.                                                                |
+| contaDigito         | string  | Bank account number check digit.                                                    |
+| contaPgto           | string  | Bank account number followed by the check digit.                                    |
+| tipoConta           | integer | Bank account type. 1 for Checking, 2 for Savings, 3 for Payment, and 4 for Payroll. |
+| modeloConta         | integer | Bank account model. 1 for Movement, 2 for Escrow, 3 for Payment, and 4 for Payroll. |
+| nome                | string  | Full name of the beneficiary.                                                       |
+| documentoFederal    | string  | CPF or CNPJ number of the beneficiary.                                              |
+| numeroBanco         | integer | Bank identifier code. Example: 001 for Banco do Brasil.                             |
+| agencia             | string  | Beneficiary's bank branch number.                                                   |
+| agenciaDigito       | string  | Beneficiary's bank branch check digit.                                              |
+| conta               | string  | Beneficiary's bank account number.                                                  |
+| contaDigito         | string  | Beneficiary's bank account number check digit.                                      |
+| contaPagamento      | string  | Beneficiary's bank account number followed by the check digit.                      |
+
+</Expandable>

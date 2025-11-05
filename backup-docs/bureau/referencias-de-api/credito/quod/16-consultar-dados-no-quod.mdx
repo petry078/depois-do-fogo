@@ -1,0 +1,1321 @@
+---
+title: 16 - Consultar Dados no QUOD
+openapi: post /Bureau/ConsultaFraudeQuodRufra
+---
+
+Por meio deste endpoint, você terá acesso à base Rufra, que reúne informações unificadas sobre marcações de fraudes e golpes. Para realizar sua consulta, é obrigatório enviar o documento do cliente. Além disso, você pode incluir informações opcionais, como Chave Pix, e-mail e celular, para obter resultados mais completos. A QUOD utiliza inteligência em sua base e analisa dados de interoperabilidade de outras instituições, garantindo sempre um retorno atualizado e completo.
+
+<Note>Os exemplos abaixo mostram como pode ser o retorno de uma consulta feita pela QUOD. Porém, no ambiente de testes (homologação), a QUOD não repassa todas as informações completas nas consultas — isso ocorre apenas em produção.</Note>
+
+Os dados apresentados abaixo correspondem aos retornos de produção.
+
+<Expandable title="Estrutura JSON QUOD/Interops">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado:
+
+```json
+{
+    "Erro": false,
+    "MensagemOperador": "OK",
+    "ResultadoConsulta": {
+        "SessionId": "string",
+        "QuodxScore": {
+            "Score": 100,
+            "MotivoScore": [
+                "string"
+            ],
+            "ClassificacaoRisco": "string",
+            "SugestaoStatusRevisao": "string",
+            "RequisicaoId": "string"
+        },
+        "pepvip": {
+            "pepvipUsuario": {
+                "numeroDocumento": "string",
+                "indicadorPEP": "string",
+                "indicadorVIP": "string"
+            },
+            "pepvipRecebedor": {
+                "numeroDocumento": "string",
+                "indicadorPEP": "string",
+                "indicadorVIP": "string"
+            }
+        },
+        "QuodRufra": {
+            "Origem": [
+                {
+                    "Documento": "string",
+                    "IndicadorRufra": "string",
+                    "Fraudes": [
+                        {
+                            "DataEvento": "string",
+                            "TipoEnvolvido": {
+                                "Codigo": 0,
+                                "Nome": "string"
+                            },
+                            "FraudeConfirmada": {
+                                "Codigo": "int",
+                                "Nome": "string"
+                            },
+                            "Motivo": {
+                                "Codigo": "int",
+                                "Nome": "string",
+                                "Descricao": "string"
+                            },
+                            "Canal": {
+                                "Codigo": 0,
+                                "Nome": "string"
+                            },
+                            "OrigemDado": "string"
+                        }
+                    ],
+                    "TotalFraudesConfirmadasBeneficiario": [
+                        {
+                            "Estatistica": "string",
+                            "Qtd": 0
+                        },
+                        {
+                            "Estatistica": "string",
+                            "Qtd": 0
+                        },
+                        {
+                            "Estatistica": "string",
+                            "Qtd": 0
+                        },
+                        {
+                            "Estatistica": "string",
+                            "Qtd": 0
+                        }
+                    ],
+                    "Canal": {
+                        "Codigo": 0,
+                        "Nome": "string"
+                    },
+                    "Produto": {
+                        "Codigo": 0,
+                        "Nome": "string"
+                    },
+                    "Interops": [
+                        {
+                            "Documento": "string",
+                            "OrigemDado": "string",
+                            "Status": {
+                                "Codigo": 0,
+                                "Mensagem": "string"
+                            },
+                            "Ocorrencias": [
+                                {
+                                    "InstituicaoResponsavel": {
+                                        "CnpjOrigem": "string",
+                                        "RazaoSocialOrigem": "string"
+                                    },
+                                    "InformacaoesBancariasDestino": {
+                                        "CodigoInstituicao": 11,
+                                        "Agencia": "string",
+                                        "Conta": {
+                                            "Numero": "string",
+                                            "Tipo": 0,
+                                            "Titular": {
+                                                "Documento": {
+                                                    "Tipo": 0,
+                                                    "Numero": "string"
+                                                },
+                                                "NomeCompletoRazaoSocial": "string",
+                                                "NomeFantasia": "string"
+                                            },
+                                            "DocumentoRepresentanteLegal": [
+                                                {
+                                                    "tipo": 0,
+                                                    "numero": "string"
+                                                }
+                                            ]
+                                        },
+                                        "ChavePix": "string",
+                                        "LinhaDigitavelBoleto": "string"
+                                    },
+                                    "InformacaoExecutor": {
+                                        "Nome": "string",
+                                        "RazaoSocial": "string",
+                                        "Documento": {
+                                            "Tipo": 0,
+                                            "Numero": "string"
+                                        },
+                                        "DocumentoRepresentanteLegal": [
+                                            {
+                                                "tipo": 0,
+                                                "numero": "string"
+                                            }
+                                        ]
+                                    },
+                                    "InformacaoReclamante": {
+                                        "Documento": {
+                                            "Tipo": 0,
+                                            "Numero": "string"
+                                        },
+                                        "DocumentoRepresentanteLegal": [
+                                            {
+                                                "tipo": 0,
+                                                "numero": "string"
+                                            }
+                                        ]
+                                    },
+                                    "Registro": {
+                                        "DataHora": "string",
+                                        "Local": "string",
+                                        "Canal": {
+                                            "Codigo": 1,
+                                            "Nome": "string"
+                                        },
+                                        "AtividadeRelacionada": 4,
+                                        "Classificacao": 1,
+                                        "Motivo": "string",
+                                        "ValorTransacao": 0,
+                                        "ValorContrato": 0,
+                                        "EnvolvimentoReclamante": 0,
+                                        "dispositivo": {
+                                            "identificacao": "string",
+                                            "ip": "string"
+                                        },
+                                        "ModalidadeFraude": 1
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "Destino": [
+                {
+                    "Documento": "string",
+                    "IndicadorRufra": "string",
+                    "Fraudes": [
+                        {
+                            "DataEvento": "string",
+                            "TipoEnvolvido": {
+                                "Codigo": 0,
+                                "Nome": "string"
+                            },
+                            "FraudeConfirmada": {
+                                "Codigo": "int",
+                                "Nome": "string"
+                            },
+                            "Motivo": {
+                                "Codigo": "int",
+                                "Nome": "string",
+                                "Descricao": "string"
+                            },
+                            "Canal": {
+                                "Codigo": 0,
+                                "Nome": "string"
+                            },
+                            "OrigemDado": "string"
+                        }
+                    ],
+                    "TotalFraudesConfirmadasBeneficiario": [
+                        {
+                            "Estatistica": "string",
+                            "Qtd": 0
+                        },
+                        {
+                            "Estatistica": "string",
+                            "Qtd": 0
+                        },
+                        {
+                            "Estatistica": "string",
+                            "Qtd": 0
+                        },
+                        {
+                            "Estatistica": "string",
+                            "Qtd": 0
+                        }
+                    ],
+                    "Canal": {
+                        "Codigo": 0,
+                        "Nome": "string"
+                    },
+                    "Produto": {
+                        "Codigo": 0,
+                        "Nome": "string"
+                    },
+                    "Interops": [
+                        {
+                            "Documento": "string",
+                            "OrigemDado": "string",
+                            "Status": {
+                                "Codigo": 0,
+                                "Mensagem": "string"
+                            },
+                            "Ocorrencias": [
+                                {
+                                    "InstituicaoResponsavel": {
+                                        "CnpjOrigem": "string",
+                                        "RazaoSocialOrigem": "string"
+                                    },
+                                    "InformacaoesBancariasDestino": {
+                                        "CodigoInstituicao": 11,
+                                        "Agencia": "string",
+                                        "Conta": {
+                                            "Numero": "string",
+                                            "Tipo": 0,
+                                            "Titular": {
+                                                "Documento": {
+                                                    "Tipo": 0,
+                                                    "Numero": "string"
+                                                },
+                                                "NomeCompletoRazaoSocial": "string",
+                                                "NomeFantasia": "string"
+                                            },
+                                            "DocumentoRepresentanteLegal": [
+                                                {
+                                                    "tipo": 0,
+                                                    "numero": "string"
+                                                }
+                                            ]
+                                        },
+                                        "ChavePix": "string",
+                                        "LinhaDigitavelBoleto": "string"
+                                    },
+                                    "InformacaoExecutor": {
+                                        "Nome": "string",
+                                        "RazaoSocial": "string",
+                                        "Documento": {
+                                            "Tipo": 0,
+                                            "Numero": "string"
+                                        },
+                                        "DocumentoRepresentanteLegal": [
+                                            {
+                                                "tipo": 0,
+                                                "numero": "string"
+                                            }
+                                        ]
+                                    },
+                                    "InformacaoReclamante": {
+                                        "Documento": {
+                                            "Tipo": 0,
+                                            "Numero": "string"
+                                        },
+                                        "DocumentoRepresentanteLegal": [
+                                            {
+                                                "tipo": 0,
+                                                "numero": "string"
+                                            }
+                                        ]
+                                    },
+                                    "Registro": {
+                                        "DataHora": "string",
+                                        "Local": "string",
+                                        "Canal": {
+                                            "Codigo": 1
+                                        },
+                                        "AtividadeRelacionada": 4,
+                                        "Classificacao": 1,
+                                        "Motivo": "string",
+                                        "ValorTransacao": 0,
+                                        "ValorContrato": 0,
+                                        "EnvolvimentoReclamante": 0,
+                                        "dispositivo": {
+                                            "identificacao": "string",
+                                            "ip": "string"
+                                        },
+                                        "ModalidadeFraude": 1
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "Status": {
+                "Codigo": 0,
+                "StatusItem": {
+                    "Codigo": 1,
+                    "Descricao": "string"
+                }
+            }
+        }
+    }
+}
+```
+
+</Expandable>
+
+<Expandable title="Estrutura JSON QUOD">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado:
+
+```json
+{
+    "Erro": false,
+    "MensagemOperador": "OK",
+    "ResultadoConsulta": {
+        "SessionId": "string",
+        "QuodxScore": {
+            "Score": 100,
+            "MotivoScore": [
+                "string"
+            ],
+            "ClassificacaoRisco": "string",
+            "SugestaoStatusRevisao": "string",
+            "RequisicaoId": "string"
+        },
+        "pepvip": {
+            "pepvipUsuario": {
+                "numeroDocumento": "string",
+                "indicadorPEP": "string",
+                "indicadorVIP": "string"
+            },
+            "pepvipRecebedor": {
+                "numeroDocumento": "string",
+                "indicadorPEP": "string",
+                "indicadorVIP": "string"
+            }
+        },
+        "QuodRufra": {
+            "Origem": [
+                {
+                    "Documento": "string",
+                    "IndicadorRufra": "string",
+                    "Fraudes": [
+                        {
+                            "DataEvento": "string",
+                            "TipoEnvolvido": {
+                                "Codigo": 2,
+                                "Nome": "string"
+                            },
+                            "FraudeConfirmada": {
+                                "Codigo": 1,
+                                "Nome": "string"
+                            },
+                            "Motivo": {
+                                "Codigo": 3,
+                                "Nome": "string",
+                                "Descricao": "string"
+                            },
+                            "Canal": {
+                                "Codigo": 2,
+                                "Nome": "string"
+                            },
+                            "OrigemDado": "string"
+                        },
+                        {
+                            "DataEvento": "string",
+                            "TipoEnvolvido": {
+                                "Codigo": 2,
+                                "Nome": "string"
+                            },
+                            "FraudeConfirmada": {
+                                "Codigo": 1,
+                                "Nome": "string"
+                            },
+                            "Motivo": {
+                                "Codigo": 3,
+                                "Nome": "string",
+                                "Descricao": "string"
+                            },
+                            "Canal": {
+                                "Codigo": 99,
+                                "Nome": "string"
+                            },
+                            "OrigemDado": "string"
+                        }
+                    ],
+                    "TotalFraudesConfirmadasBeneficiario": [
+                        {
+                            "Estatistica": "string",
+                            "Qtd": 0
+                        },
+                        {
+                            "Estatistica": "string",
+                            "Qtd": 0
+                        },
+                        {
+                            "Estatistica": "string",
+                            "Qtd": 0
+                        },
+                        {
+                            "Estatistica": "string",
+                            "Qtd": 2
+                        }
+                    ],
+                    "Canal": {
+                        "Codigo": 0,
+                        "Nome": "string"
+                    },
+                    "Produto": {
+                        "Codigo": 0,
+                        "Nome": "string"
+                    },
+                    "Interops": null
+                }
+            ],
+            "Destino": null
+        },
+        "Status": {
+            "Codigo": 0,
+            "StatusItem": {
+                "Codigo": 1,
+                "Descricao": "string"
+            }
+        }
+    }
+}
+```
+
+</Expandable>
+
+<Expandable title="Estrutura JSON Interops">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado:
+
+```json
+{
+    "Erro": false,
+    "MensagemOperador": "OK",
+    "ResultadoConsulta": {
+        "SessionId": "string",
+        "QuodxScore": {
+            "Score": -993,
+            "MotivoScore": [
+                "string"
+            ],
+            "ClassificacaoRisco": "string",
+            "SugestaoStatusRevisao": "string",
+            "RequisicaoId": "string"
+        },
+        "Pepvip": {
+            "pepvipUsuario": {
+                "numeroDocumento": "string",
+                "indicadorPEP": "string",
+                "indicadorVIP": "string"
+            },
+            "pepvipRecebedor": {
+                "numeroDocumento": "string",
+                "indicadorPEP": "string",
+                "indicadorVIP": "string"
+            }
+        },
+        "QuodRufra": {
+            "Origem": [
+                {
+                    "Documento": "string",
+                    "IndicadorRufra": "string",
+                    "Fraudes": [],
+                    "TotalFraudesConfirmadasBeneficiario": [],
+                    "Canal": {
+                        "Codigo": 0,
+                        "Nome": "string"
+                    },
+                    "Produto": {
+                        "Codigo": 0,
+                        "Nome": "string"
+                    },
+                    "Interops": [
+                        {
+                            "Documento": "string",
+                            "OrigemDado": "string",
+                            "Status": {
+                                "Codigo": -1,
+                                "Mensagem": "string"
+                            },
+                            "Ocorrencias": null
+                        },
+                        {
+                            "Documento": "string",
+                            "OrigemDado": "string",
+                            "Status": {
+                                "Codigo": -1,
+                                "Mensagem": "string"
+                            },
+                            "Ocorrencias": null
+                        },
+                        {
+                            "Documento": "string",
+                            "OrigemDado": "string",
+                            "Status": {
+                                "Codigo": 1,
+                                "Mensagem": "string"
+                            },
+                            "Ocorrencias": [
+                                {
+                                    "InstituicaoResponsavel": {
+                                        "CnpjOrigem": "string",
+                                        "RazaoSocialOrigem": "string"
+                                    },
+                                    "InformacaoesBancariasDestino": {
+                                        "CodigoInstituicao": 0,
+                                        "Agencia": "string",
+                                        "Conta": {
+                                            "Numero": "string",
+                                            "Tipo": 0,
+                                            "Titular": {
+                                                "Documento": {
+                                                    "Tipo": 1,
+                                                    "Numero": "string"
+                                                },
+                                                "NomeCompletoRazaoSocial": "string",
+                                                "NomeFantasia": "string"
+                                            },
+                                            "DocumentoRepresentanteLegal": [
+                                                {
+                                                    "tipo": 0,
+                                                    "numero": "string"
+                                                }
+                                            ]
+                                        },
+                                        "ChavePix": "string",
+                                        "LinhaDigitavelBoleto": "string"
+                                    },
+                                    "InformacaoExecutor": {
+                                        "Nome": "string",
+                                        "RazaoSocial": "string",
+                                        "Documento": {
+                                            "Tipo": 1,
+                                            "Numero": "string"
+                                        },
+                                        "DocumentoRepresentanteLegal": [
+                                            {
+                                                "tipo": 0,
+                                                "numero": "string"
+                                            }
+                                        ]
+                                    },
+                                    "InformacaoReclamante": {
+                                        "Documento": {
+                                            "Tipo": 0,
+                                            "Numero": "string"
+                                        },
+                                        "DocumentoRepresentanteLegal": [
+                                            {
+                                                "tipo": 0,
+                                                "numero": "string"
+                                            }
+                                        ]
+                                    },
+                                    "Registro": {
+                                        "DataHora": "string",
+                                        "Local": "string",
+                                        "Canal": {
+                                            "Codigo": 1
+                                        },
+                                        "AtividadeRelacionada": 4,
+                                        "Classificacao": 1,
+                                        "Motivo": "string",
+                                        "ValorTransacao": 0,
+                                        "ValorContrato": 0,
+                                        "EnvolvimentoReclamante": 0,
+                                        "dispositivo": {
+                                            "identificacao": "string",
+                                            "ip": "string"
+                                        },
+                                        "ModalidadeFraude": 1
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "Destino": null
+        },
+        "Status": {
+            "Codigo": 0,
+            "StatusItem": {
+                "Codigo": 1,
+                "Descricao": "string"
+            }
+        }
+    }
+}
+```
+
+</Expandable>
+
+<Expandable title="Retorno QUOD/Interops">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado:
+
+```json
+{
+    "Erro": false,
+    "MensagemOperador": "OK",
+    "ResultadoConsulta": {
+        "SessionId": "a8b5f5be-cdf50a26e5be",
+        "QuodxScore": {
+            "Score": -994,
+            "MotivoScore": [
+                "Registro com apontamento na Base Compartilhada de Fraudes"
+            ],
+            "ClassificacaoRisco": "high",
+            "SugestaoStatusRevisao": "reject",
+            "RequisicaoId": "bb553ec2-02-dd48266f7261"
+        },
+        "Pepvip": null,
+        "QuodRufra": {
+            "Origem": [
+                {
+                    "Documento": "44455566699",
+                    "IndicadorRufra": "S",
+                    "Fraudes": [
+                        {
+                            "DataEvento": "01/05/2025",
+                            "TipoEnvolvido": {
+                                "Codigo": 2,
+                                "Nome": "FRAUDADOR"
+                            },
+                            "FraudeConfirmada": {
+                                "Codigo": 1,
+                                "Nome": "SIM"
+                            },
+                            "Motivo": {
+                                "Codigo": 3,
+                                "Nome": "Fraude Transacional",
+                                "Descricao": "Favorecido de créditos espúrios (fraudes transacionais) em quaisquer meios de pagamentos - Crédito Espúrio"
+                            },
+                            "Canal": {
+                                "Codigo": 1,
+                                "Nome": "Internet"
+                            },
+                            "OrigemDado": "Quod"
+                        },
+                        {
+                            "DataEvento": "01/05/2025",
+                            "TipoEnvolvido": {
+                                "Codigo": 2,
+                                "Nome": "FRAUDADOR"
+                            },
+                            "FraudeConfirmada": {
+                                "Codigo": 1,
+                                "Nome": "SIM"
+                            },
+                            "Motivo": {
+                                "Codigo": 3,
+                                "Nome": "Fraude Transacional",
+                                "Descricao": "Favorecido de créditos espúrios (fraudes transacionais) em quaisquer meios de pagamentos - Crédito Espúrio"
+                            },
+                            "Canal": {
+                                "Codigo": 2,
+                                "Nome": "Mobile"
+                            },
+                            "OrigemDado": "Quod"
+                        },
+                        {
+                            "DataEvento": "21/10/2024",
+                            "TipoEnvolvido": {
+                                "Codigo": 2,
+                                "Nome": "FRAUDADOR"
+                            },
+                            "FraudeConfirmada": {
+                                "Codigo": 1,
+                                "Nome": "SIM"
+                            },
+                            "Motivo": {
+                                "Codigo": 2,
+                                "Nome": "Conta de Passagem/Conta Laranja",
+                                "Descricao": "Uma conta que é suspeita ou foi encerrada por causa de confirmada atividade de crime financeiro, como lavagem de dinheiro ou recebimento de receitas de crime."
+                            },
+                            "Canal": {
+                                "Codigo": 2,
+                                "Nome": "Mobile"
+                            },
+                            "OrigemDado": "Quod"
+                        },
+                        {
+                            "DataEvento": "13/09/2024",
+                            "TipoEnvolvido": {
+                                "Codigo": 2,
+                                "Nome": "FRAUDADOR"
+                            },
+                            "FraudeConfirmada": {
+                                "Codigo": 1,
+                                "Nome": "SIM"
+                            },
+                            "Motivo": {
+                                "Codigo": 3,
+                                "Nome": "Fraude Transacional",
+                                "Descricao": "Favorecido de créditos espúrios (fraudes transacionais) em quaisquer meios de pagamentos - Crédito Espúrio"
+                            },
+                            "Canal": {
+                                "Codigo": 2,
+                                "Nome": "Mobile"
+                            },
+                            "OrigemDado": "Quod"
+                        },
+                        {
+                            "DataEvento": "08/06/2024",
+                            "TipoEnvolvido": {
+                                "Codigo": 2,
+                                "Nome": "FRAUDADOR"
+                            },
+                            "FraudeConfirmada": {
+                                "Codigo": 1,
+                                "Nome": "SIM"
+                            },
+                            "Motivo": {
+                                "Codigo": 2,
+                                "Nome": "Conta de Passagem/Conta Laranja",
+                                "Descricao": "Uma conta que é suspeita ou foi encerrada por causa de confirmada atividade de crime financeiro, como lavagem de dinheiro ou recebimento de receitas de crime."
+                            },
+                            "Canal": {
+                                "Codigo": 2,
+                                "Nome": "Mobile"
+                            },
+                            "OrigemDado": "Quod"
+                        }
+                    ],
+                    "TotalFraudesConfirmadasBeneficiario": [
+                        {
+                            "Estatistica": "7D",
+                            "Qtd": 0
+                        },
+                        {
+                            "Estatistica": "30D",
+                            "Qtd": 0
+                        },
+                        {
+                            "Estatistica": "180D",
+                            "Qtd": 4
+                        },
+                        {
+                            "Estatistica": "HISTORICO",
+                            "Qtd": 7
+                        }
+                    ],
+                    "Canal": null,
+                    "Produto": null,
+                    "Interops": [
+                        {
+                            "Documento": "44455566699",
+                            "OrigemDado": "ClearSale",
+                            "Status": {
+                                "Codigo": 1,
+                                "Mensagem": "Dados obtidos com sucesso."
+                            },
+                            "Ocorrencias": [
+                                {
+                                    "InstituicaoResponsavel": {
+                                        "CnpjOrigem": "01111111000111",
+                                        "RazaoSocialOrigem": "BANCO S.A."
+                                    },
+                                    "InformacaoesBancariasDestino": {
+                                        "CodigoInstituicao": 31495,
+                                        "Agencia": "1",
+                                        "Conta": {
+                                            "Numero": "121321321",
+                                            "Tipo": 2,
+                                            "Titular": {
+                                                "Documento": {
+                                                    "Tipo": 1,
+                                                    "Numero": "44455566699"
+                                                },
+                                                "NomeCompletoRazaoSocial": "NAO IDENTIFICADO",
+                                                "NomeFantasia": null
+                                            },
+                                            "DocumentoRepresentanteLegal": []
+                                        },
+                                        "ChavePix": null,
+                                        "LinhaDigitavelBoleto": null
+                                    },
+                                    "InformacaoExecutor": {
+                                        "Nome": "NAO IDENTIFICADO",
+                                        "RazaoSocial": null,
+                                        "Documento": {
+                                            "Tipo": 1,
+                                            "Numero": "44455566699"
+                                        },
+                                        "DocumentoRepresentanteLegal": []
+                                    },
+                                    "InformacaoReclamante": {
+                                        "Documento": {
+                                            "Tipo": 1,
+                                            "Numero": "44455566699"
+                                        },
+                                        "DocumentoRepresentanteLegal": []
+                                    },
+                                    "Registro": {
+                                        "DataHora": "2024-09-19T18:43:40Z",
+                                        "Local": "",
+                                        "Canal": null,
+                                        "AtividadeRelacionada": 4,
+                                        "Classificacao": 1,
+                                        "Motivo": "",
+                                        "ValorTransacao": 2000.00,
+                                        "ValorContrato": null,
+                                        "EnvolvimentoReclamante": 0,
+                                        "Dispositivo": {
+                                            "Identificacao": "",
+                                            "Ip": ""
+                                        },
+                                        "ModalidadeFraude": null
+                                    }
+                                },
+                                {
+                                    "InstituicaoResponsavel": {
+                                        "CnpjOrigem": "01111111000111",
+                                        "RazaoSocialOrigem": "BANCO S.A."
+                                    },
+                                    "InformacaoesBancariasDestino": {
+                                        "CodigoInstituicao": 31855495,
+                                        "Agencia": "1",
+                                        "Conta": {
+                                            "Numero": "121321321",
+                                            "Tipo": 2,
+                                            "Titular": {
+                                                "Documento": {
+                                                    "Tipo": 1,
+                                                    "Numero": "44455566699"
+                                                },
+                                                "NomeCompletoRazaoSocial": "NAO IDENTIFICADO",
+                                                "NomeFantasia": null
+                                            },
+                                            "DocumentoRepresentanteLegal": []
+                                        },
+                                        "ChavePix": null,
+                                        "LinhaDigitavelBoleto": null
+                                    },
+                                    "InformacaoExecutor": {
+                                        "Nome": "NAO IDENTIFICADO",
+                                        "RazaoSocial": null,
+                                        "Documento": {
+                                            "Tipo": 1,
+                                            "Numero": "44455566699"
+                                        },
+                                        "DocumentoRepresentanteLegal": []
+                                    },
+                                    "InformacaoReclamante": {
+                                        "Documento": {
+                                            "Tipo": 1,
+                                            "Numero": "44455566699"
+                                        },
+                                        "DocumentoRepresentanteLegal": []
+                                    },
+                                    "Registro": {
+                                        "DataHora": "2024-09-19T18:42:40Z",
+                                        "Local": "",
+                                        "Canal": null,
+                                        "AtividadeRelacionada": 4,
+                                        "Classificacao": 1,
+                                        "Motivo": "",
+                                        "ValorTransacao": 379.00,
+                                        "ValorContrato": null,
+                                        "EnvolvimentoReclamante": 0,
+                                        "Dispositivo": {
+                                            "Identificacao": "",
+                                            "Ip": ""
+                                        },
+                                        "ModalidadeFraude": null
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "Destino": null
+        },
+        "Status": {
+            "Codigo": 0,
+            "StatusItem": {
+                "Codigo": 1,
+                "Descricao": "QuodX obtido com sucesso"
+            }
+        }
+    }
+}
+```
+
+</Expandable>
+
+<Expandable title="Retorno QUOD">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado:
+
+```json
+{
+    "Erro": false,
+    "MensagemOperador": "OK",
+    "ResultadoConsulta": {
+        "SessionId": "a8b5f5be-cdf50a26e5be",
+        "QuodxScore": {
+            "Score": -997,
+            "MotivoScore": [
+                "Registro com apontamento na Base Compartilhada de Fraudes"
+            ],
+            "ClassificacaoRisco": "high",
+            "SugestaoStatusRevisao": "reject",
+            "RequisicaoId": "e305a878-bd5a-12b9579ca161"
+        },
+        "Pepvip": null,
+        "QuodRufra": {
+            "Origem": [
+                {
+                    "Documento": "12366678910",
+                    "IndicadorRufra": "S",
+                    "Fraudes": [
+                        {
+                            "DataEvento": "04/09/2024",
+                            "TipoEnvolvido": {
+                                "Codigo": 2,
+                                "Nome": "FRAUDADOR"
+                            },
+                            "FraudeConfirmada": {
+                                "Codigo": 1,
+                                "Nome": "SIM"
+                            },
+                            "Motivo": {
+                                "Codigo": 3,
+                                "Nome": "Fraude Transacional",
+                                "Descricao": "Favorecido de créditos espúrios (fraudes transacionais) em quaisquer meios de pagamentos - Crédito Espúrio"
+                            },
+                            "Canal": {
+                                "Codigo": 2,
+                                "Nome": "Mobile"
+                            },
+                            "OrigemDado": "Quod"
+                        },
+                        {
+                            "DataEvento": "31/08/2024",
+                            "TipoEnvolvido": {
+                                "Codigo": 2,
+                                "Nome": "FRAUDADOR"
+                            },
+                            "FraudeConfirmada": {
+                                "Codigo": 1,
+                                "Nome": "SIM"
+                            },
+                            "Motivo": {
+                                "Codigo": 3,
+                                "Nome": "Fraude Transacional",
+                                "Descricao": "Favorecido de créditos espúrios (fraudes transacionais) em quaisquer meios de pagamentos - Crédito Espúrio"
+                            },
+                            "Canal": {
+                                "Codigo": 99,
+                                "Nome": "Outros"
+                            },
+                            "OrigemDado": "Quod"
+                        }
+                    ],
+                    "TotalFraudesConfirmadasBeneficiario": [
+                        {
+                            "Estatistica": "7D",
+                            "Qtd": 0
+                        },
+                        {
+                            "Estatistica": "30D",
+                            "Qtd": 0
+                        },
+                        {
+                            "Estatistica": "180D",
+                            "Qtd": 0
+                        },
+                        {
+                            "Estatistica": "HISTORICO",
+                            "Qtd": 2
+                        }
+                    ],
+                    "Canal": null,
+                    "Produto": null,
+                    "Interops": null
+                }
+            ],
+            "Destino": null
+        },
+        "Status": {
+            "Codigo": 0,
+            "StatusItem": {
+                "Codigo": 1,
+                "Descricao": "QuodX obtido com sucesso"
+            }
+        }
+    }
+}
+```
+
+</Expandable>
+
+<Expandable title="Retorno Interops">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado:
+
+```json
+{
+    "Erro": false,
+    "MensagemOperador": "OK",
+    "ResultadoConsulta": {
+        "SessionId": "d02523e2-86e4-dab577945135",
+        "QuodxScore": {
+            "Score": -993,
+            "MotivoScore": [
+                "Registro com apontamento na Base Compartilhada de Fraudes - Interoperabilidade"
+            ],
+            "ClassificacaoRisco": "high",
+            "SugestaoStatusRevisao": "reject",
+            "RequisicaoId": "dc909613-be73-1a76d6a37517"
+        },
+        "Pepvip": {
+            "PepvipUsuario": {
+                "NumeroDocumento": "99966655511",
+                "IndicadorPEP": "N",
+                "IndicadorVIP": "N"
+            },
+            "PepvipRecebedor": null
+        },
+        "QuodRufra": {
+            "Origem": [
+                {
+                    "Documento": "99966655511",
+                    "IndicadorRufra": "N",
+                    "Fraudes": [],
+                    "TotalFraudesConfirmadasBeneficiario": [],
+                    "Canal": null,
+                    "Produto": null,
+                    "Interops": [
+                        {
+                            "Documento": "99966655511",
+                            "OrigemDado": "ClearSale",
+                            "Status": {
+                                "Codigo": -1,
+                                "Mensagem": "Dados não retornados pela Signatária."
+                            },
+                            "Ocorrencias": null
+                        },
+                        {
+                            "Documento": "99966655511",
+                            "OrigemDado": "Experian",
+                            "Status": {
+                                "Codigo": -1,
+                                "Mensagem": "Dados não retornados pela Signatária."
+                            },
+                            "Ocorrencias": null
+                        },
+                        {
+                            "Documento": "99966655511",
+                            "OrigemDado": "BOAVISTA",
+                            "Status": {
+                                "Codigo": 1,
+                                "Mensagem": "Dados obtidos com sucesso."
+                            },
+                            "Ocorrencias": [
+                                {
+                                    "InstituicaoResponsavel": {
+                                        "CnpjOrigem": "12222333000122",
+                                        "RazaoSocialOrigem": "Pagamentos"
+                                    },
+                                    "InformacaoesBancariasDestino": {
+                                        "CodigoInstituicao": null,
+                                        "Agencia": null,
+                                        "Conta": {
+                                            "Numero": null,
+                                            "Tipo": null,
+                                            "Titular": {
+                                                "Documento": {
+                                                    "Tipo": 1,
+                                                    "Numero": "99966655511"
+                                                },
+                                                "NomeCompletoRazaoSocial": "Teste LTDA",
+                                                "NomeFantasia": null
+                                            },
+                                            "DocumentoRepresentanteLegal": []
+                                        },
+                                        "ChavePix": null,
+                                        "LinhaDigitavelBoleto": null
+                                    },
+                                    "InformacaoExecutor": {
+                                        "Nome": "Teste LTDA",
+                                        "RazaoSocial": null,
+                                        "Documento": {
+                                            "Tipo": 1,
+                                            "Numero": "99966655511"
+                                        },
+                                        "DocumentoRepresentanteLegal": []
+                                    },
+                                    "InformacaoReclamante": {
+                                        "Documento": {
+                                            "Tipo": null,
+                                            "Numero": null
+                                        },
+                                        "DocumentoRepresentanteLegal": []
+                                    },
+                                    "Registro": {
+                                        "DataHora": "2024-01-31T21:01:00Z",
+                                        "Local": "13732625",
+                                        "Canal": 2,
+                                        "AtividadeRelacionada": 9,
+                                        "Classificacao": 1,
+                                        "Motivo": "Monitoramento de transacoes com perfil fraudador",
+                                        "ValorTransacao": null,
+                                        "ValorContrato": null,
+                                        "EnvolvimentoReclamante": 0,
+                                        "Dispositivo": {
+                                            "Identificacao": null,
+                                            "Ip": "999.26.999.888"
+                                        },
+                                        "ModalidadeFraude": null
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "Documento": "99966655511",
+                            "OrigemDado": "B3",
+                            "Status": {
+                                "Codigo": 1,
+                                "Mensagem": "Dados obtidos com sucesso."
+                            },
+                            "Ocorrencias": [
+                                {
+                                    "InstituicaoResponsavel": {
+                                        "CnpjOrigem": "65987654000122",
+                                        "RazaoSocialOrigem": "GESTAO FINANCEIRA"
+                                    },
+                                    "InformacaoesBancariasDestino": null,
+                                    "InformacaoExecutor": {
+                                        "Nome": "Teste LTDA",
+                                        "RazaoSocial": null,
+                                        "Documento": {
+                                            "Tipo": 1,
+                                            "Numero": "99966655511"
+                                        },
+                                        "DocumentoRepresentanteLegal": null
+                                    },
+                                    "InformacaoReclamante": null,
+                                    "Registro": {
+                                        "DataHora": "2024-10-24T19:29:20Z",
+                                        "Local": null,
+                                        "Canal": null,
+                                        "AtividadeRelacionada": 9,
+                                        "Classificacao": 1,
+                                        "Motivo": null,
+                                        "ValorTransacao": null,
+                                        "ValorContrato": null,
+                                        "EnvolvimentoReclamante": 1,
+                                        "Dispositivo": null,
+                                        "ModalidadeFraude": null
+                                    }
+                                },
+                                {
+                                    "InstituicaoResponsavel": {
+                                        "CnpjOrigem": "98654321000199",
+                                        "RazaoSocialOrigem": "FINANCIAMENTO E INVESTIMENTO"
+                                    },
+                                    "InformacaoesBancariasDestino": null,
+                                    "InformacaoExecutor": {
+                                        "Nome": null,
+                                        "RazaoSocial": null,
+                                        "Documento": null,
+                                        "DocumentoRepresentanteLegal": null
+                                    },
+                                    "InformacaoReclamante": {
+                                        "Documento": {
+                                            "Tipo": 1,
+                                            "Numero": "99966655511"
+                                        },
+                                        "DocumentoRepresentanteLegal": null
+                                    },
+                                    "Registro": {
+                                        "DataHora": "2024-09-05T03:00:00Z",
+                                        "Local": null,
+                                        "Canal": 2,
+                                        "AtividadeRelacionada": 5,
+                                        "Classificacao": 0,
+                                        "Motivo": null,
+                                        "ValorTransacao": null,
+                                        "ValorContrato": 3000.0,
+                                        "EnvolvimentoReclamante": 0,
+                                        "Dispositivo": null,
+                                        "ModalidadeFraude": null
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "Documento": "99966655511",
+                            "OrigemDado": "CERC",
+                            "Status": {
+                                "Codigo": 1,
+                                "Mensagem": "Dados obtidos com sucesso."
+                            },
+                            "Ocorrencias": [
+                                {
+                                    "InstituicaoResponsavel": {
+                                        "CnpjOrigem": "98987987000166",
+                                        "RazaoSocialOrigem": "PAGAMENTO LTDA"
+                                    },
+                                    "InformacaoesBancariasDestino": {
+                                        "CodigoInstituicao": 3240502,
+                                        "Agencia": "0001",
+                                        "Conta": {
+                                            "Numero": "55568140",
+                                            "Tipo": 2,
+                                            "Titular": {
+                                                "Documento": {
+                                                    "Tipo": 1,
+                                                    "Numero": "99966655511"
+                                                },
+                                                "NomeCompletoRazaoSocial": "N/A",
+                                                "NomeFantasia": ""
+                                            },
+                                            "DocumentoRepresentanteLegal": []
+                                        },
+                                        "ChavePix": null,
+                                        "LinhaDigitavelBoleto": null
+                                    },
+                                    "InformacaoExecutor": {
+                                        "Nome": "Joao de Carvalho",
+                                        "RazaoSocial": "",
+                                        "Documento": {
+                                            "Tipo": 1,
+                                            "Numero": "99565432111"
+                                        },
+                                        "DocumentoRepresentanteLegal": []
+                                    },
+                                    "InformacaoReclamante": {
+                                        "Documento": {
+                                            "Tipo": null,
+                                            "Numero": ""
+                                        },
+                                        "DocumentoRepresentanteLegal": []
+                                    },
+                                    "Registro": {
+                                        "DataHora": "2024-10-06T09:02:40Z",
+                                        "Local": "",
+                                        "Canal": null,
+                                        "AtividadeRelacionada": 10,
+                                        "Classificacao": 1,
+                                        "Motivo": "Recepção de fundos com denuncia via Med PIX (PIX)",
+                                        "ValorTransacao": 240.0,
+                                        "ValorContrato": null,
+                                        "EnvolvimentoReclamante": 0,
+                                        "Dispositivo": {
+                                            "Identificacao": "",
+                                            "Ip": ""
+                                        },
+                                        "ModalidadeFraude": null
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "Documento": "99966655511",
+                            "OrigemDado": "TOPAZ",
+                            "Status": {
+                                "Codigo": -1,
+                                "Mensagem": "Dados não retornados pela Signatária."
+                            },
+                            "Ocorrencias": null
+                        }
+                    ]
+                }
+            ],
+            "Destino": null
+        },
+        "Status": {
+            "Codigo": 0,
+            "StatusItem": {
+                "Codigo": 1,
+                "Descricao": "QuodX obtido com sucesso"
+            }
+        }
+    }
+}
+```
+
+</Expandable>

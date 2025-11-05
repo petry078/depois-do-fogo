@@ -1,0 +1,476 @@
+---
+title: "42 - Enviar Proposta PJ"
+openapi: post /Bureau/B2E/EnviarPropostaPJ
+---
+
+Utilize este endpoint para solicitar análise de crédito. Após a requisição, há um retorno síncrono com o status de aceitação e um retorno assíncrono (callback) com o resultado completo da análise.
+ 
+Campos obrigatórios:
+ 
+* `webhookID`: identificador do webhook cadastrado previamente junto ao time de Implantação da BMP. Será usado para dispara o callback com o resultado da análise.
+* `CNPJ`: documento do cliente pessoa jurídica que será submetido à análise de crédito.
+* `Politica`: nome da política de crédito configurada junto ao time de crédito.
+* `CodigoInstituicao`: codigo atribuído pela plataforma BMP ao se criar a política, em conjunto com o time de crédito.
+* `CodigoPropostaCliente`: ID único da proposta, fornecido pelo cliente, que servirá de identificador para toda a operação de análise.
+
+Tabelas:
+
+<Expandable title="Pessoa Física">
+
+| Objeto                 | Campo                               | Tipo de Dado | Descrição                                                                    |
+|------------------------|-------------------------------------|--------------|------------------------------------------------------------------------------|
+| `PropostaPessoaFisica` | `CodigoPropostaCliente`             | string       | Identificador único da proposta no sistema do cliente.                       |
+| `PropostaPessoaFisica` | `CodigoInstituicao`                 | string       | Identificador do cliente. Formato GUID: `XXXX-XXXX-XXXX-XXXX`.               |
+| `PropostaPessoaFisica` | `ValorSolicitado`                   | number       | Valor de limite de crédito solicitado pelo proponente.                       |
+| `PropostaPessoaFisica` | `PrazoMeses`                        | int          | Prazo em meses solicitado pelo proponente para a tomada de crédito.          |
+| `PropostaPessoaFisica` | `FormaPagamento`                    | number       | ID que indica a forma de pagamento, referencia na tabela Formas de Pagamento. | 
+| `DadosProponentes`     | `Nome`                              | string       | Nome completo do proponente.                                                 |
+| `DadosProponentes`     | `CPF`                               | string       | Número do CPF (apenas os números, 11 dígitos).                               |
+| `DadosProponentes`     | `NumeroRegistroPessoaFisica`        | string       | Número de registro.                                                          |
+| `ComprovanteRenda`     | `PossuiComprovante`                 | int          | 1 para SIM e 2 para NÂO.                                                     |
+| `ComprovanteRenda`     | `Codigo`                            | string       | Código comprovante informado pelo sistema cliente.                           |
+| `ComprovanteRenda`     | `Descricao`                         | string       | Descrição comprovante informado pelo sistema cliente.                        |
+| `ComprovanteRenda`     | `RendaMensal`                       | number       | Renda mensal do proponente.                                                  |
+| `ComprovanteRenda`     | `DataNascimento`                    | string/date  | Data de nascimento (Exemplo: `1967-06-17T00:00:00.000Z`).                    |
+| `ComprovanteRenda`     | `Genero`                            | string       | Descrição do genero. Referência na tabela Genero.                            |
+| `ComprovanteRenda`     | `NomeMae`                           | string       | Nome completo da mãe.                                                        |
+| `DadosEmpregaticios`   | `Empresa`                           | string       | Nome da empresa atual.                                                       |
+| `DadosEmpregaticios`   | `TempoAtividade`                    | int          | Tempo de atividade.                                                          |
+| `DadosEmpregaticios`   | `TipoTempoAtividade`                | int          | Descrição do tipo de tempo. Pode ser Dias, Meses, Anos e Indefinido. Referência na tabela Tempo Atividade. |
+| `DadosEmpregaticios`   | `DataAdimissao`                     | string/date  | Data de adimissão na empresa (Exemplo: 1967-06-17T00:00:00.000Z).            |
+| `DadosEmpregaticios`   | `SituacaoEmpregaticia`              | number       | Descrição da situação empregatícia. Referência na tabela Situação Empregatícia. |
+| `DadosEmpregaticios`   | `Qualificacao`                      | string       | Objeto que contempla os campos `codigoCBO` e `descricao`.                    |
+| `DadosEmpregaticios`   | `Cargo`                             | string       | Descrição do cargo.                                                          |
+| `DadosEmpregaticios`   | `CNPJ`                              | string       | Número do CPF (apenas os números, 11 dígitos).                               |
+| `Endereco`             | `CEP`                               | string       | Código do endereçamento postal, somente os números (Exemplo: 9999999).       | 
+| `Endereco`             | `Logradouro`                        | string       | Descrição do endereço.                                                       |
+| `Endereco`             | `Numero`                            | string       | Número da residência ou estabelecimento.                                     |
+| `Endereco`             | `Complemento`                       | string       | Descrição do complemento do endereço.                                        |
+| `Endereco`             | `Bairro`                            | string       | Descrição do bairro.                                                         |
+| `Endereco`             | `Cidade`                            | string       | Descrição da cidade.                                                         |
+| `Endereco`             | `UF`                                | string       | Descrição da Unidade Federativa.                                             |
+| `Endereco`             | `Tipo`                              | string       | Descrição do tipo do endereço.                                               |
+| `Telefone`             | `DDD`                               | string       | Número do DDD.                                                               |
+| `Telefone`             | `Numero`                            | string       | Número de telefone.                                                          |
+| `Telefone`             | `Ramal`                             | string       | Ramal do número do telefone.                                                 |
+| `Telefone`             | `Tipo`                              | string       | Referência na tabela Tipo de Telefone.                                       |
+| `CNH`                  | `Categoria`                         | string       | Referência na tabela CNH.                                                    | 
+| `CNH`                  | `NumeroRegistro`                    | string       | Número do registro da CNH.                                                   | 
+| `CNH`                  | `NumeroSeguranca`                   | string       | Número de segurança da CNH.                                                  | 
+| `CNH`                  | `Email`                             | string       | E-mail principal                                                             |
+| `EstadoCivil`          | `Id`                                | int          | Número do identificador interno.                                             |
+| `EstadoCivil`          | `Codigo`                            | int          | Código do identificador interno.                                             |
+| `EstadoCivil`          | `Descricao`                         | string       | Descrição do estado civil.                                                   |
+| `Nacionalidade`        | `Id`                                | int          | Número do identificador interno.                                             |
+| `Nacionalidade`        | `Código`                            | int          | Código do indentificador interno.                                            |
+| `Nacionalidade`        | `Descricao`                         | string       | Descrição da nacionalidade.                                                  |
+| `Conjuge`              | `Nome`                              | string       | Nome completo.                                                               |
+| `Conjuge`              | `CPF`                               | string       | Número do CPF (apenas os números, 11 dígitos. Exemplo: 99999999999).         |
+| `DadosAvalistas`       | `Nome`                              | string       | Nome completo do proponente.                                                 |
+| `DadosAvalistas`       | `CPF`                               | string       | Número do CPF.                                                               |
+| `DadosAvalistas`       | `NumeroRegistroPessoaFisica`        | string       | Valor referente ao tipo de documento acima.                                  |
+| `DadosAvalistas`       | `RendaMensal`                       | number       | Renda mensal do proponente.                                                  |
+| `ComprovanteRenda`     | `PossuiComprovante`                 | int          | 1 para SIM e 2 para NÂO.                                                     | 
+| `ComprovanteRenda`     | `Codigo`                            | string       | Código comprovante informado pelo sistema.                                   | 
+| `ComprovanteRenda`     | `Descricao`                         | string       | Descrição comprovante informado pelo sistema cliente.                        | 
+| `ComprovanteRenda`     | `DataNascimento`                    | string/date  | Data de nascimento. Exemplo: `1967-06-17T00:00:00.000Z`                      | 
+| `ComprovanteRenda`     | `Genero`                            | string       | Referência na tabela Genero.                                                 | 
+| `ComprovanteRenda`     | `NomeMae`                           | string       | Nome completo da mãe.                                                        | 
+| `ComprovanteRenda`     | `DadosEmpregaticios`                | list         | Objeto com campos dos dados empregatícios.                                   | 
+| `ComprovanteRenda`     | `Enderecos`                         | list         | Objeto com campos de endereço.                                               | 
+| `ComprovanteRenda`     | `Telefones`                         | list         | Objeto com campos de telefone.                                               | 
+| `ComprovanteRenda`     | `CNH`                               | list         | Objeto com campos de CNH.                                                    | 
+| `ComprovanteRenda`     | `Email`                             | string       | Email principal.                                                             | 
+| `ComprovanteRenda`     | `EstadoCivil`                       | string       | Referência na tabela Estado Civil.                                           | 
+| `ComprovanteRenda`     | `Nacionalidade`                     | string       | Referência na tabela Nacionlidade.                                           | 
+| `ComprovanteRenda`     | `Conjuge`                           | list         | Objeto com os campos `nome` e `cpf` do cônjuge.                              | 
+| `ComprovanteRenda`     | `ReferenciasBancarias`              | list         | Objeto com os as referências bancárias.                                      | 
+| `ComprovanteRenda`     | `ReferenciasPessoais`               | list         | Objeto com os campos `nome` e dados de telefone.                             | 
+| `ComprovanteRenda`     | `PatrimonioDeclarado`               | number       | Valor bruto do patriômio do avalista.                                        | 
+| `ComprovanteRenda`     | `Naturalidade`                      | string       | Descrição da naturalidade. Exemplo: Paulistano.                              |
+| `ComprovanteRenda`     | `QtdeDependentes`                   | int          | Quantidade de dependentes do avalista                                        | 
+| `ComprovanteRenda`     | `Escolaridade`                      | list         | Referência na tabela Grau de Escolaridade.                                   | 
+| `ComprovanteRenda`     | `Id`                                | int          | Número do identificador interno.                                             | 
+| `ComprovanteRenda`     | `Codigo`                            | string       | Código do identificador interno.                                             | 
+| `ComprovanteRenda`     | `Descricao`                         | string       | Descrição do comprovante de renda.                                           | 
+| `ComprovanteRenda`     | `Nacionalidade`                     | string       | Referência na tabela Nacionalidade.                                          | 
+| `ReferenciasBancarias` | `CodigoBanco`                       | string       | Código do banco de acordo com a tabela da Febraban.                          |
+| `ReferenciasBancarias` | `CodigoAgencia`                     | string       | Número da agência do banco.                                                  |
+| `ReferenciasBancarias` | `CodigoConta`                       | string       | string                                                                       |
+| `ReferenciasBancarias` | `ContaDesde`                        | string       | string                                                                       |
+| `ReferenciasPessoais`  | `Nome`                              | string       | string                                                                       |
+| `Telefone`             | `DDD`                               | string       | Número do DDD.                                                               |
+| `Telefone`             | `Numero`                            | string       | Número do telefone.                                                          |
+| `Telefone`             | `Tipo`                              | string       | Referência na tabela Tipo de Telefone.                                       |
+| `Telefone`             | `TipoRelacaoPessoal`                | int          | Referência na tabela Tipo de Relação Pessoal.                                |
+| `Telefone`             | `PatrimonioDeclarado`               | number       | Valor financeiro declarado.                                                  |
+| `InformacaoAdicional`  | `Grupo`                             | string       | Descrição do grupamento.                                                     |
+| `InformacaoAdicional`  | `Descricao`                         | string       | Descrição do campo personalizado no sistema do cliente.                      |
+| `InformacaoAdicional`  | `Valor`                             | string       | Valore referente a descrição (exemplo: Grupo CEP_LOJA, Valor: “06030040”).   |
+
+</Expandable>
+
+<Expandable title="Pessoa Jurídica">
+
+| Objeto                | Campo                             | Tipo de Dado | Descrição                                                      |
+|-----------------------|-----------------------------------|--------------|----------------------------------------------------------------|
+| `proponente`          | `RazaoSocial`                     | string       | Razão social da empresa.                                       |
+| `proponente`          | `NomeFantasia`                    | string       | Nome fantasia da empresa.                                      |
+| `proponente`          | `CNPJ`                            | string       | CNPJ.                                                          |
+| `proponente`          | `InscricaoEstadual`               | string       | Inscrição estadual.                                            |
+| `proponente`          | `DataFundacao`                    | string/date  | Data da fundação. Formato/Exemplo: 1967-06-17T00:00:00.000Z    |
+| `proponente`          | `NumeroFiliais`                   | int          | Número de filiais                                              |
+| `proponente`          | `NumeroFuncionarios`              | int          | Número de funcionários                                         |
+| `ramoDeAtividade`     | `CodigoCNAE`                      | string       | Código do CNAE.                                                |
+| `ramoDeAtividade`     | `Descricao`                       | string       | Descrição do CNAE.                                             |
+| `ramoDeAtividade`     | `PrincipalAtividade`              | int          | Identificação de atividade principal. 1 para SIM e 2 para NÃO. |
+| `faturamento`         | `Mes`                             | int          | Mês do faturamento.                                            |
+| `faturamento`         | `Ano`                             | int          | Ano do faturamento.                                            |
+| `faturamento`         | `Valor`                           | number       | Valor faturado no mês.                                         |
+| `socioProponentePf`   | `Nome`                            | string       | Nome completo.                                                 |
+| `socioProponentePf`   | `CPF`                             | string       | CPF.                                                           |
+| `socioProponentePf`   | `RG`                              | string       | RG.                                                            |
+| `socioProponentePf`   | `RendaMensal`                     | number       | Renda mensal.                                                  |
+| `socioProponentePf`   | `DataNascimento`                  | string/date  | Data de nascimento. Formato/Exemplo: 1967-06-17T00:00:00.000Z. |
+| `socioProponentePf`   | `Genero`                          | string       | Ver tabela Gênero.                                             |
+| `socioProponentePf`   | `NomeMae`                         | string       | Nome completo da mãe.                                          |
+| `patromonioDeclarado` | `Valor`                           | number       | Valor do patrimônio declarado.                                 |
+| `patromonioDeclarado` | `PercentualParticipacaoSociedade` | number       | Percentual, somente números.                                   |
+| `conjuge`             | `Nome`                            | string       | Nome completo do cônjuge.                                      |
+| `conjuge`             | `CPF`                             | string       | CPF do cônjuge. Somente os números (11 dígitos).               |
+
+</Expandable>
+
+<Expandable title="Domínio - Status da Proposta">
+
+| ID | Descrição                                        |
+|----|--------------------------------------------------|
+| 76 | AGUARDANDO ALÇADA CFO                            |
+| 75 | AGUARDANDO ALÇADA GERENTE                        |
+| 74 | SUSPEITA DE FRAUDE                               |
+| 72 | AGUARDANDO ALÇADA                                |
+| 71 | PENDENTE - ATUALIZAÇÂO CADASTRAL                 |
+| 70 | PAGO COM AVALISTA                                |
+| 69 | AGUARDANDO POSITIVAÇÃO                           |
+| 68 | LIMITE CONCEDIDO                                 |
+| 67 | APROVADO PARA CONCESSÃO                          |
+| 66 | NECESSARIO INFORMAÇÕES ADICIONAIS                |
+| 65 | APROVADO - AGUARDANDO ASS. DE CONTRATO           |
+| 64 | PENDÊNCIA DOCUMENTAÇÂO PARA ANÁLISE              |
+| 63 | PENDÊNCIA CONTATO                                |
+| 62 | DERIVAR MESA                                     |
+| 61 | AGUARDANDO CAUÇÃO                                |
+| 60 | PAGAMENTO ANTECIPADO                             |
+| 59 | LIMITE MANTIDO                                   |
+| 58 | REPROVADO - SOLICITAR AVALISTA                   |
+| 57 | APROVADO ALÇADA                                  |
+| 56 | PENDÊNCIA INTERNA                                |
+| 55 | PRÉ-APROVADO                                     |
+| 49 | AGUARDANDO DIRETORIA                             |
+| 48 | APROVADO - ATESTADO                              |
+| 47 | PARECER COMERCIAL                                |
+| 43 | EM ESPERA                                        |
+| 41 | APROVADO - PROCESSO ENCERRADO                    |
+| 40 | APROVADO - AGUARDANDO FINALIZAÇÃO DA SAFRA       |
+| 38 | AGUARDANDO ANÁLISE - FINANÇAS                    |
+| 37 | AGUARDANDO ANÁLISE - CADASTRO                    |
+| 36 | APROVADO SOMENTE NA CONDIÇÃO À VISTA             |
+| 34 | CLIENTE RECORRENTE                               |
+| 33 | PRÉ-ANÁLISE                                      |
+| 30 | APROVADO - AGUARDANDO VALIDAÇÃO                  |
+| 27 | CANCELADO                                        |
+| 26 | AGUARDANDO ALÇADA                                |
+| 25 | APROVADO COM AVALISTA                            |
+| 24 | NÃO RECOMENDADO                                  |
+| 23 | RECOMENDADO                                      |
+| 22 | FAVORÁVEL                                        |
+| 21 | V. APROVADO COM ALTERAÇÃO                        |
+| 20 | APROVADO CRÉDITO                                 |
+| 19 | CONFIRMAÇÃO ADICIONAL                            |
+| 18 | PAGO                                             |
+| 17 | PAGAMENTO OK                                     |
+| 16 | ENVIADO PAGAMENTO                                |
+| 15 | AGUARDANDO COMITÊ                                |
+| 14 | PROSSEGUIR CADASTRO                              |
+| 13 | SOLICITA DOCUMENTAÇÃO DE APOIO                   |
+| 12 | RECUSADO AUTOMATICAMENTE                         |
+| 11 | PENDENTE                                         |
+| 10 | EXCLUSÃO                                         |
+| 9  | EM REVISÃO                                       |
+| 8  | APROVADO COM RESSALVA                            |
+| 7  | APROVADO COM ALTERAÇÃO                           |
+| 6  | APROVADO AUTOMATICAMENTE                         |
+| 4  | RECUSADO                                         |
+| 3  | APROVADO                                         |
+| 2  | EM ANÁLISE                                       |
+| 1  | AGUARDANDO ANÁLISE                               |
+| 0  | EM PROCESSAMENTO                                 |
+
+</Expandable>
+
+<Expandable title="Nacionalidade">
+
+| ID  | Descrição                     |
+|-----|-------------------------------|
+| 104 | Arábia Saud                   |
+| 103 | Vietnamita                    |
+| 102 | Venezuelano                   |
+| 101 | Uruguaio                      |
+| 100 | Ucraniano                     |
+| 99  | Turco                         |
+| 98  | Togolês                       |
+| 97  | Tanzaniano                    |
+| 96  | Tailandês                     |
+| 95  | Sírio                         |
+| 94  | Suíço                         |
+| 93  | Sul-coreano                   |
+| 92  | Sul-africano                  |
+| 91  | Sueco                         |
+| 90  | Sudanês                       |
+| 89  | Somali                        |
+| 88  | Senegalês                     |
+| 87  | Salvadorenho                  |
+| 86  | Russo                         |
+| 85  | Romeno                        |
+| 84  | Queniano                      |
+| 83  | Português                     |
+| 82  | Porto Riquenh                 |
+| 81  | Polonês                       |
+| 80  | Polaco                        |
+| 79  | Peruano                       |
+| 78  | Paraguaio                     |
+| 77  | Paquistanês                   |
+| 76  | Panamenho                     |
+| 75  | Outro                         |
+| 74  | Norueguês                     |
+| 73  | Norte-coreano                 |
+| 72  | Nigeriano                     |
+| 71  | Nicaraguense                  |
+| 70  | Morroquino                    |
+| 69  | Mongol                        |
+| 68  | Mexicano                      |
+| 67  | Malaio                        |
+| 66  | Líbio                         |
+| 65  | Lituano                       |
+| 64  | Libanês                       |
+| 63  | Letão                         |
+| 62  | Kuwaitiano                    |
+| 61  | Japonês                       |
+| 60  | Jamaicano                     |
+| 59  | Italiano                      |
+| 58  | Israelense                    |
+| 57  | Irlandês                      |
+| 56  | Iraquiano                     |
+| 55  | Iraniano                      |
+| 54  | Ioguslavo                     |
+| 53  | Inglês                        |
+| 52  | Indonésio                     |
+| 51  | Indiano                       |
+| 50  | Húngaro                       |
+| 49  | Hondurenho                    |
+| 48  | Holandês                      |
+| 47  | Haitiano                      |
+| 46  | Guatemalteco                  |
+| 45  | Grego                         |
+| 44  | Francês                       |
+| 43  | Finlandês                     |
+| 42  | Filipino                      |
+| 41  | Europeu                       |
+| 40  | Etíope                        |
+| 39  | Espanhol                      |
+| 38  | Esloveno                      |
+| 37  | Eslovaco                      |
+| 36  | Escocês                       |
+| 35  | Equatoriano                   |
+| 34  | Emirados Árabes Unidos        |
+| 33  | Egípcio                       |
+| 32  | Dinamarquês                   |
+| 31  | Cubano                        |
+| 30  | Croata                        |
+| 29  | Costa-riquenh                 |
+| 28  | Congolês                      |
+| 27  | Colombiano                    |
+| 26  | Cipriota                      |
+| 25  | Chinês                        |
+| 24  | Chileno                       |
+| 23  | Checo                         |
+| 22  | Canadense                     |
+| 21  | Cambojano                     |
+| 20  | Camaronês                     |
+| 19  | Búlgaro                       |
+| 18  | Bósnio                        |
+| 17  | Britânico                     |
+| 16  | Brasileiro                    |
+| 15  | Boliviano                     |
+| 14  | Bielo-russo                   |
+| 13  | Belga                         |
+| 12  | Austríaco                     |
+| 11  | Australiano                   |
+| 10  | Asiático                      |
+| 9   | Armenio                       |
+| 8   | Argentino                     |
+| 7   | Argelino                      |
+| 6   | Angolano                      |
+| 5   | Americano                     |
+| 4   | Alemão                        |
+| 3   | Albanês                       |
+| 2   | Africano                      |
+| 1   | Afegão                        |
+
+</Expandable>
+
+<Expandable title="Estado Civil">
+
+| ID | Descrição        |
+|----|------------------|
+| 8  | AMASIADO         |
+| 7  | SEPARADO         |
+| 6  | UNIÃO ESTÁVEL    |
+| 5  | VIÚVO            |
+| 4  | DESQUITADO       |
+| 3  | DIVORCIADO       |
+| 2  | CASADO           |
+| 1  | SOLTEIRO         |
+
+</Expandable>
+
+<Expandable title="Situação Empregatícia">
+
+| ID | Descrição                |
+|----|--------------------------|
+| 6  | Outros                   |
+| 5  | Aposentado/Pensionista   |
+| 4  | Socio-Proprietario       |
+| 3  | Profissional Liberal     |
+| 2  | Autonomo                 |
+| 1  | Assalariado              |
+
+</Expandable>
+
+<Expandable title="Grau de Escolaridade">
+
+| ID | Descrição                              |
+|----|----------------------------------------|
+| SI | SUPERIOR INCOMPLETO                    |
+| SE | SUPERIOR EM ECÔNOMIA OU FINANÇAS       |
+| S  | SUPERIOR                               |
+| PG | PÓS GRADUAÇÃO                          |
+| P  | PRIMÁRIO                               |
+| N  | NÃO ALFABETIZADO                       |
+| G  | GINASIO                                |
+| F  | MÉDIO INCOMPLETO                       |
+| E  | ENSINO MEDIO                           |
+| C  | COLEGIAL                               |
+| A  | OUTROS                                 |
+
+</Expandable>
+
+<Expandable title="Classificação Brasileira de Ocupações (CBO)">
+
+Acesse a tabela completa no [site do Ministério do Trabalho Brasileiro](https://www.mtecbo.gov.br/cbosite/pages/home.jsf).
+
+</Expandable>
+
+<Expandable title="CNH">
+
+| ID  | Descrição                     |
+|-----|-------------------------------|
+| I   | Indefinido                    |
+| A   | A                             |
+| B   | B                             |
+| C   | C                             |
+| D   | D                             |
+| E   | E                             |
+| AB  | AB                            |
+| AC  | AC                            |
+| AD  | AD                            |
+| AE  | AE                            |
+| ACC | ACC                           |
+
+</Expandable>
+
+<Expandable title="Gênero">
+
+| ID | Descrição   |
+|----|-------------|
+| I  | Indefinido. |
+| M  | Masculino.  |
+| F  | Feminino.   |
+
+</Expandable>
+
+<Expandable title="Tipo de Telefone">
+
+| ID | Descrição     |
+|----|---------------|
+| I  | Indefinido    |
+| R  | Residencial   |
+| C  | Comercial     |
+| M  | Celular       |
+| E  | Recados       |
+| O  | Outros        |
+
+</Expandable>
+
+<Expandable title="Formas de Pagamento">
+
+| ID | Descrição            |
+|----|----------------------|
+| 7  | Cripto Moedas        |
+| 6  | Dinheiro             |
+| 5  | DEPÓSITO             |
+| 4  | A VISTA              |
+| 3  | BOLETO               |
+| 2  | CHEQUE               |
+| 1  | CARTÃO               |
+
+</Expandable>
+
+<Expandable title="Tipo Tempo Atividade">
+
+| ID | Descrição    |
+|----|--------------|
+| D  | Dias         |
+| M  | Meses        |
+| A  | Anos         |
+| I  | Indefinido   |
+
+</Expandable>
+
+<Expandable title="Tipos de Relação Pessoal">
+
+| ID | Descrição     |
+|----|---------------|
+| 7  | OUTROS        |
+| 6  | AMIGO(A)      |
+| 5  | SOBRINHO(A)   |
+| 4  | FILHO(A)      |
+| 3  | PRIMO(A)      |
+| 2  | MÃE           |
+| 1  | PAI           |
+
+</Expandable>
+
+<Expandable title="Tipos de Moradia">
+
+| ID | Descrição           |
+|----|---------------------|
+| P  | PROPRIA             |
+| C  | COM PARENTES        |
+| E  | FUNCIONAL/EMPRESA   |
+| F  | FINANCIADA          |
+| A  | ALUGADA             |
+
+</Expandable>
+
+<Expandable title="Tipos de Documento PF">
+
+| ID | Descrição           |
+|----|---------------------|
+| 1  | CPF                 |
+| 2  | RG                  |
+| 3  | CNH                 |
+| 4  | RNE                 |
+| 5  | TÍTULO DE ELEITOR   |
+
+</Expandable>

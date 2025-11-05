@@ -1,0 +1,51 @@
+---
+title: "20 - Incluir Avalista"
+openapi: post /Proposta/IncluirAvalista
+---
+
+Por meio deste endpoint o parceiro faz inclusão dos dados de um avalista para uma proposta.
+O avalista pode ser pessoa física ou jurídica, e os campos não são obrigatórios, basta realizar o preenchimento do DTO conforme a necessidade.
+
+  <Expandable title="Tabela EstadoCivil">
+  | ID  | Descrição                    |
+  | --- | ---------------------------- |
+  | 1   | Solteiro                     |
+  | 2   | Casado                       |
+  | 3   | Desquitado                   |
+  | 4   | Divorciado                   |
+  | 5   | Separado                     |
+  | 6   | Viúvo                        |
+  | 7   | Outros                       |
+  | 8   | Não informado                |
+  | 9   | Vínculo Conjugal             |
+  </Expandable>
+
+## Mensagens de erro
+
+A tabela abaixo representa as mensagens de erro que podem ser retornadas ao tentar realizar uma requisição.
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+<Note>No exemplo de retorno ao lado, o campo `code` representa a coluna **Código** desta tabela; o campo `context` representa a coluna **Código Detalhado**; e o campo `message` representa a coluna **Mensagem**.</Note>
+
+| Categoria | Operação                        | Ação              | Código | Código Detalhado | Mensagem                                                                                                              |
+|-----------|---------------------------------|-------------------|--------|------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | C0112  | V0001            | Proposta não encontrada                                                                                              |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | C0112  | V0002            | A Proposta não pertence à esta Integração                                                                            |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | C0057  | V0001            | Não é possível incluir avalistas na proposta. Proposta encontra-se " + SituacaoPropostaEnum.GetDescricao(proposta.Situacao) |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | C0057  | V0002            | Dados do avalista PF devem ser enviados                                                                              |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | C0057  | V0003            | Dados do avalista PJ devem ser enviados                                                                              |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0669  | D0001            | CPF já cadastrado como Avalista.                                                                                    |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0669  | D0002            | Documento deve ser preenchido                                                                                         |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0669  | D0003            | Nome deve ser preenchido                                                                                            |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0669  | D0004            | Proposta não encontrada                                                                                              |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0669  | D0005            | CPF Inválido                                                                                                         |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0669  | D0006            | CNPJ Inválido                                                                                                        |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0670  | D0001            | Nome do cônjuge deve ser preenchido                                                                                  |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0670  | D0002            | CPF do cônjuge deve ser preenchido                                                                                   |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0670  | D0003            | CPF do cônjuge Inválido                                                                                               |
+| Proposta  | IncluirPropostaAvalista         | IncluirAvalista   | T0671  | D0001            | A data de entrada do sócio não pode ser retroativa a data de abertura da empresa                                      |
+</Expandable>
+

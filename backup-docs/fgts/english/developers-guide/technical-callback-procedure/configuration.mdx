@@ -1,0 +1,68 @@
+---
+title: "Configuration"
+version: 'English'
+---
+
+To implement FGTS services, the partner must configure a URL to receive callback events.
+
+In this step, the partner must configure:
+
+* A URL to receive callbacks;
+* This URL must have a homologation and a production environment;
+* The URL must be developed to receive `GET` or `POST` type requests;
+* An authentication method accepted by BMP.
+
+After configuring the callback URL (homologation and production), choosing which HTTP method and which authentication method should be used, the partner must inform the BMP implementation team, so that this configuration can be parameterized in the partner's credentials.
+
+See below for the technical details of each of these configurations.
+
+## 1. URL
+
+The partner must develop a callback URL and send it to BMP.
+
+This URL will be used for BMP communication with the partner, through callback events.
+
+<Info>See the URL examples in the next step, below.</Info>
+
+## 2. Environments
+
+The callback for monitoring the status of proposals must be sent to both the approval environment and the production environment.
+
+It is recommended that different URLs be used for each environment.
+
+### 2.1 Examples of sandbox URLs
+
+```json
+www.example-of-sandbox-url.com.br
+```
+
+### 2.2 Examples of production URLs
+
+```json
+www.example-of-production-url.com.br
+```
+
+## 3. Request methods
+
+The partner must choose an HTTP method that they would like to use to receive callbacks.
+
+Available options include:
+
+* `POST`
+* `GET`
+
+## 4. Authentication
+
+It is also recommended that the partner define an authentication method for receiving callbacks.
+
+Available options include:
+
+| Authentication method | Key type | Token example |
+|-----------------------------------------|------------------|--------------------------------------|
+| Bearer Token | Authorization | `Bearer eyJhbGciOiJIUzI1CI6IkpXVCJ9` |
+| API Key | API-Key | `1234567890abcdef1234567890abcdef` |
+| Basic Authentication | Authorization | `Basic dXNlcm5hbWU6cGFzc3dvcmQ` |
+| X-API-Key | X-API-Key | `0987654321fedcba0987654321fedcba` | | JWT (JSON Web Token) | Authorization | `Bearer eyJhbGciOiJIUzI1NiIs` |
+| HMAC (Hash-based Message Authentication Code) | Authorization | `HMAC 5d41402abc4b19d911017c592` |
+
+<Warning>We accept keys up to 255 characters long for all authentication methods.</Warning>

@@ -1,0 +1,1013 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "BMPDigitalCore.ApiExterna.AgendaPagamento.API",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.bmpdigital.moneyp.dev.br/",
+      "description": "Localhost"
+    }
+  ],
+  "paths": {
+    "/AgendaPagamento/CalcularParcelaAtualizada": {
+      "post": {
+        "tags": ["AgendaPagamento"],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaPagamentoParcelaAtualizadaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaPagamentoParcelaAtualizadaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaPagamentoParcelaAtualizadaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaPagamentoParcelaAtualizadaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaPagamentoParcelaAtualizadaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaPagamentoParcelaAtualizadaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgendaPagamento/Consultar": {
+      "post": {
+        "tags": ["AgendaPagamento"],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaAgendaPagamentoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaAgendaPagamentoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaAgendaPagamentoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultaAgendaPagamentoResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultaAgendaPagamentoResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultaAgendaPagamentoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgendaPagamento/ConsultarResumida": {
+      "post": {
+        "tags": ["AgendaPagamento"],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaAgendaPagamentoResumidaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaAgendaPagamentoResumidaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaAgendaPagamentoResumidaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultaAgendaPagamentoResumidaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultaAgendaPagamentoResumidaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsultaAgendaPagamentoResumidaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AgendaPagamento/IncluirLancamentoParcela": {
+      "post": {
+        "tags": ["AgendaPagamento"],
+        "parameters": [
+          {
+            "name": "IdempotencyKey",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaPagamentoLiquidacaoParcelaCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaPagamentoLiquidacaoParcelaCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaPagamentoLiquidacaoParcelaCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaPagamentoLiquidacaoParcelaResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaPagamentoLiquidacaoParcelaResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaPagamentoLiquidacaoParcelaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/HealthCheck": {
+      "get": {
+        "tags": ["HealthCheck"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AgendaPagamentoLiquidacaoParcelaCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/AgendaPagamentoLiquidacaoParcelaDTO"
+          },
+          "dtoPagamento": {
+            "$ref": "#/components/schemas/AgendaPagamentoLiquidacaoParcelaDTOPagamento"
+          },
+          "parametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaPagamentoParam"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaPagamentoLiquidacaoParcelaDTO": {
+        "type": "object",
+        "properties": {
+          "codigoProposta": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "codigoOperacao": {
+            "type": "string",
+            "nullable": true
+          },
+          "sequencia": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaPagamentoLiquidacaoParcelaDTOPagamento": {
+        "type": "object",
+        "properties": {
+          "dtPagamento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vlrPagamento": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaPagamentoLiquidacaoParcelaResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "parametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaPagamentoParam"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaPagamentoParam": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "valor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaPagamentoParcelaAtualizadaCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/AgendaPagamentoParcelaAtualizadaDTO"
+          },
+          "dtoPagamento": {
+            "$ref": "#/components/schemas/AgendaPagamentoParcelaAtualizadaDTOPagamento"
+          },
+          "parametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaPagamentoParam"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaPagamentoParcelaAtualizadaDTO": {
+        "type": "object",
+        "properties": {
+          "codigoProposta": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "codigoOperacao": {
+            "type": "string",
+            "nullable": true
+          },
+          "sequencia": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaPagamentoParcelaAtualizadaDTOPagamento": {
+        "type": "object",
+        "properties": {
+          "dtPrevisaoPagamento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaPagamentoParcelaAtualizadaResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "vlrParcelaAtualizada": {
+            "type": "number",
+            "format": "double"
+          },
+          "dtPagamentoEm": {
+            "type": "string",
+            "nullable": true
+          },
+          "parametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaPagamentoParam"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaAgendaPagamentoBoletoResumida": {
+        "type": "object",
+        "properties": {
+          "numeroBoleto": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "situacao": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtVencimento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dtCredito": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vlrBoleto": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrPago": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "sequencia": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaAgendaPagamentoCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/ConsultaAgendaPagamentoDTO"
+          },
+          "parametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaPagamentoParam"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaAgendaPagamentoDTO": {
+        "type": "object",
+        "properties": {
+          "documentoCliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroProposta": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaAgendaPagamentoDetalhe": {
+        "type": "object",
+        "properties": {
+          "sequencia": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nroOrdemPagamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtVencimento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vlrParcela": {
+            "type": "number",
+            "format": "double"
+          },
+          "vlrDespesas": {
+            "type": "number",
+            "format": "double"
+          },
+          "dtPagamento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vlrPagamento": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrSaldoPagamento": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "tipoPagamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoParcela": {
+            "type": "string",
+            "nullable": true
+          },
+          "nroBoleto": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "seuNumero": {
+            "type": "string",
+            "nullable": true
+          },
+          "pagtoInterno": {
+            "type": "boolean"
+          },
+          "nroBoletoPagamentoParcial": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaAgendaPagamentoItemResult": {
+        "type": "object",
+        "properties": {
+          "codigoProposta": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "documentoFederal": {
+            "type": "string",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "situacao": {
+            "type": "string",
+            "nullable": true
+          },
+          "qtdeParcelas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vlrFinanciado": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrTotalDivida": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "taxa": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true
+          },
+          "cep": {
+            "type": "string",
+            "nullable": true
+          },
+          "ecCliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtAprovacao": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "numeroProposta": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalhes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConsultaAgendaPagamentoDetalhe"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaAgendaPagamentoParcelasResumida": {
+        "type": "object",
+        "properties": {
+          "nroParcela": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nroOrdemPagamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtVencimento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "seuNumero": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtUltPagamento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vlrSaldo": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrParcela": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrTotalPago": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "situacao": {
+            "type": "string",
+            "nullable": true
+          },
+          "vlrEncargos": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "vlrDescontos": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "boletosParcela": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConsultaAgendaPagamentoBoletoResumida"
+            },
+            "nullable": true
+          },
+          "boletosAvulsos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConsultaAgendaPagamentoBoletoResumida"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaAgendaPagamentoPropostasResumida": {
+        "type": "object",
+        "properties": {
+          "dtAprovacao": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "cep": {
+            "type": "string",
+            "nullable": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "nroContrato": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "numeroProposta": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigoECCliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "vlrTotalDivida": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "qtdeParcelas": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "situacao": {
+            "type": "string",
+            "nullable": true
+          },
+          "parcelas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConsultaAgendaPagamentoParcelasResumida"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaAgendaPagamentoResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "itens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConsultaAgendaPagamentoItemResult"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaAgendaPagamentoResumidaCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/ConsultaAgendaPagamentoResumidaDTO"
+          },
+          "parametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaPagamentoParam"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaAgendaPagamentoResumidaDTO": {
+        "type": "object",
+        "properties": {
+          "documentoCliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroProposta": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaAgendaPagamentoResumidaResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          },
+          "itens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConsultaAgendaPagamentoPropostasResumida"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorType": {
+        "enum": [1, 2, 3],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "messageType": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "context": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "field": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseBase": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hasError": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "Informe o token",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
+}

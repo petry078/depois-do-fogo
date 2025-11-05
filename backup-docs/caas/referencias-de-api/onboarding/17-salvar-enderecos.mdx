@@ -1,0 +1,51 @@
+---
+title: "17 - Salvar Endereços"
+openapi: post /Pessoa/SalvarEnderecos
+version: 'Português'
+---
+
+Por meio deste endpoint o parceiro inclui ou atualiza registros de endereços de um cliente específico.
+Para que ocorra uma atualização, é necessário o envio do campo código, preenchido com o código do registro na base da BMP, ou então a busca será através do campo CEP
+
+# Tabela de códigos auxiliares
+
+<Expandable title="Tabela TipoEndereco">
+  | ID  | Descrição       |
+  | --- | --------------- |
+  | 1   | Residencial     |
+  | 2   | Comercial       |
+</Expandable>
+
+<Expandable title=" Tabela TipoResidencia">
+  | ID | Descrição       |
+  |----|-----------------|
+  | 1  | Alugado         |
+  | 2  | Próprio         |
+  | 3  | Financiado      |
+  | 4  | Casa Funcional  |
+  </Expandable>
+
+## Mensagens de erro
+
+A tabela abaixo representa as mensagens de erro que podem ser retornadas ao tentar realizar uma requisição.
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+<Note>No exemplo de retorno ao lado, o campo `code` representa a coluna **Código** desta tabela; o campo `context` representa a coluna **Código Detalhado**; e o campo `message` representa a coluna **Mensagem**.</Note>
+
+| Categoria | Operação                  | Ação            | Código | Código Detalhado | Mensagem                                                                                           |
+|-----------|---------------------------|-----------------|--------|------------------|----------------------------------------------------------------------------------------------------|
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | C0108  | V0001            | Documento Federal deve ser informado                                                              |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | C0108  | V0002            | Cliente não encontrado com o documento `{documentoCliente}`                                        |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | C0108  | V0003            | Cliente não cadastrado pelo parceiro de integração                                                |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0001            | Informe o CEP                                                                                   |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0002            | CEP inválido                                                                                   |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0003            | Informe o Logradouro                                                                           |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0004            | Informe a Cidade                                                                              |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0005            | Informe o Estado                                                                              |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0006            | Informe o Tipo de Imóvel                                                                       |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0007            | Informe o Tipo de Endereço                                                                     |
+| Pessoa    | CreateUpdatePessoaEnderecos | SalvarEnderecos | T0608  | D0008            | Informe o tempo em que está situado no endereço                                                  |
+</Expandable>

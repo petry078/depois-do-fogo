@@ -1,0 +1,32 @@
+---
+title: 13 - Consulta Grafeno por CPF
+openapi: post /Bureau/GrafenoConsultarReceitaCPF
+---
+
+Utilize este endpoint para consultas os dados de uma pessoa física, obtendo informações como:
+
+* Nome completo;
+* Situação cadastral atualizada;
+* Data de nascimento.
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{
+    \"Erro": false,
+    \"MensagemOperador": "OK",
+    \"ResultadoConsulta": {
+        \"Ni": "11122233344",
+        \"Nome": "TONY VALADÃO",
+        \"Situacao": {
+            \"Codigo": "0",
+            \"Descricao": "Regular"
+        },
+        \"Nascimento": "1985-09-03"
+    }
+}
+```
+
+</Expandable>

@@ -1,0 +1,34 @@
+---
+title: "55 - Registrar Boleto"
+openapi: post /api/Boleto/Registrar
+---
+
+Por meio deste endpoint, o parceiro pode efetuar o registro de um boleto.
+
+O processo da API por parte do integrador, faz com que o boleto seja registrado junto ao órgão responsável.
+
+Antes de efetuar o registro do boleto é necessário que o emissor tenha um número de cedente vinculado a conta e uma carteira registrada, sendo carteira “1” para boleto simples que é a situação que se aplica neste endpoint e “9” para CNAB.
+
+O registro do cedente deve ser realizado no endpoint /api/Cedente e o vínculo do cedente a uma carteira deve ser realizado no endpoint /api/Cedente/AdicionarCarteira.
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+| Endpoint              | Mensagem de erro         |
+|-----------------------|--------------------------|
+| /api/Boleto/Registrar | Conta {Situacao} |
+| /api/Boleto/Registrar | Operador sem parceiro cadastrado |
+| /api/Boleto/Registrar | Parceiro não autorizado para esta conta {Numero} |
+| /api/Boleto/Registrar | O modelo conta deve ser informado |
+| /api/Boleto/Registrar | A conta não pode ser do modelo 'Conta {modeloConta} |
+| /api/Boleto/Registrar | Não foi possível registrar o boleto. A conta está bloqueada |
+| /api/Boleto/Registrar | Não foi possivel obter os dados da conta para registro do boleto |
+| /api/Boleto/Registrar | A carteira está desativada |
+| /api/Boleto/Registrar | Não existe cedente parametrizado para esta conta |
+| /api/Boleto/Registrar | Carteira não encontrada |
+| /api/Boleto/Registrar | Não existe cedente parametrizado para esta conta e carteira |
+| /api/Boleto/Registrar | Situação do cedente não permite registro de boleto |
+| /api/Boleto/Registrar | Não foram identificados pagadores para a emissão de boleto |
+
+</Expandable>

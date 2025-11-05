@@ -1,0 +1,112 @@
+---
+title: "Autenticação"
+version: 'Português'
+---
+
+## Método de Autenticação
+
+Utilizamos o método de autenticação OAuth 2.0, um padrão da indústria para autorização, para garantir a segurança e a integridade da identificação de usuários e sistemas.
+
+Esse método envolve a geração de tokens que permitem o acesso seguro aos nossos servidores, softwares e APIs. A autenticação através do OAuth 2.0 ajuda a prevenir fraudes cibernéticas e o vazamento de informações confidenciais, utilizando criptografia de chave pública para validar as identidades.
+
+<Steps>
+
+<Step title="Criação das Chaves Pública e Privada">
+
+Antes de receber a credencial, é necessário gerar um par de chaves: uma chave privada e outra pública. A chave privada será utilizada para assinar o token, enquanto a chave pública deverá ser enviada a nós para validar a assinatura do token.
+    
+Primeiramente gere a **chave privada** utilizando o comando abaixo via terminal:
+
+```bash
+openssl genrsa -out private.pem 2048
+```
+
+Posteriormente gere a **chave pública** através do terminal:
+
+```bash
+openssl rsa -in private.pem -pubout > public.pem
+```
+
+<Warning> Guarde a chave privada em local seguro e nunca a compartilhe.</Warning>
+
+</Step>
+
+<Step title="Solicitação da chave pública">
+
+Solicitaremos seu e-mail para abrir uma requisição referente ao envio da chave pública.
+
+Após isso, você receberá uma mensagem do **notifications@heflo.com** com as instruções para envio da chave.
+
+<Warning>Envie **somente** sua chave pública para validação do nosso time, respondendo ao e-mail de solicitação do HEFLO, sem adicionar outras pessoas em cópia por segurança. Caso outras pessoas sejam copiadas, isso invalidará o recebimento da chave pública.</Warning>
+
+</Step>
+
+<Step title = "Recebimento do client_id">
+
+Após a validação da sua chave pública, nossa equipe irá gerar e enviar o seu `client_id`, que será utilizado para a autenticação no sistema.
+
+</Step>
+
+<Step title = "Geração do JWT">
+
+Gere um TOKEN seguindo o padrão **RS256**, contendo informações cruciais como identificador único, tempo de emissão e expiração.
+
+```javascript
+const tokenHeader = {
+  alg: "RS256", // 'alg': Algoritmo usado para assinar o token (RS256 - RSA com SHA-256).
+  typ: "JWT"    // 'typ': Tipo do token, no caso, JWT.
+};
+
+const tokenPayload = {
+  jti: "5e8e07e3-d3f0-4881-a644-0895f4949e9b", // 'jti': ID único do token.
+  sub: "client_id", // 'sub': Identificador do cliente (preencher com o client_id enviado pelo nosso time).
+  iat: 1573648398, // 'iat': Data e hora em que o token foi emitido (timestamp UNIX em segundos).
+  nbf: 1573648398, // 'nbf': Data e hora antes da qual o token não deve ser aceito (timestamp UNIX).
+  exp: 1573648458, // 'exp': Data de expiração do token (timestamp UNIX).
+  iss: "client_id", // 'iss': Emissor do token (preencher com o client_id enviado pelo nosso time).
+  aud: "https://auth.moneyp.dev.br/connect/token" // 'aud': Destinatário do token (verifica se o token é enviado ao servidor correto).
+};
+```
+
+</Step>
+
+<Step title="Endpoint de geração de Bearer Token">
+
+Para gerar um TOKEN utilizando o método OAuth 2.0, o cliente deve enviar uma requisição POST com o Header Content-Type "x-www-form-urlencoded", abaixo o CURL do endpoint que será utilizado para gerar o token:
+
+```javascript
+curl --location 'https://auth.moneyp.dev.br/connect/token' \
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --header 'Cache-Control: no-cache' \
+  --data-urlencode 'grant_type=client_credentials' \
+  --data-urlencode 'client_id=client_id' \
+  --data-urlencode 'scope=bmp.digital.api.full.access' \
+  --data-urlencode 'client_assertion= "<< Token JWT >>"' \ // JWT gerado no passo anterior.
+  --data-urlencode 'client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer'
+```
+
+Exemplo de reposta:
+
+```json
+{
+  "access_token": "<access_token>",
+	"expires_in": 3600,
+	"expires_at": "2025-05-19T19:16:06.4378836Z",
+	"token_type": "Bearer",
+	"scope": "bmp.digital.api.full.access"
+}
+```
+
+Após a autenticação, o access token obtido deve ser usado em todas as requisições subsequentes no cabeçalho de autorização.
+
+```javascript
+const headers = {
+  Authorization: `Bearer <<Access token>>`
+};
+```
+
+<Warning>***O nosso Bearer Token, uma vez gerado, tem uma validade de 1 hora. Após esse período, será necessário gerar um novo token para garantir a continuidade da sessão de forma ativa e segura***</Warning>
+
+</Step>
+
+</Steps>

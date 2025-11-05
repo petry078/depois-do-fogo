@@ -1,0 +1,16 @@
+---
+title: "4 - Generate an Installment Charge"
+openapi: post /AgendaRecebivel/GerarUnicaCobranca
+---
+
+This endpoint allows the individual issuance of charges for specific contracts or installments. 
+
+It facilitates the creation of a custom bill, where parameters such as amount, due date, and payment method are provided, meeting the different needs of each customer. 
+
+Endpoint functionality encompasses three billing modalities: 
+
+* Boleto: for generating traditional boletos; 
+* Boleto Híbrido (with PIX): combination of traditional boleto with the option of payment via PIX; 
+* PIX Collection: generation of collection exclusively via PIX. With this flexibility, the partner can create varied charges efficiently and tailored to customer needs.
+
+<Warning>The SettlementID field, generated in the response of this endpoint, needs to be saved. This amount is required to request cancellation of the charges issued for the installments, in endpoint 6 - Cancel Installment Charges.</Warning>

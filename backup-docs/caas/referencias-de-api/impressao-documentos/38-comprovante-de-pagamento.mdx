@@ -1,0 +1,24 @@
+---
+title: "38 - Comprovante de Pagamento"
+openapi: get /api/
+---
+
+Este endpoint é destinado à consulta do comprovante de pagamento:
+
+```
+https://reports.moneyp.com.br/imprimir?impressao=S&tipo=recibo&codigoProposta={{GUID_DA_PROPOSTA}}&split={{ID_DO_SPLIT}}
+```
+
+Substitua `{{GUID_DA_PROPOSTA}}` pelo GUID da proposta para realizar a requisição de consulta (GET).
+
+O GUID da proposta aparece no retorno de todos os endpoints de criação de proposta, no campo `codigo`.
+
+Substitua `{{ID_DO_SPLIT}}` pelo código ID do split de pagamento ou pelo código ID do boleto para realizar a requisição de consulta (GET). Esse código é fornecido pelo time de Implantação da BMP.
+
+<Note>Caso não tenha split de pagamento para declarar, utilize a URL sem o parâmetro `&split={{ID_DO_SPLIT}}`.</Note>
+
+Requisição sem split de pagamento:
+
+```
+https://reports.moneyp.com.br/imprimir?impressao=S&tipo=recibo&codigoProposta={{GUID_DA_PROPOSTA}}
+```

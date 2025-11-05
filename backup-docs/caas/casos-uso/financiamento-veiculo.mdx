@@ -1,0 +1,640 @@
+---
+title: "Financiamento de Veículos"
+version: 'Português'
+---
+
+O financiamento de veículos é uma modalidade de crédito que permite a aquisição de automóveis de forma parcelada, oferecendo uma alternativa acessível para pessoas jurídicas (CNPJ) de obter um veículo sem a necessidade de pagamento à vista. 
+
+Esse tipo de financiamento é amplamente utilizado por consumidores que buscam flexibilidade financeira, permitindo a escolha de prazos e condições ajustáveis ao perfil do comprador.
+
+Para minimizar os riscos de inadimplência e tornar a operação mais segura tanto para o cliente quanto para a instituição financeira, o próprio veículo financiado é utilizado como garantia da operação. Além disso, diferentes condições de crédito podem ser aplicadas, considerando fatores como histórico do cliente, valor de entrada e taxa de juros.
+
+Este documento explora o funcionamento do financiamento de veículos, abordando suas modalidades, critérios de análise e os benefícios que essa solução oferece para parceiros BMP.
+
+Abaixo segue o passo a passo para utilização do caso de uso:
+
+<Warning>Antes de utilizar este serviço, é necessário configurar a autenticação. Consulte as [instruções de autenticação](https://bmpdocs.moneyp.com.br/caas/primeiros-passos/autenticacao) para orientações detalhadas.</Warning>
+
+## 1 - Simulações
+
+O primeiro passo para a contratação de crédito na modalidade Financiamento de Veículos é a simulação.
+
+A simulação pode ser realizada de duas formas:
+
+<Expandable title= "Simulação Detalhada">
+
+Na **Simulação Detalhada**, o parceiro informa todos os dados necessários para a simulação e recebe as condições de crédito disponíveis.
+<br />
+<br />
+Para realizar a requisição da Simulação Detalhada, é necessário informar:
+
+* Valor de crédito solicitado pelo cliente;
+* Número de dias de acréscimo para o vencimento da primeira parcela;
+* Percentual de juros;
+* Tipo de pessoa (física ou jurídica);
+* Prazo em meses para o pagamento (quantidade de parcelas);
+* Intervalo de prazo (fluxo irregular ou regular).
+
+Para mais informações sobre este endpoint, acesso o documento de referência [6 - Simulação Detalhada](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/simulacoes/6-simulacao-detalhada).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/CalcularGridParcelasSimplificadoPrice' \
+--header 'accept: text/plain' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--data '{
+  "dto": {
+    "vlrSolicitado": 0, // Valor solicitado pelo seu cliente | OBRIGATÓRIO
+    "nroDiasAcrescimo": 0, // Este campo ajusta o vencimento da 1ª parcela, somando ou subtraindo dias da data padrão (sempre no mesmo dia da simulação, no mês seguinte) 
+    "percJurosNegociado": 0, // Percentual de juros negocioado com seu cliente | OBRIGATÓRIO
+    "tipoPessoa": 0, // Para PF informar 1 e para PJ informar 2 | OBRIGATÓRIO
+    "vlrTAC": 0, // Caso tenha TAC, informe esse campo. Caso não tenha, pode excluir | NÃO OBRIGATÓRIO
+    "prazo": 0, // informe a quantidade de parcelas
+    "fluxoIrregular": false // informe false para intervalo de prazo de 30 em 30 ou true para outros intervalos
+  }
+}'  
+```
+
+</Expandable>
+
+<Expandable title = "Simulação Multiparcelamento">
+
+Na **Simulação Multiparcelamento**, o parceiro informa apenas o valor solicitado e recebe as condições de crédito disponíveis para diferentes prazos.
+<br />
+<br />
+Na requisição da Simulação Multiparcelamento, é necessário informar:
+
+* Valor de crédito solicitado pelo cliente;
+* Número de dias de acréscimo para o vencimento da primeira parcela;
+* Percentual de juros;
+* Tipo de pessoa (física ou jurídica).
+
+Para mais informações sobre este endpoint, acesso o documento de referência [5 - Simulação Multiparcelamento](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/simulacoes/5-simulacao-multiparcelamento).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/CalcularGridParcelasSimplificado' \
+--header 'accept: text/plain' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer 2ec83da4-ddba-4b01-9c6a-5b5e718f5793' \
+--data '    {
+    "dto": {
+    "vlrSolicitado": 0, // Valor solicitado pelo seu cliente | OBRIGATÓRIO
+    "nroDiasAcrescimo": 0, // Este campo ajusta o vencimento da 1ª parcela, somando ou subtraindo dias da data padrão (sempre no mesmo dia da simulação, no mês seguinte) 
+    "percJurosNegociado": 0, // Percentual de juros negocioado com seu cliente | OBRIGATÓRIO
+    "tipoPessoa": 0, // Para PF informar 1 e para PJ informar 2 | OBRIGATÓRIO
+    "vlrTAC": 0 // Caso tenha TAC, informe esse campo. Caso não tenha, pode excluir | NÃO OBRIGATÓRIO
+  }
+    }'
+```
+
+</Expandable>
+
+<Note>Em ambas as simulaçõies, o campo `nroDiasAcrescimo` define quantos dias serão adicionados ou subtraídos da data de vencimento padrão da primeira parcela. Por padrão, o vencimento ocorre no mesmo dia da simulação, mas no mês seguinte. Exemplo: se a simulação for em 27/05, o vencimento padrão será 27/06. Se você preencher com "20", o vencimento será 20 dias após essa data padrão (ex: 17/07). Caso a simulação seja feita nos dias 30 ou 31 e o mês seguinte não possua essas datas, o vencimento será ajustado para o último dia do mês (por exemplo, uma simulação em 31/01 terá vencimento em 28/02).</Note>
+
+## 2 - Onboarding
+
+Após a simulação, é necessário realizar o cadastro dos dados e endereço do cliente. Essa etapa é chamada de onboarding.
+
+O onboarding é realizado em duas etapas:
+
+<Expandable title="Cadastro das Informações Pessoais do Cliente">
+
+Para realizar o cadastro dos dados pessoais do cliente, é necessário informar:
+
+* Nome do cliente;
+* Documento federal (CPF ou CNPJ);
+* Dados de contato (e-mail e telefone celular);
+* Se o Documento Federal for CPF, é necessário informar também o RG, órgão emissor, UF do RG, data de emissão do RG, data de nascimento, sexo, nacionalidade, cidade natal e UF natal;
+* Se o Documento Federal for CNPJ, é necessário informar o nome fantasia, documento estadual, documento municipal, data de abertura da empresa, nome do responsável pela empresa, CPF do responsável pela empresa e RG do responsável pela empresa.
+
+Para mais informações sobre este endpoint, acesse o documento de referência [10 - Cadastro do Cliente](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/onboarding/10-cadastro-do-cliente).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Pessoa/Salvar' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Authorization: Bearer qXdZot13a6EbJkAbjpZ5ep_eTKH2F5ZHOwZrYZVN1lw' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "dto": {
+        "Codigo": "1", // Código para identificar o cliente em seu sistema | NÃO OBRIGATÓRIO
+        "Nome": "CLIENTE TESTE", // Nome do seu cliente | OBRIGATÓRIO
+        "DocumentoFederal": "75000000000", // Documento federal (CPF: 11 dígitos | CNPJ: 14 dígitos | temos um validador, então precisa ser um documento válido) | OBRIGATÓRIO
+        "PF": { // Se seu cliente for Pessoa Física, preencha esse objeto, se não, exclua esse objeto
+            "rg": "string",// RG do seu cliente | OBRIGATÓRIO
+            "rgOrgao": "string", // Orgão de emissão do RG do seu cliente | NÃO OBRIGATÓRIO
+            "rguf": "string", // UF do RG do seu cliente | NÃO OBRIGATÓRIO
+            "rgData": "2023-07-10T20:01:07.689Z", // data de emissão do rg | NÃO OBRIGATÓRIO
+            "dtNasc": "2023-07-10T20:01:07.689Z", // Data de nascimento do seu cliente | OBRIGATÓRIO
+            "sexo": "string", // Sexo do seu cliente | NÃO OBRIGATÓRIO
+            "nacionalidade": "string", // nacionalidade do seu cliente | NÃO OBRIGATÓRIO
+            "naturalDeCidade": "string", // Cidade natal do seu cliente | NÃO OBRIGATÓRIO
+            "naturalDeUF": "string", // UF natal do seu cliente| NÃO OBRIGATÓRIO
+            "estadoCivil": 0, // tipo enum, Consultar documento enviado em e-mail| NÃO OBRIGATÓRIO
+            "escolaridade": 0 // tipo enum, Consultar documento enviado em e-mail | NÃO OBRIGATÓRIO
+        },
+        "PJ": { // Se seu cliente for Pessoa Jurídica, preencha esse objeto, se não, exclua esse objeto
+            "nomeFantasia": "string", // Nome fantasia da empresa | OBRIGATÓRIO
+            "documentoEstadual": "string", // Informe o documento estadual da empresa || NÃO OBRIGATÓRIO
+            "documentoMunicipal": "string", // Informe o documento Municipal da empresa || NÃO OBRIGATÓRIO
+            "dtAberturaEmpresa": "2024-06-06T19:49:59.553Z", // Informe a data da abertura do CNPJ em timestamp || NÃO OBRIGATÓRIO
+            "nomeResponsavelEmpresa": "string", // Informe o nome do responsável pela empresa || NÃO OBRIGATÓRIO
+            "cpfResponsavelEmpresa": "string", // Informe o nome do cpf do responsável pela empresa || NÃO OBRIGATÓRIO
+            "rgResponsavelEmpresa": "string" // Informe o rg responsável do responsável pela empresa || NÃO OBRIGATÓRIO
+        },
+        "PessoaDadosContato": {
+            "Email": "teste@email.com.br", // E-mail do seu cliente | OBRIGATÓRIO
+            "TelefoneCelular1": "11923456781" // Celular do seu cliente | OBRIGATÓRIO
+        }
+    }
+}'
+```
+</Expandable>
+
+<Expandable title="Cadastro do Endereço">
+
+Para realizar o cadastro do endereço do cliente, é necessário informar:
+
+* Documento Federal do cliente (CPF ou CNPJ);
+* CEP do endereço (obrigatório);
+* Além de outros dados opicionais.
+
+Para mais informações sobre este endpoint, acesse o documento de referência [11 - Cadastro do Endereço](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/onboarding/11-cadastro-do-endereco).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Pessoa/SalvarEndereco' \
+--header 'Authorization: Bearer qXdZot13a6EbJkAbjpZ5ep_eTKH2F5ZHOwZrYZVN1lw' \
+--header 'IdempotencyKey: GUID ÚNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--data '{
+  "dto": {
+    "codigo": "string", // Código para identificar o endereço em seu sistema | NÃO OBRIGATÓRIO
+    "cep": "string", // CEP do endereço | OBRIGATÓRIO
+    "logradouro": "string", // logradouro do endereço | NÃO OBRIGATÓRIO
+    "nroLogradouro": "string", // nroLogradouro do endereço | NÃO OBRIGATÓRIO
+    "bairro": "string", // bairro do endereço | NÃO OBRIGATÓRIO
+    "complemento": "string", // complemento do endereço | NÃO OBRIGATÓRIO
+    "cidade": "string", // cidade do endereço | NÃO OBRIGATÓRIO
+    "uf": "string", // uf do endereço | NÃO OBRIGATÓRIO
+    "tipoEndereco": 0, // tipoEndereco do endereço | NÃO OBRIGATÓRIO
+    "tipoResidencia": 0, // logradouro do endereço | NÃO OBRIGATÓRIO
+    "enderecoDesde": "2024-04-04T12:19:46.116Z", // informe desde quando o endereço pertence ao cliente| NÃO OBRIGATÓRIO
+    "enderecoPrincipal": true, // é o endereço principal do cliente?  | NÃO OBRIGATÓRIO
+    "enderecoCorrespondencia": true // é o endereço para correspondencia? | NÃO OBRIGATÓRIO
+  
+  },
+  "param": {
+    "documentoCliente": "string" // Documento federal (CPF: 11 dígitos | CNPJ: 14 dígitos | temos um validador, então precisa ser um documento válido) | OBRIGATÓRIO
+  }
+}
+'
+```
+
+</Expandable>
+
+## 3 - Contratação
+
+Após a simulação e o onboarding, é necessário realizar a requisição de contratação do crédito. Chamamos essa etapa de **Inclusão de Proposta**.
+
+<Expandable title="Inclusão de Proposta">
+
+Para realizar a inclusão da proposta, é necessário informar:
+
+* Código da operação;
+* Valor solicitado na proposta;
+* Prazo solicitado (em meses);
+* Percentual de juros negociado;
+* Valor Total do Imposto sobre Operações Financeiras (IOF);
+* Percentual do Imposto sobre Operações Financeiras (IOF);
+* Valor da Parcela;
+* Valor da Tarifa de Cadastro (TAC);
+* Data estimada do primeiro vencimento;
+* Tipo da Conta (conta corrente, poupança, etc.);
+* Agência bancária;
+* Dígito da agência;
+* Conta bancária;
+* Dígito da conta;
+* Número do banco.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirManualSimplificado' \
+--header 'Authorization: Bearer qXdZot13a6EbJkAbjpZ5ep_eTKH2F5ZHOwZrYZVN1lw' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": {
+        "documentoCliente": "string", // Documento do cliente
+        "documentoParceiroCorrespondente": "string",  // Documento do Parceiro Correspondente
+        "codigoOperacao": "string", // Obrigatório - Uso do Integrador. É o código da operação no sistema do parceiro. Esta informação é exclusiva e poderá ser utilizada para atualizar a proposta sem necessidade de guardar o código da proposta na BMP. Porém o código de proposta BMP é importante ser armazenado para uso de impressão de boletos/CCB/Nota promissória ou Protocolo.
+        "codigoVersaoCCB": 0, // Código da versão da Cédula de Crédito Bancária – (CCB)
+        "vlrSolicitado": 0, // Obrigatório - Valor solicitado na proposta
+        "prazo": 0, // Obrigatório - Prazo solicitado. Será consistido conforme a parametrizado de integração.
+        "percJurosNegociado": 0, // Obrigatório - Percentual de juros da proposta
+        "vlrIOF": 0, // Obrigatório - Valor Total do Imposto sobre Operações Financeiras (IOF)
+        "percIOF": 0, // Obrigatório - Percentual do Imposto sobre Operações Financeiras (IOF)
+        "vlrParcela": 0, // Obrigatório - Valor da Parcela
+        "vlrTAC": 0, // Obrigatório - Valor da Tarifa de Cadastro. Pode ser R$ 0,00 quando não houver.
+        "dtPrimeiroVencto": "2024-02-21T17:48:40.110Z", // Obrigatório - Data estimada do primeiro vencimento.
+        "tipoContrato": "string", // string(5) - Sigla indicando o tipo de contrato da proposta. Exémplo: CSG -> Capital de Giro; CCG -> Capital de Giro com Garantia
+        "propostaContaPagamentoDTO": { 
+            "tipoConta": 0, // Obrigatório - tipo de conta
+            "agencia": "string", // string(10) Obrigatório - Agência bancária
+            "agenciaDig": "string", // string(1)Obrigatório - Dígito da agência
+            "conta": "string", // string(20) Obrigatório - Conta bancária
+            "contaDig": "string", // string(1) Obrigatório - Dígito da conta
+            "numeroBanco": "string" //string(5)  Obrigatório - Número da conta
+        },
+    },
+}'
+```
+
+<Note>O campo `nroDiasAcrescimo` define quantos dias serão adicionados ou subtraídos da data de vencimento padrão da primeira parcela. Por padrão, o vencimento ocorre no mesmo dia da simulação, mas no mês seguinte. Exemplo: se a simulação for em 27/05, o vencimento padrão será 27/06. Se você preencher com "20", o vencimento será 20 dias após essa data padrão (ex: 17/07).</Note>
+
+Para utilização de contrato com split de **TED** adicione o objeto abaixo na requisição anterior dentro do array `dto`:
+
+<Expandable title="Split de TED">
+
+```json
+"propostaLancamentos": [ 
+    {
+        "campoID": "string", // Nome do campo responsável pelo split | OBRIGATÓRIO
+        "vlrTransacao": 0, // Valor da transação (lembrando que deve ser menor ou igual que o valor solicitado) | OBRIGATÓRIO
+        "tipoConta": 0, // 1 = PF, 2 = PJ | OBRIGATÓRIO
+        "agencia": "string", // Agência bancária da conta | OBRIGATÓRIO
+        "agenciaDig": "string", // Digíto da conta bancária do emitente | OBRIGATÓRIO
+        "conta": "string", // Conta bancária do emitente | OBRIGATÓRIO
+        "contaDig": "string", // Digito bancário da conta do emitente | OBRIGATÓRIO
+        "numeroBanco": "string", // Código bancário de acordo com a tabela do BACEN | OBRIGATÓRIO
+        "documentoFederal": "string", //Número do Documento Federal | OBRIGATÓRIO
+        "nomePagamento": "string" //Nome para pagamento | OBRIGATÓRIO
+    }
+]
+```
+</Expandable>
+
+Para utilização de contrato com split de **BOLETO** adicione o objeto abaixo na requisição anterior dentro do array `dto`:
+
+<Expandable title="Split de Boleto">
+
+```json
+"propostaLancamentos": [ 
+    {
+        "campoID": "string", // Nome do campo responsável pelo split | OBRIGATÓRIO 
+        "vlrTransacao": 0, // Valor da transação (lembrando que deve ser menor ou igual que o valor solicitado) | OBRIGATÓRIO 
+        "dtPagamento": "2024-02-21T17:48:40.110Z", // Data prevista de pagamento da proposta.
+        "linhaDigitavel": "string", // string(60)  string contendo informações do boleto, como dados do banco, destinatário etc.
+        "documentoFederalCedente": "string", // string(20)   Documento federal do cedente
+        "nomeCedente": "string", // string(60)   Nome do cedente
+        "documentoFederal": "string", //Número do Documento Federal | OBRIGATÓRIO
+        "nomePagamento": "string" //Nome para pagamento | OBRIGATÓRIO
+    }
+]
+```
+
+</Expandable>
+
+</Expandable>
+
+## 4 - Inclusão de Dados do Veículos
+
+Após a requisição de contratação, é necessário realizar a inclusão dos dados do veículo.
+
+<Expandable title="Inclusão de Dados do Veículo">
+
+Utilize o endpoint `/Proposta/IncluirDadosVeiculos` para incluir dados do veículo. 
+
+Para mais informações sobre este endpoint, acesse o documento de referência [34 - Registro de Veículo](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/garantias/34-registro-de-veiculo).
+
+```json
+ curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirDadosVeiculo' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--data '{
+  "dto": {
+    "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "codigoOperacao": "string"
+  },
+  "dadosVeiculoDTOs": [
+    {
+      "codigo": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "codigoIdentificador": "string",
+      "placa": "string",
+      "marca": "string",
+      "modelo": "string",
+      "versaoModelo": "string",
+      "anoFab": 0,
+      "anoMod": 0,
+      "cor": "string",
+      "chassis": "string",
+      "renavam": "string",
+      "proprietario": "string",
+      "documentoFederalProprietario": "string",
+      "financiado": true,
+      "saldoFinanciamento": 0,
+      "tipoPlaca": 0,
+      "tipoVeiculo": 0,
+      "ufPlaca": "string",
+      "ufLicenciamento": "string",
+      "tipoRestricao": 0,
+      "tipoChassi": 0,
+      "codigoFipe": "string",
+      "situacaoGravame": 0,
+      "descricaoGravame": "string",
+      "dtSituacaoGravame": "2024-04-03T15:23:35.988Z",
+      "origemGravame": 0,
+      "gravame": 0,
+      "nroRegristroGecov": "string"
+    }
+  ]
+}'
+```
+
+<Warning>
+
+Nesta estapa, será realizada a consulta do veículo no Registro Nacional de Veículos em Estoque (RENAVE). Essa é uma exigência do SENATRAN para a validação de veículos novos e usados. O serviço de consulta RENAVE é realizado pela BMP e neste passo é necessário que o parceiro informe os dados do Chassi, Unidade Federativa (UF) da placa e o documento do proprietário do veículo (apenas CNPJ).
+
+</Warning>
+
+</Expandable>
+
+## 5 - Inclusão de documentos do Veículo
+
+Nesta etapa o parceiro poderá encaminhar os documentos do veículo através do endpoint abaixo:
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirDocumento' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--data '{
+  "dto": { // Apenas um dos campos abaixo deve ser informado
+    "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Colocar GUID da proposta gerado no response da inclusão da proposta
+    "codigoOperacao": "string" // Colocar codigo da operação utilizado na inclusão da proposta
+  },
+  "documento": {
+    "codigo": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Código da proposta gerado no response da criação da proposta | OBRIGATÓRIO
+    "tipoDocumento": 0, // Tipo de documento do seu cliente (caso queira informar, verifique a tabela de enum no email) | OBRIGATÓRIO
+    "nomeArquivo": "string", // Nome do arquivo | OBRIGATÓRIO
+    "extensao": "string", // Extensão do arquivo (ex: jpg, pdf, png) | OBRIGATÓRIO
+    "dtValidade": "2023-05-23T20:57:08.922Z", // Data de validade do arquivo | OBRIGATÓRIO
+    "arquivo": "string" // Arquivo desejado codificado em BASE64 | OBRIGATÓRIO
+  }
+}'
+```
+
+
+## 6 - Coleta de Assinaturas
+
+Após informar os dados do veículo, é necessário coletar as assinaturas dos envolvidos na proposta.
+
+Para saber mais sobre os modelos de assinatura, acesse o documento de [Assinaturas](https://bmpdocs.moneyp.com.br/caas/assinaturas).
+
+A assinatura pode ser realizada de três formas:
+
+<Expandable title="Assinatura Eletrônica">
+
+Para utilizar a assinatura eletrônica, é necessário informar:
+
+* Nome, e-mail, documento, descrição, telefone celular e data limite de assinatura do assinante;
+* Informar se o assinante receberá a CCB por e-mail, WhatsApp ou SMS;
+* Data limite para a assinatura.
+
+Para mais informações sobre este endpoint, acesse o documento de referência [39 - Eletrônica](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/assinaturas/39-eletronica).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirAssinaturaCCB' \
+--header 'accept: text/plain' \
+--header 'Authorization: Bearer qXdZot13a6EbJkAbjpZ5ep_eTKH2F5ZHOwZrYZVN1lw' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": { // Apenas um dos campos abaixo deve ser informado
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Colocar GUID da proposta gerado no response da inclusão da proposta
+        "codigoOperacao": "string" // Colocar codigo da operação utilizado na inclusão da proposta
+    },
+    "assinantes": [
+        {
+            "nome": "string", // Informe o nome do assinante | OBRIGATÓRIO
+            "email": "string", // Informe o email do assinante | OBRIGATÓRIO
+            "documento": "string", // Informe o documento federal do assinante | OBRIGATÓRIO
+            "descricao": "string", // Informe o papel desse assinante na operação | OBRIGATÓRIO
+            "telefoneCelular": "string", // Informe o telefone celular do assinante | OBRIGATÓRIO
+            "notificarPorEmail": true, // Esse campo controle se o cliente receberá a CCB por email para a assinatura | OBRIGATÓRIO
+            "notificarPorWhatsApp": true, // Se o cliente for receber o token de assinatura via WhatsApp, deixar esse campo como true. Se não, colocar false | NÃO OBRIGATÓRIO
+            "notificarPorSMS": true, // Se o cliente for receber o token de assinatura via SMS, deixar esse campo como true. Se não, colocar false | NÃO OBRIGATÓRIO
+            "codigoIdentificador": "string", // Código identificador do assinante dentro da proposta (caso queira realizar alguma alteração nesse assinante, informe esse código na outra chamada da API) | NÃO OBRIGATÓRIO
+            "dtLimiteAssinatura": "2024-02-21T19:47:38.567Z" // Data limite para que o assnante realize a assinatura | OBRIGATÓRIO
+        }
+    ]
+}'
+```
+
+</Expandable>
+
+<Expandable title="Assinatura Relogon">
+
+Para utilizar a assinatura Relogon, é necessário seguir as etapas abaixo:
+
+<Steps>
+
+<Step title="Coleta do Modelo de Assinatura">
+
+Para coletar o modelo de assinatuara, faça uma requisição para o endpoint de [Impressão de CCB](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/impressao-documentos/37-impressao-ccb), utilizando os parâmetros de código da proposta e código de integração.
+
+```json
+curl --location 'https://reports.moneyp.dev.br/imprimir?impressao=S&tipo=ccb&code=GUIDPROPOSTA&integracao=CODPARAMETRO&copias=1&versao=' \
+```
+</Step>
+
+<Step title= "Assinatura Relogon">
+
+Por meio deste [endpoint](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/assinaturas/40-relogon), o parceiro pode realizar a assinatura da proposta, permitindo a inclusão de assinantes que já tenham assinado no backend do integrador, sendo que a proposta só é finalizada após todos os assinantes cadastrados realizarem a assinatura. Este método não envia e-mails de notificação e exige parâmetros de autenticação, localização da proposta e uma lista de assinantes que já realizaram a assinatura com data, hora e endereço IP de origem. Nesta etapa, é necessário realizar a assinatura Relogon por meio da integração com nossa API de Assinatura Relogon.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirAssinaturaCCBFinalizada' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": { 
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Número sequencial da proposta
+        "codigoOperacao": "string" // string(50) Código da Operação do Parceiro
+  },
+  "assinantes": [
+    {
+      "nome": "string", // string(60)   Obrigatório - Nome do assinante
+      "email": "string",  // string(60)   Obrigatório - E-mail do assinante
+      "documento": "string", // string(20)  Obrigatório – Número do Cadastro de Pessoa Física ( CPF) e do Cadastro Nacional de Pessoa jurídica (CNPJ) do assinante
+      "descricao": "string", // string(100)    Caracterização do assinante
+      "notificarPorEmail": true, // Obrigatório - O assinante que for marcado para receber a notificação terá controle sobre todas as assinaturas, podendo cobrar as assinaturas pendentes. O e-mail será enviado pela BMP.
+      "dtAssinatura": "2024-01-15T14:21:57.250Z", // Obrigatório - Data e hora da assinatura efetuada no backend do integrador
+      "ipAssinatura": "string" // string(255) Obrigatório -Número de IP onde a assinatura foi coletada
+    }
+  ]
+}'
+```
+</Step>
+
+<Step title = "Finalização de proposta">
+
+Por meio deste [endpoint](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/assinaturas/42-finalizacao-de-proposta), o parceiro pode finalizar a proposta após a conclusão do procedimento de assinatura. Após o envio da requisição de assinatura Relogon, será necessário finalizar a proposta por meio da integração com o endpoint de Finalização de proposta.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/Finalizar' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer g3Lmb6cowHidKJwwu8J-5xAVAViSysAZAajzeeeTXq4' \
+--data '{
+    "dto": { 
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Número sequencial da proposta
+        "codigoOperacao": "string" // string(50) Código da Operação
+    },
+    "parametros": [ 
+        {
+            "Nome": "FINALIZACAO_VALIDARPARCELAS",
+            "Valor": "FALSE"
+        },
+        {
+            "Nome": "IP_ADDRESS",
+            "Valor": "00.000.000.00"
+        }
+    ]
+}'
+```
+</Step>
+
+<Step title="Impressão de CCB Assinada">
+
+Este [endpoint](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/impressao-documentos/37-impressao-ccb) é utilizado para solicitar a consulta da impressão de um Certificado de Crédito Bancário (CCB), por meio dos parâmetros de código da proposta e código de integração. Nesta etapa, é necessário realizar a consulta do CCB através da integração com nossa URL de Impressão de CCB para validação do modelo antes da
+
+```json
+curl --location 'https://reports.moneyp.dev.br/imprimir?impressao=S&tipo=ccb&code=GUIDPROPOSTA&integracao=CODPARAMETRO&copias=1&versao=' \
+```
+</Step>
+
+</Steps>
+
+</Expandable>
+
+<Expandable title="Assinatura Certificadora">
+
+<Steps>
+
+<Step title="Coleta do Modelo de Assinatura">
+
+Este [endpoint](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/impressao-documentos/37-impressao-ccb) é utilizado para solicitar a consulta da impressão de um Certificado de Crédito Bancário (CCB), por meio dos parâmetros de código da proposta e código de integração. Nesta etapa, é necessário realizar a consulta do CCB através da integração com nossa URL de Impressão de CCB para validação do modelo antes da assinatura.
+
+```json
+curl --location 'https://reports.moneyp.dev.br/imprimir?impressao=S&tipo=ccb&code=GUIDPROPOSTA&integracao=CODPARAMETRO&copias=1&versao=' \
+```
+</Step>
+
+<Step title="Envio para Certificadora">
+
+Nesta etapa será necessário enviar o modelo da CCB para a certificadora, para que seja realizada a assinatura.
+
+</Step>
+
+<Step title="Assinatura Certificadora">
+
+Por meio deste [endpoint](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/assinaturas/41-certificadora), o parceiro executa a assinatura da proposta via Certificadora, como Docusign, QCertifica, Clicksign, Finanblue, entre outras. O processo de assinatura inicia com o download da CCB sem a marca d'água MODELO disponível em nosso portal, seguido da assinatura por uma certificadora e posterior anexação da CCB assinada à proposta. Após a coleta das assinaturas, será necessário realizar o upload da CCB assinada por meio da integração com nossa API de Assinatura Certificadora.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirDocumento' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer token gerado no 1º passo' \
+--data '{
+  "dto": { 
+    "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", //Número sequencial da proposta 
+    "codigoOperacao": "string" // string(50)  Código da Operação do Parceiro
+  },
+  "documento": {
+    "codigo": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Preenchido com o código do arquivo na base BMP
+    "tipoDocumento": 30, // Obrigatório - Consultar tabela de tipo de documento
+    "nomeArquivo": "string", // string(500)   Obrigatório - Nome do arquivo
+    "extensao": "string", // string(20)  Obrigatório - Extensão do arquivo
+    "dtValidade": "2023-05-23T20:57:08.922Z", // Data de Validade do Arquivo
+    "arquivo": "string" // : Obrigatório - Array de bytes que contém o arquivo
+  }
+}'
+```
+</Step>
+
+<Step title = "Finalização de proposta">
+
+Por meio deste [endpoint](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/assinaturas/42-finalizacao-de-proposta), o parceiro pode finalizar a proposta após a conclusão do procedimento de assinatura. Após o envio da requisição de assinatura Relogon, será necessário finalizar a proposta por meio da integração com o endpoint de Finalização de proposta.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/Finalizar' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer g3Lmb6cowHidKJwwu8J-5xAVAViSysAZAajzeeeTXq4' \
+--data '{
+    "dto": { 
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", //Número sequencial da proposta 
+        "codigoOperacao": "string" // string(50)  Código da Operação do Parceiro 
+    },
+    "parametros": [ 
+        {
+            "Nome": "FINALIZACAO_VALIDARPARCELAS",
+            "Valor": "FALSE"
+        },
+        {
+            "Nome": "IP_ADDRESS",
+            "Valor": "00.000.000.00"
+        }
+    ]
+}'
+```
+</Step>
+
+</Steps>
+
+</Expandable>
+
+## 7 - Liberação de proposta (Opcional)
+
+Este é o último passo do processo de contratação do crédito na modalidade Financiamento de Veículos.
+
+O parceiro pode liberar a proposta para a fila de pagamento após receber o status de proposta “finalizada”, sendo o processo de desembolso de responsabilidade da BMP.
+
+Nesta etapa, é necessário realizar a liberação da proposta por meio da integração com nossa URL de Liberação da proposta para pagamento para validação do modelo após a assinatura.
+
+<Warning>Em casos de utilização do gravame automático, não é necessário chamar o endpoint de liberação de proposta. O processo ocorre automaticamente conforme a vinculação do gravame ao financiamento.</Warning>
+
+<Expandable title="Liberação de proposta">
+
+Para liberar a proposta, é necessário informar:
+
+* Código da proposta;
+* Código da operação;
+* Parâmetros da proposta (caso haja necessidade).
+
+Para mais informações sobre este endpoint, acesse o documento de referência [43 - Liberação de Proposta](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/desembolso/43-liberacao-de-proposta).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/Liberar' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": { // Apenas um dos campos abaixo deve ser informado
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", //Número sequencial da proposta 
+    "codigoOperacao": "string" // string(50)  Código da Operação do Parceiro
+    },
+    "parametros": [
+        {}
+    ]
+}'
+```
+
+</Expandable>
+
+## Endpoints e documentos auxiliares
+
+Para esta jornada, é muito importante que o parceiro conheça o [Procedimento Técnico de Callback do CaaS](https://bmpdocs.moneyp.com.br/caas/procedimento-tecnico-de-callback/introducao).
+
+Também podem ser úteis os seguintes endpoints:
+
+* [28 - Consultar Contrato](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/gestao-de-propostas/28-consultar): utilizado para consultar os dados da proposta;
+* [33 - Cancelamento de Contrato](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/gestao-de-propostas/33-cancelamento-de-contrato): utilizado para cancelamento de contrato;
+* [38 - Consultar comprovante de Pagamento](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/impressao-documentos/38-comprovante-de-pagamento): utilizado para consultar o comprovante de pagamento da proposta;
+* [44 - Atualização da Conta Bancária](https://bmpdocs.moneyp.com.br/caas/referencias-de-api/desembolso/44-atualizacao-de-conta-bancaria): utilizado para atualização da conta de pagamento;

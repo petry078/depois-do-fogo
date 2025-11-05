@@ -1,0 +1,10 @@
+---
+title: "34 - Relogon"
+openapi: post /Proposta/IncluirAssinaturaCCBFinalizada
+version: 'English'
+---
+<Warning>Using the proposal completion endpoint is mandatory</Warning>
+
+- Through this endpoint, the partner can sign the proposal. It allows the inclusion of signatories who have already signed in the integrator's backend, as the proposal is only finalized after all registered signatories have signed.
+- This method does not send email notifications requesting signatures.
+- The method requires authentication and proposal location parameters, as well as a list of signatories who have already signed, including the date, time, and originating IP address.

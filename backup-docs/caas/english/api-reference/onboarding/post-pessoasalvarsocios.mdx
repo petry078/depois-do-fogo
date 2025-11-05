@@ -1,0 +1,26 @@
+---
+title: "10 - Save Partners"
+openapi: post /Pessoa/SalvarSocios
+version: 'English'
+---
+
+Through this endpoint, the partner includes or updates records of partners for a specific client.
+To update, it is necessary to send the "código" field, filled with the record code in the BMP database, or the search will be done through the "DocumentoFederal" field.
+
+<Expandable title="Messages">
+| Categoria | Operação                  | Ação           | Código | Código Detalhado | Mensagem                                                                                         |
+|-----------|---------------------------|----------------|--------|------------------|--------------------------------------------------------------------------------------------------|
+| Pessoa    | CreateUpdatePessoaSocios  | SalvarSocios    | C0048  | V0001            | Método disponível para Pessoa Jurídica                                                           |
+| Pessoa    | CreateUpdatePessoaSocios  | SalvarSocios    | C0108  | V0001            | Documento Federal deve ser informado                                                            |
+| Pessoa    | CreateUpdatePessoaSocios  | SalvarSocios    | C0108  | V0002            | Cliente não encontrado com o documento `{documentoCliente}`                                      |
+| Pessoa    | CreateUpdatePessoaSocios  | SalvarSocios    | C0108  | V0003            | Cliente não cadastrado pelo parceiro de integração                                              |
+| Pessoa    | CreateUpdatePessoaSocios  | SalvarSocios    | T0624  | D0001            | CPF já cadastrado como sócio                                                                    |
+| Pessoa    | CreateUpdatePessoaSocios  | SalvarSocios    | T0624  | D0002            | Documento deve ser preenchido                                                                   |
+| Pessoa    | CreateUpdatePessoaSocios  | SalvarSocios    | T0624  | D0003            | Nome deve ser preenchido                                                                      |
+| Pessoa    | CreateUpdatePessoaSocios  | SalvarSocios    | T0624  | D0004            | CPF inválido                                                                                   |
+| Pessoa    | CreateUpdatePessoaSocios  | SalvarSocios    | T0624  | D0005            | CNPJ Inválido                                                                                  |
+| Pessoa    | CreateUpdatePessoaSocios  | SalvarSocios    | T0624  | D0006            | CEP inválido                                                                                   |
+| Pessoa    | CreateUpdatePessoaSocios  | SalvarSocios    | T0624  | D0007            | Nome do cônjuge deve ser preenchido                                                             |
+| Pessoa    | CreateUpdatePessoaSocios  | SalvarSocios    | T0624  | D0008            | CPF do cônjuge deve ser preenchido                                                              |
+| Pessoa    | CreateUpdatePessoaSocios  | SalvarSocios    | T0624  | D0009            | CPF do cônjuge Inválido                                                                         |
+</Expandable>

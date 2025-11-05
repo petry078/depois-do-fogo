@@ -1,0 +1,18 @@
+---
+title: "22 - Inclusão com Análise BMP"
+openapi: post /Proposta/IncluirManual
+---
+
+Por meio deste endpoint o parceiro pode incluir uma proposta manualmente.
+
+<Tip>Neste endpoint, ambos os parâmetros `CodigoBanco` e  `NumeroBanco` podem ser utilizados. O campo `CodigoBanco` refere-se ao Identificador do Sistema de Pagamentos Brasileiro (ISPB) e espera um valor em números, enquanto o campo `NumeroBanco` refere-se ao código bancário, que possui 3 dígitos numéricos e espera o valor como string. Exemplo: `"CodigoBanco": 90400888, "NumeroBanco": "033"`.</Tip>
+
+<Expandable title="Tabela TipoContaBancaria">
+
+| ID  | Descrição        |
+| --- | ---------------- |
+| 1   | Poupança         |
+| 2   | Conta Corrente   |
+| 3   | Conta Pagamento  |
+
+</Expandable>

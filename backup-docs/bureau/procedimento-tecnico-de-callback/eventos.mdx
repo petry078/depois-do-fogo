@@ -1,0 +1,47 @@
+---
+title: 'Eventos'
+version: 'Português'
+---
+
+Este documento apresenta os exemplos de resposta dos **Bureaus** enviados via callback.
+
+## Motor de Crédito
+
+### Evento de Resposta do Motor de Crédito
+
+Para mais informações sobre o endpoint de consulta do **Motor de Crédito**, acesse as referências de API [19 - Enviar Proposta PF](https://bmpdocs.moneyp.com.br/bureau/referencias-de-api/motor-de-credito/19-enviar-proposta-pf) e [20 - Enviar Proposta PJ](https://bmpdocs.moneyp.com.br/bureau/referencias-de-api/motor-de-credito/20-enviar-proposta-pj).
+
+<Expandable title="Exemplo de resposta da análise do Motor de Crédito">
+
+```json
+{
+  "Sucesso": true, //Booleano
+  "Mensagens": null, //String
+  "CodigoProposta": "2213122", //String
+  "PropostaId": 208776, //Number
+  "PropostaProcessada": true, //Booleano
+  "StatusProposta": {
+    "Id": 6, //Number
+    "Nome": "APROVADO AUTOMATICAMENTE", //String
+    "Descricao": null //String
+  },
+  "Score": null, //String
+  "LimiteConcedido": "", //String 
+  "Alertas": "", //String 
+  "InformacoesAdicionais": null //String
+}
+```
+
+</Expandable>
+
+<Expandable title="Tabela de IDs e Nomes dos Status da Análise">
+
+| Status                  | ID |
+|-------------------------|----|
+| Aprovado                | 6  |
+| Aprovado com alteração  | 7  |
+| Pendente                | 11 |
+| Recusado                | 4  |
+| Cancelado               | 27 |
+
+</Expandable>

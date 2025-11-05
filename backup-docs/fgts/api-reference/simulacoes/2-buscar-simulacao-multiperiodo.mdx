@@ -1,0 +1,50 @@
+---
+title: "2 - Buscar Simulação MultiPeríodo"
+openapi: post /FGTS/BuscarSimulacaoMultiPeriodo
+---
+
+
+Por meio deste endpoint o parceiro realiza a busca e simulação de dados referente aos valores de FGTS disponíveis para o trabalhador. 
+Após o retorno dos valores, pode realizar empréstimos com garantia do Saque Aniversário, onde serão posteriormente inclusos em uma proposta. 
+Esta ação antecede a inclusão e efetivação da proposta no sistema. 
+Regras:
+- Caso seja informado o campo “Saldo”, não utilizamos o saldo verdadeiro do cliente na Caixa Econômica Federal e o cálculo será com base nos valores da nossa calculadora.
+- Caso o mês de aniversário esteja incorreto, o sistema retorna um erro no momento da simulação. 
+- Em caso de preenchimento do campo CPF, a consulta é realizada na Caixa Econômica Federal
+
+<Warning>
+
+Quando o valor do campo `ConsultaCache` for `false`, a requisição consultará o saldo do FGTS atualizado diretamente na **Caixa Econômica Federal (CEF)**; quando for `true`, o saldo será obtido do cache da BMP. Este campo não é obrigatório, caso não seja informado, o sistema assume o valor `true` como padrão.
+
+</Warning>
+
+## Mensagens de erro
+
+A tabela abaixo representa as mensagens de erro que podem ser retornadas ao tentar realizar uma requisição.
+
+<Expandable title="Mensagens de requisições com erro">
+
+O retorno de uma requisição com status HTTP 400 (Bad Request) pode incluir as seguintes mensagens de erro:
+
+| Código | Retorno da Caixa                                                                | Retorno ao Parceiro                                                                 | Tipo de Retorno |
+|--------|---------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|-----------------|
+| 400    | 2. Quantidade de Períodos deve ser maior que zero.                              | Quantidade de períodos deve ser maior que zero                                      | Cancela         |
+| 400    | 4. Número de CPF inválido.                                                      | CPF informado inválido                                                              | Cancela         |
+| 400    | 5. Existe uma Operação Fiduciária em andamento. Tente mais tarde                | Existe uma Operação Fiduciária em andamento. Tente mais tarde                       | Reprocessa      |
+| 400    | 9. Trabalhador não possui adesão ao saque aniversário vigente na data corrente. | Trabalhador não possui adesão ao saque aniversário vigente na data corrente.        | Cancela         |
+| 400    | 10. Operação não permitida antes de determinada data.                           | Operação não permitida antes de determinada data                                    | Cancela         |
+| 400    | 11. Não é possível realizar a operação para o CPF informado.                    | Não é possível realizar a operação para o CPF informado                             | Cancela         |
+| 400    | 12. Trabalhador não possui saldo disponível para Operação Fiduciária.           | Trabalhador não possui saldo disponível para Operação Fiduciária.                   | Cancela         |
+| 400    | 13. Operação não permitida por pendência no processo de pagamento de saque-aniversário. | Operação não permitida por pendência no processo de pagamento de saque-aniversário. | Cancela         |
+| 400    | 14. Existe uma solicitação de garantia com o mesmo número identificador.        | Existe uma solicitação de garantia com o mesmo número identificador.                | Cancela         |
+| 400    | 15. Trabalhador não possui adesão ao saque aniversário para o período informado.| Trabalhador não possui adesão ao saque aniversário para o período informado.        | Cancela         |
+| 400    | 16. Uma ou mais datas de previsão do saque informadas não conferem com as previstas no sistema. | Uma ou mais datas de previsão do saque informadas não conferem com as previstas no sistema. | Cancela         |
+| 400    | 17. Valor da alienação/cessão superior ao valor disponível para o trabalhador.  | Valor da alienação/cessão superior ao valor disponível para o trabalhador.          | Cancela         |
+| 400    | 18. Trabalhador com solicitação de retorno para saque rescisão, que deve ser cancelada pelo mesmo para possibilitar a solicitação de garantia. | Trabalhador com solicitação de retorno para saque rescisão, que deve ser cancelada pelo mesmo para possibilitar a solicitação de garantia. | Cancela         |
+| 400    | 34. Valor da reserva deve ser maior que zero.                                   | Valor da reserva deve ser maior que zero.                                           | Cancela         |
+| 400    | 35. Mudanças cadastrais ou lançamentos a débito foram realizadas na conta do FGTS, impedindo a contratação. Entre em contato com o setor de FGTS da CAIXA para regularização ou acompanhe a data do débito no APP FGTS. | Foi identificado falta de dados cadastrais na conta do FGTS que impedem a contratação. Entre em contato com o setor de FGTS da Caixa. | Cancela         |
+| 400    | 37. Trabalhador não possui saldo suficiente para a garantia necessária.         | Trabalhador não possui saldo suficiente para a garantia necessária.                 | Cancela         |
+| 400    | 38. Identificador da Solicitação inválido.                                      | Identificador da Solicitação inválido.                                              | Cancela         |
+| 400    | 40. Foi identificado falta de dados cadastrais na conta do FGTS que impedem a contratação. Entre em contato com o setor de FGTS da Caixa. | Foi identificado falta de dados cadastrais na conta do FGTS que impedem a contratação. Entre em contato com o setor de FGTS da Caixa. | Cancela         |
+
+</Expandable>

@@ -1,0 +1,216 @@
+---
+title: "34 - Mídia Negativa Síncrona"
+openapi: post /Bureau/MidiaNegativaPJ
+---
+
+Este endpoint realiza consultas síncronas e retorna, em formato de 'String JSON' serializada, os dados de mídia negativa relacionados a um documento jurídico. A resposta contém as seguintes informações principais: 
+
+* Nível de exposição;
+* Contagem de exposições por período de 7 a 360 dias;
+* Análise de sentimento do documento por algumas instituições. 
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{
+    "CelebrityLevel": "String",
+    "CreationDate": "Data",
+    "EntityStatistics": {
+        "NewsByRangeDate": {
+            "TotalNews": Numero,
+            "TotalNewsOnLast180Days": Numero,
+            "TotalNewsOnLast30Days": Numero,
+            "TotalNewsOnLast365Days": Numero,
+            "TotalNewsOnLast7Days": Numero,
+            "TotalNewsOnLast90Days": Numero
+        }
+    },
+    "LastUpdateDate": "Data",
+    "MediaExposureLevel": "String",
+    "NewsItems": [
+        {
+            "CaptureDate": "Data",
+            "Categories": [
+                "String"
+            ],
+            "PublicationDate": "Data",
+            "SentimentAnalysis": {
+                "Entities": {
+                    "ORGANIZATIONS": {
+                        "PIX": {
+                            "Label": "String"
+                        },
+                        "SFN": {
+                            "Label": "String"
+                        },
+                        "SINQIA": {
+                            "Label": "String"
+                        },
+                        "SISTEMA FINANCEIRO NACIONAL": {
+                            "Label": "String"
+                        },
+                        "BMP": {
+                            "Label": "String"
+                        },
+                        "HSBC": {
+                            "Label": "String"
+                        },
+                        "BC": {
+                            "Label": "String"
+                        },
+                        "BANCO CENTRAL": {
+                            "Label": "String"
+                        },
+                        "DREX": {
+                            "Label": "String"
+                        },
+                        "PSTIS": {
+                            "Label": "String"
+                        },
+                        "PSTI": {
+                            "Label": "String"
+                        },
+                        "C&M": {
+                            "Label": "String"
+                        },
+                        "SISTEMA PIX": {
+                            "Label": "String"
+                        },
+                        "BANCO HSBC": {
+                            "Label": "String"
+                        },
+                        "SISTEMA FINANCEIRO NACIONAL (SFN": {
+                            "Label": "String"
+                        },
+                        "OPEN FINANCE": {
+                            "Label": "String"
+                        },
+                        "GOVERNO": {
+                            "Label": "String"
+                        },
+                        "DE SERVICOS DE TECNOLOGIA DA": {
+                            "Label": "String"
+                        },
+                        "GOVERNO DOS ESTADOS UNIDOS": {
+                            "Label": "String"
+                        },
+                        "INSTITUICOES FINANCEIRAS": {
+                            "Label": "String"
+                        },
+                        "INSTITUICOES": {
+                            "Label": "String"
+                        },
+                        "PROVEDORES DE SERVICOS DE TECNOLOGIA DA INFORMACAO": {
+                            "Label": "String"
+                        },
+                        "BANCOS": {
+                            "Label": "String"
+                        },
+                        "BANCO BMP": {
+                            "Label": "String"
+                        },
+                        "AUTARQUIA": {
+                            "Label": "String"
+                        },
+                        "EMPRESAS": {
+                            "Label": "String"
+                        }
+                    },
+                    "PEOPLE": {
+                        "RODRIGO ALVES TEIXEIRA": {
+                            "Label": "String"
+                        },
+                        "TEIXEIRA": {
+                            "Label": "String"
+                        },
+                        "SINQIA": {
+                            "Label": "String"
+                        },
+                        "DIRETOR DE ADMINISTRACAO": {
+                            "Label": "String"
+                        },
+                        "DIRETOR": {
+                            "Label": "String"
+                        },
+                        "PSTIS": {
+                            "Label": "String"
+                        },
+                        "POPULACAO": {
+                            "Label": "String"
+                        },
+                        "VITIMA": {
+                            "Label": "String"
+                        },
+                        "PARTICIPANTES": {
+                            "Label": "String"
+                        },
+                        "REQUISITOS": {
+                            "Label": "String"
+                        },
+                        "HACKERS": {
+                            "Label": "String"
+                        },
+                        "UM": {
+                            "Label": "String"
+                        },
+                        "FUNCIONARIO": {
+                            "Label": "String"
+                        }
+                    },
+                    "PLACES": {
+                        "BRASILIA": {
+                            "Label": "String"
+                        },
+                        "PSTIS": {
+                            "Label": "String"
+                        },
+                        "ESTADOS UNIDOS": {
+                            "Label": "String"
+                        },
+                        "ESTRADA": {
+                            "Label": "String"
+                        },
+                        "PONTES": {
+                            "Label": "String"
+                        },
+                        "BRASILEIRA": {
+                            "Label": "String"
+                        },
+                        "BANCO CENTRAL": {
+                            "Label": "String"
+                        },
+                        "TEIXEIRA": {
+                            "Label": "String"
+                        }
+                    }
+                },
+                "Label": "String",
+                "OrganizationsCount": Numero,
+                "PeopleCount": Numero,
+                "PlacesCount": Numero
+            },
+            "SourceName": "String",
+            "Title": "String",
+            "Url": "String"
+        }
+    ],
+    "Next": "String",
+    "SearchLabels": {
+        "OfficialName": "String",
+        "OfficialNameUniquenessScore": Float,
+        "TradeName": "String",
+        "TradeNameUniquenessScore": Float
+    },
+    "TotalPages": Numero,
+    "UnpopularityLevel": "String",
+    "Identificador": "String",
+    "StatusConsulta": {
+        "Code": Numero,
+        "Message": "String"
+    }
+}
+```
+
+</Expandable>

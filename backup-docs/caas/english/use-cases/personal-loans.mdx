@@ -1,0 +1,563 @@
+---
+title: "Personal Loans"
+version: 'English'
+---
+
+The Personal Loan is an accessible and flexible financial solution designed for individuals, without the need for a justification for using the loan.
+
+This case study explores the various types of personal loans, illustrating how each modality can be used to meet different profiles and financial needs.
+
+Below is the step-by-step guide for using the use case:
+
+<Warning>To implement this service, you must configure the CaaS service authentication. For more information, access the [Authentication Instructions](https://bmpmoneyplus-sandbox.mintlify.app/caas/primeiros-passos/autenticacao) document.</Warning>
+
+To implement the Personal Loan, use the Simulation, Onboarding, Contracting, Signature Collection, and Proposal Release APIs.
+
+## 1 - Simulations
+
+The first step in applying for a Personal Loan is a simulation.
+
+The simulation can be performed in two ways:
+
+<Expandable title="Detailed Simulation">
+
+In the **Detailed Simulation**, the partner provides all the necessary data for the simulation and receives the available credit conditions.
+<br />
+<br />
+To request a Detailed Simulation, it is necessary to provide:
+
+* Credit amount requested by the customer;
+* Number of days to add to the first installment due date;
+* Interest percentage;
+* Type of person (individual or legal entity);
+* Payment term in months (number of installments);
+* Term interval (irregular or regular flow).
+
+For more information about this endpoint, access the reference document [6 - Detailed Simulation](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/simulacoes/6-simulacao-detalhada).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/CalcularGridParcelasSimplificadoPrice' \
+--header 'accept: text/plain' \
+--header 'IdempotencyKey: <GUID ÚNICO PARA CADA CHAMADA>' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": {
+        "vlrSolicitado": 0, // Valor solicitado pelo seu cliente | OBRIGATÓRIO
+        "nroDiasAcrescimo": 0, // Este campo ajusta o vencimento da 1ª parcela, somando ou subtraindo dias da data padrão (sempre no mesmo dia da simulação, no mês seguinte) 
+        "percJurosNegociado": 0, // Percentual de juros negocioado com seu cliente | OBRIGATÓRIO
+        "tipoPessoa": 0, // Para PF informar 1 e para PJ informar 2 | OBRIGATÓRIO
+        "vlrTAC": 0, // Caso tenha TAC, informe esse campo. Caso não tenha, pode excluir | NÃO OBRIGATÓRIO
+        "prazo": 0, // informe a quantidade de parcelas
+        "fluxoIrregular": false // informe false para intervalo de prazo de 30 em 30 ou true para outros intervalos
+    }
+}'  
+```
+
+</Expandable>
+
+<Expandable title = "Multi-Installment Simulation">
+
+In the **Multi-Installment Simulation**, the partner only enters the requested amount and receives the available credit terms for different terms.
+<br />
+<br />
+When requesting a Multi-Installment Simulation, the following information is required:
+
+* Credit amount requested by the customer;
+* Number of days to add to the first installment due date;
+* Interest percentage;
+* Type of person (individual or legal entity).
+
+For more information about this endpoint, access the reference document [5 - Multi-Installment Simulation](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/simulacoes/5-simulacao-multiparcelamento).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/CalcularGridParcelasSimplificado' \
+--header 'accept: text/plain' \
+--header 'IdempotencyKey: <GUID ÚNICO PARA CADA CHAMADA>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer 2ec83da4-ddba-4b01-9c6a-5b5e718f5793' \
+--data '{
+    "dto": {
+        "vlrSolicitado": 0, // Valor solicitado pelo seu cliente | OBRIGATÓRIO
+        "nroDiasAcrescimo": 0, // Este campo ajusta o vencimento da 1ª parcela, somando ou subtraindo dias da data padrão (sempre no mesmo dia da simulação, no mês seguinte) 
+        "percJurosNegociado": 0, // Percentual de juros negocioado com seu cliente | OBRIGATÓRIO
+        "tipoPessoa": 0, // Para PF informar 1 e para PJ informar 2 | OBRIGATÓRIO
+        "vlrTAC": 0 // Caso tenha TAC, informe esse campo. Caso não tenha, pode excluir | NÃO OBRIGATÓRIO'
+    }
+}'
+```
+
+</Expandable>
+
+<Note>The `nroDiasAcrescimo` field defines how many days will be added or subtracted from the default due date of the first installment. By default, the due date occurs on the same day as the simulation, but in the following month. Example: if the simulation is on 05/27, the default due date will be 06/27. If you enter "20", the due date will be 20 days after this default date (e.g., 07/17). If the simulation is run on the 30th or 31st and the following month does not have these dates, the due date will be adjusted to the last day of the month (for example, a simulation on 01/31 will be due on 02/28).</Note>
+
+## 2 - Onboarding
+
+To apply for a Personal Loan, you must register the details and address of the customer who will receive the payment.
+
+This registration step is performed using two different endpoints: `Person/Save` for registering customer details and `/Person/SaveAddress` for registering the customer's address.
+
+<Expandable title="Customer details registration">
+
+Using this endpoint, the partner registers and updates the individual or legal entity to whom the payment will be made.
+<br />
+<br />
+This procedure must be performed before any other endpoint related to the Person API endpoints.
+<br />
+<br />
+For more information about this endpoint, access the reference document [10 - Customer Registration](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/onboarding/10-cadastro-do-cliente).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Pessoa/Salvar' \
+--header 'IdempotencyKey: <GUID ÚNICO PARA CADA CHAMADA>' \
+--header 'Authorization: Bearer qXdZot13a6EbJkAbjpZ5ep_eTKH2F5ZHOwZrYZVN1lw' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "dto": {
+        "Codigo": "1", // Código para identificar o cliente em seu sistema | NÃO OBRIGATÓRIO
+        "Nome": "CLIENTE TESTE", // Nome do seu cliente | OBRIGATÓRIO
+        "DocumentoFederal": "75000000000", // Documento federal (CPF: 11 dígitos | CNPJ: 14 dígitos | temos um validador, então precisa ser um documento válido) | OBRIGATÓRIO
+        "PF": { // Se seu cliente for Pessoa Física, preencha esse objeto, se não, exclua esse objeto
+            "rg": "string",// RG do seu cliente | OBRIGATÓRIO
+            "rgOrgao": "string", // Orgão de emissão do RG do seu cliente | NÃO OBRIGATÓRIO
+            "rguf": "string", // UF do RG do seu cliente | NÃO OBRIGATÓRIO
+            "rgData": "2023-07-10T20:01:07.689Z", // data de emissão do rg | NÃO OBRIGATÓRIO
+            "dtNasc": "2023-07-10T20:01:07.689Z", // Data de nascimento do seu cliente | OBRIGATÓRIO
+            "sexo": "string", // Sexo do seu cliente | NÃO OBRIGATÓRIO
+            "nacionalidade": "string", // nacionalidade do seu cliente | NÃO OBRIGATÓRIO
+            "naturalDeCidade": "string", // Cidade natal do seu cliente | NÃO OBRIGATÓRIO
+            "naturalDeUF": "string", // UF natal do seu cliente| NÃO OBRIGATÓRIO
+            "estadoCivil": 0, // tipo enum, Consultar documento enviado em e-mail| NÃO OBRIGATÓRIO
+            "escolaridade": 0 // tipo enum, Consultar documento enviado em e-mail | NÃO OBRIGATÓRIO
+        },
+        "PJ": { // Se seu cliente for Pessoa Jurídica, preencha esse objeto, se não, exclua esse objeto
+            "nomeFantasia": "string", // Nome fantasia da empresa | OBRIGATÓRIO
+            "documentoEstadual": "string", // Informe o documento estadual da empresa || NÃO OBRIGATÓRIO
+            "documentoMunicipal": "string", // Informe o documento Municipal da empresa || NÃO OBRIGATÓRIO
+            "dtAberturaEmpresa": "2024-06-06T19:49:59.553Z", // Informe a data da abertura do CNPJ em timestamp || NÃO OBRIGATÓRIO
+            "nomeResponsavelEmpresa": "string", // Informe o nome do responsável pela empresa || NÃO OBRIGATÓRIO
+            "cpfResponsavelEmpresa": "string", // Informe o nome do cpf do responsável pela empresa || NÃO OBRIGATÓRIO
+            "rgResponsavelEmpresa": "string" // Informe o rg responsável do responsável pela empresa || NÃO OBRIGATÓRIO
+        },
+        "PessoaDadosContato": {
+            "Email": "teste@email.com.br", // E-mail do seu cliente | OBRIGATÓRIO
+            "TelefoneCelular1": "11923456781" // Celular do seu cliente | OBRIGATÓRIO
+        }
+    }
+}'
+```
+
+<Warning>When using this endpoint, enter the CPF or CNPJ in the `Federal Document` field. When entering the CPF, only the individual object will be considered. When entering the CNPJ, only the corporate object will be considered.</Warning>
+
+</Expandable>
+
+<Expandable title="Customer address registration">
+
+Through this endpoint, the partner can create or update address records for a specific customer, using an already registered CPF or CNPJ.
+<br />
+<br />
+For an update to occur, the 'code' field must be filled in with the registration number in the BMP database.
+<br />
+<br />
+If the 'code' field is not filled in, the search will be performed using the 'cep' field.
+<br />
+<br />
+To fill in the 'tipoEndereco' and 'tipoResidencia' fields, access the [API Reference for the Inclusion with External Calculation endpoint](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/contratacao/23-inclusao-com-calculo-externo) document.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Pessoa/SalvarEndereco' \
+--header 'Authorization: Bearer qXdZot13a6EbJkAbjpZ5ep_eTKH2F5ZHOwZrYZVN1lw' \
+--header 'IdempotencyKey: <GUID ÚNICO PARA CADA CHAMADA>' \
+--header 'Content-Type: application/json' \
+--data '{
+  "dto": {
+    "codigo": "string", // Código para identificar o endereço em seu sistema | NÃO OBRIGATÓRIO
+    "cep": "string", // Código de Endereçamento Postal (CEP) do endereço | OBRIGATÓRIO
+    "logradouro": "string", // logradouro do endereço | NÃO OBRIGATÓRIO
+    "nroLogradouro": "string", // nroLogradouro do endereço | NÃO OBRIGATÓRIO
+    "bairro": "string", // bairro do endereço | NÃO OBRIGATÓRIO
+    "complemento": "string", // complemento do endereço | NÃO OBRIGATÓRIO
+    "cidade": "string", // cidade do endereço | NÃO OBRIGATÓRIO
+    "uf": "string", // uf do endereço | NÃO OBRIGATÓRIO
+    "tipoEndereco": 0, // tipoEndereco do endereço | NÃO OBRIGATÓRIO
+    "tipoResidencia": 0, // logradouro do endereço | NÃO OBRIGATÓRIO
+    "enderecoDesde": "2024-04-04T12:19:46.116Z", // informe desde quando o endereço pertence ao cliente| NÃO OBRIGATÓRIO
+    "enderecoPrincipal": true, // é o endereço principal do cliente?  | NÃO OBRIGATÓRIO
+    "enderecoCorrespondencia": true // é o endereço para correspondencia? | NÃO OBRIGATÓRIO
+  },
+  "param": {
+    "documentoCliente": "string" // Documento federal (CPF: 11 dígitos | CNPJ: 14 dígitos | temos um validador, então precisa ser um documento válido) | OBRIGATÓRIO
+  }
+}'
+```
+
+</Expandable>
+
+## 3 - Hiring
+
+After the simulation and onboarding, it is necessary to apply for credit.
+
+<Expandable title="Request for Proposal Inclusion">
+
+To include the proposal, it is necessary to inform:
+
+* Operation code;
+* Amount requested in the proposal;
+* Requested term (in months);
+* Negotiated interest percentage;
+* Total amount of the Tax on Financial Transactions (IOF);
+* Percentage of the Tax on Financial Transactions (IOF);
+* Installment amount;
+* Registration Fee (TAC);
+* Estimated date of the first due date;
+* Account type (checking, savings, etc.);
+* Bank branch;
+* Branch digit;
+* Bank account number;
+* Account digit;
+* Bank number.
+
+For more information about this endpoint, see the reference document [23 - Inclusion with External Calculation](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/contratacao/23-inclusao-com-calculo-externo).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirManualSimplificado' \
+--header 'Authorization: Bearer qXdZot13a6EbJkAbjpZ5ep_eTKH2F5ZHOwZrYZVN1lw' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": {
+        "documentoCliente": "string", // Documento do cliente
+        "documentoParceiroCorrespondente": "string",  // Documento do Parceiro Correspondente
+        "codigoOperacao": "string", // Obrigatório - Uso do Integrador. É o código da operação no sistema do parceiro. Esta informação é exclusiva e poderá ser utilizada para atualizar a proposta sem necessidade de guardar o código da proposta na BMP. Porém o código de proposta BMP é importante ser armazenado para uso de impressão de boletos/CCB/Nota promissória ou Protocolo.
+        "codigoVersaoCCB": 0, // Código da versão da Cédula de Crédito Bancária – (CCB)
+        "vlrSolicitado": 0, // Obrigatório - Valor solicitado na proposta
+        "prazo": 0, // Obrigatório - Prazo solicitado. Será consistido conforme a parametrizado de integração.
+        "percJurosNegociado": 0, // Obrigatório - Percentual de juros da proposta
+        "vlrIOF": 0, // Obrigatório - Valor Total do Imposto sobre Operações Financeiras (IOF)
+        "percIOF": 0, // Obrigatório - Percentual do Imposto sobre Operações Financeiras (IOF)
+        "vlrParcela": 0, // Obrigatório - Valor da Parcela
+        "vlrTAC": 0, // Obrigatório - Valor da Tarifa de Cadastro. Pode ser R$ 0,00 quando não houver.
+        "dtPrimeiroVencto": "2024-02-21T17:48:40.110Z", // Obrigatório - Data estimada do primeiro vencimento.
+        "tipoContrato": "string", // string(5) - Sigla indicando o tipo de contrato da proposta. Exémplo: CSG -> Capital de Giro; CCG -> Capital de Giro com Garantia
+        "propostaContaPagamentoDTO": { 
+            "tipoConta": 0, // Obrigatório - tipo de conta
+            "agencia": "string", // string(10) Obrigatório - Agência bancária
+            "agenciaDig": "string", // string(1)Obrigatório - Dígito da agência
+            "conta": "string", // string(20) Obrigatório - Conta bancária
+            "contaDig": "string", // string(1) Obrigatório - Dígito da conta
+            "numeroBanco": "string" //string(5)  Obrigatório - Número da conta
+        },
+    },
+}'
+```
+
+</Expandable>
+
+To use a contract with a **TED** split, add the object below to the previous request within the `dto` array:
+
+<Expandable title="TED Split">
+
+```json
+ "propostaLancamentos": [ 
+            {
+                "campoID": "string", // Nome do campo responsável pelo split | OBRIGATÓRIO
+                "vlrTransacao": 0, // Valor da transação (lembrando que deve ser menor ou igual que o valor solicitado) | OBRIGATÓRIO
+                "tipoConta": 0, // 1 = PF, 2 = PJ | OBRIGATÓRIO
+                "agencia": "string", // Agência bancária da conta | OBRIGATÓRIO
+                "agenciaDig": "string", // Digíto da conta bancária do emitente | OBRIGATÓRIO
+                "conta": "string", // Conta bancária do emitente | OBRIGATÓRIO
+                "contaDig": "string", // Digito bancário da conta do emitente | OBRIGATÓRIO
+                "numeroBanco": "string", // Código bancário de acordo com a tabela do BACEN | OBRIGATÓRIO
+                "documentoFederal": "string", //Número do Documento Federal | OBRIGATÓRIO
+                "nomePagamento": "string" //Nome para pagamento | OBRIGATÓRIO
+            }
+        ]
+```
+</Expandable>
+
+To use a contract with a **payment slip** split, add the object below to the previous request within the `dto` array:
+
+<Expandable title="Payment Slip Split">
+
+```json
+ "propostaLancamentos": [ 
+            {
+                "campoID": "string", // Nome do campo responsável pelo split | OBRIGATÓRIO 
+                "vlrTransacao": 0, // Valor da transação (lembrando que deve ser menor ou igual que o valor solicitado) | OBRIGATÓRIO 
+                "dtPagamento": "2024-02-21T17:48:40.110Z", // Data prevista de pagamento da proposta.
+                "linhaDigitavel": "string", // string(60)  string contendo informações do boleto, como dados do banco, destinatário etc.
+                "documentoFederalCedente": "string", // string(20)   Documento federal do cedente
+                "nomeCedente": "string", // string(60)   Nome do cedente
+                "documentoFederal": "string", //Número do Documento Federal | OBRIGATÓRIO
+                "nomePagamento": "string" //Nome para pagamento | OBRIGATÓRIO
+            }
+        ]
+```
+</Expandable>
+
+
+## 4 - Signature Collection
+
+The signature can be performed in three ways:
+
+* Electronic Signature, where the client signs electronically via a link sent by email or WhatsApp;
+* Relogon Signature, where the client signs via a link sent by email or WhatsApp, but the signature is performed in the backend;
+* Certifying Signature, where the client signs via a digital certificate.
+
+To learn more about the signature models, access the [Signatures](https://bmpmoneyplus-sandbox.mintlify.app/caas/assinaturas) document.
+
+<Expandable title="Electronic Signature">
+
+<Steps>
+
+<Step title="Electronic Signature">
+
+To use the electronic signature, it is necessary to inform:
+
+* Subscriber's name, email address, document number, description, cell phone number, and subscription deadline;
+* Indicate whether the subscriber will receive the CCB via email, WhatsApp, or SMS;
+* Subscription deadline.
+
+To learn more about this endpoint, access the reference document [39 - Inclusion of CCB Signature](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/assinaturas/39-inclusao-assinatura-ccb).
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirAssinaturaCCB' \
+--header 'accept: text/plain' \
+--header 'Authorization: Bearer qXdZot13a6EbJkAbjpZ5ep_eTKH2F5ZHOwZrYZVN1lw' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": { // Apenas um dos campos abaixo deve ser informado
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Colocar GUID da proposta gerado no response da inclusão da proposta
+        "codigoOperacao": "string" // Colocar codigo da operação utilizado na inclusão da proposta
+    },
+    "assinantes": [
+        {
+            "nome": "string", // Informe o nome do assinante | OBRIGATÓRIO
+            "email": "string", // Informe o email do assinante | OBRIGATÓRIO
+            "documento": "string", // Informe o documento federal do assinante | OBRIGATÓRIO
+            "descricao": "string", // Informe o papel desse assinante na operação | OBRIGATÓRIO
+            "telefoneCelular": "string", // Informe o telefone celular do assinante | OBRIGATÓRIO
+            "notificarPorEmail": true, // Esse campo controle se o cliente receberá a CCB por email para a assinatura | OBRIGATÓRIO
+            "notificarPorWhatsApp": true, // Se o cliente for receber o token de assinatura via WhatsApp, deixar esse campo como true. Se não, colocar false | NÃO OBRIGATÓRIO
+            "notificarPorSMS": true, // Se o cliente for receber o token de assinatura via SMS, deixar esse campo como true. Se não, colocar false | NÃO OBRIGATÓRIO
+            "codigoIdentificador": "string", // Código identificador do assinante dentro da proposta (caso queira realizar alguma alteração nesse assinante, informe esse código na outra chamada da API) | NÃO OBRIGATÓRIO
+            "dtLimiteAssinatura": "2024-02-21T19:47:38.567Z" // Data limite para que o assnante realize a assinatura | OBRIGATÓRIO
+        }
+    ]
+}'
+```
+</Step>
+
+</Steps>
+
+</Expandable>
+
+<Expandable title="Relogon Signature">
+
+To use the Relogon signature, it is necessary to follow the steps below:
+
+<Steps>
+
+<Step title="Signature Model Collection">
+
+To collect the signature model, make a request to the [CCB Printing](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/impressao-documentos/37-impressao-ccb) endpoint, using the proposal code and integration code parameters.
+
+```json
+curl --location 'https://reports.moneyp.dev.br/imprimir?impressao=S&tipo=ccb&code=GUIDPROPOSTA&integracao=CODPARAMETRO&copias=1&versao=' \
+```
+</Step>
+
+<Step title= "Relogon Signature">
+
+Through this [endpoint](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/assinaturas/40-relogon), the partner can sign the proposal, allowing the inclusion of subscribers who have already signed in the integrator's backend; the proposal is only finalized after all registered subscribers have signed. This method does not send notification emails and requires authentication parameters, proposal location, and a list of subscribers who have already signed with date, time, and source IP address, through integration with our Relogon Signature API.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirAssinaturaCCBFinalizada' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": { 
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Número sequencial da proposta
+        "codigoOperacao": "string" // string(50) Código da Operação do Parceiro
+  },
+  "assinantes": [
+    {
+      "nome": "string", // string(60)   Obrigatório - Nome do assinante
+      "email": "string",  // string(60)   Obrigatório - E-mail do assinante
+      "documento": "string", // string(20)  Obrigatório – Número do Cadastro de Pessoa Física ( CPF) e do Cadastro Nacional de Pessoa jurídica (CNPJ) do assinante
+      "descricao": "string", // string(100)    Caracterização do assinante
+      "notificarPorEmail": true, // Obrigatório - O assinante que for marcado para receber a notificação terá controle sobre todas as assinaturas, podendo cobrar as assinaturas pendentes. O e-mail será enviado pela BMP.
+      "dtAssinatura": "2024-01-15T14:21:57.250Z", // Obrigatório - Data e hora da assinatura efetuada no backend do integrador
+      "ipAssinatura": "string" // string(255) Obrigatório -Número de IP onde a assinatura foi coletada
+    }
+  ]
+}'
+```
+</Step>
+
+<Step title = "Proposal finalization">
+
+Through this [endpoint](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/assinaturas/42-finalizacao-de-proposta), the partner can finalize the proposal after the signing procedure is completed. After sending the Relogon signature request, it will be necessary to finalize the proposal through integration with the Proposal Finalization endpoint.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/Finalizar' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer g3Lmb6cowHidKJwwu8J-5xAVAViSysAZAajzeeeTXq4' \
+--data '{
+    "dto": { 
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Número sequencial da proposta
+        "codigoOperacao": "string" // string(50) Código da Operação
+    },
+    "parametros": [ 
+        {
+            "Nome": "FINALIZACAO_VALIDARPARCELAS",
+            "Valor": "FALSE"
+        },
+        {
+            "Nome": "IP_ADDRESS",
+            "Valor": "00.000.000.00"
+        }
+    ]
+}'
+```
+</Step>
+
+<Step title="Signed CCB Printing">
+
+This [endpoint](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/impressao-documentos/37-impressao-ccb) is used to request the printing of a Bank Credit Certificate (CCB), through the proposal code and integration code parameters. At this stage, it is necessary to query the CCB through integration with our CCB Printing URL for model validation before signing.
+
+```json
+curl --location 'https://reports.moneyp.dev.br/imprimir?impressao=S&tipo=ccb&code=GUIDPROPOSTA&integracao=CODPARAMETRO&copias=1&versao=' \
+```
+</Step>
+
+</Steps>
+
+</Expandable>
+
+<Expandable title="Certification Signature">
+
+<Steps>
+
+<Step title="Signature Model Collection">
+
+This [endpoint](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/impressao-documentos/37-impressao-ccb) is used to request the printing of a Bank Credit Certificate (CCB), through the proposal code and integration code parameters. At this stage, it is necessary to query the CCB through integration with our CCB Printing URL for model validation before signing.
+
+```json
+curl --location 'https://reports.moneyp.dev.br/imprimir?impressao=S&tipo=ccb&code=GUIDPROPOSTA&integracao=CODPARAMETRO&copias=1&versao=' \
+```
+</Step>
+
+<Step title="Sending to Certification Authority">
+
+At this stage, it will be necessary to send the CCB model to the certification authority for signing.
+
+</Step>
+
+<Step title="Certification Signature">
+
+Through this [endpoint](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/assinaturas/41-certificadora), the partner signs the proposal via a Certifier, such as Docusign, QCertifica, Clicksign, Finanblue, among others. The process begins with downloading the CCB (Contracting Agreement) without the MODELO watermark available on our portal, followed by signature by a certifying agency and subsequent attachment of the signed CCB to the proposal. After collecting the signatures, the signed CCB must be uploaded through integration with our Certifying Signature API.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/IncluirDocumento' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer token gerado no 1º passo' \
+--data '{
+  "dto": { 
+    "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", //Número sequencial da proposta 
+    "codigoOperacao": "string" // string(50)  Código da Operação do Parceiro
+  },
+  "documento": {
+    "codigo": "3fa85f64-5717-4562-b3fc-2c963f66afa6", // Preenchido com o código do arquivo na base BMP
+    "tipoDocumento": 30, // Obrigatório - Consultar tabela de tipo de documento
+    "nomeArquivo": "string", // string(500)   Obrigatório - Nome do arquivo
+    "extensao": "string", // string(20)  Obrigatório - Extensão do arquivo
+    "dtValidade": "2023-05-23T20:57:08.922Z", // Data de Validade do Arquivo
+    "arquivo": "string" // : Obrigatório - Array de bytes que contém o arquivo
+  }
+}'
+```
+</Step>
+
+<Step title="Proposal Finalization">
+
+Through this [endpoint](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/assinaturas/42-finalizacao-de-proposta), the partner can finalize the proposal after the signing procedure is completed. After sending the Relogon signature request, it will be necessary to finalize the proposal through integration with the Proposal Finalization endpoint.
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/Finalizar' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer g3Lmb6cowHidKJwwu8J-5xAVAViSysAZAajzeeeTXq4' \
+--data '{
+    "dto": { 
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", //Número sequencial da proposta 
+        "codigoOperacao": "string" // string(50)  Código da Operação do Parceiro 
+    },
+    "parametros": [ 
+        {
+            "Nome": "FINALIZACAO_VALIDARPARCELAS",
+            "Valor": "FALSE"
+        },
+        {
+            "Nome": "IP_ADDRESS",
+            "Valor": "00.000.000.00"
+        }
+    ]
+}'
+```
+</Step>
+
+</Steps>
+
+</Expandable>
+
+## 5 - Proposal release
+
+This is the final step in the credit hiring process for Working Capital.
+
+The partner can release the proposal to the payment queue after receiving the "finalized" proposal status, with the disbursement process being the responsibility of BMP.
+
+In this step, it is necessary to release the proposal through integration with our Proposal Release URL for payment to validate the model after signing.
+
+To release the proposal, it is necessary to inform:
+
+* Proposal code;
+* Operation code;
+* Proposal parameters (if necessary).
+
+For more information about this endpoint, see the reference document [43 - Proposal Release](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/desembolso/43-liberacao-de-proposta).
+
+<Expandable title="Request to Release Proposal">
+
+```json
+curl --location 'https://api.bmpdigital.moneyp.dev.br/Proposta/Liberar' \
+--header 'IdempotencyKey: GUID UNICO PARA CADA CHAMADA' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dto": { // Apenas um dos campos abaixo deve ser informado
+        "codigoProposta": "3fa85f64-5717-4562-b3fc-2c963f66afa6", //Número sequencial da proposta 
+    "codigoOperacao": "string" // string(50)  Código da Operação do Parceiro
+    },
+    "parametros": [
+        {}
+    ]
+}'
+```
+
+</Expandable>
+
+## Endpoints and auxiliary documents
+
+For this journey, it is very important that the partner knows the [Technical Procedure for CaaS Callback](https://bmpmoneyplus-sandbox.mintlify.app/caas/procedimento-tecnico-de-callback/introducao).
+
+The following endpoints may also be useful:
+
+* [28 - Consultar](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/gestao-de-propostas/28-consultar): used to consult proposal data;
+* [33 - Cancelamento de Contrato](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/gestao-de-propostas/33-cancelamento-de-contrato): used to cancel active contracts;
+* [38 - Comprovante de Pagamento](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/impressao-documentos/38-comprovante-de-pagamento): used to consult the payment receipt of the proposal;
+* [44 - Atualização de Conta Bancária](https://bmpmoneyplus-sandbox.mintlify.app/caas/api-reference/desembolso/44-atualizacao-de-conta-bancaria): used to update the registered payment account.
+
+
+

@@ -1,0 +1,93 @@
+---
+title: 20 - Consulta Autodata
+openapi: post /Bureau/ConsultarAutodata
+---
+
+Este endpoint tem como objetivo consultar a situação atual do veículo no momento da revenda. Para isso, é necessário informar o CNPJ da revenda que deseja consultar, além do chassi do veículo. Essas informações serão obtidas por meio de bases oficiais garantindo credibilidade e segurança na análise do veículo na revenda.
+
+<Expandable title="Planilha de dados mockados">
+
+Para executar testes em homologação, há uma planilha com diversos cenários que podem resultar nas consultas. [Download dos dados mockados](https://bmp-docs-462219491253.s3.sa-east-1.amazonaws.com/planilha-bureau-autodata-dados-mockados.pdf).
+
+</Expandable>
+
+<Expandable title="Exemplo de retorno completo">
+
+O exemplo de retorno, mostrado no lado direito desta tela, está resumido. Na linha `"json": "<string>"` o retorno do Bureau vem de forma serializada, sendo necessário deserializar para melhor visualização. Aqui está um exemplo do retorno deserializado que vem no campo `"json":`.
+
+```json
+{ 
+    \"OperationCode\": \"516897690322306689\", 
+    \"StatusCode\": \"0100\",
+    \"Message\": \"OK \", 
+    \"StartTime\": \"2025-07-08T11:04:22.347+0000\", 
+    \"EndTime\": \"2025-07-08T11:04:30.368+0000\", 
+    \"Result\": { 
+        \"Result\": \"OK\", 
+        \"Outputs\": [ 
+            { 
+                \"Key\": \"CALC_AUTODATA_RET_CNAE_OBRIG\", 
+                \"Value\": \"INDEFINIDO\", 
+                \"Type\": null 
+            }, 
+            { 
+                \"Key\": \"CALC_AUTODATA_RET_COD_RETORNO\", 
+                \"Value\": \"VEÍCULO ESTÁ CADASTRADO NO RENAVE E NÃO ESTÁ NO NOME DA REVENDA\", 
+                \"Type\": null 
+            }, 
+            { 
+                \"Key\": \"CALC_AUTODATA_RET_DT_ATUAL\", 
+                \"Value\": \"\", 
+                \"Type\": null 
+            }, 
+            { 
+                \"Key\": \"CALC_AUTODATA_RET_FLAG_ESTOQUE\", 
+                \"Value\": \"N\", 
+                \"Type\": null 
+            }, 
+            { 
+                \"Key\": \"CALC_AUTODATA_RET_FLAG_RENAVE\", 
+                \"Value\": \"S\", 
+                \"Type\": null 
+            }, 
+            { 
+                \"Key\": \"CALC_AUTODATA_RET_ID_RETORNO\", 
+                \"Value\": \"3\", 
+                \"Type\": null 
+            }, 
+            { 
+                \"Key\": \"CALC_AUTODATA_RET_MATRIZ_FILIAL_GRP_ECON\", 
+                \"Value\": \"INDEFINIDO\", 
+                \"Type\": null 
+            }, 
+            { 
+                \"Key\": \"CALC_AUTODATA_RET_STATUS_ESTOQUE\", 
+                \"Value\": \"SOLICITADO\", 
+                \"Type\": null 
+            }, 
+            { 
+                \"Key\": \"PROP_CHASSI\", 
+                \"Value\": \"9NNTSSVTNDZ5T8531\", 
+                \"Type\": null 
+            }, 
+            { 
+                \"Key\": \"PROP_CNPJ_LOJA\", 
+                \"Value\": \"03785389000116\", 
+                \"Type\": null 
+            }, 
+            { 
+                \"Key\": \"PROP_ID_CLIENT\", 
+                \"Value\": \"6065\", 
+                \"Type\": null 
+            }, 
+            { 
+                \"Key\": \"VI_NEUROTECH_USUARIO\", 
+                \"Value\": \"bmpautodata\", 
+                \"Type\": null 
+            } 
+        ] 
+    } 
+} 
+```
+
+</Expandable>
