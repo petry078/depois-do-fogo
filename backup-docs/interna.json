@@ -1,0 +1,78 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "willow",
+  "name": "INTERNA",
+  "colors": {
+    "primary": "#3B82F6",
+    "light": "#F8FAFC",
+    "dark": "#0F172A"
+  },
+  "logo": {
+    "light": "https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/interna/dark.png",
+    "dark": "https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/interna/light.png"
+  },
+  "favicon": "https://raw.githubusercontent.com/docs-petry/imagens/refs/heads/main/bmp-docs/favicon.png",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Implantação",
+        "icon": "code",
+        "pages": [
+          {
+            "group": "🪶 Onboarding",
+            "pages": [
+              "implantacao/onboarding/bem-vindo-ao-time-de-implantacao",
+              "implantacao/onboarding/steps"
+            ]
+          },
+          {
+            "group": "📓 Explicações",
+            "pages": [
+              "implantacao/explicacoes/sobre-o-codigo-identificador-equivalente"
+            ]
+          },
+          {
+            "group": "📟 Credenciamento",
+            "pages": [
+              "implantacao/credenciamento/credenciamento-caas"
+            ]
+          },
+          {
+            "group": "📅 Agenda de Recebíveis",
+            "pages": [
+              "implantacao/agenda-de-recebiveis/como-abrir-conta-de-movimento",
+              "implantacao/agenda-de-recebiveis/credenciamento"
+            ]
+          },
+          {
+            "group": "📡 SFTP",
+            "pages": [
+              "implantacao/sftp/manual-de-utilizacao-do-sftp"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "Materiais Complementares",
+        "icon": "flag",
+        "pages": [
+              "materiais-complementares/calculos"
+            ]
+      },
+      {
+        "group": "Documentação do Parceiro",
+        "icon": "book",
+        "pages": [
+          {
+            "group": "💀 BMP Docs",
+            "pages": [
+              "documentacao/como-funciona-o-portal-de-documentacao",
+              "documentacao/git-e-github-de-uma-vez-por-todas",
+              "documentacao/guia-de-redacao-e-estilo"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
